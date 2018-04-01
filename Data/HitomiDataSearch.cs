@@ -28,7 +28,7 @@ namespace Hitomi_Copy.Data
                         foreach (var tag in query.TagInclude)
                         {
                             foreach (var vtag in v.Tags)
-                                if (vtag.Contains(tag))
+                                if (vtag.ToLower().Contains(tag.ToLower()))
                                 { intersec_count++; break; }
                         }
                         if (intersec_count != query.TagInclude.Count)
@@ -47,7 +47,7 @@ namespace Hitomi_Copy.Data
                         foreach (var tag in query.TagExclude)
                         {
                             foreach (var vtag in v.Tags)
-                                if (vtag.Contains(tag))
+                                if (vtag.ToLower().Contains(tag.ToLower()))
                                 { intersec_count++; break; }
                             if (intersec_count > 0) break;
                         }
@@ -66,7 +66,7 @@ namespace Hitomi_Copy.Data
                         int intersec_count = 0;
                         foreach (var tc in query.Title)
                         {
-                            if (v.Name.Contains(tc))
+                            if (v.Name.ToLower().Contains(tc.ToLower()))
                                 { intersec_count++; }
                         }
                         if (intersec_count != query.Title.Count)
@@ -85,7 +85,7 @@ namespace Hitomi_Copy.Data
                         foreach (var tc in query.Artists)
                         {
                             foreach (var vtag in v.Artists)
-                                if (vtag.Contains(tc))
+                                if (vtag.ToLower().Contains(tc.ToLower()))
                                 { intersec_count++; break; }
                         }
                         if (intersec_count != query.Artists.Count)
