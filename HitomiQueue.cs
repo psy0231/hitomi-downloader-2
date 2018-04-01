@@ -4,18 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Hitomi_Copy
 {
     class HitomiQueue
     {
-        int capacity = Environment.ProcessorCount;
+        int capacity = 64;
         int mtx = 0;
         List<Tuple<string, string, object>> queue = new List<Tuple<string, string, object>>();
 
         public delegate void CallBack(string uri, string filename, object obj);
         CallBack callback;
+        public delegate void DownloadSizeCallBack(string uri, UInt64 size);
 
         object int_lock = new object();
         object notify_lock = new object();
@@ -30,6 +32,7 @@ namespace Hitomi_Copy
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.Proxy = null;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
                 if ((response.StatusCode == HttpStatusCode.OK ||
@@ -40,7 +43,7 @@ namespace Hitomi_Copy
                     using (Stream inputStream = response.GetResponseStream())
                     using (Stream outputStream = File.OpenWrite(fileName))
                     {
-                        byte[] buffer = new byte[4096];
+                        byte[] buffer = new byte[65536];
                         int bytesRead;
                         do
                         {
@@ -74,12 +77,21 @@ namespace Hitomi_Copy
             }
         }
 
+        public Thread StartTheThread(string uri, string filename, object obj)
+        {
+            var t = new Thread(() => DownloadRemoteImageFile(uri, filename, obj));
+            t.IsBackground = true;
+            t.Start();
+            return t;
+        }
+
         public void Add(string uri, string filename, object obj)
         {
             queue.Add(new Tuple<string, string, object>(uri, filename,obj));
-
+            ServicePointManager.DefaultConnectionLimit = 128;
             if (Wait())
                 lock (notify_lock) Notify();
+            //StartTheThread(uri, filename, obj);
         }
 
         private void Notify()
@@ -87,7 +99,11 @@ namespace Hitomi_Copy
             int i = mtx;
             if (queue.Count > i)
             {
-                Task.Run(() => DownloadRemoteImageFile(queue[i].Item1, queue[i].Item2, queue[i].Item3));
+                string s1 = queue[i].Item1;
+                string s2 = queue[i].Item2;
+                object s3 = queue[i].Item3;
+                //StartTheThread(s1, s2, s3);
+                Task.Run(() => DownloadRemoteImageFile(s1, s2, s3));
                 lock (int_lock) mtx++;
             }
         }

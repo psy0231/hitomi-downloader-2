@@ -140,7 +140,7 @@ namespace Hitomi_Copy
         {
             pb.Location = new Point(3, 3);
             pb.Size = new Size(pannelw - 6, pannelh - 30);
-            try { pb.Image = image = Image.FromFile(addr); } catch { }
+            pb.Image = image = Image.FromFile(addr);
             pb.SizeMode = PictureBoxSizeMode.Zoom;
             pb.BorderStyle = BorderStyle.FixedSingle;
             pb.Paint += Picture_Paint;

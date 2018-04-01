@@ -47,6 +47,7 @@
             this.bSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.bStat = new System.Windows.Forms.Button();
             this.boxData = new System.Windows.Forms.GroupBox();
             this.lIndex = new System.Windows.Forms.Label();
             this.bAddEntire = new System.Windows.Forms.Button();
@@ -80,6 +81,7 @@
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.ctxMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.이작가로검색ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label8 = new System.Windows.Forms.Label();
             this.ImagePanel = new Hitomi_Copy.ScrollFixLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -152,7 +154,7 @@
             // bTidy
             // 
             this.bTidy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bTidy.Location = new System.Drawing.Point(221, 470);
+            this.bTidy.Location = new System.Drawing.Point(221, 467);
             this.bTidy.Name = "bTidy";
             this.bTidy.Size = new System.Drawing.Size(101, 23);
             this.bTidy.TabIndex = 15;
@@ -163,7 +165,7 @@
             // bDownload
             // 
             this.bDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bDownload.Location = new System.Drawing.Point(1020, 470);
+            this.bDownload.Location = new System.Drawing.Point(1020, 467);
             this.bDownload.Name = "bDownload";
             this.bDownload.Size = new System.Drawing.Size(101, 23);
             this.bDownload.TabIndex = 14;
@@ -174,7 +176,7 @@
             // bCancleAll
             // 
             this.bCancleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bCancleAll.Location = new System.Drawing.Point(822, 471);
+            this.bCancleAll.Location = new System.Drawing.Point(822, 468);
             this.bCancleAll.Name = "bCancleAll";
             this.bCancleAll.Size = new System.Drawing.Size(101, 23);
             this.bCancleAll.TabIndex = 13;
@@ -185,7 +187,7 @@
             // bChooseAll
             // 
             this.bChooseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bChooseAll.Location = new System.Drawing.Point(715, 471);
+            this.bChooseAll.Location = new System.Drawing.Point(715, 468);
             this.bChooseAll.Name = "bChooseAll";
             this.bChooseAll.Size = new System.Drawing.Size(101, 23);
             this.bChooseAll.TabIndex = 12;
@@ -196,7 +198,7 @@
             // tbSex
             // 
             this.tbSex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbSex.Location = new System.Drawing.Point(77, 471);
+            this.tbSex.Location = new System.Drawing.Point(77, 468);
             this.tbSex.Name = "tbSex";
             this.tbSex.Size = new System.Drawing.Size(65, 23);
             this.tbSex.TabIndex = 11;
@@ -206,7 +208,7 @@
             // tbLang
             // 
             this.tbLang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbLang.Location = new System.Drawing.Point(6, 471);
+            this.tbLang.Location = new System.Drawing.Point(6, 468);
             this.tbLang.Name = "tbLang";
             this.tbLang.ReadOnly = true;
             this.tbLang.Size = new System.Drawing.Size(65, 23);
@@ -218,7 +220,7 @@
             // 
             this.lPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lPages.AutoSize = true;
-            this.lPages.Location = new System.Drawing.Point(473, 475);
+            this.lPages.Location = new System.Drawing.Point(473, 472);
             this.lPages.Name = "lPages";
             this.lPages.Size = new System.Drawing.Size(23, 15);
             this.lPages.TabIndex = 9;
@@ -227,7 +229,7 @@
             // numPages
             // 
             this.numPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numPages.Location = new System.Drawing.Point(397, 471);
+            this.numPages.Location = new System.Drawing.Point(397, 468);
             this.numPages.Name = "numPages";
             this.numPages.Size = new System.Drawing.Size(70, 23);
             this.numPages.TabIndex = 8;
@@ -240,7 +242,7 @@
             // bLoad
             // 
             this.bLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bLoad.Location = new System.Drawing.Point(522, 471);
+            this.bLoad.Location = new System.Drawing.Point(522, 468);
             this.bLoad.Name = "bLoad";
             this.bLoad.Size = new System.Drawing.Size(101, 23);
             this.bLoad.TabIndex = 7;
@@ -290,6 +292,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.bStat);
             this.tabPage4.Controls.Add(this.boxData);
             this.tabPage4.Controls.Add(this.bDataOpen);
             this.tabPage4.Controls.Add(this.bDataNew);
@@ -300,6 +303,18 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "고급검색";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // bStat
+            // 
+            this.bStat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bStat.Enabled = false;
+            this.bStat.Location = new System.Drawing.Point(380, 6);
+            this.bStat.Name = "bStat";
+            this.bStat.Size = new System.Drawing.Size(181, 37);
+            this.bStat.TabIndex = 3;
+            this.bStat.Text = "통계";
+            this.bStat.UseVisualStyleBackColor = true;
+            this.bStat.Click += new System.EventHandler(this.bStat_Click);
             // 
             // boxData
             // 
@@ -404,6 +419,7 @@
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(869, 23);
             this.tbTitle.TabIndex = 7;
+            this.tbTitle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchTextBoxEnterKey_KeyDown);
             // 
             // label7
             // 
@@ -422,6 +438,7 @@
             this.tbArtists.Name = "tbArtists";
             this.tbArtists.Size = new System.Drawing.Size(869, 23);
             this.tbArtists.TabIndex = 5;
+            this.tbArtists.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchTextBoxEnterKey_KeyDown);
             // 
             // label6
             // 
@@ -440,6 +457,7 @@
             this.tbTagExclude.Name = "tbTagExclude";
             this.tbTagExclude.Size = new System.Drawing.Size(869, 23);
             this.tbTagExclude.TabIndex = 3;
+            this.tbTagExclude.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchTextBoxEnterKey_KeyDown);
             // 
             // label5
             // 
@@ -458,6 +476,7 @@
             this.tbTagInclude.Name = "tbTagInclude";
             this.tbTagInclude.Size = new System.Drawing.Size(869, 23);
             this.tbTagInclude.TabIndex = 1;
+            this.tbTagInclude.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchTextBoxEnterKey_KeyDown);
             // 
             // label3
             // 
@@ -504,6 +523,8 @@
             // 
             // lStatus
             // 
+            this.lStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lStatus.AutoSize = true;
             this.lStatus.BackColor = System.Drawing.SystemColors.Control;
             this.lStatus.Location = new System.Drawing.Point(542, 347);
@@ -514,6 +535,8 @@
             // 
             // pbTarget
             // 
+            this.pbTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbTarget.Location = new System.Drawing.Point(44, 338);
             this.pbTarget.Maximum = 0;
             this.pbTarget.Name = "pbTarget";
@@ -522,6 +545,9 @@
             // 
             // lvStandBy
             // 
+            this.lvStandBy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvStandBy.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -572,6 +598,8 @@
             // 
             // tbDownloadPath
             // 
+            this.tbDownloadPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDownloadPath.Location = new System.Drawing.Point(169, 72);
             this.tbDownloadPath.Name = "tbDownloadPath";
             this.tbDownloadPath.Size = new System.Drawing.Size(851, 23);
@@ -601,6 +629,16 @@
             this.이작가로검색ToolStripMenuItem.Text = "이 작가로 검색";
             this.이작가로검색ToolStripMenuItem.Click += new System.EventHandler(this.이작가로검색ToolStripMenuItem_Click);
             // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(707, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(433, 15);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Copyright (C) 2018. DCInside Programming Gallery Union. All Rights Reserved.";
+            // 
             // ImagePanel
             // 
             this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -610,7 +648,7 @@
             this.ImagePanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ImagePanel.Location = new System.Drawing.Point(6, 64);
             this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 401);
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 398);
             this.ImagePanel.TabIndex = 3;
             // 
             // frmMain
@@ -618,6 +656,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1159, 552);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -625,7 +664,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(1175, 591);
             this.Name = "frmMain";
-            this.Text = "Robust Hitomi Copy Machine 1.4";
+            this.Text = "Robust Hitomi Copy Machine 1.5";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -640,6 +679,7 @@
             this.tabPage3.PerformLayout();
             this.ctxMenu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -696,5 +736,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button bAddEntire;
         private System.Windows.Forms.Label lIndex;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button bStat;
     }
 }

@@ -59,17 +59,17 @@
     <Compile Include="Data\HitomiDataModel.cs" />
     <Compile Include="Data\HitomiDataQuery.cs" />
     <Compile Include="Data\HitomiDataSearch.cs" />
-    <Compile Include="frmData.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmData.Designer.cs">
-      <DependentUpon>frmData.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStatistics.Designer.cs">
+      <DependentUpon>frmStatistics.cs</DependentUpon>
     </Compile>
     <Compile Include="HitomiCore.cs" />
     <Compile Include="HitomiJson.cs" />
@@ -98,11 +98,11 @@
     <Compile Include="ScrollFixLayoutPanel.designer.cs">
       <DependentUpon>ScrollFixLayoutPanel.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frmData.resx">
-      <DependentUpon>frmData.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStatistics.resx">
+      <DependentUpon>frmStatistics.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

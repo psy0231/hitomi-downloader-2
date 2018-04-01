@@ -322,6 +322,7 @@ namespace Hitomi_Copy
             await hitomi_data.DownloadMetadata();
             MessageBox.Show("데이터 작성이 완료되었습니다!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             boxData.Enabled = true;
+            bStat.Enabled = true;
         }
 
         private void bDataOpen_Click(object sender, EventArgs e)
@@ -339,6 +340,7 @@ namespace Hitomi_Copy
             }
 
             boxData.Enabled = true;
+            bStat.Enabled = true;
         }
 
         private void bDataSearch_Click(object sender, EventArgs e)
@@ -400,6 +402,17 @@ namespace Hitomi_Copy
             wc.DownloadFileCompleted += CallbackThumbnail;
             wc.DownloadFileAsync(new Uri(HitomiDef.HitomiThumbnail + ha.Thumbnail), temp,
                 new Tuple<string, HitomiArticle>(temp, ha));
+        }
+        
+        private void SearchTextBoxEnterKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+                bDataSearch.PerformClick();
+        }
+
+        private void bStat_Click(object sender, EventArgs e)
+        {
+            (new frmStatistics(hitomi_data)).Show();
         }
     }
 }
