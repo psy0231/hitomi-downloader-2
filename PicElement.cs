@@ -19,12 +19,14 @@ namespace Hitomi_Copy
         bool downloaded = false;
         HitomiArticle ha;
         PictureBox pb = new PictureBox();
+        InfoForm info;
 
         public PicElement(ToolTip tooltip = null)
         {
             InitializeComponent();
 
             this.Paint += PicElement_Paint;
+            this.BackColor = Color.WhiteSmoke;
         }
 
         private void PicElement_Paint(object sender, PaintEventArgs e)
@@ -35,17 +37,17 @@ namespace Hitomi_Copy
             g.DrawString(label, font, Brushes.Black, LabelRect);
             if (downloaded == false)
             {
-                if (mouse_enter)
-                {
-                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(100, 203, 226, 233));
-                    g.FillRectangle(basicBrushes, 0, 0, Width, Height);
-                }
-
                 if (selected)
                 {
                     SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(200, 203, 226, 233));
                     g.FillRectangle(basicBrushes, 0, 0, Width, Height);
                     g.DrawRectangle(new Pen(Color.LightSkyBlue, 2), 2, 2, this.Width - 4, this.Height - 4);
+                }
+                else if (mouse_enter)
+                {
+                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(100, 203, 226, 233));
+                    g.FillRectangle(basicBrushes, 0, 0, Width, Height);
+                    g.DrawRectangle(new Pen(Color.FromArgb(0,120,215), 1), 1, 1, this.Width - 2, this.Height - 2);
                 }
             }
             else
@@ -77,14 +79,14 @@ namespace Hitomi_Copy
         {
             if (downloaded == false)
             {
-                if (mouse_enter)
-                {
-                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(100, 203, 226, 233));
-                    e.Graphics.FillRectangle(basicBrushes, 0, 0, Width, Height);
-                }
                 if (selected)
                 {
                     SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(170, 203, 226, 233));
+                    e.Graphics.FillRectangle(basicBrushes, 0, 0, Width, Height);
+                }
+                else if (mouse_enter)
+                {
+                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(100, 203, 226, 233));
                     e.Graphics.FillRectangle(basicBrushes, 0, 0, Width, Height);
                 }
             }
@@ -112,13 +114,20 @@ namespace Hitomi_Copy
         private void Invalidall()
         { callfrom_panel = callfrom_paint = false; Invalidate(); }
         private void Picture_MouseEnter(object sender, EventArgs e)
-        { mouse_enter = true; Invalidall(); }
+        { mouse_enter = true; info.Location = Cursor.Position; info.Show(); Invalidall(); }
         private void Picture_MouseLeave(object sender, EventArgs e)
-        { mouse_enter = false; Invalidall(); }
+        { mouse_enter = false; info.Location = Cursor.Position; info.Hide(); Invalidall(); }
+        private void Picture_MouseMove(object sender, EventArgs e)
+        { info.Location = new Point(Cursor.Position.X+15,Cursor.Position.Y); /*info.BringToFront();*/ }
         private void Picture_MouseClick(object sender, EventArgs e)
         { if (((MouseEventArgs)e).Button == MouseButtons.Left) { selected = !selected; Invalidall(); } }
         private void Picture_MouseDoubleClick(object sender, EventArgs e)
-        { if (((MouseEventArgs)e).Button == MouseButtons.Left) { OpenUrl(); } }
+        { if (((MouseEventArgs)e).Button == MouseButtons.Left) { OpenInfo(); selected = false; } }
+
+        public void OpenInfo()
+        {
+            (new frmGalleryInfo(this)).Show();
+        }
 
         public void OpenUrl()
         {
@@ -142,12 +151,14 @@ namespace Hitomi_Copy
             pb.Size = new Size(pannelw - 6, pannelh - 30);
             pb.Image = image = Image.FromFile(addr);
             pb.SizeMode = PictureBoxSizeMode.Zoom;
-            pb.BorderStyle = BorderStyle.FixedSingle;
             pb.Paint += Picture_Paint;
             pb.MouseEnter += Picture_MouseEnter;
             pb.MouseLeave += Picture_MouseLeave;
             pb.MouseClick += Picture_MouseClick;
+            pb.MouseMove += Picture_MouseMove;
             pb.MouseDoubleClick += Picture_MouseDoubleClick;
+            info = new InfoForm(Image);
+            info.Size = new Size(image.Width*3/4, image.Height*3/4);
             this.Width = pannelw;
             this.Height = pannelh;
             this.Controls.Add(pb);

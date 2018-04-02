@@ -98,6 +98,7 @@ namespace Hitomi_Copy.Data
                 }
                 if (put) result.Add(v);
             }
+            result.Sort((a, b) => a.ID - b.ID);
             return result;
         }
     }

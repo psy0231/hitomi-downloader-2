@@ -47,6 +47,7 @@
             this.bSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.pbLoad = new System.Windows.Forms.ProgressBar();
             this.bStat = new System.Windows.Forms.Button();
             this.boxData = new System.Windows.Forms.GroupBox();
             this.lIndex = new System.Windows.Forms.Label();
@@ -68,6 +69,7 @@
             this.bDataOpen = new System.Windows.Forms.Button();
             this.bDataNew = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.lStatus = new System.Windows.Forms.Label();
             this.pbTarget = new System.Windows.Forms.ProgressBar();
             this.lvStandBy = new System.Windows.Forms.ListView();
@@ -154,7 +156,7 @@
             // bTidy
             // 
             this.bTidy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bTidy.Location = new System.Drawing.Point(221, 467);
+            this.bTidy.Location = new System.Drawing.Point(221, 462);
             this.bTidy.Name = "bTidy";
             this.bTidy.Size = new System.Drawing.Size(101, 23);
             this.bTidy.TabIndex = 15;
@@ -165,7 +167,7 @@
             // bDownload
             // 
             this.bDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bDownload.Location = new System.Drawing.Point(1020, 467);
+            this.bDownload.Location = new System.Drawing.Point(1020, 463);
             this.bDownload.Name = "bDownload";
             this.bDownload.Size = new System.Drawing.Size(101, 23);
             this.bDownload.TabIndex = 14;
@@ -176,7 +178,7 @@
             // bCancleAll
             // 
             this.bCancleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bCancleAll.Location = new System.Drawing.Point(822, 468);
+            this.bCancleAll.Location = new System.Drawing.Point(822, 463);
             this.bCancleAll.Name = "bCancleAll";
             this.bCancleAll.Size = new System.Drawing.Size(101, 23);
             this.bCancleAll.TabIndex = 13;
@@ -187,7 +189,7 @@
             // bChooseAll
             // 
             this.bChooseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bChooseAll.Location = new System.Drawing.Point(715, 468);
+            this.bChooseAll.Location = new System.Drawing.Point(715, 463);
             this.bChooseAll.Name = "bChooseAll";
             this.bChooseAll.Size = new System.Drawing.Size(101, 23);
             this.bChooseAll.TabIndex = 12;
@@ -198,7 +200,7 @@
             // tbSex
             // 
             this.tbSex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbSex.Location = new System.Drawing.Point(77, 468);
+            this.tbSex.Location = new System.Drawing.Point(77, 463);
             this.tbSex.Name = "tbSex";
             this.tbSex.Size = new System.Drawing.Size(65, 23);
             this.tbSex.TabIndex = 11;
@@ -208,7 +210,7 @@
             // tbLang
             // 
             this.tbLang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbLang.Location = new System.Drawing.Point(6, 468);
+            this.tbLang.Location = new System.Drawing.Point(6, 463);
             this.tbLang.Name = "tbLang";
             this.tbLang.ReadOnly = true;
             this.tbLang.Size = new System.Drawing.Size(65, 23);
@@ -220,7 +222,7 @@
             // 
             this.lPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lPages.AutoSize = true;
-            this.lPages.Location = new System.Drawing.Point(473, 472);
+            this.lPages.Location = new System.Drawing.Point(473, 467);
             this.lPages.Name = "lPages";
             this.lPages.Size = new System.Drawing.Size(23, 15);
             this.lPages.TabIndex = 9;
@@ -229,7 +231,7 @@
             // numPages
             // 
             this.numPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numPages.Location = new System.Drawing.Point(397, 468);
+            this.numPages.Location = new System.Drawing.Point(397, 463);
             this.numPages.Name = "numPages";
             this.numPages.Size = new System.Drawing.Size(70, 23);
             this.numPages.TabIndex = 8;
@@ -242,7 +244,7 @@
             // bLoad
             // 
             this.bLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bLoad.Location = new System.Drawing.Point(522, 468);
+            this.bLoad.Location = new System.Drawing.Point(522, 463);
             this.bLoad.Name = "bLoad";
             this.bLoad.Size = new System.Drawing.Size(101, 23);
             this.bLoad.TabIndex = 7;
@@ -292,6 +294,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.pbLoad);
             this.tabPage4.Controls.Add(this.bStat);
             this.tabPage4.Controls.Add(this.boxData);
             this.tabPage4.Controls.Add(this.bDataOpen);
@@ -304,9 +307,17 @@
             this.tabPage4.Text = "고급검색";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // pbLoad
+            // 
+            this.pbLoad.Location = new System.Drawing.Point(590, 19);
+            this.pbLoad.Name = "pbLoad";
+            this.pbLoad.Size = new System.Drawing.Size(503, 14);
+            this.pbLoad.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pbLoad.TabIndex = 4;
+            this.pbLoad.Visible = false;
+            // 
             // bStat
             // 
-            this.bStat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bStat.Enabled = false;
             this.bStat.Location = new System.Drawing.Point(380, 6);
             this.bStat.Name = "bStat";
@@ -509,6 +520,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.lStatus);
             this.tabPage2.Controls.Add(this.pbTarget);
             this.tabPage2.Controls.Add(this.lvStandBy);
@@ -521,13 +533,22 @@
             this.tabPage2.Text = "다운로드";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(41, 376);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(90, 15);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "다운로드 상태: ";
+            // 
             // lStatus
             // 
-            this.lStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lStatus.AutoSize = true;
-            this.lStatus.BackColor = System.Drawing.SystemColors.Control;
-            this.lStatus.Location = new System.Drawing.Point(542, 347);
+            this.lStatus.BackColor = System.Drawing.Color.Transparent;
+            this.lStatus.Location = new System.Drawing.Point(130, 376);
             this.lStatus.Name = "lStatus";
             this.lStatus.Size = new System.Drawing.Size(34, 15);
             this.lStatus.TabIndex = 9;
@@ -645,10 +666,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ImagePanel.Location = new System.Drawing.Point(6, 64);
             this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 398);
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 393);
             this.ImagePanel.TabIndex = 3;
             // 
             // frmMain
@@ -664,7 +685,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(1175, 591);
             this.Name = "frmMain";
-            this.Text = "Robust Hitomi Copy Machine 1.5";
+            this.Text = "Robust Hitomi Copy Machine 1.6";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -738,5 +759,7 @@
         private System.Windows.Forms.Label lIndex;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button bStat;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ProgressBar pbLoad;
     }
 }

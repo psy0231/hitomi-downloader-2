@@ -59,6 +59,26 @@
     <Compile Include="Data\HitomiDataModel.cs" />
     <Compile Include="Data\HitomiDataQuery.cs" />
     <Compile Include="Data\HitomiDataSearch.cs" />
+    <Compile Include="frmArtistInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmArtistInfo.Designer.cs">
+      <DependentUpon>frmArtistInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGalleryInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGalleryInfo.Designer.cs">
+      <DependentUpon>frmGalleryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HitomiLegalize.cs" />
+    <Compile Include="HitomiLog.cs" />
+    <Compile Include="InfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoForm.Designer.cs">
+      <DependentUpon>InfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +118,15 @@
     <Compile Include="ScrollFixLayoutPanel.designer.cs">
       <DependentUpon>ScrollFixLayoutPanel.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmArtistInfo.resx">
+      <DependentUpon>frmArtistInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGalleryInfo.resx">
+      <DependentUpon>frmGalleryInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoForm.resx">
+      <DependentUpon>InfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>

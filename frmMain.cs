@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hitomi_Copy
@@ -204,8 +205,17 @@ namespace Hitomi_Copy
         }
 
         List<PicElement> downloaded_check = new List<PicElement>();
+
+        public void RemoteDownloadArticle(PicElement pe)
+        {
+            AddArticle(pe);
+            tabControl1.SelectedIndex = 2;
+        }
+
         private void AddArticle(PicElement pe)
         {
+            HitomiLog.Instance.AddArticle(pe.Article);
+            HitomiLog.Instance.Save();
             downloaded_check.Add(pe);
             HitomiCore.DownloadAndSetImageLink(pe, ImageLinkCallback);
         }
@@ -227,6 +237,7 @@ namespace Hitomi_Copy
                     download_queue.Add(HitomiDef.GetDownloadImageAddress(pe.Article.Magic, pe.Article.ImagesLink[i]), Path.Combine(
                         MakeDownloadDirectory(pe.Article), pe.Article.ImagesLink[i]),
                         count);
+                    download_check.Add(pe.Label);
                     IncrementProgressBarMax();
                 }
                 HitomiJson hitomi_json = new HitomiJson(MakeDownloadDirectory(pe.Article));
@@ -236,6 +247,7 @@ namespace Hitomi_Copy
         }
 
         HitomiQueue download_queue;
+        List<string> download_check=new List<string>();
 
         private string MakeDownloadDirectory(HitomiArticle article)
         {
@@ -279,26 +291,27 @@ namespace Hitomi_Copy
                 Invoke(new Action<string>(DeleteSpecificItem), new object[] { i });
                 return;
             }
+            string title = "";
             for (int j = 0; j < lvStandBy.Items.Count; j++)
             {
                 if (lvStandBy.Items[j].SubItems[0].Text == i)
                 {
+                    title = lvStandBy.Items[j].SubItems[1].Text;
                     lvStandBy.Items.RemoveAt(j);
                     break;
                 }
             }
+            lock (download_check)
             lock (downloaded_check)
             {
+                download_check.Remove(title);
+                List<string> copy = download_check.ToList();
                 foreach (var elem in downloaded_check)
                 {
                     if (elem.Downloading == true)
                     {
-                        bool b = false;
-                        for (int j = 0; j < lvStandBy.Items.Count; j++)
-                            if (lvStandBy.Items[j].SubItems[1].Text == elem.Article.Title)
-                            { b = true; break; }
-                        if (b == false)
-                            lock (elem) elem.Downloading = false;
+                        if (!copy.Contains(elem.Label))
+                        { lock (elem) elem.Downloading = false; }
                     }
                 }
             }
@@ -313,34 +326,42 @@ namespace Hitomi_Copy
             lStatus.Text = v;
         }
 
-        HitomiData hitomi_data = new HitomiData();
+        public HitomiData hitomi_data = new HitomiData();
         private async void bDataNew_ClickAsync(object sender, EventArgs e)
         {
             bDataNew.Enabled = false;
             bDataOpen.Enabled = false;
+            pbLoad.Visible = true;
+            pbLoad.MarqueeAnimationSpeed = 10;
             await hitomi_data.DownloadTagJson();
             await hitomi_data.DownloadMetadata();
+            pbLoad.Visible = false;
             MessageBox.Show("데이터 작성이 완료되었습니다!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             boxData.Enabled = true;
             bStat.Enabled = true;
         }
 
-        private void bDataOpen_Click(object sender, EventArgs e)
+        private async void bDataOpen_Click(object sender, EventArgs e)
         {
             bDataNew.Enabled = false;
             bDataOpen.Enabled = false;
-            hitomi_data.LoadTagJson();
-            hitomi_data.LoadMetadataJson();
+            pbLoad.Visible = true;
+            pbLoad.MarqueeAnimationSpeed = 10;
+            await Task.Run(() => hitomi_data.LoadTagJson());
+            await Task.Run(() => hitomi_data.LoadMetadataJson());
 
             if (hitomi_data.tag_collection.female == null || hitomi_data.metadata_collection == null)
             {
                 MessageBox.Show("누락된 파일이 있습니다. 데이터를 새로 작성하세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 bDataNew.Enabled = true;
+                pbLoad.Visible = false;
                 return;
             }
 
             boxData.Enabled = true;
             bStat.Enabled = true;
+            pbLoad.Visible = false;
+            MessageBox.Show("데이터 로딩 완료!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void bDataSearch_Click(object sender, EventArgs e)
@@ -375,6 +396,11 @@ namespace Hitomi_Copy
 
         private void bAddEntire_Click(object sender, EventArgs e)
         {
+            if (lvSearch.Items.Count > 200)
+            {
+                MessageBox.Show("항목이 너무 많습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             foreach (ListViewItem v in lvSearch.Items)
             {
                 WebClient wc = new WebClient();
