@@ -20,13 +20,15 @@ namespace Hitomi_Copy
         HitomiArticle ha;
         PictureBox pb = new PictureBox();
         InfoForm info;
+        Form parent;
 
-        public PicElement(ToolTip tooltip = null)
+        public PicElement(Form parent, ToolTip tooltip = null)
         {
             InitializeComponent();
 
             this.Paint += PicElement_Paint;
             this.BackColor = Color.WhiteSmoke;
+            this.parent = parent;
         }
 
         private void PicElement_Paint(object sender, PaintEventArgs e)
@@ -126,7 +128,7 @@ namespace Hitomi_Copy
 
         public void OpenInfo()
         {
-            (new frmGalleryInfo(this)).Show();
+            (new frmGalleryInfo(parent, this)).Show();
         }
 
         public void OpenUrl()

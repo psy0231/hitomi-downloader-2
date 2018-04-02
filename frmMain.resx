@@ -117,6 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>Robust Hitomi Copy Machine
+Copyright (C) 2018. Hitomi Parser Developers
+
+디시인사이드 프로그래밍 갤러리 유저 연합이 개발하고 유지 및 보수하는 프로그램입니다.
+
+기타 다운로더 목록 - https://namu.wiki/w/Hitomi#s-4.2
+
+UI 부분에선 Kurt의 Qt기반 Hitomi Downloader를 따라잡을 수 없었기 때문에 
+검색기능에 차별화를 둔 다운로더입니다.
+
+
+Hitomi Copy가 제공하는 강력한 기능들을 사용해보세요!
+
+ * %temp% 폴더를 주기적으로 청소해 주세요.
+ * 기본 언어는 한국어입니다. 변경하시려면 소스코드를 수정하세요.</value>
+  </data>
   <metadata name="tooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>247, 17</value>
   </metadata>

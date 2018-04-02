@@ -1,7 +1,6 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
 using hitomi.Parser;
-using Hitomi_Copy.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,12 +16,14 @@ namespace Hitomi_Copy
     public partial class frmArtistInfo : Form
     {
         string artist;
+        Form closed_form;
 
-        public frmArtistInfo(string artist)
+        public frmArtistInfo(Form closed, string artist)
         {
             InitializeComponent();
 
             this.artist = artist;
+            closed_form = closed;
         }
 
         private void frmArtistInfo_Load(object sender, EventArgs e)
@@ -94,7 +95,7 @@ namespace Hitomi_Copy
         List<PicElement> stayed = new List<PicElement>();
         private void CallbackThumbnail(object sender, AsyncCompletedEventArgs e)
         {
-            PicElement pe = new PicElement();
+            PicElement pe = new PicElement(this);
             Tuple<string, HitomiArticle> tuple = (Tuple<string, HitomiArticle>)e.UserState;
             pe.Article = tuple.Item2;
             pe.Label = tuple.Item2.Title;
@@ -124,12 +125,18 @@ namespace Hitomi_Copy
         {
             if (pbLoad.InvokeRequired)
             {
-                Invoke(new Action(IncrementProgressBarValue));
+                // form 꺼지면 오류남
+                try { Invoke(new Action(IncrementProgressBarValue)); } catch { }
                 return;
             }
-            pbLoad.Value += 1;
-            if (pbLoad.Value == pbLoad.Maximum)
-                pbLoad.Visible = false;
+            try
+            {
+                pbLoad.Value += 1;
+                if (pbLoad.Value == pbLoad.Maximum)
+                    pbLoad.Visible = false;
+            }
+            catch { }
+            
         }
         private void AddPe(PicElement pe)
         {
@@ -175,6 +182,11 @@ namespace Hitomi_Copy
                     (Application.OpenForms[0] as frmMain).RemoteDownloadArticle(pe);
                 }
             (Application.OpenForms[0] as frmMain).BringToFront();
+        }
+
+        private void frmArtistInfo_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try { closed_form.BringToFront(); } catch { }
         }
     }
 }

@@ -8,8 +8,10 @@ using System.IO;
 
 namespace Hitomi_Copy
 {
-    public class HitomiTagModel
+    public class HitomiLogModel
     {
+        [JsonProperty]
+        public string Id;
         [JsonProperty]
         public string Title;
         [JsonProperty]
@@ -24,12 +26,12 @@ namespace Hitomi_Copy
         public static HitomiLog Instance => instance.Value;
         string log_path = $"{Environment.CurrentDirectory}\\log.json";
         
-        List<HitomiTagModel> model;
+        List<HitomiLogModel> model;
 
         public HitomiLog()
         {
-            if (File.Exists(log_path)) model = JsonConvert.DeserializeObject<List<HitomiTagModel>>(File.ReadAllText(log_path));
-            if (model == null) model = new List<HitomiTagModel>();
+            if (File.Exists(log_path)) model = JsonConvert.DeserializeObject<List<HitomiLogModel>>(File.ReadAllText(log_path));
+            if (model == null) model = new List<HitomiLogModel>();
         }
 
         public void Save()
@@ -43,14 +45,14 @@ namespace Hitomi_Copy
 
         public void AddArticle(HitomiArticle article)
         {
-            HitomiTagModel mm = new HitomiTagModel();
+            HitomiLogModel mm = new HitomiLogModel();
             mm.Title = article.Title;
             mm.Artists = article.Artists;
             mm.Tags = article.Tags;
             model.Add(mm);
         }
 
-        public IEnumerable<HitomiTagModel> GetEnumerator()
+        public IEnumerable<HitomiLogModel> GetEnumerator()
         {
             return model;
         }

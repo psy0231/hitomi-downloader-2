@@ -47,7 +47,7 @@
             this.ImagePanel.Location = new System.Drawing.Point(254, 15);
             this.ImagePanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(798, 355);
+            this.ImagePanel.Size = new System.Drawing.Size(1427, 642);
             this.ImagePanel.TabIndex = 5;
             // 
             // lvMyTagRank
@@ -62,7 +62,7 @@
             this.lvMyTagRank.Location = new System.Drawing.Point(12, 15);
             this.lvMyTagRank.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvMyTagRank.Name = "lvMyTagRank";
-            this.lvMyTagRank.Size = new System.Drawing.Size(236, 384);
+            this.lvMyTagRank.Size = new System.Drawing.Size(236, 671);
             this.lvMyTagRank.TabIndex = 6;
             this.lvMyTagRank.UseCompatibleStateImageBehavior = false;
             this.lvMyTagRank.View = System.Windows.Forms.View.Details;
@@ -80,7 +80,8 @@
             // 
             // bDownload
             // 
-            this.bDownload.Location = new System.Drawing.Point(817, 377);
+            this.bDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bDownload.Location = new System.Drawing.Point(1446, 664);
             this.bDownload.Name = "bDownload";
             this.bDownload.Size = new System.Drawing.Size(88, 23);
             this.bDownload.TabIndex = 7;
@@ -90,7 +91,8 @@
             // 
             // bDownloadAll
             // 
-            this.bDownloadAll.Location = new System.Drawing.Point(911, 377);
+            this.bDownloadAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bDownloadAll.Location = new System.Drawing.Point(1540, 664);
             this.bDownloadAll.Name = "bDownloadAll";
             this.bDownloadAll.Size = new System.Drawing.Size(141, 23);
             this.bDownloadAll.TabIndex = 16;
@@ -100,9 +102,11 @@
             // 
             // pbLoad
             // 
-            this.pbLoad.Location = new System.Drawing.Point(289, 385);
+            this.pbLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbLoad.Location = new System.Drawing.Point(289, 672);
             this.pbLoad.Name = "pbLoad";
-            this.pbLoad.Size = new System.Drawing.Size(502, 9);
+            this.pbLoad.Size = new System.Drawing.Size(1131, 9);
             this.pbLoad.TabIndex = 17;
             // 
             // frmArtistInfo
@@ -110,17 +114,19 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1064, 412);
+            this.ClientSize = new System.Drawing.Size(1693, 699);
             this.Controls.Add(this.pbLoad);
             this.Controls.Add(this.bDownloadAll);
             this.Controls.Add(this.bDownload);
             this.Controls.Add(this.lvMyTagRank);
             this.Controls.Add(this.ImagePanel);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MinimumSize = new System.Drawing.Size(1080, 451);
             this.Name = "frmArtistInfo";
             this.Text = "작가 : ";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmArtistInfo_FormClosed);
             this.Load += new System.EventHandler(this.frmArtistInfo_Load);
             this.ResumeLayout(false);
 

@@ -92,7 +92,7 @@ namespace Hitomi_Copy
         List<PicElement> stayed = new List<PicElement>();
         private void CallbackThumbnail(object sender, AsyncCompletedEventArgs e)
         {
-            PicElement pe = new PicElement();
+            PicElement pe = new PicElement(this);
             Tuple<string, HitomiArticle> tuple = (Tuple<string, HitomiArticle>)e.UserState;
             pe.Article = tuple.Item2;
             pe.Label = tuple.Item2.Title;
@@ -256,7 +256,7 @@ namespace Hitomi_Copy
             string artists = article.Artists;
             foreach (char c in invalid) title = title.Replace(c.ToString(), "");
             foreach (char c in invalid) artists = artists.Replace(c.ToString(), "");
-            return Regex.Replace(Regex.Replace(tbDownloadPath.Text, "{Title}", title), "{Artists}", artists);
+            return Regex.Replace(Regex.Replace(Regex.Replace(tbDownloadPath.Text, "{Title}", title), "{Artists}", artists), "{Id}", article.Magic);
         }
 
         private void HitomiQueueCallback(string uri, string filename, object obj)

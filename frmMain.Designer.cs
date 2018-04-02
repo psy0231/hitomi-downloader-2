@@ -85,6 +85,7 @@
             this.이작가로검색ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label8 = new System.Windows.Forms.Label();
             this.ImagePanel = new Hitomi_Copy.ScrollFixLayoutPanel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPages)).BeginInit();
@@ -156,7 +157,7 @@
             // bTidy
             // 
             this.bTidy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bTidy.Location = new System.Drawing.Point(221, 462);
+            this.bTidy.Location = new System.Drawing.Point(221, 470);
             this.bTidy.Name = "bTidy";
             this.bTidy.Size = new System.Drawing.Size(101, 23);
             this.bTidy.TabIndex = 15;
@@ -167,7 +168,7 @@
             // bDownload
             // 
             this.bDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bDownload.Location = new System.Drawing.Point(1020, 463);
+            this.bDownload.Location = new System.Drawing.Point(1020, 471);
             this.bDownload.Name = "bDownload";
             this.bDownload.Size = new System.Drawing.Size(101, 23);
             this.bDownload.TabIndex = 14;
@@ -178,7 +179,7 @@
             // bCancleAll
             // 
             this.bCancleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bCancleAll.Location = new System.Drawing.Point(822, 463);
+            this.bCancleAll.Location = new System.Drawing.Point(822, 471);
             this.bCancleAll.Name = "bCancleAll";
             this.bCancleAll.Size = new System.Drawing.Size(101, 23);
             this.bCancleAll.TabIndex = 13;
@@ -189,7 +190,7 @@
             // bChooseAll
             // 
             this.bChooseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bChooseAll.Location = new System.Drawing.Point(715, 463);
+            this.bChooseAll.Location = new System.Drawing.Point(715, 471);
             this.bChooseAll.Name = "bChooseAll";
             this.bChooseAll.Size = new System.Drawing.Size(101, 23);
             this.bChooseAll.TabIndex = 12;
@@ -200,7 +201,7 @@
             // tbSex
             // 
             this.tbSex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbSex.Location = new System.Drawing.Point(77, 463);
+            this.tbSex.Location = new System.Drawing.Point(77, 471);
             this.tbSex.Name = "tbSex";
             this.tbSex.Size = new System.Drawing.Size(65, 23);
             this.tbSex.TabIndex = 11;
@@ -210,7 +211,7 @@
             // tbLang
             // 
             this.tbLang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbLang.Location = new System.Drawing.Point(6, 463);
+            this.tbLang.Location = new System.Drawing.Point(6, 471);
             this.tbLang.Name = "tbLang";
             this.tbLang.ReadOnly = true;
             this.tbLang.Size = new System.Drawing.Size(65, 23);
@@ -222,7 +223,7 @@
             // 
             this.lPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lPages.AutoSize = true;
-            this.lPages.Location = new System.Drawing.Point(473, 467);
+            this.lPages.Location = new System.Drawing.Point(473, 475);
             this.lPages.Name = "lPages";
             this.lPages.Size = new System.Drawing.Size(23, 15);
             this.lPages.TabIndex = 9;
@@ -231,7 +232,7 @@
             // numPages
             // 
             this.numPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numPages.Location = new System.Drawing.Point(397, 463);
+            this.numPages.Location = new System.Drawing.Point(397, 471);
             this.numPages.Name = "numPages";
             this.numPages.Size = new System.Drawing.Size(70, 23);
             this.numPages.TabIndex = 8;
@@ -244,7 +245,7 @@
             // bLoad
             // 
             this.bLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bLoad.Location = new System.Drawing.Point(522, 463);
+            this.bLoad.Location = new System.Drawing.Point(522, 471);
             this.bLoad.Name = "bLoad";
             this.bLoad.Size = new System.Drawing.Size(101, 23);
             this.bLoad.TabIndex = 7;
@@ -607,6 +608,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.textBox1);
             this.tabPage3.Controls.Add(this.tbDownloadPath);
             this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
@@ -625,7 +627,7 @@
             this.tbDownloadPath.Name = "tbDownloadPath";
             this.tbDownloadPath.Size = new System.Drawing.Size(851, 23);
             this.tbDownloadPath.TabIndex = 1;
-            this.tbDownloadPath.Text = "C:\\Hitomi\\{Artists}\\{Title}\\";
+            this.tbDownloadPath.Text = "C:\\Hitomi\\{Artists}\\[{Id}] {Title}\\";
             // 
             // label4
             // 
@@ -652,7 +654,7 @@
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(707, 13);
             this.label8.Name = "label8";
@@ -669,8 +671,21 @@
             this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ImagePanel.Location = new System.Drawing.Point(6, 64);
             this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 393);
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 400);
             this.ImagePanel.TabIndex = 3;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(76, 101);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(944, 323);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // frmMain
             // 
@@ -685,7 +700,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(1175, 591);
             this.Name = "frmMain";
-            this.Text = "Robust Hitomi Copy Machine 1.6";
+            this.Text = "Robust Hitomi Copy Machine 1.7";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -761,5 +776,6 @@
         private System.Windows.Forms.Button bStat;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ProgressBar pbLoad;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
