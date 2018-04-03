@@ -45,7 +45,6 @@
             this.tbSearchUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.bSearch = new System.Windows.Forms.Button();
-            this.ImagePanel = new Hitomi_Copy.ScrollFixLayoutPanel();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.pbLoad = new System.Windows.Forms.ProgressBar();
@@ -86,6 +85,8 @@
             this.ctxMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.이작가로검색ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label8 = new System.Windows.Forms.Label();
+            this.bArtistInfo = new System.Windows.Forms.Button();
+            this.ImagePanel = new Hitomi_Copy.ScrollFixLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPages)).BeginInit();
@@ -157,7 +158,7 @@
             // bTidy
             // 
             this.bTidy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bTidy.Location = new System.Drawing.Point(221, 470);
+            this.bTidy.Location = new System.Drawing.Point(221, 468);
             this.bTidy.Name = "bTidy";
             this.bTidy.Size = new System.Drawing.Size(101, 23);
             this.bTidy.TabIndex = 15;
@@ -168,7 +169,7 @@
             // bDownload
             // 
             this.bDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bDownload.Location = new System.Drawing.Point(1020, 471);
+            this.bDownload.Location = new System.Drawing.Point(1020, 469);
             this.bDownload.Name = "bDownload";
             this.bDownload.Size = new System.Drawing.Size(101, 23);
             this.bDownload.TabIndex = 14;
@@ -179,7 +180,7 @@
             // bCancleAll
             // 
             this.bCancleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bCancleAll.Location = new System.Drawing.Point(822, 471);
+            this.bCancleAll.Location = new System.Drawing.Point(822, 469);
             this.bCancleAll.Name = "bCancleAll";
             this.bCancleAll.Size = new System.Drawing.Size(101, 23);
             this.bCancleAll.TabIndex = 13;
@@ -190,7 +191,7 @@
             // bChooseAll
             // 
             this.bChooseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bChooseAll.Location = new System.Drawing.Point(715, 471);
+            this.bChooseAll.Location = new System.Drawing.Point(715, 469);
             this.bChooseAll.Name = "bChooseAll";
             this.bChooseAll.Size = new System.Drawing.Size(101, 23);
             this.bChooseAll.TabIndex = 12;
@@ -201,7 +202,7 @@
             // tbSex
             // 
             this.tbSex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbSex.Location = new System.Drawing.Point(77, 471);
+            this.tbSex.Location = new System.Drawing.Point(77, 469);
             this.tbSex.Name = "tbSex";
             this.tbSex.Size = new System.Drawing.Size(65, 23);
             this.tbSex.TabIndex = 11;
@@ -211,7 +212,7 @@
             // tbLang
             // 
             this.tbLang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbLang.Location = new System.Drawing.Point(6, 471);
+            this.tbLang.Location = new System.Drawing.Point(6, 469);
             this.tbLang.Name = "tbLang";
             this.tbLang.ReadOnly = true;
             this.tbLang.Size = new System.Drawing.Size(65, 23);
@@ -223,7 +224,7 @@
             // 
             this.lPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lPages.AutoSize = true;
-            this.lPages.Location = new System.Drawing.Point(473, 475);
+            this.lPages.Location = new System.Drawing.Point(473, 473);
             this.lPages.Name = "lPages";
             this.lPages.Size = new System.Drawing.Size(23, 15);
             this.lPages.TabIndex = 9;
@@ -232,7 +233,7 @@
             // numPages
             // 
             this.numPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numPages.Location = new System.Drawing.Point(397, 471);
+            this.numPages.Location = new System.Drawing.Point(397, 469);
             this.numPages.Name = "numPages";
             this.numPages.Size = new System.Drawing.Size(70, 23);
             this.numPages.TabIndex = 8;
@@ -245,7 +246,7 @@
             // bLoad
             // 
             this.bLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bLoad.Location = new System.Drawing.Point(522, 471);
+            this.bLoad.Location = new System.Drawing.Point(522, 469);
             this.bLoad.Name = "bLoad";
             this.bLoad.Size = new System.Drawing.Size(101, 23);
             this.bLoad.TabIndex = 7;
@@ -282,18 +283,6 @@
             this.bSearch.Text = "검색";
             this.bSearch.UseVisualStyleBackColor = true;
             this.bSearch.Click += new System.EventHandler(this.bSearch_Click);
-            // 
-            // ImagePanel
-            // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ImagePanel.Location = new System.Drawing.Point(6, 64);
-            this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 400);
-            this.ImagePanel.TabIndex = 3;
             // 
             // tbSearch
             // 
@@ -620,6 +609,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.bArtistInfo);
             this.tabPage3.Controls.Add(this.textBox1);
             this.tabPage3.Controls.Add(this.tbDownloadPath);
             this.tabPage3.Controls.Add(this.label4);
@@ -686,6 +676,28 @@
             this.label8.Size = new System.Drawing.Size(433, 15);
             this.label8.TabIndex = 2;
             this.label8.Text = "Copyright (C) 2018. DCInside Programming Gallery Union. All Rights Reserved.";
+            // 
+            // bArtistInfo
+            // 
+            this.bArtistInfo.Location = new System.Drawing.Point(76, 15);
+            this.bArtistInfo.Name = "bArtistInfo";
+            this.bArtistInfo.Size = new System.Drawing.Size(181, 37);
+            this.bArtistInfo.TabIndex = 4;
+            this.bArtistInfo.Text = "작가 총 정리";
+            this.bArtistInfo.UseVisualStyleBackColor = true;
+            this.bArtistInfo.Click += new System.EventHandler(this.bArtistInfo_Click);
+            // 
+            // ImagePanel
+            // 
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePanel.AutoScroll = true;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Location = new System.Drawing.Point(6, 64);
+            this.ImagePanel.Name = "ImagePanel";
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 398);
+            this.ImagePanel.TabIndex = 3;
             // 
             // frmMain
             // 
@@ -777,5 +789,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ProgressBar pbLoad;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button bArtistInfo;
     }
 }

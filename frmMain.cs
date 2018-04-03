@@ -276,7 +276,9 @@ namespace Hitomi_Copy
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
             string title = article.Title;
             string artists = article.Artists;
+            if (title != null)
             foreach (char c in invalid) title = title.Replace(c.ToString(), "");
+            if (artists != null)
             foreach (char c in invalid) artists = artists.Replace(c.ToString(), "");
             return Regex.Replace(Regex.Replace(Regex.Replace(tbDownloadPath.Text, "{Title}", title), "{Artists}", artists), "{Id}", article.Magic);
         }
@@ -461,6 +463,11 @@ namespace Hitomi_Copy
         private void bStat_Click(object sender, EventArgs e)
         {
             (new frmStatistics(hitomi_data)).Show();
+        }
+
+        private void bArtistInfo_Click(object sender, EventArgs e)
+        {
+            (new ArtistForm()).Show();
         }
     }
 }
