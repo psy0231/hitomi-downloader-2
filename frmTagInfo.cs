@@ -23,6 +23,8 @@ namespace Hitomi_Copy
 
         private void frmTagInfo_Load(object sender, EventArgs e)
         {
+            ColumnInit();
+
             List<HitomiMetadata> result = new List<HitomiMetadata>();
             var hitomi_data = (Application.OpenForms[0] as frmMain).hitomi_data.metadata_collection;
             foreach (var data in hitomi_data)
@@ -51,6 +53,11 @@ namespace Hitomi_Copy
             }
             lvil.Sort((a, b) => Convert.ToUInt32(b.SubItems[0].Text).CompareTo(Convert.ToUInt32(a.SubItems[0].Text)));
             lvHistory.Items.AddRange(lvil.ToArray());
+        }
+
+        private void ColumnInit()
+        {
+            ColumnSorter.InitListView(lvHistory);
         }
 
         private void lvHistory_MouseDoubleClick(object sender, MouseEventArgs e)

@@ -26,6 +26,8 @@ namespace Hitomi_Copy
         
         private void frmStatistics_Load(object sender, EventArgs e)
         {
+            ColumnInit();
+
             Dictionary<string, int> my_tag_rank = new Dictionary<string, int>();
             foreach (var v in HitomiLog.Instance.GetEnumerator())
             {
@@ -84,6 +86,18 @@ namespace Hitomi_Copy
             Task.Run(() => ArtistsRecommend());
             Task.Run(() => RankingProcess());
             Task.Run(() => UpdateHistory());
+        }
+
+        private void ColumnInit()
+        {
+            ColumnSorter.InitListView(lvRankArtists);
+            ColumnSorter.InitListView(lvRankCharacters);
+            ColumnSorter.InitListView(lvRankGroup);
+            ColumnSorter.InitListView(lvRankSeries);
+            ColumnSorter.InitListView(lvRankTag);
+            ColumnSorter.InitListView(lvHistory);
+            ColumnSorter.InitListView(lvMyTagRank);
+            ColumnSorter.InitListView(lvRecommendArtists);
         }
         
         public void ArtistsRecommend()

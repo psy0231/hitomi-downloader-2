@@ -122,9 +122,9 @@
             this.label9.Font = new System.Drawing.Font("맑은 고딕", 12F);
             this.label9.Location = new System.Drawing.Point(243, 28);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(162, 21);
+            this.label9.Size = new System.Drawing.Size(130, 21);
             this.label9.TabIndex = 7;
-            this.label9.Text = "당신의 주요태그는 ...";
+            this.label9.Text = "당신의 취향은 ...";
             // 
             // label2
             // 
