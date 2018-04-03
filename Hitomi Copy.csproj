@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtistForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArtistForm.Designer.cs">
+      <DependentUpon>ArtistForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ColumnSorter.cs" />
     <Compile Include="Data\HitomiData.cs" />
     <Compile Include="Data\HitomiDataModel.cs" />
@@ -78,11 +84,11 @@
     <Compile Include="frmTagInfo.Designer.cs">
       <DependentUpon>frmTagInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="frnGroupInfo.cs">
+    <Compile Include="frmGroupInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frnGroupInfo.Designer.cs">
-      <DependentUpon>frnGroupInfo.cs</DependentUpon>
+    <Compile Include="frmGroupInfo.Designer.cs">
+      <DependentUpon>frmGroupInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="frmArtistInfo.cs">
       <SubType>Form</SubType>
@@ -143,6 +149,9 @@
     <Compile Include="ScrollFixLayoutPanel.designer.cs">
       <DependentUpon>ScrollFixLayoutPanel.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ArtistForm.resx">
+      <DependentUpon>ArtistForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCharacterInfo.resx">
       <DependentUpon>frmCharacterInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,8 +161,8 @@
     <EmbeddedResource Include="frmTagInfo.resx">
       <DependentUpon>frmTagInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frnGroupInfo.resx">
-      <DependentUpon>frnGroupInfo.cs</DependentUpon>
+    <EmbeddedResource Include="frmGroupInfo.resx">
+      <DependentUpon>frmGroupInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArtistInfo.resx">
       <DependentUpon>frmArtistInfo.cs</DependentUpon>
@@ -178,6 +187,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -194,6 +204,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\screenshot-m.blog.naver.com-2018.04.03-11-50-42.png" />
     <Content Include="TETO.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
