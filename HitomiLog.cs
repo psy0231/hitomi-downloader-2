@@ -46,6 +46,7 @@ namespace Hitomi_Copy
         public void AddArticle(HitomiArticle article)
         {
             HitomiLogModel mm = new HitomiLogModel();
+            mm.Id = article.Magic;
             mm.Title = article.Title;
             mm.Artists = article.Artists;
             mm.Tags = article.Tags;

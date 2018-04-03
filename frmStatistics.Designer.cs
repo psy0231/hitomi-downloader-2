@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStatistics));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lvRecommendArtists = new System.Windows.Forms.ListView();
@@ -42,44 +43,43 @@
             this.lvMyTagRank = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label8 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lvRankTag = new System.Windows.Forms.ListView();
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvRankArtists = new System.Windows.Forms.ListView();
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvRankSeries = new System.Windows.Forms.ListView();
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvRankCharacters = new System.Windows.Forms.ListView();
-            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lvRankGroup = new System.Windows.Forms.ListView();
             this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lvRankCharacters = new System.Windows.Forms.ListView();
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvRankSeries = new System.Windows.Forms.ListView();
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvRankArtists = new System.Windows.Forms.ListView();
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lvRankTag = new System.Windows.Forms.ListView();
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.lvHistory = new System.Windows.Forms.ListView();
             this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -115,6 +115,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "요약";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("맑은 고딕", 12F);
+            this.label9.Location = new System.Drawing.Point(243, 28);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(162, 21);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "당신의 주요태그는 ...";
             // 
             // label2
             // 
@@ -203,6 +213,7 @@
             this.lvMyTagRank.TabIndex = 1;
             this.lvMyTagRank.UseCompatibleStateImageBehavior = false;
             this.lvMyTagRank.View = System.Windows.Forms.View.Details;
+            this.lvMyTagRank.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvMyTagRank_MouseDoubleClick);
             // 
             // columnHeader1
             // 
@@ -213,16 +224,6 @@
             // 
             this.columnHeader2.Text = "카운트";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1049, 13);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(433, 15);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Copyright (C) 2018. DCInside Programming Gallery Union. All Rights Reserved.";
             // 
             // tabPage2
             // 
@@ -243,166 +244,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "순위";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(110, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 15);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "<태그 순위>";
-            // 
-            // lvRankTag
-            // 
-            this.lvRankTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lvRankTag.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader13,
-            this.columnHeader7,
-            this.columnHeader8});
-            this.lvRankTag.FullRowSelect = true;
-            this.lvRankTag.GridLines = true;
-            this.lvRankTag.Location = new System.Drawing.Point(25, 47);
-            this.lvRankTag.Name = "lvRankTag";
-            this.lvRankTag.Size = new System.Drawing.Size(279, 498);
-            this.lvRankTag.TabIndex = 7;
-            this.lvRankTag.UseCompatibleStateImageBehavior = false;
-            this.lvRankTag.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "항목";
-            this.columnHeader7.Width = 127;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "카운트";
-            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(413, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 15);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "<작가 순위>";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(697, 29);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 15);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "<시리즈 순위>";
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "순위";
-            // 
-            // lvRankArtists
-            // 
-            this.lvRankArtists.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lvRankArtists.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11});
-            this.lvRankArtists.FullRowSelect = true;
-            this.lvRankArtists.GridLines = true;
-            this.lvRankArtists.Location = new System.Drawing.Point(310, 47);
-            this.lvRankArtists.Name = "lvRankArtists";
-            this.lvRankArtists.Size = new System.Drawing.Size(279, 498);
-            this.lvRankArtists.TabIndex = 11;
-            this.lvRankArtists.UseCompatibleStateImageBehavior = false;
-            this.lvRankArtists.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "순위";
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "항목";
-            this.columnHeader10.Width = 127;
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "카운트";
-            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lvRankSeries
-            // 
-            this.lvRankSeries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lvRankSeries.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader12,
-            this.columnHeader14,
-            this.columnHeader15});
-            this.lvRankSeries.FullRowSelect = true;
-            this.lvRankSeries.GridLines = true;
-            this.lvRankSeries.Location = new System.Drawing.Point(595, 47);
-            this.lvRankSeries.Name = "lvRankSeries";
-            this.lvRankSeries.Size = new System.Drawing.Size(279, 498);
-            this.lvRankSeries.TabIndex = 12;
-            this.lvRankSeries.UseCompatibleStateImageBehavior = false;
-            this.lvRankSeries.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "순위";
-            // 
-            // columnHeader14
-            // 
-            this.columnHeader14.Text = "항목";
-            this.columnHeader14.Width = 127;
-            // 
-            // columnHeader15
-            // 
-            this.columnHeader15.Text = "카운트";
-            this.columnHeader15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lvRankCharacters
-            // 
-            this.lvRankCharacters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lvRankCharacters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader16,
-            this.columnHeader17,
-            this.columnHeader18});
-            this.lvRankCharacters.FullRowSelect = true;
-            this.lvRankCharacters.GridLines = true;
-            this.lvRankCharacters.Location = new System.Drawing.Point(880, 47);
-            this.lvRankCharacters.Name = "lvRankCharacters";
-            this.lvRankCharacters.Size = new System.Drawing.Size(279, 498);
-            this.lvRankCharacters.TabIndex = 13;
-            this.lvRankCharacters.UseCompatibleStateImageBehavior = false;
-            this.lvRankCharacters.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader16
-            // 
-            this.columnHeader16.Text = "순위";
-            // 
-            // columnHeader17
-            // 
-            this.columnHeader17.Text = "항목";
-            this.columnHeader17.Width = 127;
-            // 
-            // columnHeader18
-            // 
-            this.columnHeader18.Text = "카운트";
-            this.columnHeader18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(968, 29);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 15);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "<캐릭터 순위>";
             // 
             // label7
             // 
@@ -429,6 +270,7 @@
             this.lvRankGroup.TabIndex = 15;
             this.lvRankGroup.UseCompatibleStateImageBehavior = false;
             this.lvRankGroup.View = System.Windows.Forms.View.Details;
+            this.lvRankGroup.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvRankGroup_MouseDoubleClick);
             // 
             // columnHeader19
             // 
@@ -444,15 +286,169 @@
             this.columnHeader21.Text = "카운트";
             this.columnHeader21.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label9
+            // label6
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("맑은 고딕", 12F);
-            this.label9.Location = new System.Drawing.Point(243, 28);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(162, 21);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "당신의 주요태그는 ...";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(968, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(87, 15);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "<캐릭터 순위>";
+            // 
+            // lvRankCharacters
+            // 
+            this.lvRankCharacters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lvRankCharacters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader16,
+            this.columnHeader17,
+            this.columnHeader18});
+            this.lvRankCharacters.FullRowSelect = true;
+            this.lvRankCharacters.GridLines = true;
+            this.lvRankCharacters.Location = new System.Drawing.Point(880, 47);
+            this.lvRankCharacters.Name = "lvRankCharacters";
+            this.lvRankCharacters.Size = new System.Drawing.Size(279, 498);
+            this.lvRankCharacters.TabIndex = 13;
+            this.lvRankCharacters.UseCompatibleStateImageBehavior = false;
+            this.lvRankCharacters.View = System.Windows.Forms.View.Details;
+            this.lvRankCharacters.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvRankCharacters_MouseDoubleClick);
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "순위";
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "항목";
+            this.columnHeader17.Width = 127;
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "카운트";
+            this.columnHeader18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lvRankSeries
+            // 
+            this.lvRankSeries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lvRankSeries.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader12,
+            this.columnHeader14,
+            this.columnHeader15});
+            this.lvRankSeries.FullRowSelect = true;
+            this.lvRankSeries.GridLines = true;
+            this.lvRankSeries.Location = new System.Drawing.Point(595, 47);
+            this.lvRankSeries.Name = "lvRankSeries";
+            this.lvRankSeries.Size = new System.Drawing.Size(279, 498);
+            this.lvRankSeries.TabIndex = 12;
+            this.lvRankSeries.UseCompatibleStateImageBehavior = false;
+            this.lvRankSeries.View = System.Windows.Forms.View.Details;
+            this.lvRankSeries.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvRankSeries_MouseDoubleClick);
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "순위";
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "항목";
+            this.columnHeader14.Width = 127;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "카운트";
+            this.columnHeader15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lvRankArtists
+            // 
+            this.lvRankArtists.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lvRankArtists.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11});
+            this.lvRankArtists.FullRowSelect = true;
+            this.lvRankArtists.GridLines = true;
+            this.lvRankArtists.Location = new System.Drawing.Point(310, 47);
+            this.lvRankArtists.Name = "lvRankArtists";
+            this.lvRankArtists.Size = new System.Drawing.Size(279, 498);
+            this.lvRankArtists.TabIndex = 11;
+            this.lvRankArtists.UseCompatibleStateImageBehavior = false;
+            this.lvRankArtists.View = System.Windows.Forms.View.Details;
+            this.lvRankArtists.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvRankArtists_MouseDoubleClick);
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "순위";
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "항목";
+            this.columnHeader10.Width = 127;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "카운트";
+            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(689, 29);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 15);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "<시리즈 순위>";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(413, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 15);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "<작가 순위>";
+            // 
+            // lvRankTag
+            // 
+            this.lvRankTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lvRankTag.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader13,
+            this.columnHeader7,
+            this.columnHeader8});
+            this.lvRankTag.FullRowSelect = true;
+            this.lvRankTag.GridLines = true;
+            this.lvRankTag.Location = new System.Drawing.Point(25, 47);
+            this.lvRankTag.Name = "lvRankTag";
+            this.lvRankTag.Size = new System.Drawing.Size(279, 498);
+            this.lvRankTag.TabIndex = 7;
+            this.lvRankTag.UseCompatibleStateImageBehavior = false;
+            this.lvRankTag.View = System.Windows.Forms.View.Details;
+            this.lvRankTag.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvRankTag_MouseDoubleClick);
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "순위";
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "항목";
+            this.columnHeader7.Width = 127;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "카운트";
+            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(122, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 15);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "<태그 순위>";
             // 
             // tabPage3
             // 
@@ -487,43 +483,57 @@
             this.lvHistory.TabIndex = 8;
             this.lvHistory.UseCompatibleStateImageBehavior = false;
             this.lvHistory.View = System.Windows.Forms.View.Details;
+            this.lvHistory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvHistory_MouseDoubleClick);
             // 
             // columnHeader22
             // 
-            this.columnHeader22.Text = "인덱스";
+            this.columnHeader22.Text = "아이디";
+            this.columnHeader22.Width = 79;
             // 
             // columnHeader23
             // 
             this.columnHeader23.Text = "제목";
-            this.columnHeader23.Width = 507;
+            this.columnHeader23.Width = 354;
+            // 
+            // columnHeader29
+            // 
+            this.columnHeader29.Text = "타입";
+            this.columnHeader29.Width = 86;
             // 
             // columnHeader24
             // 
             this.columnHeader24.Text = "작가";
             this.columnHeader24.Width = 105;
             // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "그룹";
+            this.columnHeader27.Width = 151;
+            // 
             // columnHeader25
             // 
             this.columnHeader25.Text = "시리즈";
             this.columnHeader25.Width = 144;
             // 
-            // columnHeader26
-            // 
-            this.columnHeader26.Text = "태그";
-            this.columnHeader26.Width = 390;
-            // 
-            // columnHeader27
-            // 
-            this.columnHeader27.Text = "그룹";
-            // 
             // columnHeader28
             // 
             this.columnHeader28.Text = "캐릭터";
+            this.columnHeader28.Width = 143;
             // 
-            // columnHeader29
+            // columnHeader26
             // 
-            this.columnHeader29.Text = "타입";
-            this.columnHeader29.Width = 92;
+            this.columnHeader26.Text = "태그";
+            this.columnHeader26.Width = 356;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1049, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(433, 15);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Copyright (C) 2018. DCInside Programming Gallery Union. All Rights Reserved.";
             // 
             // frmStatistics
             // 

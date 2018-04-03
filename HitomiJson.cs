@@ -10,6 +10,8 @@ namespace Hitomi_Copy
     public class HitomiJsonModel
     {
         [JsonProperty]
+        public string Id;
+        [JsonProperty]
         public string Title;
         [JsonProperty]
         public string Artists;
@@ -46,6 +48,7 @@ namespace Hitomi_Copy
 
         public void SetModelFromArticle(HitomiArticle article)
         {
+            model.Id = article.Magic;
             model.Title = article.Title;
             model.Artists = article.Artists;
             model.Series = article.Series;

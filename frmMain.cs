@@ -206,6 +206,28 @@ namespace Hitomi_Copy
 
         List<PicElement> downloaded_check = new List<PicElement>();
 
+        public void RemoteDownloadArticleFromId(string id)
+        {
+            tabControl1.SelectedIndex = 2;
+            HitomiMetadata metadata = new HitomiMetadata();
+            foreach (var v in hitomi_data.metadata_collection)
+            {
+                if (v.ID.ToString() == id)
+                { metadata = v; break; }
+            }
+            PicElement fake_pe = new PicElement(this);
+            HitomiArticle article = new HitomiArticle();
+            article.Magic = metadata.ID.ToString();
+            article.Title = metadata.Name;
+            if (metadata.Artists != null)
+                article.Artists = metadata.Artists[0];
+            if (metadata.Tags != null)
+                article.Tags = metadata.Tags.ToList();
+            fake_pe.Article = article;
+            fake_pe.Label = metadata.Name;
+            RemoteDownloadArticle(fake_pe);
+        }
+
         public void RemoteDownloadArticle(PicElement pe)
         {
             AddArticle(pe);

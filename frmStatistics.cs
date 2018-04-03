@@ -29,6 +29,7 @@ namespace Hitomi_Copy
             Dictionary<string, int> my_tag_rank = new Dictionary<string, int>();
             foreach (var v in HitomiLog.Instance.GetEnumerator())
             {
+                if (v.Tags == null) continue;
                 foreach (var tag in v.Tags)
                 {
                     string legalize = HitomiLegalize.LegalizeTag(tag);
@@ -55,8 +56,10 @@ namespace Hitomi_Copy
             // suprising message
             if (tag_rank_list[0].Value > 10)
             {
-                if (tag_rank_list[0].Key.Contains("female:loli") || tag_rank_list[0].Key.Contains("male:shota"))
-                    lMessage.Text = "으아아악 패도다!! 자살해!!";
+                if (tag_rank_list[0].Key.Contains("female:loli"))
+                    lMessage.Text = "로리는 진리죠!";
+                else if (tag_rank_list[0].Key.Contains("male:shota"))
+                    lMessage.Text = "쇼타??";
                 else if (tag_rank_list[0].Key.Contains("female:big breasts"))
                     lMessage.Text = "가슴큰게 좋아요?";
                 else if (tag_rank_list[0].Key.Contains("female:sole female"))
@@ -260,7 +263,7 @@ namespace Hitomi_Copy
             {
                 lvil.Add(new ListViewItem(new string[]
                 {
-                    (i+1).ToString(),
+                    result[i].ID.ToString(),
                     result[i].Name,
                     result[i].Type,
                     string.Join(",", result[i].Artists ?? Enumerable.Empty<string>()),
@@ -281,6 +284,70 @@ namespace Hitomi_Copy
                 return;
             }
             lvHistory.Items.AddRange(items);
+        }
+
+        private void lvHistory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvHistory.SelectedItems.Count > 0)
+            {
+                var hitomi_data = (Application.OpenForms[0] as frmMain).hitomi_data.metadata_collection;
+                foreach (var metadata in hitomi_data)
+                {
+                    if (metadata.ID.ToString() == lvHistory.SelectedItems[0].SubItems[0].Text)
+                    {
+                        (new frmGalleryInfo(this, metadata)).Show();
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void lvRankArtists_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankArtists.SelectedItems.Count > 0)
+            {
+                (new frmArtistInfo(this, lvRankArtists.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        private void lvRankGroup_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankGroup.SelectedItems.Count > 0)
+            {
+                (new frmGroupInfo(this, lvRankGroup.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        private void lvRankTag_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankTag.SelectedItems.Count > 0)
+            {
+                (new frmTagInfo(this, lvRankTag.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        private void lvMyTagRank_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvMyTagRank.SelectedItems.Count > 0)
+            {
+                (new frmTagInfo(this, lvMyTagRank.SelectedItems[0].SubItems[0].Text)).Show();
+            }
+        }
+
+        private void lvRankSeries_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankSeries.SelectedItems.Count > 0)
+            {
+                (new frmSeriesInfo(this, lvRankSeries.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        private void lvRankCharacters_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankCharacters.SelectedItems.Count > 0)
+            {
+                (new frmCharacterInfo(this, lvRankCharacters.SelectedItems[0].SubItems[1].Text)).Show();
+            }
         }
     }
 }
