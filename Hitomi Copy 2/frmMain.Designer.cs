@@ -54,11 +54,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.cbRecommendArtistType = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bShowSearch = new System.Windows.Forms.Button();
             this.bStatistics = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -344,11 +340,7 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.cbRecommendArtistType);
-            this.tabPage3.Controls.Add(this.button5);
-            this.tabPage3.Controls.Add(this.button4);
-            this.tabPage3.Controls.Add(this.button3);
-            this.tabPage3.Controls.Add(this.button2);
-            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.bShowSearch);
             this.tabPage3.Controls.Add(this.bStatistics);
             this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.label5);
@@ -373,64 +365,26 @@
             this.cbRecommendArtistType.UseVisualStyleBackColor = true;
             this.cbRecommendArtistType.CheckedChanged += new System.EventHandler(this.cbRecommendArtistType_CheckedChanged);
             // 
-            // button5
+            // bShowSearch
             // 
-            this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(725, 394);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(324, 33);
-            this.button5.TabIndex = 16;
-            this.button5.Text = "고급 검색";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(725, 299);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(324, 33);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "태그 통계 보기";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(725, 260);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(324, 33);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "캐릭터 통계 보기";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(725, 221);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(324, 33);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "시리즈 통계 보기";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(725, 182);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(324, 33);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "그룹 통계 보기";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bShowSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bShowSearch.Location = new System.Drawing.Point(864, 438);
+            this.bShowSearch.Name = "bShowSearch";
+            this.bShowSearch.Size = new System.Drawing.Size(185, 33);
+            this.bShowSearch.TabIndex = 16;
+            this.bShowSearch.Text = "검색";
+            this.bShowSearch.UseVisualStyleBackColor = true;
+            this.bShowSearch.Click += new System.EventHandler(this.bShowSearch_Click);
             // 
             // bStatistics
             // 
+            this.bStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bStatistics.Enabled = false;
-            this.bStatistics.Location = new System.Drawing.Point(725, 143);
+            this.bStatistics.Location = new System.Drawing.Point(864, 399);
             this.bStatistics.Name = "bStatistics";
-            this.bStatistics.Size = new System.Drawing.Size(324, 33);
+            this.bStatistics.Size = new System.Drawing.Size(185, 33);
             this.bStatistics.TabIndex = 11;
-            this.bStatistics.Text = "작가 통계 보기";
+            this.bStatistics.Text = "통계";
             this.bStatistics.UseVisualStyleBackColor = true;
             // 
             // label3
@@ -717,13 +671,9 @@
         private System.Windows.Forms.ListView lvMyTagRank;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bStatistics;
         private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button bShowSearch;
         private System.Windows.Forms.CheckBox cbRecommendArtistType;
         private System.Windows.Forms.ProgressBar pbSync;
         private System.Windows.Forms.Button bSync;

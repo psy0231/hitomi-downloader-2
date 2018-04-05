@@ -717,5 +717,9 @@ namespace Hitomi_Copy_2
             MessageBox.Show("데이터가 동기화되었습니다!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void bShowSearch_Click(object sender, EventArgs e)
+        {
+            (new frmSearch()).Show();
+        }
     }
 }
