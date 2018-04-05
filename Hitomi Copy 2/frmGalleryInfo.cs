@@ -128,5 +128,21 @@ namespace Hitomi_Copy
             else
                 System.Diagnostics.Process.Start($"https://hitomi.la/galleries/{metadata.ID}.html");
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (pic != null)
+                (new frmGroupInfo(this, pic.Article.Groups[0])).Show();
+            else
+                (new frmGroupInfo(this, metadata.Groups[0])).Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (pic != null)
+                (new frmCharacterInfo(this, pic.Article.Characters[0])).Show();
+            else
+                (new frmCharacterInfo(this, metadata.Characters[0])).Show();
+        }
     }
 }

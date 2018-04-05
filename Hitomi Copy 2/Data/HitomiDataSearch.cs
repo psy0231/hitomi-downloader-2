@@ -1,6 +1,8 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hitomi_Copy.Data
 {
@@ -109,7 +111,7 @@ namespace Hitomi_Copy.Data
             List<HitomiMetadata> result = new List<HitomiMetadata>();
             foreach (var v in HitomiData.Instance.metadata_collection)
             {
-                if (query.TagInclude.Contains(v.ID.ToString()))
+                if (query.Common.Contains(v.ID.ToString()))
                 {
                     result.Add(v);
                     continue;
@@ -123,43 +125,62 @@ namespace Hitomi_Copy.Data
                         foreach (var tag in query.TagExclude)
                         {
                             foreach (var vtag in v.Tags)
-                                if (vtag.ToLower().Contains(tag.ToLower()))
+                                if (vtag.ToLower() == tag.ToLower())
                                 { intersec_count++; break; }
                             if (intersec_count > 0) break;
                         }
                         if (intersec_count > 0) continue;
                     }
                 }
-                int put = 0;
-                if (query.TagInclude != null)
+                bool[] check = new bool[query.Common.Count];
+                if (query.Common != null)
                 {
-                    put += IntersectCount(v.Tags, query.TagInclude);
-                    put += IntersectCount(v.Artists, query.TagInclude);
-                    put += IntersectCount(v.Groups, query.TagInclude);
-                    put += IntersectCount(v.Parodies, query.TagInclude);
-                    put += IntersectCount(v.Characters, query.TagInclude);
+                    IntersectCountSplit(v.Name.Split(' '), query.Common, ref check);
+                    IntersectCountSplit(v.Tags, query.Common, ref check);
+                    IntersectCountSplit(v.Artists, query.Common, ref check);
+                    IntersectCountSplit(v.Groups, query.Common, ref check);
+                    IntersectCountSplit(v.Parodies, query.Common, ref check);
+                    IntersectCountSplit(v.Characters, query.Common, ref check);
                 }
-                if (put >= query.TagInclude.Count)
+                bool connect = false;
+                if (check.Length == 0) { check = new bool[1]; check[0] = true; }
+                if (check[0] && v.Artists != null && query.Artists != null) { check[0] = IsIntersect(v.Artists, query.Artists); connect = true; }
+                if (check[0] && v.Tags != null && query.TagInclude != null) { check[0] = IsIntersect(v.Tags, query.TagInclude); connect = true; }
+                if (check[0] && v.Groups != null && query.Groups != null) { check[0] = IsIntersect(v.Groups, query.Groups); connect = true; }
+                if (check[0] && v.Parodies != null && query.Series != null) { check[0] = IsIntersect(v.Parodies, query.Series); connect = true; }
+                if (check[0] && v.Characters != null && query.Characters != null) { check[0] = IsIntersect(v.Characters, query.Characters); connect = true; }
+                if (check.All((x => x)) && ((query.Common.Count == 0 && connect) || query.Common.Count > 0))
                     result.Add(v);
             }
             result.Sort((a, b) => a.ID - b.ID);
             return result;
         }
 
-        private static int IntersectCount(string[] target, List<string> source)
+        private static bool IsIntersect(string[] target, List<string> source)
+        {
+            bool[] check = new bool[source.Count];
+            for (int i = 0; i < source.Count; i++)
+                foreach (string e in target)
+                    if (e.ToLower().Split(' ').Contains(source[i].ToLower()))
+                    {
+                        check[i] = true;
+                        break;
+                    }
+            return check.All((x => x));
+        }
+
+        private static void IntersectCountSplit(string[] target, List<string> source, ref bool[] check)
         {
             if (target != null)
             {
-                int intersec_count = 0;
-                foreach (var tag in source)
-                {
-                    foreach (var vtag in target)
-                        if (vtag.ToLower().Contains(tag.ToLower()))
-                        { intersec_count++; break; }
-                }
-                return intersec_count;
+                for (int i = 0; i < source.Count; i++)
+                    foreach (string e in target)
+                        if (e.ToLower().Split(' ').Contains(source[i].ToLower()))
+                        {
+                            check[i] = true;
+                            break;
+                        }
             }
-            return 0;
         }
     }
 }

@@ -37,7 +37,6 @@
             this.bDownload = new System.Windows.Forms.Button();
             this.bCancleAll = new System.Windows.Forms.Button();
             this.bChooseAll = new System.Windows.Forms.Button();
-            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.bSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -80,6 +79,8 @@
             this.tbExcludeTag = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
+            this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
             this.MainTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -105,6 +106,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.listBox1);
             this.tabPage1.Controls.Add(this.bTidy);
             this.tabPage1.Controls.Add(this.lStatusSearch);
             this.tabPage1.Controls.Add(this.tbLang);
@@ -187,18 +189,6 @@
             this.bChooseAll.UseVisualStyleBackColor = true;
             this.bChooseAll.Click += new System.EventHandler(this.bChooseAll_Click);
             // 
-            // ImagePanel
-            // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ImagePanel.Location = new System.Drawing.Point(6, 35);
-            this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 430);
-            this.ImagePanel.TabIndex = 2;
-            // 
             // bSearch
             // 
             this.bSearch.Location = new System.Drawing.Point(1027, 6);
@@ -218,6 +208,7 @@
             this.tbSearch.Size = new System.Drawing.Size(1015, 23);
             this.tbSearch.TabIndex = 0;
             this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
+            this.tbSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyUp);
             // 
             // tabPage2
             // 
@@ -242,7 +233,7 @@
             // 
             this.lDownloadStatusSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lDownloadStatusSize.AutoSize = true;
-            this.lDownloadStatusSize.Location = new System.Drawing.Point(134, 425);
+            this.lDownloadStatusSize.Location = new System.Drawing.Point(134, 442);
             this.lDownloadStatusSize.Name = "lDownloadStatusSize";
             this.lDownloadStatusSize.Size = new System.Drawing.Size(36, 15);
             this.lDownloadStatusSize.TabIndex = 29;
@@ -252,7 +243,7 @@
             // 
             this.lDownloadSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lDownloadSize.AutoSize = true;
-            this.lDownloadSize.Location = new System.Drawing.Point(134, 410);
+            this.lDownloadSize.Location = new System.Drawing.Point(134, 427);
             this.lDownloadSize.Name = "lDownloadSize";
             this.lDownloadSize.Size = new System.Drawing.Size(36, 15);
             this.lDownloadSize.TabIndex = 28;
@@ -262,7 +253,7 @@
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(41, 425);
+            this.label12.Location = new System.Drawing.Point(41, 442);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(94, 15);
             this.label12.TabIndex = 27;
@@ -272,7 +263,7 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(25, 410);
+            this.label11.Location = new System.Drawing.Point(25, 427);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(110, 15);
             this.label11.TabIndex = 26;
@@ -282,7 +273,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(45, 382);
+            this.label9.Location = new System.Drawing.Point(45, 399);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(90, 15);
             this.label9.TabIndex = 22;
@@ -293,7 +284,7 @@
             this.lStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lStatus.AutoSize = true;
             this.lStatus.BackColor = System.Drawing.Color.Transparent;
-            this.lStatus.Location = new System.Drawing.Point(134, 382);
+            this.lStatus.Location = new System.Drawing.Point(134, 399);
             this.lStatus.Name = "lStatus";
             this.lStatus.Size = new System.Drawing.Size(34, 15);
             this.lStatus.TabIndex = 21;
@@ -303,7 +294,7 @@
             // 
             this.pbTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbTarget.Location = new System.Drawing.Point(48, 344);
+            this.pbTarget.Location = new System.Drawing.Point(48, 361);
             this.pbTarget.Maximum = 0;
             this.pbTarget.Name = "pbTarget";
             this.pbTarget.Size = new System.Drawing.Size(1038, 35);
@@ -322,7 +313,7 @@
             this.lvStandBy.GridLines = true;
             this.lvStandBy.Location = new System.Drawing.Point(48, 70);
             this.lvStandBy.Name = "lvStandBy";
-            this.lvStandBy.Size = new System.Drawing.Size(1038, 268);
+            this.lvStandBy.Size = new System.Drawing.Size(1038, 285);
             this.lvStandBy.TabIndex = 19;
             this.lvStandBy.UseCompatibleStateImageBehavior = false;
             this.lvStandBy.View = System.Windows.Forms.View.Details;
@@ -558,24 +549,24 @@
             // 
             // bSync
             // 
-            this.bSync.Enabled = false;
-            this.bSync.Location = new System.Drawing.Point(845, 28);
+            this.bSync.Location = new System.Drawing.Point(845, 34);
             this.bSync.Name = "bSync";
             this.bSync.Size = new System.Drawing.Size(191, 38);
             this.bSync.TabIndex = 5;
             this.bSync.Text = "데이터 동기화";
             this.bSync.UseVisualStyleBackColor = true;
+            this.bSync.Click += new System.EventHandler(this.bSync_Click);
             // 
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(92, 167);
+            this.textBox1.Location = new System.Drawing.Point(92, 136);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(944, 256);
+            this.textBox1.Size = new System.Drawing.Size(944, 287);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
@@ -583,7 +574,7 @@
             // 
             this.tbDownloadPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDownloadPath.Location = new System.Drawing.Point(185, 109);
+            this.tbDownloadPath.Location = new System.Drawing.Point(185, 78);
             this.tbDownloadPath.Name = "tbDownloadPath";
             this.tbDownloadPath.Size = new System.Drawing.Size(851, 23);
             this.tbDownloadPath.TabIndex = 3;
@@ -592,7 +583,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(89, 112);
+            this.label4.Location = new System.Drawing.Point(89, 81);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 15);
             this.label4.TabIndex = 2;
@@ -600,7 +591,7 @@
             // 
             // tbExcludeTag
             // 
-            this.tbExcludeTag.Location = new System.Drawing.Point(185, 138);
+            this.tbExcludeTag.Location = new System.Drawing.Point(185, 107);
             this.tbExcludeTag.Name = "tbExcludeTag";
             this.tbExcludeTag.Size = new System.Drawing.Size(851, 23);
             this.tbExcludeTag.TabIndex = 1;
@@ -609,7 +600,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(97, 141);
+            this.label1.Location = new System.Drawing.Point(97, 110);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 15);
             this.label1.TabIndex = 0;
@@ -624,6 +615,33 @@
             this.label8.Size = new System.Drawing.Size(433, 15);
             this.label8.TabIndex = 3;
             this.label8.Text = "Copyright (C) 2018. DCInside Programming Gallery Union. All Rights Reserved.";
+            // 
+            // ImagePanel
+            // 
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePanel.AutoScroll = true;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Location = new System.Drawing.Point(6, 35);
+            this.ImagePanel.Name = "ImagePanel";
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 430);
+            this.ImagePanel.TabIndex = 2;
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(230, 455);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.ScrollAlwaysVisible = true;
+            this.listBox1.Size = new System.Drawing.Size(281, 109);
+            this.listBox1.TabIndex = 7;
+            this.listBox1.Visible = false;
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
             // frmMain
             // 
@@ -709,5 +727,6 @@
         private System.Windows.Forms.CheckBox cbRecommendArtistType;
         private System.Windows.Forms.ProgressBar pbSync;
         private System.Windows.Forms.Button bSync;
+        private AutoCompleteListBox listBox1;
     }
 }

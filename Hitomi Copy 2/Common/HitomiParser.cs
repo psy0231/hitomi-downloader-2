@@ -30,7 +30,7 @@ namespace hitomi.Parser
             document.LoadHtml(source);
             HtmlNode nodes = document.DocumentNode.SelectNodes("//div[@class='cover-column']")[0];
 
-            article.Thumbnail = nodes.SelectSingleNode(".//div//a//img").GetAttributeValue("src", "").Substring("//tn.hitomi.la/".Length);
+            article.Thumbnail = nodes.SelectSingleNode(".//div//img").GetAttributeValue("src", "").Substring("//tn.hitomi.la/".Length);
 
             return article;
         }

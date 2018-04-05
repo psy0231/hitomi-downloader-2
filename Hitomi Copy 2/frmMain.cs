@@ -6,6 +6,7 @@ using Hitomi_Copy.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,12 +33,6 @@ namespace Hitomi_Copy_2
             MainTab.Enabled = true;
             UpdateStatistics();
         }
-        
-        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-                bSearch.PerformClick();
-        }
 
         private void bSearch_Click(object sender, System.EventArgs e)
         {
@@ -45,18 +40,52 @@ namespace Hitomi_Copy_2
             List<string> positive_data = new List<string>();
             List<string> negative_data = new List<string>();
 
-            tbSearch.Text.Split(' ').ToList().ForEach((a) => positive_data.Add(a.Trim()));
-            tbExcludeTag.Text.Split(' ').ToList().ForEach((a) => negative_data.Add(a.Trim()));
-            query.TagInclude = positive_data;
-            query.Series = positive_data;
-            query.Groups = positive_data;
-            query.Characters = positive_data;
-            query.Artists = positive_data;
-            query.Title = positive_data;
+            tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":")) positive_data.Add(a.Trim()); });
+            tbExcludeTag.Text.Trim().Split(' ').ToList().ForEach((a) => negative_data.Add(a.Trim()));
+            query.Common = positive_data;
             query.TagExclude = negative_data;
+            foreach (var elem in tbSearch.Text.Trim().Split(' '))
+            {
+                if (!elem.Contains(":")) continue;
+                if (elem.StartsWith("tag:"))
+                    if (query.TagInclude == null)
+                        query.TagInclude = new List<string>() { elem.Substring("tag:".Length) };
+                    else
+                        query.TagInclude.Add(elem);
+                else if (elem.StartsWith("artist:"))
+                    if (query.Artists == null)
+                        query.Artists = new List<string>() { elem.Substring("artist:".Length) };
+                    else
+                        query.Artists.Add(elem);
+                else if (elem.StartsWith("series:"))
+                    if (query.Series == null)
+                        query.Series = new List<string>() { elem.Substring("series:".Length) };
+                    else
+                        query.Series.Add(elem);
+                else if (elem.StartsWith("group:"))
+                    if (query.Groups == null)
+                        query.Groups = new List<string>() { elem.Substring("group:".Length) };
+                    else
+                        query.Groups.Add(elem);
+                else if (elem.StartsWith("character:"))
+                    if (query.Characters == null)
+                        query.Characters = new List<string>() { elem.Substring("character:".Length) };
+                    else
+                        query.Characters.Add(elem);
+                else if (elem.StartsWith("tagx:"))
+                    if (query.TagExclude == null)
+                        query.TagExclude = new List<string>() { elem.Substring("tagx:".Length) };
+                    else
+                        query.TagExclude.Add(elem);
+                else
+                {
+                    MessageBox.Show($"알 수 없는 규칙입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
 
             var query_result = HitomiDataSearch.Search2(query);
-            lStatusSearch.Text = $"{query_result.Count}개 항목이 검색됨";
+            lStatusSearch.Text = $"{query_result.Count} 개 항목이 검색됨";
             if (query_result.Count > 100)
             {
                 MessageBox.Show("검색된 항목이 너무 많아 표시할 수 없습니다. 고급검색 기능을 이용해주세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -69,6 +98,173 @@ namespace Hitomi_Copy_2
 
             query_result.ForEach((a) => {Task.Run(() => AddMetadataToPanel(a));});
         }
+
+        #region 검색창
+        int global_position = 0;
+        string global_text = "";
+        bool selected_part = true;
+
+        private int GetCaretWidthFromTextBox(int pos)
+        {
+            return TextRenderer.MeasureText(tbSearch.Text.Substring(0, pos), tbSearch.Font).Width;
+        }
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+                bSearch.PerformClick();
+            else
+            {
+                if (listBox1.Visible)
+                {
+                    if (e.KeyCode == Keys.Down)
+                    {
+                        listBox1.SelectedIndex = 0;
+                        listBox1.Focus();
+                    }
+                    else if (e.KeyCode == Keys.Up)
+                    {
+                        listBox1.SelectedIndex = listBox1.Items.Count - 1;
+                        listBox1.Focus();
+                    }
+                }
+
+                if (selected_part)
+                {
+                    selected_part = false;
+                    if (e.KeyCode != Keys.Back)
+                    {
+                        tbSearch.SelectionStart = global_position;
+                        tbSearch.SelectionLength = 0;
+                    }
+                }
+
+            }
+        }
+
+        private void tbSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            int position = tbSearch.SelectionStart;
+            while (position > 0 && tbSearch.Text[position-1] != ' ')
+                position -= 1;
+
+            string word = "";
+            for (int i = position; i < tbSearch.TextLength; i++)
+            {
+                if (tbSearch.Text[i] == ' ') break;
+                word += tbSearch.Text[i];
+            }
+
+            if (word == "") { listBox1.Visible = false; return; }
+
+            List<string> match = null;
+            if (word.Contains(":"))
+            {
+                if (word.StartsWith("artist:"))
+                {
+                    word = word.Substring("artist:".Length);
+                    position += "artist:".Length;
+                    match = HitomiData.Instance.GetArtistList(word);
+                }
+                else if (word.StartsWith("tag:"))
+                {
+                    word = word.Substring("tag:".Length);
+                    position += "tag:".Length;
+                    match = HitomiData.Instance.GetTagList(word);
+                }
+                else if (word.StartsWith("tagx:"))
+                {
+                    word = word.Substring("tagx:".Length);
+                    position += "tagx:".Length;
+                    match = HitomiData.Instance.GetTagList(word);
+                }
+                else if (word.StartsWith("character:"))
+                {
+                    word = word.Substring("character:".Length);
+                    position += "character:".Length;
+                    match = HitomiData.Instance.GetCharacterList(word);
+                }
+                else if (word.StartsWith("group:"))
+                {
+                    word = word.Substring("group:".Length);
+                    position += "group:".Length;
+                    match = HitomiData.Instance.GetGroupList(word);
+                }
+                else if (word.StartsWith("series:"))
+                {
+                    word = word.Substring("series:".Length);
+                    position += "series:".Length;
+                    match = HitomiData.Instance.GetSeriesList(word);
+                }
+            }
+
+            if (match != null && match.Count > 0)
+            {
+                listBox1.Visible = true;
+                listBox1.Items.Clear();
+                foreach (var item in match)
+                    listBox1.Items.Add(item);
+                listBox1.Location = new Point(tbSearch.Left + GetCaretWidthFromTextBox(position),
+                    tbSearch.Top + tbSearch.Font.Height + 5);
+                listBox1.MaxColoredTextLength = word.Length;
+            }
+            else { listBox1.Visible = false; return; }
+
+            global_position = position;
+            global_text = word;
+
+            if (e.KeyCode == Keys.Down)
+            {
+                listBox1.SelectedIndex = 0;
+                listBox1.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                listBox1.SelectedIndex = listBox1.Items.Count - 1;
+                listBox1.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
+            {
+                PutStringIntoTextBox(listBox1.Items[0].ToString());
+            }
+        }
+
+        private void PutStringIntoTextBox(string text)
+        {
+            tbSearch.Text = tbSearch.Text.Substring(0, global_position) + 
+                text + 
+                tbSearch.Text.Substring(global_position + global_text.Length);
+            listBox1.Hide();
+
+            tbSearch.SelectionStart = global_position;
+            tbSearch.SelectionLength = text.Length;
+            tbSearch.Focus();
+
+            global_position = global_position + tbSearch.SelectionLength;
+            selected_part = true;
+        }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox1.SelectedItems.Count > 0)
+            {
+                PutStringIntoTextBox(listBox1.SelectedItem.ToString());
+            }
+        }
+
+        private void listBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
+            {
+                if (listBox1.SelectedItems.Count > 0)
+                    PutStringIntoTextBox(listBox1.SelectedItem.ToString());
+            }
+            else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Escape)
+            {
+                listBox1.Hide();
+                tbSearch.Focus();
+            }
+        }
+        #endregion
 
         #region 썸네일 관련
         private async void AddMetadataToPanel(HitomiMetadata metadata)
@@ -510,5 +706,16 @@ namespace Hitomi_Copy_2
         {
             UpdateStatistics();
         }
+
+        private async void bSync_Click(object sender, EventArgs e)
+        {
+            pbSync.Visible = true;
+            bSync.Enabled = false;
+            await HitomiData.Instance.Synchronization();
+            pbSync.Visible = false;
+            bSync.Enabled = true;
+            MessageBox.Show("데이터가 동기화되었습니다!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     }
 }

@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoCompleteListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ColumnSorter.cs" />
     <Compile Include="Common\HitomiSearch.cs" />
     <Compile Include="CrossThreadUpdator.cs" />

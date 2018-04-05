@@ -61,7 +61,7 @@ namespace Hitomi_Copy.Data
 
         public async Task Synchronization()
         {
-            List<HitomiMetadata> metadata_collection = new List<HitomiMetadata>();
+            metadata_collection.Clear();
             await Task.WhenAll(Enumerable.Range(0, number_of_gallery_jsons).Select(no => downloadMetadata(no)));
 
             JsonSerializer serializer = new JsonSerializer();
@@ -73,9 +73,88 @@ namespace Hitomi_Copy.Data
             {
                 serializer.Serialize(writer, metadata_collection);
             }
-
-            this.metadata_collection.Clear();
-            this.metadata_collection = metadata_collection;
         }
+
+        #region Autocomplete Helper
+        public List<string> GetArtistList(string startswith)
+        {
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            foreach (var metadata in metadata_collection)
+            {
+                if (metadata.Artists != null && metadata.Artists[0].StartsWith(startswith.ToLower()) 
+                    && !dic.ContainsKey(metadata.Artists[0].ToLower()))
+                    dic.Add(metadata.Artists[0].ToLower(), 0);
+                if (dic.Count > 50) break;
+            }
+            List<string> result = new List<string>();
+            dic.ToList().ForEach((pair) => result.Add(pair.Key));
+            result.Sort();
+            return result;
+        }
+
+        public List<string> GetTagList(string startswith)
+        {
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            foreach (var metadata in metadata_collection)
+            {
+                if (metadata.Tags != null && metadata.Tags[0].StartsWith(startswith.ToLower())
+                    && !dic.ContainsKey(metadata.Tags[0].ToLower()))
+                    dic.Add(metadata.Tags[0].ToLower(), 0);
+                if (dic.Count > 50) break;
+            }
+            List<string> result = new List<string>();
+            dic.ToList().ForEach((pair) => result.Add(pair.Key));
+            result.Sort();
+            return result;
+        }
+
+        public List<string> GetGroupList(string startswith)
+        {
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            foreach (var metadata in metadata_collection)
+            {
+                if (metadata.Groups != null && metadata.Groups[0].StartsWith(startswith.ToLower())
+                    && !dic.ContainsKey(metadata.Groups[0].ToLower()))
+                    dic.Add(metadata.Groups[0].ToLower(), 0);
+                if (dic.Count > 50) break;
+            }
+            List<string> result = new List<string>();
+            dic.ToList().ForEach((pair) => result.Add(pair.Key));
+            result.Sort();
+            return result;
+        }
+
+        public List<string> GetSeriesList(string startswith)
+        {
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            foreach (var metadata in metadata_collection)
+            {
+                if (metadata.Parodies != null && metadata.Parodies[0].StartsWith(startswith.ToLower())
+                    && !dic.ContainsKey(metadata.Parodies[0].ToLower()))
+                    dic.Add(metadata.Parodies[0].ToLower(), 0);
+                if (dic.Count > 50) break;
+            }
+            List<string> result = new List<string>();
+            dic.ToList().ForEach((pair) => result.Add(pair.Key));
+            result.Sort();
+            return result;
+        }
+
+        public List<string> GetCharacterList(string startswith)
+        {
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            foreach (var metadata in metadata_collection)
+            {
+                if (metadata.Characters != null && metadata.Characters[0].StartsWith(startswith.ToLower())
+                    && !dic.ContainsKey(metadata.Characters[0].ToLower()))
+                    dic.Add(metadata.Characters[0].ToLower(), 0);
+                if (dic.Count > 50) break;
+            }
+            List<string> result = new List<string>();
+            dic.ToList().ForEach((pair) => result.Add(pair.Key));
+            result.Sort();
+            return result;
+        }
+        #endregion
     }
 }

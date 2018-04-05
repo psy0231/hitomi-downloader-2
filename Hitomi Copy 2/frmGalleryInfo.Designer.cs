@@ -46,6 +46,8 @@
             this.lCharacter = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lGroup = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -142,7 +144,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("맑은 고딕", 13F);
-            this.button1.Location = new System.Drawing.Point(851, 392);
+            this.button1.Location = new System.Drawing.Point(571, 345);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(163, 41);
             this.button1.TabIndex = 15;
@@ -153,7 +155,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("맑은 고딕", 13F);
-            this.button2.Location = new System.Drawing.Point(682, 392);
+            this.button2.Location = new System.Drawing.Point(571, 392);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(163, 41);
             this.button2.TabIndex = 16;
@@ -223,12 +225,36 @@
             this.lGroup.TabIndex = 21;
             this.lGroup.Text = "그룹";
             // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("맑은 고딕", 13F);
+            this.button5.Location = new System.Drawing.Point(740, 392);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(163, 41);
+            this.button5.TabIndex = 23;
+            this.button5.Text = "캐릭터 찾기";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("맑은 고딕", 13F);
+            this.button6.Location = new System.Drawing.Point(740, 345);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(163, 41);
+            this.button6.TabIndex = 24;
+            this.button6.Text = "그룹 찾기";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // frmGalleryInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1286, 470);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lGroup);
             this.Controls.Add(this.lCharacter);
@@ -281,5 +307,7 @@
         private System.Windows.Forms.Label lCharacter;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lGroup;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
