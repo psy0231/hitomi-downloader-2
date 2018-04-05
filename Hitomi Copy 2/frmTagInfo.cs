@@ -20,6 +20,7 @@ namespace Hitomi_Copy
 
             this.tag = tag;
             closed_form = closed;
+            Text += tag;
         }
 
         private void frmTagInfo_Load(object sender, EventArgs e)

@@ -135,7 +135,7 @@
             // 
             this.lStatusSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lStatusSearch.AutoSize = true;
-            this.lStatusSearch.Location = new System.Drawing.Point(163, 475);
+            this.lStatusSearch.Location = new System.Drawing.Point(163, 476);
             this.lStatusSearch.Name = "lStatusSearch";
             this.lStatusSearch.Size = new System.Drawing.Size(110, 15);
             this.lStatusSearch.TabIndex = 19;
@@ -144,7 +144,7 @@
             // tbLang
             // 
             this.tbLang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbLang.Location = new System.Drawing.Point(6, 471);
+            this.tbLang.Location = new System.Drawing.Point(6, 472);
             this.tbLang.Name = "tbLang";
             this.tbLang.ReadOnly = true;
             this.tbLang.Size = new System.Drawing.Size(65, 23);
@@ -379,13 +379,13 @@
             // bStatistics
             // 
             this.bStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bStatistics.Enabled = false;
             this.bStatistics.Location = new System.Drawing.Point(864, 399);
             this.bStatistics.Name = "bStatistics";
             this.bStatistics.Size = new System.Drawing.Size(185, 33);
             this.bStatistics.TabIndex = 11;
             this.bStatistics.Text = "통계";
             this.bStatistics.UseVisualStyleBackColor = true;
+            this.bStatistics.Click += new System.EventHandler(this.bStatistics_Click);
             // 
             // label3
             // 
@@ -594,7 +594,7 @@
             this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ImagePanel.Location = new System.Drawing.Point(6, 35);
             this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 430);
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 428);
             this.ImagePanel.TabIndex = 2;
             // 
             // frmMain

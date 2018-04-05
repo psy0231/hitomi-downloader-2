@@ -721,5 +721,10 @@ namespace Hitomi_Copy_2
         {
             (new frmSearch()).Show();
         }
+
+        private void bStatistics_Click(object sender, EventArgs e)
+        {
+            (new frmStatistics()).Show();
+        }
     }
 }

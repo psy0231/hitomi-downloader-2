@@ -26,6 +26,7 @@ namespace Hitomi_Copy
 
             this.group = group;
             closed_form = closed;
+            Text += group;
         }
 
         private void frmArtistInfo_Load(object sender, EventArgs e)
