@@ -81,9 +81,9 @@ namespace Hitomi_Copy.Data
             Dictionary<string, int> dic = new Dictionary<string, int>();
             foreach (var metadata in metadata_collection)
             {
-                if (metadata.Artists != null && metadata.Artists[0].StartsWith(startswith.ToLower()) 
-                    && !dic.ContainsKey(metadata.Artists[0].ToLower()))
-                    dic.Add(metadata.Artists[0].ToLower(), 0);
+                if (metadata.Artists != null && metadata.Artists[0].ToLower().Replace(' ', '_').StartsWith(startswith.ToLower()) 
+                    && !dic.ContainsKey(metadata.Artists[0].ToLower().Replace(' ', '_')))
+                    dic.Add(metadata.Artists[0].ToLower().Replace(' ', '_'), 0);
                 if (dic.Count > 50) break;
             }
             List<string> result = new List<string>();
@@ -97,9 +97,9 @@ namespace Hitomi_Copy.Data
             Dictionary<string, int> dic = new Dictionary<string, int>();
             foreach (var metadata in metadata_collection)
             {
-                if (metadata.Tags != null && metadata.Tags[0].StartsWith(startswith.ToLower())
-                    && !dic.ContainsKey(metadata.Tags[0].ToLower()))
-                    dic.Add(metadata.Tags[0].ToLower(), 0);
+                if (metadata.Tags != null && metadata.Tags[0].ToLower().Replace(' ', '_').StartsWith(startswith.ToLower())
+                    && !dic.ContainsKey(metadata.Tags[0].ToLower().Replace(' ', '_')))
+                    dic.Add(metadata.Tags[0].ToLower().Replace(' ', '_'), 0);
                 if (dic.Count > 50) break;
             }
             List<string> result = new List<string>();
@@ -113,9 +113,9 @@ namespace Hitomi_Copy.Data
             Dictionary<string, int> dic = new Dictionary<string, int>();
             foreach (var metadata in metadata_collection)
             {
-                if (metadata.Groups != null && metadata.Groups[0].StartsWith(startswith.ToLower())
-                    && !dic.ContainsKey(metadata.Groups[0].ToLower()))
-                    dic.Add(metadata.Groups[0].ToLower(), 0);
+                if (metadata.Groups != null && metadata.Groups[0].ToLower().Replace(' ', '_').StartsWith(startswith.ToLower())
+                    && !dic.ContainsKey(metadata.Groups[0].ToLower().Replace(' ', '_')))
+                    dic.Add(metadata.Groups[0].ToLower().Replace(' ', '_'), 0);
                 if (dic.Count > 50) break;
             }
             List<string> result = new List<string>();
@@ -129,9 +129,9 @@ namespace Hitomi_Copy.Data
             Dictionary<string, int> dic = new Dictionary<string, int>();
             foreach (var metadata in metadata_collection)
             {
-                if (metadata.Parodies != null && metadata.Parodies[0].StartsWith(startswith.ToLower())
-                    && !dic.ContainsKey(metadata.Parodies[0].ToLower()))
-                    dic.Add(metadata.Parodies[0].ToLower(), 0);
+                if (metadata.Parodies != null && metadata.Parodies[0].StartsWith(startswith.ToLower().Replace(' ', '_'))
+                    && !dic.ContainsKey(metadata.Parodies[0].ToLower().Replace(' ', '_')))
+                    dic.Add(metadata.Parodies[0].ToLower().Replace(' ', '_'), 0);
                 if (dic.Count > 50) break;
             }
             List<string> result = new List<string>();
@@ -145,9 +145,9 @@ namespace Hitomi_Copy.Data
             Dictionary<string, int> dic = new Dictionary<string, int>();
             foreach (var metadata in metadata_collection)
             {
-                if (metadata.Characters != null && metadata.Characters[0].StartsWith(startswith.ToLower())
-                    && !dic.ContainsKey(metadata.Characters[0].ToLower()))
-                    dic.Add(metadata.Characters[0].ToLower(), 0);
+                if (metadata.Characters != null && metadata.Characters[0].StartsWith(startswith.ToLower().Replace(' ', '_'))
+                    && !dic.ContainsKey(metadata.Characters[0].ToLower().Replace(' ', '_')))
+                    dic.Add(metadata.Characters[0].ToLower().Replace(' ', '_'), 0);
                 if (dic.Count > 50) break;
             }
             List<string> result = new List<string>();
