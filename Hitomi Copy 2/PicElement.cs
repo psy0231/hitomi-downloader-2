@@ -128,9 +128,9 @@ namespace Hitomi_Copy
         private void Invalidall()
         { callfrom_panel = callfrom_paint = false; Invalidate(); }
         private void Picture_MouseEnter(object sender, EventArgs e)
-        { mouse_enter = true; info.Location = Cursor.Position; info.Show(); Invalidall(); }
+        { mouse_enter = true; if (!downloading) { info.Location = Cursor.Position; info.Show(); Invalidall(); } }
         private void Picture_MouseLeave(object sender, EventArgs e)
-        { mouse_enter = false; info.Location = Cursor.Position; info.Hide(); Invalidall(); }
+        { mouse_enter = false; if (!downloading) { info.Location = Cursor.Position; info.Hide(); Invalidall(); } }
         private void Picture_MouseMove(object sender, EventArgs e)
         { info.Location = new Point(Cursor.Position.X+15,Cursor.Position.Y); /*info.BringToFront();*/ }
         private void Picture_MouseClick(object sender, EventArgs e)

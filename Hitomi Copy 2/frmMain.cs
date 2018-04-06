@@ -323,6 +323,16 @@ namespace Hitomi_Copy_2
                 Invoke(new Action<PicElement>(AddPanel), new object[] { pe }); return;
             }
             ImagePanel.Controls.Add(pe);
+            SortThumbnail();
+        }
+        private void SortThumbnail()
+        {
+            List<Control> controls = new List<Control>();
+            for(int i = 0; i < ImagePanel.Controls.Count; i++ )
+                controls.Add(ImagePanel.Controls[i]);
+            controls.Sort((a, b) => Convert.ToUInt32((b as PicElement).Article.Magic).CompareTo(Convert.ToUInt32((a as PicElement).Article.Magic)));
+            for (int i = 0; i < controls.Count; i++)
+                ImagePanel.Controls.SetChildIndex(controls[i], i);
         }
         #endregion
 
@@ -383,14 +393,11 @@ namespace Hitomi_Copy_2
                 {
                     download_check.Remove(title);
                     List<string> copy = download_check.ToList();
-                    foreach (var elem in downloaded_check)
-                    {
-                        if (elem.Downloading == true)
-                        {
-                            if (!copy.Contains(elem.Label))
-                            { lock (elem) elem.Downloading = false; }
-                        }
-                    }
+                    List<PicElement> check = downloaded_check.ToList();
+                    if (!copy.Contains(title))
+                        foreach (var elem in check)
+                            if (elem.Label == title)
+                                elem.Downloading = false;
                 }
         }
         private void UpdateLabel(string v)

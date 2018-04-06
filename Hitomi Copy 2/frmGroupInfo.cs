@@ -147,11 +147,22 @@ namespace Hitomi_Copy
                 else
                 {
                     ImagePanel.Controls.Add(pe);
+                    SortThumbnail();
                 }
             }
             catch { }
         }
-        
+
+        private void SortThumbnail()
+        {
+            List<Control> controls = new List<Control>();
+            for (int i = 0; i < ImagePanel.Controls.Count; i++)
+                controls.Add(ImagePanel.Controls[i]);
+            controls.Sort((a, b) => Convert.ToUInt32((b as PicElement).Article.Magic).CompareTo(Convert.ToUInt32((a as PicElement).Article.Magic)));
+            for (int i = 0; i < controls.Count; i++)
+                ImagePanel.Controls.SetChildIndex(controls[i], i);
+        }
+
         private void bDownloadAll_Click(object sender, EventArgs e)
         {
             Close();

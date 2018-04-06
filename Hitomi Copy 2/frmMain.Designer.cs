@@ -123,7 +123,7 @@
             // bTidy
             // 
             this.bTidy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bTidy.Location = new System.Drawing.Point(636, 471);
+            this.bTidy.Location = new System.Drawing.Point(636, 470);
             this.bTidy.Name = "bTidy";
             this.bTidy.Size = new System.Drawing.Size(101, 23);
             this.bTidy.TabIndex = 20;
@@ -135,7 +135,7 @@
             // 
             this.lStatusSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lStatusSearch.AutoSize = true;
-            this.lStatusSearch.Location = new System.Drawing.Point(163, 476);
+            this.lStatusSearch.Location = new System.Drawing.Point(163, 474);
             this.lStatusSearch.Name = "lStatusSearch";
             this.lStatusSearch.Size = new System.Drawing.Size(110, 15);
             this.lStatusSearch.TabIndex = 19;
@@ -144,7 +144,7 @@
             // tbLang
             // 
             this.tbLang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbLang.Location = new System.Drawing.Point(6, 472);
+            this.tbLang.Location = new System.Drawing.Point(6, 471);
             this.tbLang.Name = "tbLang";
             this.tbLang.ReadOnly = true;
             this.tbLang.Size = new System.Drawing.Size(65, 23);
@@ -155,7 +155,7 @@
             // bDownload
             // 
             this.bDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bDownload.Location = new System.Drawing.Point(1020, 471);
+            this.bDownload.Location = new System.Drawing.Point(1020, 470);
             this.bDownload.Name = "bDownload";
             this.bDownload.Size = new System.Drawing.Size(101, 23);
             this.bDownload.TabIndex = 17;
@@ -166,7 +166,7 @@
             // bCancleAll
             // 
             this.bCancleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bCancleAll.Location = new System.Drawing.Point(874, 471);
+            this.bCancleAll.Location = new System.Drawing.Point(874, 470);
             this.bCancleAll.Name = "bCancleAll";
             this.bCancleAll.Size = new System.Drawing.Size(101, 23);
             this.bCancleAll.TabIndex = 16;
@@ -177,7 +177,7 @@
             // bChooseAll
             // 
             this.bChooseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bChooseAll.Location = new System.Drawing.Point(767, 471);
+            this.bChooseAll.Location = new System.Drawing.Point(767, 470);
             this.bChooseAll.Name = "bChooseAll";
             this.bChooseAll.Size = new System.Drawing.Size(101, 23);
             this.bChooseAll.TabIndex = 15;
@@ -587,14 +587,11 @@
             // 
             // ImagePanel
             // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.ImagePanel.AutoScroll = true;
             this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ImagePanel.Location = new System.Drawing.Point(6, 35);
             this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 428);
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 429);
             this.ImagePanel.TabIndex = 2;
             // 
             // frmMain
@@ -613,7 +610,7 @@
             this.MinimumSize = new System.Drawing.Size(1175, 591);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hitomi Copy 2.0";
+            this.Text = "Hitomi Copy 2.1";
             this.MainTab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
