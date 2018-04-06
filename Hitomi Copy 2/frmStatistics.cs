@@ -17,9 +17,6 @@ namespace Hitomi_Copy
         {
             InitializeComponent();
         }
-
-        List<KeyValuePair<string, int>> tag_rank_list;
-        List<Tuple<string, KeyValuePair<string, int>[]>> artist_tag_rank;
         
         private void frmStatistics_Load(object sender, EventArgs e)
         {

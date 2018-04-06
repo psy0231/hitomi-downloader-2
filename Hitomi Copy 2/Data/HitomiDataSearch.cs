@@ -125,7 +125,7 @@ namespace Hitomi_Copy.Data
                         foreach (var tag in query.TagExclude)
                         {
                             foreach (var vtag in v.Tags)
-                                if (vtag.ToLower() == tag.ToLower())
+                                if (vtag.ToLower().Replace(' ', '_') == tag.ToLower())
                                 { intersec_count++; break; }
                             if (intersec_count > 0) break;
                         }

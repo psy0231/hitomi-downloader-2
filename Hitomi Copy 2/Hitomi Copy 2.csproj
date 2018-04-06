@@ -132,6 +132,7 @@
     <Compile Include="HitomiCommon.cs" />
     <Compile Include="HitomiLog.cs" />
     <Compile Include="HitomiQueue.cs" />
+    <Compile Include="HitomiSetting.cs" />
     <Compile Include="InfoForm.cs">
       <SubType>Form</SubType>
     </Compile>

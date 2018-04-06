@@ -1,7 +1,6 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
 using System;
-using System.Collections.Generic;
 
 namespace hitomi.Parser
 {

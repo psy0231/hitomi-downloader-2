@@ -28,6 +28,21 @@ namespace Hitomi_Copy_2
             InitStatistics();
         }
 
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            tbDownloadPath.Text = HitomiSetting.Instance.GetModel().Path;
+            tbExcludeTag.Text = string.Join(", ", HitomiSetting.Instance.GetModel().ExclusiveTag ?? Enumerable.Empty<string>());
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            HitomiSetting.Instance.GetModel().Path = tbDownloadPath.Text;
+            List<string> exclusive_tag = new List<string>();
+            tbExcludeTag.Text.Split(',').ToList().ForEach((a)=>exclusive_tag.Add(a.ToLower().Trim()));
+            HitomiSetting.Instance.GetModel().ExclusiveTag = exclusive_tag.ToArray();
+            HitomiSetting.Instance.Save();
+        }
+
         public void OnTab()
         {
             MainTab.Enabled = true;
@@ -733,5 +748,6 @@ namespace Hitomi_Copy_2
         {
             (new frmStatistics()).Show();
         }
+
     }
 }
