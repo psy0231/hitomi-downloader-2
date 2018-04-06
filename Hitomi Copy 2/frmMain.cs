@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -101,17 +102,27 @@ namespace Hitomi_Copy_2
 
             var query_result = HitomiDataSearch.Search2(query);
             lStatusSearch.Text = $"{query_result.Count} 개 항목이 검색됨";
-            if (query_result.Count > 100)
+            if (query_result.Count > HitomiSetting.Instance.GetModel().MaximumThumbnailShow)
             {
-                MessageBox.Show("검색된 항목이 너무 많아 표시할 수 없습니다. 고급검색 기능을 이용해주세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show("검색된 항목이 너무 많습니다. 모든 결과를 보려면 고급검색 기능을 이용해주세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                query_result.RemoveRange(HitomiSetting.Instance.GetModel().MaximumThumbnailShow, query_result.Count - HitomiSetting.Instance.GetModel().MaximumThumbnailShow);
             }
             else if (query_result.Count == 0)
             {
                 MessageBox.Show("검색된 항목이 없습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            query_result.ForEach((a) => {Task.Run(() => AddMetadataToPanel(a));});
+            //query_result.ForEach((a) => {Task.Run(() => AddMetadataToPanel(a));});
+            Task.Run(()=>LazyAdd(query_result));
+        }
+
+        private void LazyAdd(List<HitomiMetadata> metadata_result)
+        {
+            foreach (var v in metadata_result)
+            {
+                Thread.Sleep(100);
+                Task.Run(() => AddMetadataToPanel(v));
+            }
         }
 
         #region 검색창

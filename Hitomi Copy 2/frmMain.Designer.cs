@@ -135,7 +135,7 @@
             // 
             this.lStatusSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lStatusSearch.AutoSize = true;
-            this.lStatusSearch.Location = new System.Drawing.Point(167, 474);
+            this.lStatusSearch.Location = new System.Drawing.Point(165, 475);
             this.lStatusSearch.Name = "lStatusSearch";
             this.lStatusSearch.Size = new System.Drawing.Size(110, 15);
             this.lStatusSearch.TabIndex = 19;

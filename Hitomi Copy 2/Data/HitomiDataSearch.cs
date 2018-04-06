@@ -152,7 +152,7 @@ namespace Hitomi_Copy.Data
                 if (check.All((x => x)) && ((query.Common.Count == 0 && connect) || query.Common.Count > 0))
                     result.Add(v);
             }
-            result.Sort((a, b) => a.ID - b.ID);
+            result.Sort((a, b) => b.ID - a.ID);
             return result;
         }
 
