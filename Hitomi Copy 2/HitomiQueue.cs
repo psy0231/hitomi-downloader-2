@@ -29,6 +29,7 @@ namespace Hitomi_Copy_2
 
         public HitomiQueue(CallBack notify, DownloadSizeCallBack notify_size, DownloadStatusCallBack notify_status)
         {
+            ServicePointManager.DefaultConnectionLimit = 128;
             callback = notify;
             download_callback = notify_size;
             status_callback = notify_status;
@@ -89,7 +90,6 @@ namespace Hitomi_Copy_2
         public void Add(string uri, string filename, object obj)
         {
             queue.Add(new Tuple<string, string, object>(uri, filename, obj));
-            ServicePointManager.DefaultConnectionLimit = 128;
             if (Wait())
                 lock (notify_lock) Notify();
         }
