@@ -14,6 +14,8 @@ namespace Hitomi_Copy_2
         public string[] ExclusiveTag;
         [JsonProperty]
         public bool Zip;
+        [JsonProperty]
+        public int MaximumThumbnailShow;
     }
 
     public class HitomiSetting
@@ -33,6 +35,7 @@ namespace Hitomi_Copy_2
                 model.Path = @"C:\Hitomi\{Artists}\[{Id}] {Title}\";
                 model.ExclusiveTag = new string[] { "female:mother", "male:anal" };
                 model.Zip = false;
+                model.MaximumThumbnailShow = 1000;
                 Save();
             }
         }

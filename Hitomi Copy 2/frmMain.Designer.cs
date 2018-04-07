@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.MainTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pbLoad = new System.Windows.Forms.ProgressBar();
             this.bTidy = new System.Windows.Forms.Button();
             this.lStatusSearch = new System.Windows.Forms.Label();
             this.tbLang = new System.Windows.Forms.TextBox();
@@ -102,6 +103,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.pbLoad);
             this.tabPage1.Controls.Add(this.listBox1);
             this.tabPage1.Controls.Add(this.bTidy);
             this.tabPage1.Controls.Add(this.lStatusSearch);
@@ -120,9 +122,17 @@
             this.tabPage1.Text = "검색";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // pbLoad
+            // 
+            this.pbLoad.Location = new System.Drawing.Point(272, 477);
+            this.pbLoad.Name = "pbLoad";
+            this.pbLoad.Size = new System.Drawing.Size(346, 8);
+            this.pbLoad.TabIndex = 21;
+            this.pbLoad.Visible = false;
+            // 
             // bTidy
             // 
-            this.bTidy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bTidy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bTidy.Location = new System.Drawing.Point(636, 471);
             this.bTidy.Name = "bTidy";
             this.bTidy.Size = new System.Drawing.Size(101, 23);
@@ -135,7 +145,7 @@
             // 
             this.lStatusSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lStatusSearch.AutoSize = true;
-            this.lStatusSearch.Location = new System.Drawing.Point(165, 475);
+            this.lStatusSearch.Location = new System.Drawing.Point(97, 475);
             this.lStatusSearch.Name = "lStatusSearch";
             this.lStatusSearch.Size = new System.Drawing.Size(110, 15);
             this.lStatusSearch.TabIndex = 19;
@@ -165,7 +175,7 @@
             // 
             // bCancleAll
             // 
-            this.bCancleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bCancleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bCancleAll.Location = new System.Drawing.Point(874, 471);
             this.bCancleAll.Name = "bCancleAll";
             this.bCancleAll.Size = new System.Drawing.Size(101, 23);
@@ -176,7 +186,7 @@
             // 
             // bChooseAll
             // 
-            this.bChooseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bChooseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bChooseAll.Location = new System.Drawing.Point(767, 471);
             this.bChooseAll.Name = "bChooseAll";
             this.bChooseAll.Size = new System.Drawing.Size(101, 23);
@@ -187,6 +197,7 @@
             // 
             // bSearch
             // 
+            this.bSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bSearch.Location = new System.Drawing.Point(1027, 6);
             this.bSearch.Name = "bSearch";
             this.bSearch.Size = new System.Drawing.Size(94, 23);
@@ -545,6 +556,7 @@
             // 
             // tbExcludeTag
             // 
+            this.tbExcludeTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tbExcludeTag.Location = new System.Drawing.Point(185, 107);
             this.tbExcludeTag.Name = "tbExcludeTag";
             this.tbExcludeTag.Size = new System.Drawing.Size(851, 23);
@@ -576,7 +588,7 @@
             this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(230, 455);
+            this.listBox1.Location = new System.Drawing.Point(117, 481);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
             this.listBox1.Size = new System.Drawing.Size(281, 109);
@@ -587,6 +599,9 @@
             // 
             // ImagePanel
             // 
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ImagePanel.AutoScroll = true;
             this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ImagePanel.Location = new System.Drawing.Point(6, 35);
@@ -677,5 +692,6 @@
         private System.Windows.Forms.ProgressBar pbSync;
         private System.Windows.Forms.Button bSync;
         private AutoCompleteListBox listBox1;
+        private System.Windows.Forms.ProgressBar pbLoad;
     }
 }

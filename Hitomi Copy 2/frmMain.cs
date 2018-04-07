@@ -55,14 +55,17 @@ namespace Hitomi_Copy_2
             HitomiDataQuery query = new HitomiDataQuery();
             List<string> positive_data = new List<string>();
             List<string> negative_data = new List<string>();
+            int start_element = 0;
 
-            tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":")) positive_data.Add(a.Trim()); });
+            tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("/")) start_element = Convert.ToInt32(a.Substring(1)); });
+            tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":") && !a.StartsWith("/")) positive_data.Add(a.Trim()); });
             tbExcludeTag.Text.Trim().Split(' ').ToList().ForEach((a) => negative_data.Add(a.Trim()));
             query.Common = positive_data;
             query.TagExclude = negative_data;
             foreach (var elem in tbSearch.Text.Trim().Split(' '))
             {
                 if (!elem.Contains(":")) continue;
+                if (elem.StartsWith("/")) continue;
                 if (elem.StartsWith("tag:"))
                     if (query.TagInclude == null)
                         query.TagInclude = new List<string>() { elem.Substring("tag:".Length) };
@@ -112,7 +115,10 @@ namespace Hitomi_Copy_2
                 MessageBox.Show("검색된 항목이 없습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            //query_result.ForEach((a) => {Task.Run(() => AddMetadataToPanel(a));});
+            if (start_element != 0 && start_element <= query_result.Count) query_result.RemoveRange(0, start_element);
+            
+            pbLoad.Visible = true;
+            pbLoad.Maximum += query_result.Count;
             Task.Run(()=>LazyAdd(query_result));
         }
 
@@ -293,6 +299,16 @@ namespace Hitomi_Copy_2
         #endregion
 
         #region 썸네일 관련
+        private void IncrementLoadProgressBarValue()
+        {
+            if (pbTarget.InvokeRequired)
+            {
+                Invoke(new Action(IncrementLoadProgressBarValue));
+                return;
+            }
+            pbLoad.Value += 1;
+        }
+
         private async void AddMetadataToPanel(HitomiMetadata metadata)
         {
             HitomiArticle article = HitomiCommon.MetadataToArticle(metadata);
@@ -349,6 +365,7 @@ namespace Hitomi_Copy_2
                 Invoke(new Action<PicElement>(AddPanel), new object[] { pe }); return;
             }
             ImagePanel.Controls.Add(pe);
+            IncrementLoadProgressBarValue();
             SortThumbnail();
         }
         private void SortThumbnail()
@@ -502,7 +519,8 @@ namespace Hitomi_Copy_2
         {
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
             string title = article.Title;
-            string artists = article.Artists[0];
+            string artists = "";
+            if (article.Artists != null) artists=article.Artists[0];
             if (title != null)
                 foreach (char c in invalid) title = title.Replace(c.ToString(), "");
             if (artists != null)
@@ -513,11 +531,11 @@ namespace Hitomi_Copy_2
         public void RemoteDownloadArticle(PicElement pe)
         {
             AddArticle(pe);
-            MainTab.SelectedIndex = 2;
+            MainTab.SelectedIndex = 1;
         }
         public void RemoteDownloadArticleFromId(string id)
         {
-            MainTab.SelectedIndex = 2;
+            MainTab.SelectedIndex = 1;
             HitomiMetadata metadata = new HitomiMetadata();
             foreach (var v in HitomiData.Instance.metadata_collection)
             {
@@ -699,7 +717,7 @@ namespace Hitomi_Copy_2
         {
             for (int i = 0; i < ImagePanel.Controls.Count; i++)
             {
-                if (!(ImagePanel.Controls[i] as PicElement).Downloaded)
+                if (!(ImagePanel.Controls[i] as PicElement).Downloading)
                 {
                     for (int j = 0; j < stayed.Count; j++)
                     {
