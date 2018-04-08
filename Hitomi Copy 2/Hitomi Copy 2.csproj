@@ -77,6 +77,12 @@
     <Compile Include="frmCharacterInfo.designer.cs">
       <DependentUpon>frmCharacterInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmGallery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGallery.Designer.cs">
+      <DependentUpon>frmGallery.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGalleryInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,12 @@
     <Compile Include="PicElement.designer.cs">
       <DependentUpon>PicElement.cs</DependentUpon>
     </Compile>
+    <Compile Include="PicElementStatic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PicElementStatic.Designer.cs">
+      <DependentUpon>PicElementStatic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScrollFixLayoutPanel.cs">
@@ -156,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCharacterInfo.resx">
       <DependentUpon>frmCharacterInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGallery.resx">
+      <DependentUpon>frmGallery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGalleryInfo.resx">
       <DependentUpon>frmGalleryInfo.cs</DependentUpon>

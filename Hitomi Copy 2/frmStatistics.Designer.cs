@@ -66,10 +66,19 @@
             this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.bApplyFilter = new System.Windows.Forms.Button();
+            this.tbFilter = new System.Windows.Forms.TextBox();
+            this.lvSearch = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -79,6 +88,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -385,6 +395,83 @@
             this.columnHeader26.Text = "태그";
             this.columnHeader26.Width = 356;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.bApplyFilter);
+            this.tabPage1.Controls.Add(this.tbFilter);
+            this.tabPage1.Controls.Add(this.lvSearch);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1469, 600);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "작가 태그 검색";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // bApplyFilter
+            // 
+            this.bApplyFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bApplyFilter.Location = new System.Drawing.Point(1019, 56);
+            this.bApplyFilter.Name = "bApplyFilter";
+            this.bApplyFilter.Size = new System.Drawing.Size(85, 23);
+            this.bApplyFilter.TabIndex = 11;
+            this.bApplyFilter.Text = "검색";
+            this.bApplyFilter.UseVisualStyleBackColor = true;
+            this.bApplyFilter.Click += new System.EventHandler(this.bApplyFilter_Click);
+            // 
+            // tbFilter
+            // 
+            this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFilter.Location = new System.Drawing.Point(394, 56);
+            this.tbFilter.Name = "tbFilter";
+            this.tbFilter.Size = new System.Drawing.Size(619, 23);
+            this.tbFilter.TabIndex = 10;
+            this.tbFilter.Text = "female:femdom 500 male:shota 200 female:loli 100";
+            this.tbFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFilter_KeyDown);
+            // 
+            // lvSearch
+            // 
+            this.lvSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvSearch.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader1});
+            this.lvSearch.FullRowSelect = true;
+            this.lvSearch.GridLines = true;
+            this.lvSearch.Location = new System.Drawing.Point(394, 85);
+            this.lvSearch.MultiSelect = false;
+            this.lvSearch.Name = "lvSearch";
+            this.lvSearch.Size = new System.Drawing.Size(710, 450);
+            this.lvSearch.TabIndex = 9;
+            this.lvSearch.UseCompatibleStateImageBehavior = false;
+            this.lvSearch.View = System.Windows.Forms.View.Details;
+            this.lvSearch.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvSearch_MouseDoubleClick);
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "순위";
+            this.columnHeader6.Width = 54;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "작가";
+            this.columnHeader4.Width = 126;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "점수";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader5.Width = 61;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "상세 내역";
+            this.columnHeader1.Width = 431;
+            // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -416,6 +503,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -461,5 +550,13 @@
         private System.Windows.Forms.ColumnHeader columnHeader26;
         private System.Windows.Forms.ColumnHeader columnHeader28;
         private System.Windows.Forms.ColumnHeader columnHeader29;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ListView lvSearch;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.TextBox tbFilter;
+        private System.Windows.Forms.Button bApplyFilter;
     }
 }

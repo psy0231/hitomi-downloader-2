@@ -202,5 +202,112 @@ namespace Hitomi_Copy
                 (new frmCharacterInfo(this, lvRankCharacters.SelectedItems[0].SubItems[1].Text)).Show();
             }
         }
+        
+        private void bApplyFilter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Dictionary<string, int> my_tag_rank = new Dictionary<string, int>();
+                string[] split = tbFilter.Text.Split(' ');
+                try
+                {
+                    for (int i = 0; i < split.Length; i += 2)
+                        my_tag_rank.Add(split[i], Convert.ToInt32(split[i + 1]));
+                }
+                catch { }
+
+                var tag_rank_list = my_tag_rank.ToList();
+                tag_rank_list.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
+
+                var hitomi_data = HitomiData.Instance.metadata_collection;
+                Dictionary<string, Dictionary<string, int>> artists_tag_count = new Dictionary<string, Dictionary<string, int>>();
+                foreach (var metadata in hitomi_data)
+                {
+                    if (metadata.Language != "korean") continue;
+                    if (metadata.Artists == null || metadata.Tags == null || metadata.Artists.Length == 0) continue;
+                    if (!artists_tag_count.ContainsKey(metadata.Artists[0]))
+                        artists_tag_count.Add(metadata.Artists[0], new Dictionary<string, int>());
+                    foreach (var tag in metadata.Tags)
+                    {
+                        if (!artists_tag_count[metadata.Artists[0]].ContainsKey(tag))
+                            artists_tag_count[metadata.Artists[0]].Add(tag, 1);
+                        else
+                            artists_tag_count[metadata.Artists[0]][tag] += 1;
+                    }
+                }
+
+                var myList = artists_tag_count.ToList();
+                var artist_tag_rank = new List<Tuple<string, KeyValuePair<string, int>[]>>();
+                for (int i = 0; i < myList.Count; i++)
+                {
+                    artist_tag_rank.Add(new Tuple<string, KeyValuePair<string, int>[]>(myList[i].Key, myList[i].Value.OrderBy(key => key.Value).ToArray()));
+                }
+
+                List<Tuple<string, int, string>> result = new List<Tuple<string, int, string>>();
+                for (int i = 0; i < artist_tag_rank.Count; i++)
+                {
+                    List<Tuple<string, int>> tag_score = new List<Tuple<string, int>>();
+                    int score = artist_tag_rank[i].Item2.Last().Value * tag_rank_list[0].Value;
+                    tag_score.Add(new Tuple<string, int>(tag_rank_list[0].Key, artist_tag_rank[i].Item2.Last().Value * tag_rank_list[0].Value));
+                    for (int j = artist_tag_rank[i].Item2.Count() - 1; j >= 0; j--)
+                    {
+                        for (int k = 1; k < tag_rank_list.Count; k++)
+                        {
+                            if (artist_tag_rank[i].Item2[j].Key == tag_rank_list[k].Key)
+                            {
+                                score += artist_tag_rank[i].Item2[j].Value * tag_rank_list[k].Value;
+                                tag_score.Add(new Tuple<string, int>(tag_rank_list[k].Key, artist_tag_rank[i].Item2[j].Value * tag_rank_list[k].Value));
+                            }
+                        }
+                    }
+                    var tag_score_list = tag_score.ToList();
+                    tag_score_list.Sort((pair1, pair2) => pair2.Item2.CompareTo(pair1.Item2));
+                    StringBuilder builder = new StringBuilder();
+                    for (int j = 0; j < tag_score_list.Count; j++)
+                        builder.Append($"{tag_score_list[j].Item1}({tag_score_list[j].Item2}),");
+                    result.Add(new Tuple<string, int, string>(artist_tag_rank[i].Item1, score, builder.ToString()));
+                }
+
+                result.Sort((pair1, pair2) => pair2.Item2.CompareTo(pair1.Item2));
+
+                List<ListViewItem> lvil = new List<ListViewItem>();
+                for (int i = 0; i < result.Count && i < 500; i++)
+                {
+                    lvil.Add(new ListViewItem(new string[]
+                    {
+                    (i+1).ToString(),
+                    result[i].Item1,
+                    result[i].Item2.ToString(),
+                    result[i].Item3
+                    }));
+                }
+                AddToArtistSearch(lvil.ToArray());
+            } catch { }
+        }
+
+        private void AddToArtistSearch(ListViewItem[] items)
+        {
+            if (lvSearch.InvokeRequired)
+            {
+                Invoke(new Action<ListViewItem[]>(AddToArtistSearch), new object[] { items });
+                return;
+            }
+            lvSearch.Items.Clear();
+            lvSearch.Items.AddRange(items);
+        }
+
+        private void lvSearch_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvSearch.SelectedItems.Count > 0)
+            {
+                (new frmArtistInfo(this, lvSearch.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        private void tbFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                bApplyFilter.PerformClick();
+        }
     }
 }

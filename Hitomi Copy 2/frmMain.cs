@@ -188,7 +188,7 @@ namespace Hitomi_Copy_2
 
             if (word == "") { listBox1.Visible = false; return; }
 
-            List<string> match = null;
+            List<HitomiTagdata> match = null;
             if (word.Contains(":"))
             {
                 if (word.StartsWith("artist:"))
@@ -233,8 +233,8 @@ namespace Hitomi_Copy_2
             {
                 listBox1.Visible = true;
                 listBox1.Items.Clear();
-                foreach (var item in match)
-                    listBox1.Items.Add(item);
+                for (int i = 0; i < 30 && i < match.Count; i++)
+                    listBox1.Items.Add(match[i].Tag + $" ({match[i].Count})");
                 listBox1.Location = new Point(tbSearch.Left + GetCaretWidthFromTextBox(position),
                     tbSearch.Top + tbSearch.Font.Height + 5);
                 listBox1.MaxColoredTextLength = word.Length;
@@ -262,6 +262,7 @@ namespace Hitomi_Copy_2
 
         private void PutStringIntoTextBox(string text)
         {
+            text = text.Split('(')[0].Trim();
             tbSearch.Text = tbSearch.Text.Substring(0, global_position) + 
                 text + 
                 tbSearch.Text.Substring(global_position + global_text.Length);
@@ -655,14 +656,14 @@ namespace Hitomi_Copy_2
                 tag_score_list.Sort((pair1, pair2) => pair2.Item2.CompareTo(pair1.Item2));
                 StringBuilder builder = new StringBuilder();
                 for (int j = 0; j < tag_score_list.Count; j++)
-                    builder.Append($"{tag_score_list[j].Item1}({tag_score_list[j].Item2}),");
+                    builder.Append($"{tag_score_list[j].Item1}({tag_score_list[j].Item2}), ");
                 result.Add(new Tuple<string, int, string>(artist_tag_rank[i].Item1, score, artist_tag_rank[i].Item2.Last().Key));
             }
 
             result.Sort((pair1, pair2) => pair2.Item2.CompareTo(pair1.Item2));
             
             List<ListViewItem> lvil = new List<ListViewItem>();
-            for (int i = 0; i < result.Count && i < 500; i++)
+            for (int i = 0; i < result.Count && i < 2000; i++)
             {
                 lvil.Add(new ListViewItem(new string[]
                 {
@@ -757,7 +758,7 @@ namespace Hitomi_Copy_2
         {
             UpdateStatistics();
         }
-
+        
         private async void bSync_Click(object sender, EventArgs e)
         {
             pbSync.Visible = true;

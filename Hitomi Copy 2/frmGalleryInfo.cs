@@ -101,18 +101,25 @@ namespace Hitomi_Copy
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (pic != null)
-                (new frmArtistInfo(this, pic.Article.Artists[0])).Show();
-            else
-                (new frmArtistInfo(this, metadata.Artists[0])).Show();
+            try
+            {
+                if (pic != null)
+                    (new frmArtistInfo(this, pic.Article.Artists[0])).Show();
+                else if (metadata.Artists != null)
+                    (new frmArtistInfo(this, metadata.Artists[0])).Show();
+            } catch { }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (pic != null)
-                (new frmSeriesInfo(this, pic.Article.Series[0])).Show();
-            else
-                (new frmSeriesInfo(this, metadata.Parodies[0])).Show();
+            try
+            {
+                if (pic != null)
+                    (new frmSeriesInfo(this, pic.Article.Series[0])).Show();
+                else
+                    (new frmSeriesInfo(this, metadata.Parodies[0])).Show();
+            }
+            catch { }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -123,26 +130,38 @@ namespace Hitomi_Copy
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (pic != null)
-                System.Diagnostics.Process.Start($"https://hitomi.la/galleries/{pic.Article.Magic}.html");
-            else
-                System.Diagnostics.Process.Start($"https://hitomi.la/galleries/{metadata.ID}.html");
+            try
+            {
+                if (pic != null)
+                    System.Diagnostics.Process.Start($"https://hitomi.la/galleries/{pic.Article.Magic}.html");
+                else
+                    System.Diagnostics.Process.Start($"https://hitomi.la/galleries/{metadata.ID}.html");
+            }
+            catch { }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (pic != null)
-                (new frmGroupInfo(this, pic.Article.Groups[0])).Show();
-            else
-                (new frmGroupInfo(this, metadata.Groups[0])).Show();
+            try
+            {
+                if (pic != null)
+                    (new frmGroupInfo(this, pic.Article.Groups[0])).Show();
+                else
+                    (new frmGroupInfo(this, metadata.Groups[0])).Show();
+            }
+            catch { }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (pic != null)
-                (new frmCharacterInfo(this, pic.Article.Characters[0])).Show();
-            else
-                (new frmCharacterInfo(this, metadata.Characters[0])).Show();
+            try
+            {
+                if (pic != null)
+                    (new frmCharacterInfo(this, pic.Article.Characters[0])).Show();
+                else
+                    (new frmCharacterInfo(this, metadata.Characters[0])).Show();
+            }
+            catch { }
         }
     }
 }
