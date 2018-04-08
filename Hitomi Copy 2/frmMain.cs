@@ -70,32 +70,32 @@ namespace Hitomi_Copy_2
                     if (query.TagInclude == null)
                         query.TagInclude = new List<string>() { elem.Substring("tag:".Length) };
                     else
-                        query.TagInclude.Add(elem);
+                        query.TagInclude.Add(elem.Substring("tag:".Length));
                 else if (elem.StartsWith("artist:"))
                     if (query.Artists == null)
                         query.Artists = new List<string>() { elem.Substring("artist:".Length) };
                     else
-                        query.Artists.Add(elem);
+                        query.Artists.Add(elem.Substring("artist:".Length));
                 else if (elem.StartsWith("series:"))
                     if (query.Series == null)
                         query.Series = new List<string>() { elem.Substring("series:".Length) };
                     else
-                        query.Series.Add(elem);
+                        query.Series.Add(elem.Substring("series:".Length));
                 else if (elem.StartsWith("group:"))
                     if (query.Groups == null)
                         query.Groups = new List<string>() { elem.Substring("group:".Length) };
                     else
-                        query.Groups.Add(elem);
+                        query.Groups.Add(elem.Substring("group:".Length));
                 else if (elem.StartsWith("character:"))
                     if (query.Characters == null)
                         query.Characters = new List<string>() { elem.Substring("character:".Length) };
                     else
-                        query.Characters.Add(elem);
+                        query.Characters.Add(elem.Substring("character:".Length));
                 else if (elem.StartsWith("tagx:"))
                     if (query.TagExclude == null)
                         query.TagExclude = new List<string>() { elem.Substring("tagx:".Length) };
                     else
-                        query.TagExclude.Add(elem);
+                        query.TagExclude.Add(elem.Substring("tagx:".Length));
                 else
                 {
                     MessageBox.Show($"알 수 없는 규칙입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
