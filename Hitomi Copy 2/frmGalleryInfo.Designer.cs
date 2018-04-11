@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGalleryInfo));
-            this.pbImage = new System.Windows.Forms.PictureBox();
             this.lTitle = new System.Windows.Forms.Label();
             this.lArtist = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -48,17 +47,10 @@
             this.lGroup = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pbImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbImage
-            // 
-            this.pbImage.Location = new System.Drawing.Point(12, 12);
-            this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(360, 446);
-            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbImage.TabIndex = 6;
-            this.pbImage.TabStop = false;
             // 
             // lTitle
             // 
@@ -89,6 +81,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(674, 152);
             this.textBox1.TabIndex = 9;
+            this.textBox1.Visible = false;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGalleryInfo_KeyDown);
             // 
             // lSeries
@@ -247,12 +240,31 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(509, 167);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(1);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(674, 152);
+            this.flowLayoutPanel1.TabIndex = 25;
+            // 
+            // pbImage
+            // 
+            this.pbImage.Location = new System.Drawing.Point(12, 12);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(360, 446);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbImage.TabIndex = 6;
+            this.pbImage.TabStop = false;
+            // 
             // frmGalleryInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1286, 470);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.label7);
@@ -309,5 +321,6 @@
         private System.Windows.Forms.Label lGroup;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

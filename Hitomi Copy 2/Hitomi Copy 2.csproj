@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analysis\HitomiAnalysis.cs" />
+    <Compile Include="Analysis\HitomiAnalysisArtist.cs" />
+    <Compile Include="Analysis\HitomiAnalysisSetting.cs" />
     <Compile Include="AutoCompleteListBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -228,6 +230,8 @@
     <None Include="Resources\i14434391215.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\female-2-xxl.png" />
+    <Content Include="Resources\male-2-xxl.png" />
     <Content Include="TETO.ico" />
   </ItemGroup>
   <ItemGroup />

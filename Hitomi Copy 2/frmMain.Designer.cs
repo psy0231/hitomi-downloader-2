@@ -54,7 +54,6 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.cbRecommendArtistType = new System.Windows.Forms.CheckBox();
             this.bShowSearch = new System.Windows.Forms.Button();
             this.bStatistics = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -124,7 +123,9 @@
             // 
             // pbLoad
             // 
-            this.pbLoad.Location = new System.Drawing.Point(269, 477);
+            this.pbLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbLoad.Location = new System.Drawing.Point(269, 478);
             this.pbLoad.Maximum = 0;
             this.pbLoad.Name = "pbLoad";
             this.pbLoad.Size = new System.Drawing.Size(346, 8);
@@ -134,7 +135,7 @@
             // bTidy
             // 
             this.bTidy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bTidy.Location = new System.Drawing.Point(636, 471);
+            this.bTidy.Location = new System.Drawing.Point(639, 471);
             this.bTidy.Name = "bTidy";
             this.bTidy.Size = new System.Drawing.Size(101, 23);
             this.bTidy.TabIndex = 20;
@@ -177,7 +178,7 @@
             // bCancleAll
             // 
             this.bCancleAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bCancleAll.Location = new System.Drawing.Point(874, 471);
+            this.bCancleAll.Location = new System.Drawing.Point(877, 471);
             this.bCancleAll.Name = "bCancleAll";
             this.bCancleAll.Size = new System.Drawing.Size(101, 23);
             this.bCancleAll.TabIndex = 16;
@@ -188,7 +189,7 @@
             // bChooseAll
             // 
             this.bChooseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bChooseAll.Location = new System.Drawing.Point(767, 471);
+            this.bChooseAll.Location = new System.Drawing.Point(770, 471);
             this.bChooseAll.Name = "bChooseAll";
             this.bChooseAll.Size = new System.Drawing.Size(101, 23);
             this.bChooseAll.TabIndex = 15;
@@ -352,7 +353,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.cbRecommendArtistType);
             this.tabPage3.Controls.Add(this.bShowSearch);
             this.tabPage3.Controls.Add(this.bStatistics);
             this.tabPage3.Controls.Add(this.label3);
@@ -365,19 +365,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "통계";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // cbRecommendArtistType
-            // 
-            this.cbRecommendArtistType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbRecommendArtistType.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cbRecommendArtistType.Location = new System.Drawing.Point(725, 38);
-            this.cbRecommendArtistType.Name = "cbRecommendArtistType";
-            this.cbRecommendArtistType.Size = new System.Drawing.Size(324, 40);
-            this.cbRecommendArtistType.TabIndex = 5;
-            this.cbRecommendArtistType.Text = "<= 제일 많이 일치하는 태그만 추출하여 추천 작가 표시\r\n";
-            this.cbRecommendArtistType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cbRecommendArtistType.UseVisualStyleBackColor = true;
-            this.cbRecommendArtistType.CheckedChanged += new System.EventHandler(this.cbRecommendArtistType_CheckedChanged);
             // 
             // bShowSearch
             // 
@@ -405,7 +392,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(395, 474);
+            this.label3.Location = new System.Drawing.Point(454, 474);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 15);
             this.label3.TabIndex = 10;
@@ -436,7 +423,7 @@
             this.lvRecommendArtists.Location = new System.Drawing.Point(258, 21);
             this.lvRecommendArtists.MultiSelect = false;
             this.lvRecommendArtists.Name = "lvRecommendArtists";
-            this.lvRecommendArtists.Size = new System.Drawing.Size(413, 450);
+            this.lvRecommendArtists.Size = new System.Drawing.Size(463, 450);
             this.lvRecommendArtists.TabIndex = 8;
             this.lvRecommendArtists.UseCompatibleStateImageBehavior = false;
             this.lvRecommendArtists.View = System.Windows.Forms.View.Details;
@@ -456,12 +443,12 @@
             // 
             this.columnHeader5.Text = "점수";
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader5.Width = 61;
+            this.columnHeader5.Width = 147;
             // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "최다태그";
-            this.columnHeader7.Width = 134;
+            this.columnHeader7.Width = 96;
             // 
             // lvMyTagRank
             // 
@@ -508,6 +495,8 @@
             // 
             // pbSync
             // 
+            this.pbSync.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbSync.Location = new System.Drawing.Point(218, 453);
             this.pbSync.MarqueeAnimationSpeed = 10;
             this.pbSync.Name = "pbSync";
@@ -692,7 +681,6 @@
         private System.Windows.Forms.Button bStatistics;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button bShowSearch;
-        private System.Windows.Forms.CheckBox cbRecommendArtistType;
         private System.Windows.Forms.ProgressBar pbSync;
         private System.Windows.Forms.Button bSync;
         private AutoCompleteListBox listBox1;

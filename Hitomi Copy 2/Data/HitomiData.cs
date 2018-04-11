@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,6 +31,7 @@ namespace Hitomi_Copy.Data
         #region Metadata
         public async Task DownloadMetadata()
         {
+            ServicePointManager.DefaultConnectionLimit = 128;
             metadata_collection = new List<HitomiMetadata>();
             await Task.WhenAll(Enumerable.Range(0, number_of_gallery_jsons).Select(no => downloadMetadata(no)));
             SortMetadata();
@@ -52,6 +55,7 @@ namespace Hitomi_Copy.Data
         private async Task downloadMetadata(int no)
         {
             HttpClient client = new HttpClient();
+            client.Timeout = new TimeSpan(0, 0, 0, 0, Timeout.Infinite);
             var data = await client.GetStringAsync(gllerie_json_uri(no));
             lock (metadata_collection)
             metadata_collection.AddRange(JsonConvert.DeserializeObject<IEnumerable<HitomiMetadata>>(data));

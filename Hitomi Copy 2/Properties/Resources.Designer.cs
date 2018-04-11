@@ -63,9 +63,29 @@ namespace Hitomi_Copy_2.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap female_2_xxl {
+            get {
+                object obj = ResourceManager.GetObject("female_2_xxl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap i14434391215 {
             get {
                 object obj = ResourceManager.GetObject("i14434391215", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap male_2_xxl {
+            get {
+                object obj = ResourceManager.GetObject("male_2_xxl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

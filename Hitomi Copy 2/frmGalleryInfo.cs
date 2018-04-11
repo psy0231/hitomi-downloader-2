@@ -4,6 +4,7 @@ using hitomi.Parser;
 using Hitomi_Copy.Data;
 using Hitomi_Copy_2;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -49,18 +50,66 @@ namespace Hitomi_Copy
                 lGroup.Text = string.Join(",", pic.Article.Groups ?? Enumerable.Empty<string>());
                 lCharacter.Text = string.Join(",", pic.Article.Characters ?? Enumerable.Empty<string>());
                 textBox1.Text = string.Join(",", pic.Article.Tags ?? Enumerable.Empty<string>());
+
+                pic.Article.Tags.ToList().ForEach((a) =>
+                {
+                    if (a.StartsWith("female:")) AddTagToPanel(a.Substring("female:".Length), 1);
+                    else if (a.StartsWith("male:")) AddTagToPanel(a.Substring("male:".Length), 2);
+                    else AddTagToPanel(a, 0);
+                });
             }
             else
             {
                 lTitle.Text = metadata.Name;
                 lArtist.Text = string.Join(",", metadata.Artists ?? Enumerable.Empty<string>());
                 lSeries.Text = string.Join(",", metadata.Parodies ?? Enumerable.Empty<string>());
-                textBox1.Text = string.Join(",", metadata.Tags ?? Enumerable.Empty<string>());
                 lGroup.Text = string.Join(",", metadata.Groups ?? Enumerable.Empty<string>());
                 lCharacter.Text = string.Join(",", metadata.Characters ?? Enumerable.Empty<string>());
 
+                metadata.Tags.ToList().ForEach((a) =>
+                {
+                    a = HitomiCommon.LegalizeTag(a);
+                    if (a.StartsWith("female:")) AddTagToPanel(a.Substring("female:".Length), 1);
+                    else if (a.StartsWith("male:")) AddTagToPanel(a.Substring("male:".Length), 2);
+                    else AddTagToPanel(a, 0);
+                });
+
                 Task.Run(() => download_image());
             }
+        }
+        
+        private void AddTagToPanel(string tag_data, int image)
+        {
+            Button b = new Button();
+            b.Text = tag_data;
+            b.UseVisualStyleBackColor = true;
+            b.AutoSize = false;
+            b.Font = new Font(Font.Name, 10);
+            using (Graphics cg = this.CreateGraphics())
+            {
+                b.Width = (int)cg.MeasureString(tag_data, b.Font).Width + 13;
+            }
+            b.Height = 26;
+            b.Padding = new Padding(0);
+            b.Margin = new Padding(0);
+            b.MouseClick += ButtonMessage;
+            
+            if (image == 1)
+                b.ForeColor = Color.DeepPink;
+            else if (image == 2)
+                b.ForeColor = Color.DarkBlue;
+            
+            flowLayoutPanel1.Controls.Add(b);
+        }
+
+        public void ButtonMessage(object sender, EventArgs e)
+        {
+            if (((Button)sender).ForeColor == Color.DeepPink)
+                (new frmTagInfo(this, "female:" + ((Button)sender).Text)).Show();
+            else if (((Button)sender).ForeColor == Color.DarkBlue)
+                (new frmTagInfo(this, "male:" + ((Button)sender).Text)).Show();
+            else
+                (new frmTagInfo(this, ((Button)sender).Text)).Show();
         }
 
         private void download_image()
