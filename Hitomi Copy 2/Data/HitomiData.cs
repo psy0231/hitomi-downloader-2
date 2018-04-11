@@ -31,6 +31,7 @@ namespace Hitomi_Copy.Data
         {
             metadata_collection = new List<HitomiMetadata>();
             await Task.WhenAll(Enumerable.Range(0, number_of_gallery_jsons).Select(no => downloadMetadata(no)));
+            SortMetadata();
 
             JsonSerializer serializer = new JsonSerializer();
             serializer.Converters.Add(new JavaScriptDateTimeConverter());
@@ -41,6 +42,11 @@ namespace Hitomi_Copy.Data
             {
                 serializer.Serialize(writer, metadata_collection);
             }
+        }
+
+        public void SortMetadata()
+        {
+            metadata_collection.Sort((a, b) => b.ID.CompareTo(a.ID));
         }
 
         private async Task downloadMetadata(int no)

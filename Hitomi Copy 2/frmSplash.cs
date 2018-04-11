@@ -37,7 +37,7 @@ namespace Hitomi_Copy_2
                 lStatus.Text = "데이터를 다운로드 중 입니다... 이 작업은 수 분 정도 걸립니다.";
                 await Task.Run(() => HitomiData.Instance.DownloadMetadata());
             }
-
+            
             (Application.OpenForms["frmMain"] as frmMain).OnTab();
             Application.OpenForms["frmMain"].BringToFront();
             this.Close();

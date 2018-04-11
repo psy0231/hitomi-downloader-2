@@ -56,6 +56,9 @@ namespace Hitomi_Copy_2
             List<string> positive_data = new List<string>();
             List<string> negative_data = new List<string>();
             int start_element = 0;
+            bool recent = false;
+            int recent_count = 0;
+            int recent_start = 0;
 
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("/")) start_element = Convert.ToInt32(a.Substring(1)); });
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":") && !a.StartsWith("/")) positive_data.Add(a.Trim()); });
@@ -96,6 +99,26 @@ namespace Hitomi_Copy_2
                         query.TagExclude = new List<string>() { elem.Substring("tagx:".Length) };
                     else
                         query.TagExclude.Add(elem.Substring("tagx:".Length));
+                else if (elem.StartsWith("recent:"))
+                {
+                    recent = true;
+                    try
+                    {
+                        if (elem.Substring("recent:".Length).Contains("-"))
+                        {
+                            recent_start = Convert.ToInt32(elem.Substring("recent:".Length).Split('-')[0]);
+                            recent_count = Convert.ToInt32(elem.Substring("recent:".Length).Split('-')[1]);
+                        }
+                        else
+                            recent_count = Convert.ToInt32(elem.Substring("recent:".Length));
+                    }
+                    catch
+                    {
+                        MessageBox.Show($"recent 규칙 오류입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    tbSearch.Text = "recent:" + (recent_start + recent_count) + "-" + recent_count;
+                }
                 else
                 {
                     MessageBox.Show($"알 수 없는 규칙입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -103,7 +126,15 @@ namespace Hitomi_Copy_2
                 }
             }
 
-            var query_result = HitomiDataSearch.Search2(query);
+            List<HitomiMetadata> query_result;
+            if (recent == true)
+            {
+                query_result = HitomiDataSearch.GetSubsetOf(recent_start, recent_count);
+            }
+            else
+            {
+                query_result = HitomiDataSearch.Search2(query);
+            }
             lStatusSearch.Text = $"{query_result.Count} 개 항목이 검색됨";
             if (query_result.Count > HitomiSetting.Instance.GetModel().MaximumThumbnailShow)
             {

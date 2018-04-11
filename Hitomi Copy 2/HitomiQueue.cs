@@ -11,7 +11,7 @@ namespace Hitomi_Copy_2
 {
     class HitomiQueue
     {
-        int capacity = 64;
+        int capacity = 32;
         int mtx = 0;
         List<Tuple<string, string, object>> queue = new List<Tuple<string, string, object>>();
         IWebProxy proxy;
@@ -29,6 +29,7 @@ namespace Hitomi_Copy_2
 
         public HitomiQueue(CallBack notify, DownloadSizeCallBack notify_size, DownloadStatusCallBack notify_status)
         {
+            capacity = HitomiSetting.Instance.GetModel().Thread;
             ServicePointManager.DefaultConnectionLimit = 128;
             callback = notify;
             download_callback = notify_size;

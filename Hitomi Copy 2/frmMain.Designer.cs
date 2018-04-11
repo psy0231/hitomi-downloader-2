@@ -124,7 +124,7 @@
             // 
             // pbLoad
             // 
-            this.pbLoad.Location = new System.Drawing.Point(269, 479);
+            this.pbLoad.Location = new System.Drawing.Point(269, 477);
             this.pbLoad.Maximum = 0;
             this.pbLoad.Name = "pbLoad";
             this.pbLoad.Size = new System.Drawing.Size(346, 8);
@@ -215,6 +215,7 @@
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(1015, 23);
             this.tbSearch.TabIndex = 0;
+            this.tbSearch.Text = "recent:0-25";
             this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
             this.tbSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyUp);
             // 
@@ -628,7 +629,7 @@
             this.MinimumSize = new System.Drawing.Size(1175, 591);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hitomi Copy 2.2";
+            this.Text = "Hitomi Copy 2.4";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.MainTab.ResumeLayout(false);

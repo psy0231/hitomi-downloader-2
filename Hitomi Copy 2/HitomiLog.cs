@@ -18,6 +18,8 @@ namespace Hitomi_Copy_2
         public string[] Artists;
         [JsonProperty]
         public string[] Tags;
+        [JsonProperty]
+        public DateTime Time;
     }
 
     public class HitomiLog
@@ -50,6 +52,7 @@ namespace Hitomi_Copy_2
             mm.Title = article.Title;
             mm.Artists = article.Artists;
             mm.Tags = article.Tags;
+            mm.Time = DateTime.Now;
             model.Add(mm);
         }
 

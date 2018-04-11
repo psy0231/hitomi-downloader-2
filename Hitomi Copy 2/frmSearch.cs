@@ -21,6 +21,9 @@ namespace Hitomi_Copy_2
         {
             HitomiDataQuery query = new HitomiDataQuery();
             List<string> positive_data = new List<string>();
+            bool recent = false;
+            int recent_count = 0;
+            int recent_start = 0;
 
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":")) positive_data.Add(a.Trim()); });
             query.Common = positive_data;
@@ -58,6 +61,26 @@ namespace Hitomi_Copy_2
                         query.TagExclude = new List<string>() { elem.Substring("tagx:".Length) };
                     else
                         query.TagExclude.Add(elem.Substring("tagx:".Length));
+                else if (elem.StartsWith("recent:"))
+                {
+                    recent = true;
+                    try
+                    {
+                        if (elem.Substring("recent:".Length).Contains("-"))
+                        {
+                            recent_start = Convert.ToInt32(elem.Substring("recent:".Length).Split('-')[0]);
+                            recent_count = Convert.ToInt32(elem.Substring("recent:".Length).Split('-')[1]);
+                        }
+                        else
+                            recent_count = Convert.ToInt32(elem.Substring("recent:".Length));
+                    }
+                    catch
+                    {
+                        MessageBox.Show($"recent 규칙 오류입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    tbSearch.Text = "recent:" + (recent_start + recent_count) + "-" + recent_count;
+                }
                 else
                 {
                     MessageBox.Show($"알 수 없는 규칙입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -65,7 +88,15 @@ namespace Hitomi_Copy_2
                 }
             }
 
-            var query_result = HitomiDataSearch.Search2(query);
+            List<HitomiMetadata> query_result;
+            if (recent == true)
+            {
+                query_result = HitomiDataSearch.GetSubsetOf(recent_start, recent_count);
+            }
+            else
+            {
+                query_result = HitomiDataSearch.Search2(query);
+            }
             if (query_result.Count == 0)
             {
                 MessageBox.Show("검색된 항목이 없습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -182,5 +182,19 @@ namespace Hitomi_Copy.Data
                         }
             }
         }
+
+        public static List<HitomiMetadata> GetSubsetOf(int start, int count)
+        {
+            List<HitomiMetadata> result = new List<HitomiMetadata>();
+            foreach (var v in HitomiData.Instance.metadata_collection)
+            {
+                if (v.Language != "korean") continue;
+                if (start > 0) { start--; continue; }
+                result.Add(v);
+                if (--count == 0)
+                    break;
+            }
+            return result;
+        }
     }
 }

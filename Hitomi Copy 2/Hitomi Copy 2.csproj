@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analysis\HitomiAnalysis.cs" />
     <Compile Include="AutoCompleteListBox.cs">
       <SubType>Component</SubType>
     </Compile>
