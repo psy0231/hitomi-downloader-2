@@ -3,6 +3,7 @@
 using Hitomi_Copy.Data;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Hitomi_Copy_2.Analysis
 {
@@ -75,17 +76,25 @@ namespace Hitomi_Copy_2.Analysis
             return rate;
         }
 
-        public string GetTopTag()
+        public string GetDetail(HitomiAnalysisArtist user)
         {
-            float now = rate.ToList()[0].Value;
-            string top = rate.ToList()[0].Key;
-            foreach(var pair in rate)
-                if (pair.Value > now)
+            Dictionary<string, double> tags_rate = new Dictionary<string, double>();
+            foreach (var artist in rate)
+                if (user.IsExsit(artist.Key))
                 {
-                    now = pair.Value;
-                    top = pair.Key;
+                    if (tags_rate.ContainsKey(artist.Key))
+                        tags_rate[artist.Key] += user.GetRate(artist.Key) * artist.Value;
+                    else
+                        tags_rate.Add(artist.Key, user.GetRate(artist.Key) * artist.Value);
                 }
-            return top;
+
+            var list = tags_rate.ToList();
+            list.Sort((p1, p2) => p2.Value.CompareTo(p1.Value));
+
+            StringBuilder builder = new StringBuilder();
+            foreach (var pair in list)
+                builder.Append($"{pair.Key}({pair.Value}),");
+            return builder.ToString();
         }
     }
 }

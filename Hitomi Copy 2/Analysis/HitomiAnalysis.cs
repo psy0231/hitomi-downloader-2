@@ -37,7 +37,7 @@ namespace Hitomi_Copy_2.Analysis
         {
             HitomiAnalysisArtist user;
             user = new HitomiAnalysisArtist(HitomiLog.Instance.GetEnumerator());
-
+            
             ///////////////////////////////
 
             Dictionary<string, Tuple<double, HitomiAnalysisArtist>> score = new Dictionary<string, Tuple<double, HitomiAnalysisArtist>>();
@@ -61,7 +61,7 @@ namespace Hitomi_Copy_2.Analysis
 
             foreach (var item in list)
             {
-                Rank.Add(new Tuple<string, double, string>(item.Key, item.Value.Item1, item.Value.Item2.GetTopTag()));
+                Rank.Add(new Tuple<string, double, string>(item.Key, item.Value.Item1, item.Value.Item2.GetDetail(user)));
             }
         }
     }

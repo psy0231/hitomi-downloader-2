@@ -35,7 +35,7 @@ namespace Hitomi_Copy_2
             {
                 model = new HitomiSettingModel();
                 model.Path = @"C:\Hitomi\{Artists}\[{Id}] {Title}\";
-                model.ExclusiveTag = new string[] { "female:mother", "male:anal" };
+                model.ExclusiveTag = new string[] { "female:mother", "male:anal", "male:guro", "female:guro", "male:snuff", "female:snuff" };
                 model.Zip = false;
                 model.MaximumThumbnailShow = 1000;
                 model.Thread = 32;

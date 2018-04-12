@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,7 +58,7 @@
   <ItemGroup>
     <Compile Include="Analysis\HitomiAnalysis.cs" />
     <Compile Include="Analysis\HitomiAnalysisArtist.cs" />
-    <Compile Include="Analysis\HitomiAnalysisSetting.cs" />
+    <Compile Include="Analysis\HitomiAnalysisTrend.cs" />
     <Compile Include="AutoCompleteListBox.cs">
       <SubType>Component</SubType>
     </Compile>

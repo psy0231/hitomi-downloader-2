@@ -512,8 +512,7 @@ namespace Hitomi_Copy_2
                 lDownloadStatusSize.Text = ((double)status_size / 1000 / 1000).ToString("#,#.#") + " MB";
             }
         }
-
-
+        
         private void AddArticle(PicElement pe)
         {
             HitomiLog.Instance.AddArticle(pe.Article);
@@ -553,12 +552,13 @@ namespace Hitomi_Copy_2
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
             string title = article.Title;
             string artists = "";
+            string type = article.Types;
             if (article.Artists != null) artists=article.Artists[0];
             if (title != null)
                 foreach (char c in invalid) title = title.Replace(c.ToString(), "");
             if (artists != null)
                 foreach (char c in invalid) artists = artists.Replace(c.ToString(), "");
-            return Regex.Replace(Regex.Replace(Regex.Replace(tbDownloadPath.Text, "{Title}", title), "{Artists}", artists), "{Id}", article.Magic);
+            return Regex.Replace(Regex.Replace(Regex.Replace(Regex.Replace(tbDownloadPath.Text, "{Title}", title), "{Artists}", artists), "{Id}", article.Magic), "{Type}", type);
         }
 
         public void RemoteDownloadArticle(PicElement pe)
@@ -642,7 +642,7 @@ namespace Hitomi_Copy_2
         {
             HitomiAnalysis.Instance.Update();
             List<ListViewItem> lvil = new List<ListViewItem>();
-            for (int i = 0; i < HitomiAnalysis.Instance.Rank.Count && i < 4000; i++)
+            for (int i = 0; i < HitomiAnalysis.Instance.Rank.Count /*&& i < 4000*/; i++)
             {
                 lvil.Add(new ListViewItem(new string[]
                 {

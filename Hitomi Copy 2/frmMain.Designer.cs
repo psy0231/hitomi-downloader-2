@@ -32,12 +32,14 @@
             this.MainTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pbLoad = new System.Windows.Forms.ProgressBar();
+            this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
             this.bTidy = new System.Windows.Forms.Button();
             this.lStatusSearch = new System.Windows.Forms.Label();
             this.tbLang = new System.Windows.Forms.TextBox();
             this.bDownload = new System.Windows.Forms.Button();
             this.bCancleAll = new System.Windows.Forms.Button();
             this.bChooseAll = new System.Windows.Forms.Button();
+            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.bSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -75,8 +77,6 @@
             this.tbExcludeTag = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
-            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.MainTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -131,6 +131,21 @@
             this.pbLoad.Size = new System.Drawing.Size(346, 8);
             this.pbLoad.TabIndex = 21;
             this.pbLoad.Visible = false;
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(117, 481);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.ScrollAlwaysVisible = true;
+            this.listBox1.Size = new System.Drawing.Size(281, 109);
+            this.listBox1.TabIndex = 7;
+            this.listBox1.Visible = false;
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
             // bTidy
             // 
@@ -196,6 +211,18 @@
             this.bChooseAll.Text = "모두 선택";
             this.bChooseAll.UseVisualStyleBackColor = true;
             this.bChooseAll.Click += new System.EventHandler(this.bChooseAll_Click);
+            // 
+            // ImagePanel
+            // 
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePanel.AutoScroll = true;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Location = new System.Drawing.Point(6, 35);
+            this.ImagePanel.Name = "ImagePanel";
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 430);
+            this.ImagePanel.TabIndex = 2;
             // 
             // bSearch
             // 
@@ -369,7 +396,7 @@
             // bShowSearch
             // 
             this.bShowSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bShowSearch.Location = new System.Drawing.Point(864, 438);
+            this.bShowSearch.Location = new System.Drawing.Point(909, 438);
             this.bShowSearch.Name = "bShowSearch";
             this.bShowSearch.Size = new System.Drawing.Size(185, 33);
             this.bShowSearch.TabIndex = 16;
@@ -380,7 +407,7 @@
             // bStatistics
             // 
             this.bStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bStatistics.Location = new System.Drawing.Point(864, 399);
+            this.bStatistics.Location = new System.Drawing.Point(909, 399);
             this.bStatistics.Name = "bStatistics";
             this.bStatistics.Size = new System.Drawing.Size(185, 33);
             this.bStatistics.TabIndex = 11;
@@ -392,7 +419,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(454, 474);
+            this.label3.Location = new System.Drawing.Point(541, 474);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 15);
             this.label3.TabIndex = 10;
@@ -423,7 +450,7 @@
             this.lvRecommendArtists.Location = new System.Drawing.Point(258, 21);
             this.lvRecommendArtists.MultiSelect = false;
             this.lvRecommendArtists.Name = "lvRecommendArtists";
-            this.lvRecommendArtists.Size = new System.Drawing.Size(463, 450);
+            this.lvRecommendArtists.Size = new System.Drawing.Size(645, 450);
             this.lvRecommendArtists.TabIndex = 8;
             this.lvRecommendArtists.UseCompatibleStateImageBehavior = false;
             this.lvRecommendArtists.View = System.Windows.Forms.View.Details;
@@ -448,7 +475,7 @@
             // columnHeader7
             // 
             this.columnHeader7.Text = "최다태그";
-            this.columnHeader7.Width = 96;
+            this.columnHeader7.Width = 283;
             // 
             // lvMyTagRank
             // 
@@ -574,33 +601,6 @@
             this.label8.Size = new System.Drawing.Size(433, 15);
             this.label8.TabIndex = 3;
             this.label8.Text = "Copyright (C) 2018. DCInside Programming Gallery Union. All Rights Reserved.";
-            // 
-            // listBox1
-            // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(117, 481);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(281, 109);
-            this.listBox1.TabIndex = 7;
-            this.listBox1.Visible = false;
-            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
-            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
-            // 
-            // ImagePanel
-            // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ImagePanel.Location = new System.Drawing.Point(6, 35);
-            this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 430);
-            this.ImagePanel.TabIndex = 2;
             // 
             // frmMain
             // 

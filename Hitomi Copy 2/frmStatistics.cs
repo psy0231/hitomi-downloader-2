@@ -2,12 +2,15 @@
 
 using Hitomi_Copy.Data;
 using Hitomi_Copy_2;
+using Hitomi_Copy_2.Analysis;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Hitomi_Copy
 {
@@ -24,6 +27,7 @@ namespace Hitomi_Copy
             
             Task.Run(() => RankingProcess());
             Task.Run(() => UpdateHistory());
+            comboBox1.SelectedIndex = 0;
         }
 
         private void ColumnInit()
@@ -35,7 +39,8 @@ namespace Hitomi_Copy
             ColumnSorter.InitListView(lvRankTag);
             ColumnSorter.InitListView(lvHistory);
         }
-        
+
+        #region Ranking
         private void RankingProcess()
         {
             Dictionary<string, int> rank_tag = new Dictionary<string, int>();
@@ -102,6 +107,50 @@ namespace Hitomi_Copy
             lv.Items.AddRange(items);
         }
 
+        private void lvRankArtists_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankArtists.SelectedItems.Count > 0)
+            {
+                (new frmArtistInfo(this, lvRankArtists.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        private void lvRankGroup_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankGroup.SelectedItems.Count > 0)
+            {
+                (new frmGroupInfo(this, lvRankGroup.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        private void lvRankTag_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankTag.SelectedItems.Count > 0)
+            {
+                (new frmTagInfo(this, lvRankTag.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        private void lvRankSeries_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankSeries.SelectedItems.Count > 0)
+            {
+                (new frmSeriesInfo(this, lvRankSeries.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        private void lvRankCharacters_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvRankCharacters.SelectedItems.Count > 0)
+            {
+                (new frmCharacterInfo(this, lvRankCharacters.SelectedItems[0].SubItems[1].Text)).Show();
+            }
+        }
+
+        #endregion
+
+        #region History
+
         private void UpdateHistory()
         {
             List<HitomiMetadata> result = new List<HitomiMetadata>();
@@ -162,47 +211,9 @@ namespace Hitomi_Copy
                 }
             }
         }
+        #endregion
 
-        private void lvRankArtists_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (lvRankArtists.SelectedItems.Count > 0)
-            {
-                (new frmArtistInfo(this, lvRankArtists.SelectedItems[0].SubItems[1].Text)).Show();
-            }
-        }
-
-        private void lvRankGroup_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (lvRankGroup.SelectedItems.Count > 0)
-            {
-                (new frmGroupInfo(this, lvRankGroup.SelectedItems[0].SubItems[1].Text)).Show();
-            }
-        }
-
-        private void lvRankTag_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (lvRankTag.SelectedItems.Count > 0)
-            {
-                (new frmTagInfo(this, lvRankTag.SelectedItems[0].SubItems[1].Text)).Show();
-            }
-        }
-        
-        private void lvRankSeries_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (lvRankSeries.SelectedItems.Count > 0)
-            {
-                (new frmSeriesInfo(this, lvRankSeries.SelectedItems[0].SubItems[1].Text)).Show();
-            }
-        }
-
-        private void lvRankCharacters_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (lvRankCharacters.SelectedItems.Count > 0)
-            {
-                (new frmCharacterInfo(this, lvRankCharacters.SelectedItems[0].SubItems[1].Text)).Show();
-            }
-        }
-        
+        #region Tag Search
         private void bApplyFilter_Click(object sender, EventArgs e)
         {
             try
@@ -309,5 +320,286 @@ namespace Hitomi_Copy
             if (e.KeyCode == Keys.Enter)
                 bApplyFilter.PerformClick();
         }
+        #endregion
+
+        #region Chart
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateChart();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateChart();
+        }
+
+        public void UpdateChart()
+        {
+            if (comboBox1.SelectedIndex == 0)
+                UpdateGalleryVariationChart();
+            else if (comboBox1.SelectedIndex == 1)
+                UpdateGalleryIncrements();
+            else if (comboBox1.SelectedIndex == 2)
+                UpdateTagIncrements();
+            else if (comboBox1.SelectedIndex == 3)
+                UpdateTagKoreanIncrements();
+            else if (comboBox1.SelectedIndex == 4)
+                UpdateArtistsIncremetns();
+            else if (comboBox1.SelectedIndex == 5)
+                UpdateArtistsKoreanIncremetns();
+        }
+
+        public void UpdateGalleryVariationChart()
+        {
+            HitomiAnalysisTrend.Instance.UpdateGalleryVariation();
+
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            chart1.ChartAreas.Add("ChartArea1");
+
+            chart1.ChartAreas[0].AxisX.Title = "아이디 간격";
+            chart1.ChartAreas[0].AxisX.TitleFont = Font;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Interval = 100000 / 2;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].AxisY.Title = "작품 수";
+            chart1.ChartAreas[0].AxisY.TitleFont = Font;
+            chart1.ChartAreas[0].AxisY.Interval = 500;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].BackColor = Color.Gray;
+
+            foreach (var sample in HitomiAnalysisTrend.Instance.samples)
+            {
+                Series series = new Series();
+                series.Name = sample.name;
+                series.Font = Font;
+                series.ChartArea = "ChartArea1";
+                series.ChartType = SeriesChartType.Spline;
+                series.Color = Color.LightPink;
+                series.LabelBackColor = Color.Gray;
+                series.BorderWidth = 3;
+
+                foreach (var point in sample.points)
+                    series.Points.Add(new DataPoint(point.X, point.Y));
+
+                chart1.Series.Add(series);
+            }
+        }
+
+        public void UpdateGalleryIncrements()
+        {
+            HitomiAnalysisTrend.Instance.UpdataGalleryIncrements();
+
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            chart1.ChartAreas.Add("ChartArea1");
+
+            chart1.ChartAreas[0].AxisX.Title = "아이디 간격";
+            chart1.ChartAreas[0].AxisX.TitleFont = Font;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Interval = 100000 / 4 * 3;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].AxisY.Title = "누적 작품 수";
+            chart1.ChartAreas[0].AxisY.TitleFont = Font;
+            chart1.ChartAreas[0].AxisY.Interval = 50000;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].BackColor = Color.Gray;
+
+            foreach (var sample in HitomiAnalysisTrend.Instance.samples)
+            {
+                Series series = new Series();
+                series.Name = sample.name;
+                series.Font = Font;
+                series.ChartArea = "ChartArea1";
+                series.ChartType = SeriesChartType.Spline;
+                series.Color = Color.LightPink;
+                series.LabelBackColor = Color.Gray;
+                series.BorderWidth = 3;
+
+                foreach (var point in sample.points)
+                    series.Points.Add(new DataPoint(point.X, point.Y));
+
+                chart1.Series.Add(series);
+            }
+        }
+
+        public void UpdateTagIncrements()
+        {
+            HitomiAnalysisTrend.Instance.UpdateTagIncrements();
+
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            chart1.ChartAreas.Add("ChartArea1");
+
+            chart1.ChartAreas[0].AxisX.Title = "아이디 간격";
+            chart1.ChartAreas[0].AxisX.TitleFont = Font;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Interval = 100000 / 4 * 3;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].AxisY.Title = "누적 작품 수";
+            chart1.ChartAreas[0].AxisY.TitleFont = Font;
+            chart1.ChartAreas[0].AxisY.Interval = 10000;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].BackColor = Color.Gray;
+
+            foreach (var sample in HitomiAnalysisTrend.Instance.samples)
+            {
+                Series series = new Series();
+                series.Name = sample.name;
+                series.Font = Font;
+                series.ChartArea = "ChartArea1";
+                series.ChartType = SeriesChartType.Spline;
+                Random rm = new Random(sample.name.GetHashCode());
+                series.Color = Color.FromArgb(rm.Next(256), rm.Next(256), rm.Next(256));
+                series.LabelBackColor = Color.Gray;
+                series.BorderWidth = 2;
+
+                foreach (var point in sample.points)
+                    series.Points.Add(new DataPoint(point.X, point.Y));
+
+                chart1.Series.Add(series);
+            }
+        }
+
+        public void UpdateTagKoreanIncrements()
+        {
+            HitomiAnalysisTrend.Instance.UpdateTagKoreanIncrements();
+
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            chart1.ChartAreas.Add("ChartArea1");
+
+            chart1.ChartAreas[0].AxisX.Title = "아이디 간격";
+            chart1.ChartAreas[0].AxisX.TitleFont = Font;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Interval = 100000 / 4 * 3;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].AxisY.Title = "누적 작품 수";
+            chart1.ChartAreas[0].AxisY.TitleFont = Font;
+            chart1.ChartAreas[0].AxisY.Interval = 1000;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].BackColor = Color.Gray;
+
+            foreach (var sample in HitomiAnalysisTrend.Instance.samples)
+            {
+                Series series = new Series();
+                series.Name = sample.name;
+                series.Font = Font;
+                series.ChartArea = "ChartArea1";
+                series.ChartType = SeriesChartType.Spline;
+                Random rm = new Random(sample.name.GetHashCode());
+                series.Color = Color.FromArgb(rm.Next(256), rm.Next(256), rm.Next(256));
+                series.LabelBackColor = Color.Gray;
+                series.BorderWidth = 2;
+
+                foreach (var point in sample.points)
+                    series.Points.Add(new DataPoint(point.X, point.Y));
+
+                chart1.Series.Add(series);
+            }
+        }
+
+        public void UpdateArtistsIncremetns()
+        {
+            HitomiAnalysisTrend.Instance.UpdateArtistsIncremetns(checkBox1.Checked, textBox1.Text);
+
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            chart1.ChartAreas.Add("ChartArea1");
+
+            chart1.ChartAreas[0].AxisX.Title = "아이디 간격";
+            chart1.ChartAreas[0].AxisX.TitleFont = Font;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Interval = 100000 / 4 * 3;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].AxisY.Title = "누적 작품 수";
+            chart1.ChartAreas[0].AxisY.TitleFont = Font;
+            chart1.ChartAreas[0].AxisY.Interval = 100;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].BackColor = Color.Gray;
+
+            foreach (var sample in HitomiAnalysisTrend.Instance.samples)
+            {
+                Series series = new Series();
+                series.Name = sample.name;
+                series.Font = Font;
+                series.ChartArea = "ChartArea1";
+                series.ChartType = SeriesChartType.Line;
+                Random rm = new Random(sample.name.GetHashCode());
+                series.Color = Color.FromArgb(rm.Next(256), rm.Next(256), rm.Next(256));
+                series.LabelBackColor = Color.Gray;
+                series.BorderWidth = 2;
+
+                foreach (var point in sample.points)
+                    series.Points.Add(new DataPoint(point.X, point.Y));
+
+                chart1.Series.Add(series);
+            }
+        }
+
+        public void UpdateArtistsKoreanIncremetns()
+        {
+            HitomiAnalysisTrend.Instance.UpdateArtistsKoreanIncremetns(checkBox1.Checked, textBox1.Text);
+
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            chart1.ChartAreas.Add("ChartArea1");
+
+            chart1.ChartAreas[0].AxisX.Title = "아이디 간격";
+            chart1.ChartAreas[0].AxisX.TitleFont = Font;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Interval = 100000 / 4 * 3;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].AxisY.Title = "누적 작품 수";
+            chart1.ChartAreas[0].AxisY.TitleFont = Font;
+            chart1.ChartAreas[0].AxisY.Interval = 10;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].BackColor = Color.Gray;
+
+            foreach (var sample in HitomiAnalysisTrend.Instance.samples)
+            {
+                Series series = new Series();
+                series.Name = sample.name;
+                series.Font = Font;
+                series.ChartArea = "ChartArea1";
+                series.ChartType = SeriesChartType.Line;
+                Random rm = new Random(sample.name.GetHashCode());
+                series.Color = Color.FromArgb(rm.Next(256), rm.Next(256), rm.Next(256));
+                series.LabelBackColor = Color.Gray;
+                series.BorderWidth = 2;
+
+                foreach (var point in sample.points)
+                    series.Points.Add(new DataPoint(point.X, point.Y));
+
+                chart1.Series.Add(series);
+            }
+        }
+
+        #endregion
     }
 }
