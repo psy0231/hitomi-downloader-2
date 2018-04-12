@@ -149,6 +149,42 @@ namespace Hitomi_Copy_2.Analysis
             samples.RemoveRange(30, samples.Count - 30);
         }
 
+        public void UpdateTagKoreanVariation()
+        {
+            samples.Clear();
+
+            Dictionary<string, Dictionary<int, int>> tag_list = new Dictionary<string, Dictionary<int, int>>();
+            foreach (var metadata in HitomiData.Instance.metadata_collection)
+                if (metadata.Language == "korean" && metadata.Tags != null)
+                    foreach (var tag in metadata.Tags)
+                        if (!tag_list.ContainsKey(tag))
+                            tag_list.Add(tag, new Dictionary<int, int>());
+
+            foreach (var data in datas)
+                foreach (var metadata in data.Value)
+                    if (metadata.Language == "korean" && metadata.Tags != null)
+                        foreach (var tag in metadata.Tags)
+                            if (tag_list[tag].ContainsKey(data.Key))
+                                tag_list[tag][data.Key] += 1;
+                            else
+                                tag_list[tag].Add(data.Key, 1);
+
+            foreach (var tag in tag_list)
+            {
+                HitomiAnalysisTrendElement e = new HitomiAnalysisTrendElement();
+                e.name = tag.Key;
+                e.points = new List<Point>();
+
+                foreach (var pair in tag.Value)
+                {
+                    e.points.Add(new Point(pair.Key, pair.Value));
+                }
+                samples.Add(e);
+            }
+
+            samples.Sort((a, b) => b.points.Last().Y.CompareTo(a.points.Last().Y));
+            samples.RemoveRange(20, samples.Count - 20);
+        }
 
         public void UpdateArtistsIncremetns(bool specifictag = false, string tag = "")
         {

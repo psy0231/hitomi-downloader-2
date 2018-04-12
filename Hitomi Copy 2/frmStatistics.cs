@@ -345,8 +345,10 @@ namespace Hitomi_Copy
             else if (comboBox1.SelectedIndex == 3)
                 UpdateTagKoreanIncrements();
             else if (comboBox1.SelectedIndex == 4)
-                UpdateArtistsIncremetns();
+                UpdateTagKoreanVariation();
             else if (comboBox1.SelectedIndex == 5)
+                UpdateArtistsIncremetns();
+            else if (comboBox1.SelectedIndex == 6)
                 UpdateArtistsKoreanIncremetns();
         }
 
@@ -492,6 +494,49 @@ namespace Hitomi_Copy
             chart1.ChartAreas[0].AxisY.Title = "누적 작품 수";
             chart1.ChartAreas[0].AxisY.TitleFont = Font;
             chart1.ChartAreas[0].AxisY.Interval = 1000;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].BackColor = Color.Gray;
+
+            foreach (var sample in HitomiAnalysisTrend.Instance.samples)
+            {
+                Series series = new Series();
+                series.Name = sample.name;
+                series.Font = Font;
+                series.ChartArea = "ChartArea1";
+                series.ChartType = SeriesChartType.Spline;
+                Random rm = new Random(sample.name.GetHashCode());
+                series.Color = Color.FromArgb(rm.Next(256), rm.Next(256), rm.Next(256));
+                series.LabelBackColor = Color.Gray;
+                series.BorderWidth = 2;
+
+                foreach (var point in sample.points)
+                    series.Points.Add(new DataPoint(point.X, point.Y));
+
+                chart1.Series.Add(series);
+            }
+        }
+
+
+        public void UpdateTagKoreanVariation()
+        {
+            HitomiAnalysisTrend.Instance.UpdateTagKoreanVariation();
+
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            chart1.ChartAreas.Add("ChartArea1");
+
+            chart1.ChartAreas[0].AxisX.Title = "아이디 간격";
+            chart1.ChartAreas[0].AxisX.TitleFont = Font;
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisX.Interval = 100000 / 4 * 3;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.DarkGray;
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+            chart1.ChartAreas[0].AxisY.Title = "작품 변동 수";
+            chart1.ChartAreas[0].AxisY.TitleFont = Font;
+            chart1.ChartAreas[0].AxisY.Interval = 10;
             chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.DarkGray;
             chart1.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
 
