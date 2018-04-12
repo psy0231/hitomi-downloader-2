@@ -1,10 +1,10 @@
-# Hitomi Copy
+5# Hitomi Copy
 
 소스코드는 Hitomi Copy 2 폴더에 있습니다.
 
 # 다운로드 주소
 
-https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.4 여기서 새로운 버전을 다운받으세요.
+https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.5 여기서 새로운 버전을 다운받으세요.
 
 # 검색
 
