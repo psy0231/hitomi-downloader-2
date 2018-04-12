@@ -1,4 +1,4 @@
-5# Hitomi Copy
+# Hitomi Copy
 
 소스코드는 Hitomi Copy 2 폴더에 있습니다.
 
