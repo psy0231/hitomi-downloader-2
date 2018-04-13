@@ -1,4 +1,4 @@
-# Hitomi Copy
+# Hitomi Copy (현존하는 최강의 히토미 다운로더)
 
 소스코드는 Hitomi Copy 2 폴더에 있습니다.
 
