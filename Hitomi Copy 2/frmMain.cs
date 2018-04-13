@@ -7,6 +7,7 @@ using Hitomi_Copy_2.Analysis;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -743,6 +744,11 @@ namespace Hitomi_Copy_2
             MessageBox.Show("데이터가 동기화되었습니다!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void bGallery_Click(object sender, EventArgs e)
+        {
+            (new frmGallery(this)).Show();
+        }
+
         private void bShowSearch_Click(object sender, EventArgs e)
         {
             (new frmSearch()).Show();
@@ -751,6 +757,12 @@ namespace Hitomi_Copy_2
         private void bStatistics_Click(object sender, EventArgs e)
         {
             (new frmStatistics()).Show();
+        }
+
+        private void MemoryUsageUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            Process proc = Process.GetCurrentProcess();
+            lMemoryUsage.Text = (proc.PrivateMemorySize64 / 1000).ToString("#,#") + " KB";
         }
 
     }

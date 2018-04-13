@@ -186,6 +186,9 @@ namespace Hitomi_Copy
         private void frmArtistInfo_FormClosed(object sender, FormClosedEventArgs e)
         {
             try { closed_form.BringToFront(); } catch { }
+
+            foreach (var pe in ImagePanel.Controls)
+                (pe as PicElement).Dispose();
         }
     }
 }

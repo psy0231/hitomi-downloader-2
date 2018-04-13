@@ -28,18 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.MainTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pbLoad = new System.Windows.Forms.ProgressBar();
-            this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
             this.bTidy = new System.Windows.Forms.Button();
             this.lStatusSearch = new System.Windows.Forms.Label();
             this.tbLang = new System.Windows.Forms.TextBox();
             this.bDownload = new System.Windows.Forms.Button();
             this.bCancleAll = new System.Windows.Forms.Button();
             this.bChooseAll = new System.Windows.Forms.Button();
-            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.bSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -77,6 +76,12 @@
             this.tbExcludeTag = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.lMemoryUsage = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.bGallery = new System.Windows.Forms.Button();
+            this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
+            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.MainTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -131,21 +136,6 @@
             this.pbLoad.Size = new System.Drawing.Size(346, 8);
             this.pbLoad.TabIndex = 21;
             this.pbLoad.Visible = false;
-            // 
-            // listBox1
-            // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(117, 481);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(281, 109);
-            this.listBox1.TabIndex = 7;
-            this.listBox1.Visible = false;
-            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
-            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
             // bTidy
             // 
@@ -211,18 +201,6 @@
             this.bChooseAll.Text = "모두 선택";
             this.bChooseAll.UseVisualStyleBackColor = true;
             this.bChooseAll.Click += new System.EventHandler(this.bChooseAll_Click);
-            // 
-            // ImagePanel
-            // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ImagePanel.Location = new System.Drawing.Point(6, 35);
-            this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 430);
-            this.ImagePanel.TabIndex = 2;
             // 
             // bSearch
             // 
@@ -380,6 +358,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.bGallery);
             this.tabPage3.Controls.Add(this.bShowSearch);
             this.tabPage3.Controls.Add(this.bStatistics);
             this.tabPage3.Controls.Add(this.label3);
@@ -602,11 +581,77 @@
             this.label8.TabIndex = 3;
             this.label8.Text = "Copyright (C) 2018. DCInside Programming Gallery Union. All Rights Reserved.";
             // 
+            // lMemoryUsage
+            // 
+            this.lMemoryUsage.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lMemoryUsage.AutoSize = true;
+            this.lMemoryUsage.Location = new System.Drawing.Point(553, 12);
+            this.lMemoryUsage.Name = "lMemoryUsage";
+            this.lMemoryUsage.Size = new System.Drawing.Size(32, 15);
+            this.lMemoryUsage.TabIndex = 7;
+            this.lMemoryUsage.Text = "0 KB";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(448, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(99, 15);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Memory Usage : ";
+            // 
+            // MemoryUsageUpdateTimer
+            // 
+            this.MemoryUsageUpdateTimer.Enabled = true;
+            this.MemoryUsageUpdateTimer.Interval = 1000;
+            this.MemoryUsageUpdateTimer.Tick += new System.EventHandler(this.MemoryUsageUpdateTimer_Tick);
+            // 
+            // bGallery
+            // 
+            this.bGallery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bGallery.Location = new System.Drawing.Point(909, 338);
+            this.bGallery.Name = "bGallery";
+            this.bGallery.Size = new System.Drawing.Size(185, 33);
+            this.bGallery.TabIndex = 17;
+            this.bGallery.Text = "맞춤 갤러리";
+            this.bGallery.UseVisualStyleBackColor = true;
+            this.bGallery.Click += new System.EventHandler(this.bGallery_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(117, 481);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.ScrollAlwaysVisible = true;
+            this.listBox1.Size = new System.Drawing.Size(281, 109);
+            this.listBox1.TabIndex = 7;
+            this.listBox1.Visible = false;
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
+            // 
+            // ImagePanel
+            // 
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePanel.AutoScroll = true;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Location = new System.Drawing.Point(6, 35);
+            this.ImagePanel.Name = "ImagePanel";
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 430);
+            this.ImagePanel.TabIndex = 2;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1159, 552);
+            this.Controls.Add(this.lMemoryUsage);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.MainTab);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
@@ -618,7 +663,7 @@
             this.MinimumSize = new System.Drawing.Size(1175, 591);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hitomi Copy 2.4";
+            this.Text = "Hitomi Copy 2.6";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.MainTab.ResumeLayout(false);
@@ -685,5 +730,9 @@
         private System.Windows.Forms.Button bSync;
         private AutoCompleteListBox listBox1;
         private System.Windows.Forms.ProgressBar pbLoad;
+        private System.Windows.Forms.Label lMemoryUsage;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Timer MemoryUsageUpdateTimer;
+        private System.Windows.Forms.Button bGallery;
     }
 }

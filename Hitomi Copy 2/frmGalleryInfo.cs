@@ -4,7 +4,6 @@ using hitomi.Parser;
 using Hitomi_Copy.Data;
 using Hitomi_Copy_2;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -53,6 +52,7 @@ namespace Hitomi_Copy
 
                 pic.Article.Tags.ToList().ForEach((a) =>
                 {
+                    a = HitomiCommon.LegalizeTag(a);
                     if (a.StartsWith("female:")) AddTagToPanel(a.Substring("female:".Length), 1);
                     else if (a.StartsWith("male:")) AddTagToPanel(a.Substring("male:".Length), 2);
                     else AddTagToPanel(a, 0);
@@ -68,7 +68,6 @@ namespace Hitomi_Copy
 
                 metadata.Tags.ToList().ForEach((a) =>
                 {
-                    a = HitomiCommon.LegalizeTag(a);
                     if (a.StartsWith("female:")) AddTagToPanel(a.Substring("female:".Length), 1);
                     else if (a.StartsWith("male:")) AddTagToPanel(a.Substring("male:".Length), 2);
                     else AddTagToPanel(a, 0);

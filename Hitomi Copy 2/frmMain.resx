@@ -136,6 +136,9 @@ Hitomi Copy가 제공하는 강력한 기능들을 사용해보세요!
  * 이 프로그램은 엄청난 양의 물리메모리를 소모합니다. 메모리 관리에 주의하세요.
 </value>
   </data>
+  <metadata name="MemoryUsageUpdateTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
