@@ -50,13 +50,14 @@ namespace Hitomi_Copy
                 lCharacter.Text = string.Join(",", pic.Article.Characters ?? Enumerable.Empty<string>());
                 textBox1.Text = string.Join(",", pic.Article.Tags ?? Enumerable.Empty<string>());
 
-                pic.Article.Tags.ToList().ForEach((a) =>
-                {
-                    a = HitomiCommon.LegalizeTag(a);
-                    if (a.StartsWith("female:")) AddTagToPanel(a.Substring("female:".Length), 1);
-                    else if (a.StartsWith("male:")) AddTagToPanel(a.Substring("male:".Length), 2);
-                    else AddTagToPanel(a, 0);
-                });
+                if (pic.Article.Tags != null)
+                    pic.Article.Tags.ToList().ForEach((a) =>
+                    {
+                        a = HitomiCommon.LegalizeTag(a);
+                        if (a.StartsWith("female:")) AddTagToPanel(a.Substring("female:".Length), 1);
+                        else if (a.StartsWith("male:")) AddTagToPanel(a.Substring("male:".Length), 2);
+                        else AddTagToPanel(a, 0);
+                    });
             }
             else
             {
@@ -65,13 +66,14 @@ namespace Hitomi_Copy
                 lSeries.Text = string.Join(",", metadata.Parodies ?? Enumerable.Empty<string>());
                 lGroup.Text = string.Join(",", metadata.Groups ?? Enumerable.Empty<string>());
                 lCharacter.Text = string.Join(",", metadata.Characters ?? Enumerable.Empty<string>());
-
-                metadata.Tags.ToList().ForEach((a) =>
-                {
-                    if (a.StartsWith("female:")) AddTagToPanel(a.Substring("female:".Length), 1);
-                    else if (a.StartsWith("male:")) AddTagToPanel(a.Substring("male:".Length), 2);
-                    else AddTagToPanel(a, 0);
-                });
+                
+                if (metadata.Tags != null)
+                    metadata.Tags.ToList().ForEach((a) =>
+                    {
+                        if (a.StartsWith("female:")) AddTagToPanel(a.Substring("female:".Length), 1);
+                        else if (a.StartsWith("male:")) AddTagToPanel(a.Substring("male:".Length), 2);
+                        else AddTagToPanel(a, 0);
+                    });
 
                 Task.Run(() => download_image());
             }
