@@ -556,9 +556,9 @@ namespace Hitomi_Copy_2
         private string MakeDownloadDirectory(HitomiArticle article)
         {
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
-            string title = article.Title;
+            string title = article.Title ?? "";
             string artists = "";
-            string type = article.Types;
+            string type = article.Types ?? "";
             if (article.Artists != null) artists=article.Artists[0];
             if (title != null)
                 foreach (char c in invalid) title = title.Replace(c.ToString(), "");
