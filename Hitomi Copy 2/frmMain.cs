@@ -749,6 +749,15 @@ namespace Hitomi_Copy_2
             MessageBox.Show("데이터가 동기화되었습니다!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void bSaveArtist_Click(object sender, EventArgs e)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (ListViewItem item in lvRecommendArtists.Items)
+                builder.Append($"{item.SubItems[0].Text}\t{item.SubItems[1].Text}\t{item.SubItems[2].Text}\t{item.SubItems[3].Text}\r\n");
+            File.WriteAllText("save_data.txt", builder.ToString());
+            MessageBox.Show("저장완료!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void bGallery_Click(object sender, EventArgs e)
         {
             (new frmGallery(this)).Show();
@@ -775,6 +784,14 @@ namespace Hitomi_Copy_2
             HitomiSetting.Instance.GetModel().Language = cbLanguage.Text;
             HitomiSetting.Instance.Save();
             tbLang.Text = cbLanguage.Text;
+        }
+
+        private void tbDownloadPath_TextChanged(object sender, EventArgs e)
+        {
+            if (tbDownloadPath.Text.Contains("{Id}") || tbDownloadPath.Text.Contains("{Title}"))
+                lMsgPathError.Visible = false;
+            else
+                lMsgPathError.Visible = true;
         }
     }
 }

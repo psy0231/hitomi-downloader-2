@@ -57,6 +57,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.bSaveArtist = new System.Windows.Forms.Button();
             this.bGallery = new System.Windows.Forms.Button();
             this.bShowSearch = new System.Windows.Forms.Button();
             this.bStatistics = new System.Windows.Forms.Button();
@@ -71,6 +72,7 @@
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lMsgPathError = new System.Windows.Forms.Label();
             this.cbLanguage = new System.Windows.Forms.ComboBox();
             this.pbSync = new System.Windows.Forms.ProgressBar();
             this.bSync = new System.Windows.Forms.Button();
@@ -386,6 +388,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.bSaveArtist);
             this.tabPage3.Controls.Add(this.bGallery);
             this.tabPage3.Controls.Add(this.bShowSearch);
             this.tabPage3.Controls.Add(this.bStatistics);
@@ -399,6 +402,17 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "통계";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // bSaveArtist
+            // 
+            this.bSaveArtist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bSaveArtist.Location = new System.Drawing.Point(909, 21);
+            this.bSaveArtist.Name = "bSaveArtist";
+            this.bSaveArtist.Size = new System.Drawing.Size(185, 33);
+            this.bSaveArtist.TabIndex = 18;
+            this.bSaveArtist.Text = "추천 작가 목록 저장";
+            this.bSaveArtist.UseVisualStyleBackColor = true;
+            this.bSaveArtist.Click += new System.EventHandler(this.bSaveArtist_Click);
             // 
             // bGallery
             // 
@@ -524,6 +538,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.lMsgPathError);
             this.tabPage4.Controls.Add(this.cbLanguage);
             this.tabPage4.Controls.Add(this.pbSync);
             this.tabPage4.Controls.Add(this.bSync);
@@ -538,6 +553,18 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "설정";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // lMsgPathError
+            // 
+            this.lMsgPathError.AutoSize = true;
+            this.lMsgPathError.ForeColor = System.Drawing.Color.Red;
+            this.lMsgPathError.Location = new System.Drawing.Point(80, 27);
+            this.lMsgPathError.Name = "lMsgPathError";
+            this.lMsgPathError.Size = new System.Drawing.Size(314, 45);
+            this.lMsgPathError.TabIndex = 8;
+            this.lMsgPathError.Text = "다운로드 경로가 잘못 지정되었습니다.\r\n{Id} 또는 {Title}를 반드시 하나이상 포함하세요.\r\n이 경고를 무시하면 치명적인 오류가 발생할 수" +
+    " 있습니다.";
+            this.lMsgPathError.Visible = false;
             // 
             // cbLanguage
             // 
@@ -580,7 +607,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(944, 287);
+            this.textBox1.Size = new System.Drawing.Size(944, 272);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
@@ -593,6 +620,7 @@
             this.tbDownloadPath.Size = new System.Drawing.Size(851, 23);
             this.tbDownloadPath.TabIndex = 3;
             this.tbDownloadPath.Text = "C:\\Hitomi\\{Artists}\\[{Id}] {Title}\\";
+            this.tbDownloadPath.TextChanged += new System.EventHandler(this.tbDownloadPath_TextChanged);
             // 
             // label4
             // 
@@ -747,5 +775,7 @@
         private System.Windows.Forms.Timer MemoryUsageUpdateTimer;
         private System.Windows.Forms.Button bGallery;
         private System.Windows.Forms.ComboBox cbLanguage;
+        private System.Windows.Forms.Button bSaveArtist;
+        private System.Windows.Forms.Label lMsgPathError;
     }
 }

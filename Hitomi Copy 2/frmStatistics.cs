@@ -999,16 +999,14 @@ namespace Hitomi_Copy
                     var prop = result.Object as DataPoint;
                     if (prop != null)
                     {
-                        var pointXPixel = result.ChartArea.AxisX.ValueToPixelPosition(prop.XValue);
-                        var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
-
-                        // check if the cursor is really close to the point (2 pixels around the point)
-                        //if (Math.Abs(pos.X - pointXPixel) < 20 &&
-                        //    Math.Abs(pos.Y - pointYPixel) < 20)
+                        try
                         {
+                            var pointXPixel = result.ChartArea.AxisX.ValueToPixelPosition(prop.XValue);
+                            var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
+
                             tooltip.Show(result.Series.Name + ", X=" + prop.XValue + ", Y=" + prop.YValues[0], this.chart1,
-                                            pos.X, pos.Y - 15);
-                        }
+                                                pos.X, pos.Y - 15);
+                        } catch { }
                     }
                 }
             }
