@@ -182,6 +182,14 @@ namespace Hitomi_Copy.Data
                 { HitomiTagdata data = new HitomiTagdata(); data.Tag = tagdata.Tag.ToLower().Replace(' ', '_'); data.Count = tagdata.Count; result.Add(data); }
             return result;
         }
+
+        public List<string> GetLanguageList()
+        {
+            List<string> result = new List<string>();
+            foreach (var lang in tagdata_collection.language)
+                result.Add(lang.Tag);
+            return result;
+        }
         #endregion
     }
 }

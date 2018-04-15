@@ -26,15 +26,10 @@ namespace Hitomi_Copy_2
         {
             InitializeComponent();
             (new frmSplash()).Show();
-
-            InitDownloader();
-            InitStatistics();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            tbDownloadPath.Text = HitomiSetting.Instance.GetModel().Path;
-            tbExcludeTag.Text = string.Join(", ", HitomiSetting.Instance.GetModel().ExclusiveTag ?? Enumerable.Empty<string>());
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -48,7 +43,17 @@ namespace Hitomi_Copy_2
 
         public void OnTab()
         {
+            InitDownloader();
+            InitStatistics();
+
+            tbLang.Text = HitomiSetting.Instance.GetModel().Language;
+
+            tbDownloadPath.Text = HitomiSetting.Instance.GetModel().Path;
+            tbExcludeTag.Text = string.Join(", ", HitomiSetting.Instance.GetModel().ExclusiveTag ?? Enumerable.Empty<string>());
             MainTab.Enabled = true;
+            foreach (var lang in HitomiData.Instance.GetLanguageList())
+                cbLanguage.Items.Add(lang);
+            cbLanguage.Text = HitomiSetting.Instance.GetModel().Language;
             UpdateStatistics();
         }
 
@@ -764,6 +769,12 @@ namespace Hitomi_Copy_2
             Process proc = Process.GetCurrentProcess();
             lMemoryUsage.Text = (proc.PrivateMemorySize64 / 1000).ToString("#,#") + " KB";
         }
-
+        
+        private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            HitomiSetting.Instance.GetModel().Language = cbLanguage.Text;
+            HitomiSetting.Instance.Save();
+            tbLang.Text = cbLanguage.Text;
+        }
     }
 }

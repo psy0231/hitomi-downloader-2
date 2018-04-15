@@ -1,5 +1,6 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using Hitomi_Copy.Data;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -18,6 +19,8 @@ namespace Hitomi_Copy_2
         public int MaximumThumbnailShow;
         [JsonProperty]
         public int Thread;
+        [JsonProperty]
+        public string Language;
     }
 
     public class HitomiSetting
@@ -39,6 +42,7 @@ namespace Hitomi_Copy_2
                 model.Zip = false;
                 model.MaximumThumbnailShow = 1000;
                 model.Thread = 32;
+                model.Language = "korean";
                 Save();
             }
             else
@@ -46,6 +50,8 @@ namespace Hitomi_Copy_2
                 if (String.IsNullOrEmpty(model.Path)) model.Path = @"C:\Hitomi\{Artists}\[{Id}] {Title}\";
                 if (model.MaximumThumbnailShow < 10) model.MaximumThumbnailShow = 1000;
                 if (model.Thread < 5) model.Thread = 32;
+                if (!HitomiData.Instance.GetLanguageList().Contains(model.Language))
+                    model.Language = "korean";
                 Save();
             }
         }

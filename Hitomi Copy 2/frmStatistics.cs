@@ -51,7 +51,7 @@ namespace Hitomi_Copy
             var hitomi_data = HitomiData.Instance.metadata_collection;
             foreach (var metadata in hitomi_data)
             {
-                if (metadata.Language != "korean") continue;
+                if (metadata.Language != HitomiSetting.Instance.GetModel().Language) continue;
                 if (metadata.Tags != null)
                     metadata.Tags.ToList().ForEach((tag) => { if (rank_tag.ContainsKey(tag)) rank_tag[tag] += 1; else rank_tag.Add(tag, 1); });
                 if (metadata.Artists != null)

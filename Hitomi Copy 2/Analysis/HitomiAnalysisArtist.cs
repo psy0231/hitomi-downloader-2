@@ -21,7 +21,7 @@ namespace Hitomi_Copy_2.Analysis
             foreach (var metadata in metadatas)
             {
                 if (metadata.Tags == null) continue;
-                if (metadata.Language != "korean") continue;
+                if (metadata.Language != HitomiSetting.Instance.GetModel().Language) continue;
                 tags_count += metadata.Tags.Length;
                 foreach (var tag in metadata.Tags)
                     if (tags_map.ContainsKey(tag))
