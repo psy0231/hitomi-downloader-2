@@ -33,7 +33,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(162, 129);
+            this.button1.Location = new System.Drawing.Point(53, 29);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(159, 80);
@@ -52,6 +52,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ehen";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.ehen_Load);
             this.ResumeLayout(false);
 
         }
