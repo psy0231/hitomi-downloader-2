@@ -139,6 +139,7 @@
     <Compile Include="frmTagInfo.designer.cs">
       <DependentUpon>frmTagInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="GalleryInfo\HitomiGalleryInfoModel.cs" />
     <Compile Include="HitomiCore.cs" />
     <Compile Include="HitomiJson.cs" />
     <Compile Include="HitomiCommon.cs" />
