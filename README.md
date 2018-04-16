@@ -1,4 +1,4 @@
-# Hitomi Copy (현존하는 최강의 히토미 다운로더)
+﻿# Hitomi Copy (현존하는 최강의 히토미 다운로더)
 
 소스코드는 Hitomi Copy 2 폴더에 있습니다.
 
@@ -17,15 +17,15 @@ https://www.microsoft.com/ko-kr/download/details.aspx?id=49982
 # 핵심 기능
 
 ## 초기창
-![hitomi main](1.png)
+![hitomi main](Docs/Image/1.png)
 
 프로그램을 처음시작하면 데이터 다운로드가 시작됩니다. 
 히토미 접속 트래픽이 증가할 경우 다운로드 속도가 매우 느릴 수 있으니 몇 분 정도 기다려 주세요.
 
 ## 검색
-![hitomi main](2.png)
-![hitomi main](9.png)
-![hitomi main](10.png)
+![hitomi main](Docs/Image/2.png)
+![hitomi main](Docs/Image/9.png)
+![hitomi main](Docs/Image/10.png)
 
 히토미 다운로더의 핵심 기능인 검색창 입니다. 이미지에 예제를 보고 아래 설명을 참고해주세요.
 ```
@@ -40,21 +40,21 @@ https://www.microsoft.com/ko-kr/download/details.aspx?id=49982
 
 # 데이터 분석
 
-![hitomi main](apple.jpg)
+![hitomi main](Docs/Image/apple.jpg)
 
 최신 빅데이터 분석 알고리즘으로 당신의 취향에 맞는 작가를 추천해 드립니다!
 
-![hitomi main](3.png)
+![hitomi main](Docs/Image/3.png)
 
 `통계`탭을 누르시면 기존의 다운로드 기록을 바탕으로 작가를 추천해드립니다.
 
-![hitomi main](4.png)
+![hitomi main](Docs/Image/4.png)
 
 또한 현재 베타 기능이긴하지만, 작품도 추천해드립니다.
 다만, 태그가 하나인 게시물들이 상위에 많이 존재할 수 있습니다.
 이것은 기술적으로 해결할 수가 없었습니다 ㅠㅠ
 
-![hitomi main](5.png)
+![hitomi main](Docs/Image/5.png)
 
 `통계` 탭에서 `통계`버튼을 눌러 보세요.
 최근 1년 정도의 데이터를 한눈에 볼 수 있는 기능을 제공합니다.
@@ -76,15 +76,15 @@ https://www.microsoft.com/ko-kr/download/details.aspx?id=49982
 캐릭터 변동 - 한국어
 ```
 
-![hitomi main](6.png)
+![hitomi main](Docs/Image/6.png)
 
 물론 정적인 데이터 분석결과도 필요하겠죠. 그래서 대충 구겨넣었습니다. 어차피 안쓰실거예요!
 
-![hitomi main](7.png)
+![hitomi main](Docs/Image/7.png)
 
 다운로드 히스토리도 형식적으로라도 보여줘야겠죠?
 
-![hitomi main](8.png)
+![hitomi main](Docs/Image/8.png)
 
 `설정`탭에 가시면 데이터 동기화 및 다운로드 경로, 제외할 태그들을 입력할 수 있습니다.
 
