@@ -1,1 +1,1 @@
-# Hitomi Copy °³¹ß¹®¼­
+# Hitomi Copy ê°œë°œë¬¸ì„œ
