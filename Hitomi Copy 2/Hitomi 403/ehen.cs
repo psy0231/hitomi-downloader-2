@@ -85,7 +85,6 @@ namespace Hitomi_403
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             Directory.CreateDirectory("C:\\Hitomi\\tmp\\");
             foreach (var ix in richTextBox1.Lines)
                 if (!string.IsNullOrEmpty(ix))
