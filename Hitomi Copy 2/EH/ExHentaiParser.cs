@@ -9,6 +9,10 @@ namespace Hitomi_Copy_2.EH
 {
     class ExHentaiParser
     {
+        /// <summary>
+        /// 이미지 주소를 얻으려면 여기에 아티클 소스를 넣으세요
+        /// ex: https://exhentai.org/g/1212168/421ef300a8/ [이치하야 예제]
+        /// </summary>
         public static string[] GetImagesUri(string source)
         {
             HtmlDocument document = new HtmlDocument();
@@ -25,7 +29,11 @@ namespace Hitomi_Copy_2.EH
 
             return uri.ToArray();
         }
-        
+
+        /// <summary>
+        /// 이미지 다운로드 주소를 얻으려면 여기에 이미지 소스를 넣으세요
+        /// https://exhentai.org/s/df24b19548/1212549-2 [이치하야 예제]
+        /// </summary>
         public static string GetImagesAddress(string source)
         {
             HtmlDocument document = new HtmlDocument();
@@ -34,7 +42,13 @@ namespace Hitomi_Copy_2.EH
 
             return nodes.SelectSingleNode(".//div[@id='i3']//a//img").GetAttributeValue("src", "");
         }
-        
+
+        /// <summary>
+        /// 페이지 주소를 얻으려면 여기에 아티클 소스를 넣으세요
+        /// ex: https://exhentai.org/g/1212168/421ef300a8/ [이치하야 예제]
+        /// ex: https://exhentai.org/g/1212396/71a853083e/ [5 페이지 예제]
+        /// ex: https://exhentai.org/g/1201400/48f9b8e20a/ [85 페이지 예제]
+        /// </summary>
         public static string[] GetPagesUri(string source)
         {
             HtmlDocument document = new HtmlDocument();
