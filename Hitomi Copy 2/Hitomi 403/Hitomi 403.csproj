@@ -52,7 +52,9 @@
     <Compile Include="ehen.Designer.cs">
       <DependentUpon>ehen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExHentaiArticle.cs" />
     <Compile Include="ExHentaiParser.cs" />
+    <Compile Include="HitomiQueue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ehen.resx">
