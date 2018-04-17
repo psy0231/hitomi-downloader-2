@@ -2,6 +2,7 @@
 
 using hitomi.Parser;
 using Hitomi_Copy;
+using Hitomi_Copy_2.GalleryInfo;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -23,13 +24,16 @@ namespace Hitomi_Copy_2
             WebClient wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
             wc.DownloadStringCompleted += wc_dasil;
-            wc.DownloadStringAsync(new Uri(HitomiDef.HitomiGalleryAddress + pe.Article.Magic + ".html"),
+            //wc.DownloadStringAsync(new Uri(HitomiDef.HitomiGalleryAddress + pe.Article.Magic + ".html"),
+            //    new Tuple<PicElement, CallBack>(pe, callback));
+            wc.DownloadStringAsync(new Uri(HitomiDef.HitomiGalleryAddress + pe.Article.Magic + ".js"),
                 new Tuple<PicElement, CallBack>(pe, callback));
         }
         static private void wc_dasil(object sender, DownloadStringCompletedEventArgs e)
         {
             Tuple<PicElement, CallBack> tuple = (Tuple<PicElement, CallBack>)e.UserState;
-            tuple.Item1.Article.ImagesLink = HitomiParser.ParsePage(e.Result);
+
+            tuple.Item1.Article.ImagesLink = HitomiGalleryInfo.GetImageLink(e.Result); // HitomiParser.ParsePage(e.Result); 
 
             lock (tuple.Item2)
             {

@@ -43,27 +43,31 @@ namespace Hitomi_Copy_2
             request.Timeout = Timeout.Infinite;
             request.KeepAlive = true;
             request.Proxy = proxy;
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-            if ((response.StatusCode == HttpStatusCode.OK ||
-                response.StatusCode == HttpStatusCode.Moved ||
-                response.StatusCode == HttpStatusCode.Redirect) &&
-                response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
+            
+            try
             {
-                using (Stream inputStream = response.GetResponseStream())
-                using (Stream outputStream = File.OpenWrite(fileName))
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                if ((response.StatusCode == HttpStatusCode.OK ||
+                    response.StatusCode == HttpStatusCode.Moved ||
+                    response.StatusCode == HttpStatusCode.Redirect) &&
+                    response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
                 {
-                    byte[] buffer = new byte[131072];
-                    int bytesRead;
-                    lock (download_callback) download_callback(uri, response.ContentLength);
-                    do
+                    using (Stream inputStream = response.GetResponseStream())
+                    using (Stream outputStream = File.OpenWrite(fileName))
                     {
-                        bytesRead = inputStream.Read(buffer, 0, buffer.Length);
-                        outputStream.Write(buffer, 0, bytesRead);
-                        lock (status_callback) status_callback(uri, bytesRead);
-                    } while (bytesRead != 0);
+                        byte[] buffer = new byte[131072];
+                        int bytesRead;
+                        lock (download_callback) download_callback(uri, response.ContentLength);
+                        do
+                        {
+                            bytesRead = inputStream.Read(buffer, 0, buffer.Length);
+                            outputStream.Write(buffer, 0, bytesRead);
+                            lock (status_callback) status_callback(uri, bytesRead);
+                        } while (bytesRead != 0);
+                    }
                 }
-            }
+            } catch {  }
 
             lock (callback) callback(uri, fileName, obj);
 
