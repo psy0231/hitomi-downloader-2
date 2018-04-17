@@ -2,13 +2,11 @@
 
 using Hitomi_Copy_2.EH;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -40,8 +38,11 @@ namespace Hitomi_Copy_2
             article = ExHentaiParser.GetArticleData(article_source);
             lTitle.Text = article.Title;
             lArtist.Text = string.Join(", ", article.artist);
+            if (article.male != null)
             tbTags.Text += "male: " + string.Join(", ", article.male) + "\r\n";
+            if (article.female != null)
             tbTags.Text += "female: " + string.Join(", ", article.female) + "\r\n";
+            if (article.misc != null)
             tbTags.Text += "misc: " + string.Join(", ", article.misc) + "\r\n";
             Task.Run(() => download_image(article.Thumbnail));
         }

@@ -121,9 +121,9 @@ namespace Hitomi_Copy_2.EH
             article.language = nodes_data[1].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
             article.group = nodes_data[2].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
             article.artist = nodes_data[3].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
-            article.male = nodes_data[4].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
-            article.female = nodes_data[5].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
-            article.misc = nodes_data[6].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
+            try { article.male = nodes_data[4].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray(); } catch { }
+            try { article.female = nodes_data[5].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray(); } catch { }
+            try { article.misc = nodes_data[6].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray(); } catch { }
 
             return article;
         }

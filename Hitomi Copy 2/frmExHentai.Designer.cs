@@ -55,6 +55,8 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbProxy = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
@@ -99,6 +101,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.tbProxy);
+            this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.bDownload);
             this.tabPage1.Controls.Add(this.lArtist);
             this.tabPage1.Controls.Add(this.lTitle);
@@ -329,6 +333,23 @@
             this.label5.TabIndex = 30;
             this.label5.Text = "대기중인 항목";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("맑은 고딕", 12F);
+            this.label6.Location = new System.Drawing.Point(442, 328);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 21);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Proxy : ";
+            // 
+            // tbProxy
+            // 
+            this.tbProxy.Location = new System.Drawing.Point(514, 326);
+            this.tbProxy.Name = "tbProxy";
+            this.tbProxy.Size = new System.Drawing.Size(418, 23);
+            this.tbProxy.TabIndex = 12;
+            // 
             // frmExHentai
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -380,5 +401,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tbProxy;
+        private System.Windows.Forms.Label label6;
     }
 }
