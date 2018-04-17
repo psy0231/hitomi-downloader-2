@@ -3,6 +3,7 @@
 using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Hitomi_403
 {
@@ -53,8 +54,8 @@ namespace Hitomi_403
         /// <summary>
         /// 페이지 주소를 얻으려면 여기에 아티클 소스를 넣으세요
         /// ex: https://exhentai.org/g/1212168/421ef300a8/ [이치하야 예제]
+        /// ex: https://exhentai.org/g/1212396/71a853083e/ [5 페이지 예제]
         /// ex: https://exhentai.org/g/1201400/48f9b8e20a/ [85 페이지 예제]
-        /// 
         /// </summary>
         public static string[] GetPagesUri(string source)
         {
@@ -70,7 +71,25 @@ namespace Hitomi_403
                 }
                 catch { }
 
-            return uri.Distinct().ToArray();
+            // get max pages
+            int max = 0;
+            foreach (var page_c in uri)
+            {
+                int value;
+                if (int.TryParse(Regex.Split(page_c, @"\?p\=")[1], out value))
+                    if (max < value)
+                        max = value;
+            }
+
+            // make uri
+            if (uri.Count == 0) return null;
+
+            List<string> result = new List<string>();
+            string prefix = Regex.Split(uri[0], @"\?p\=")[0];
+            for (int i = 0; i <= max; i++)
+                result.Add(prefix + "?p=" + i.ToString());
+            
+            return result.ToArray();
         }
     }
 }

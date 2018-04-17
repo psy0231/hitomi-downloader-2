@@ -22,7 +22,7 @@ namespace Hitomi_403
             wc.Headers.Add(HttpRequestHeader.Cookie, "ipb_member_id=1904662;ipb_pass_hash=ff8940e2cc632d601091b8836fca66f5;");
             //MessageBox.Show(wc.DownloadString(new Uri($"https://exhentai.org/g/1212168/421ef300a8/")));
 
-            ExHentaiParser.GetPagesUri(wc.DownloadString(new Uri($"https://exhentai.org/g/1212396/71a853083e/")));
+            ExHentaiParser.GetPagesUri(wc.DownloadString(new Uri($"https://exhentai.org/g/1201400/48f9b8e20a/")));
             ExHentaiParser.GetImagesUri(wc.DownloadString(new Uri($"https://exhentai.org/g/1212168/421ef300a8/")));
             ExHentaiParser.TestArticle(wc.DownloadString(new Uri($"https://exhentai.org/g/1212168/421ef300a8/")));
         }
