@@ -83,6 +83,7 @@
             this.lMemoryUsage = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.bAbort = new System.Windows.Forms.Button();
             this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
             this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.MainTab.SuspendLayout();
@@ -230,6 +231,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.bAbort);
             this.tabPage2.Controls.Add(this.lDownloadStatusSize);
             this.tabPage2.Controls.Add(this.lDownloadSize);
             this.tabPage2.Controls.Add(this.label12);
@@ -658,6 +660,16 @@
             this.MemoryUsageUpdateTimer.Interval = 1000;
             this.MemoryUsageUpdateTimer.Tick += new System.EventHandler(this.MemoryUsageUpdateTimer_Tick);
             // 
+            // bAbort
+            // 
+            this.bAbort.Location = new System.Drawing.Point(900, 416);
+            this.bAbort.Name = "bAbort";
+            this.bAbort.Size = new System.Drawing.Size(185, 40);
+            this.bAbort.TabIndex = 30;
+            this.bAbort.Text = "선택파일 다운로드 취소";
+            this.bAbort.UseVisualStyleBackColor = true;
+            this.bAbort.Click += new System.EventHandler(this.bAbort_Click);
+            // 
             // listBox1
             // 
             this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -777,5 +789,6 @@
         private System.Windows.Forms.ComboBox cbLanguage;
         private System.Windows.Forms.Button bSaveArtist;
         private System.Windows.Forms.Label lMsgPathError;
+        private System.Windows.Forms.Button bAbort;
     }
 }

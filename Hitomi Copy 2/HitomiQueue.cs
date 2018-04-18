@@ -14,6 +14,7 @@ namespace Hitomi_Copy_2
         int capacity = 32;
         int mtx = 0;
         List<Tuple<string, string, object>> queue = new List<Tuple<string, string, object>>();
+        List<Tuple<string,HttpWebRequest>> requests = new List<Tuple<string, HttpWebRequest>>();
         public IWebProxy proxy { get; set; }
 
         public delegate void CallBack(string uri, string filename, object obj);
@@ -43,7 +44,9 @@ namespace Hitomi_Copy_2
             request.Timeout = Timeout.Infinite;
             request.KeepAlive = true;
             request.Proxy = proxy;
-            
+
+            lock (requests) requests.Add(new Tuple<string, HttpWebRequest>(uri,request));
+
             try
             {
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -77,18 +80,35 @@ namespace Hitomi_Copy_2
                 for (; at < queue.Count; at++)
                     if (queue[at].Item1 == uri && queue[at].Item2 == fileName)
                         break;
-                queue.RemoveAt(at);
+                if (at != queue.Count) queue.RemoveAt(at);
             }
 
             lock (int_lock) mtx--;
             lock (notify_lock) Notify();
         }
 
-        //public bool Abort(string uri)
-        //{
+        public bool Abort(string uri)
+        {
+            lock (queue)
+            {
+                for (int i = 0; i < queue.Count; i++)
+                    if (queue[i].Item1 == uri)
+                    {
+                        queue.RemoveAt(i);
+                        lock (int_lock) mtx--;
+                        lock (notify_lock) Notify();
+                        return true;
+                    }
+            }
+            lock (requests)
+            {
+                foreach (var i in requests)
+                    if (i.Item1 == uri)
+                        lock(i.Item2) i.Item2.Abort();
+            }
+            return false;
+        }
 
-        //}
-        
         public void Add(string uri, string filename, object obj)
         {
             queue.Add(new Tuple<string, string, object>(uri, filename, obj));

@@ -451,7 +451,7 @@ namespace Hitomi_Copy_2
                 Invoke(new Action(IncrementProgressBarValue));
                 return;
             }
-            pbTarget.Value += 1;
+            if (pbTarget.Value != pbTarget.Maximum) pbTarget.Value += 1;
         }
         private void DeleteSpecificItem(string i)
         {
@@ -597,6 +597,20 @@ namespace Hitomi_Copy_2
             fake_pe.Article = article;
             fake_pe.Label = metadata.Name;
             RemoteDownloadArticle(fake_pe);
+        }
+
+        private void bAbort_Click(object sender, EventArgs e)
+        {
+            List<string> uris = new List<string>();
+            if (lvStandBy.SelectedItems.Count > 0)
+                foreach (ListViewItem lvi in lvStandBy.SelectedItems)
+                {
+                    uris.Add(lvi.SubItems[2].Text);
+                    lvi.Remove();
+                }
+
+            foreach (var uri in uris)
+                download_queue.Abort(uri);
         }
         #endregion
 
@@ -793,5 +807,6 @@ namespace Hitomi_Copy_2
             else
                 lMsgPathError.Visible = true;
         }
+
     }
 }
