@@ -84,14 +84,11 @@ namespace Hitomi_Copy_2
             lock (notify_lock) Notify();
         }
 
-        public Thread StartTheThread(string uri, string filename, object obj)
-        {
-            var t = new Thread(() => DownloadRemoteImageFile(uri, filename, obj));
-            t.IsBackground = true;
-            t.Start();
-            return t;
-        }
+        //public bool Abort(string uri)
+        //{
 
+        //}
+        
         public void Add(string uri, string filename, object obj)
         {
             queue.Add(new Tuple<string, string, object>(uri, filename, obj));

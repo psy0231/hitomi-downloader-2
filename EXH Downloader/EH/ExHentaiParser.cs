@@ -127,18 +127,7 @@ namespace Hitomi_Copy_2.EH
                         i.SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray());
                 } catch { }
             }
-
-            //try
-            //{
-            //    article.reclass = nodes_data[0].SelectNodes(".//td")[1].SelectSingleNode(".//div//a").InnerText;
-            //    article.language = nodes_data[1].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
-            //    article.group = nodes_data[2].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
-            //    article.artist = nodes_data[3].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
-            //    article.male = nodes_data[4].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
-            //    article.female = nodes_data[5].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
-            //    article.misc = nodes_data[6].SelectNodes(".//td")[1].SelectNodes(".//div").Select(e => e.SelectSingleNode(".//a").InnerText).ToArray();
-            //} catch { }
-
+            
             if (information.ContainsKey("language:")) article.language = information["language:"];
             if (information.ContainsKey("group:")) article.group = information["group:"];
             if (information.ContainsKey("parody:")) article.parody = information["parody:"];
@@ -147,8 +136,7 @@ namespace Hitomi_Copy_2.EH
             if (information.ContainsKey("male:")) article.male = information["male:"];
             if (information.ContainsKey("female:")) article.female = information["female:"];
             if (information.ContainsKey("misc:")) article.misc = information["misc:"];
-
-
+            
             return article;
         }
     }
