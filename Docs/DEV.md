@@ -19,6 +19,12 @@ Json에도 없어 검색이 불가능하고, 유일한 접근 경로는 다른 �
 
 이렇게 얻은 정보는 `galleries/*.js`에서 썸네일 정보와 이미지 정보를 얻고, 기존의 방법으로 다운로드 한다.
 
+## HitomiQueue Abort 함수
+
+`DownloadRemoteImageFile`함수에서 `HttpWebRequest`를 Abort할 시 callback이 한 번 이상 호출될 수 있음을 확인했다.
+이 오류는 pbTarget Value에 영향을 주므로, 일단, pbTarget의 Maximum보다 높게 Value를 올릴 수 없게 수정했다.
+
 ## Ex-Hentai 다운로더
 
-이 사이트를 이용하기 위해선 기본적으로
+이 사이트를 이용하기 위해선 기본적으로 ex-hentai에 접속할 수 있는 쿠키가 필요하다.
+적절한 쿠키를 먹여주면 사이트 접속이 가능하고, HtmlAgilityPack으로 분석하기 쉬운 구조이다.
