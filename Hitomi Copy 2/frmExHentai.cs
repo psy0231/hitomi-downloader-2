@@ -22,12 +22,14 @@ namespace Hitomi_Copy_2
 
         ExHentaiArticle article;
         string[] pages;
+        static IWebProxy proxy = null;
 
         private static WebClient GetWebClient()
         {
             WebClient wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
             wc.Headers.Add(HttpRequestHeader.Cookie, "igneous=fc251d23e;ipb_member_id=1904662;ipb_pass_hash=ff8940e2cc632d601091b8836fca66f5;");
+            wc.Proxy = proxy;
             return wc;
         }
 
@@ -37,6 +39,7 @@ namespace Hitomi_Copy_2
             pages = ExHentaiParser.GetPagesUri(article_source);
             article = ExHentaiParser.GetArticleData(article_source);
             lTitle.Text = article.Title;
+            if (article.artist != null)
             lArtist.Text = string.Join(", ", article.artist);
             if (article.male != null)
             tbTags.Text += "male: " + string.Join(", ", article.male) + "\r\n";
@@ -44,6 +47,7 @@ namespace Hitomi_Copy_2
             tbTags.Text += "female: " + string.Join(", ", article.female) + "\r\n";
             if (article.misc != null)
             tbTags.Text += "misc: " + string.Join(", ", article.misc) + "\r\n";
+            ServicePointManager.DefaultConnectionLimit = 128;
             Task.Run(() => download_image(article.Thumbnail));
         }
 
@@ -80,24 +84,15 @@ namespace Hitomi_Copy_2
 
         private void HitomiQueueCallback(string uri, string filename, object obj)
         {
-            IncrementProgressBarValue();
+            IncrementProgressValue();
             DeleteSpecificItem(((int)obj).ToString());
             UpdateLabel($"{pbTarget.Value}/{pbTarget.Maximum}");
         }
-        private void IncrementProgressBarMax()
+        private void IncrementProgressValue()
         {
             if (pbTarget.InvokeRequired)
             {
-                Invoke(new Action(IncrementProgressBarMax));
-                return;
-            }
-            pbTarget.Maximum += 1;
-        }
-        private void IncrementProgressBarValue()
-        {
-            if (pbTarget.InvokeRequired)
-            {
-                Invoke(new Action(IncrementProgressBarValue));
+                Invoke(new Action(IncrementProgressValue));
                 return;
             }
             pbTarget.Value += 1;
@@ -159,6 +154,13 @@ namespace Hitomi_Copy_2
 
         private void bDownload_Click(object sender, EventArgs e)
         {
+            if (tbProxy.Text != "") proxy = download_queue.proxy = new WebProxy(tbProxy.Text);  
+            pbTarget.Maximum += article.Length;
+            Task.Run(() => download_page());
+        }
+
+        private void download_page()
+        {
             foreach (string page_uri in pages)
             {
                 WebClient wc1 = GetWebClient();
@@ -175,6 +177,7 @@ namespace Hitomi_Copy_2
                 WebClient wc = GetWebClient();
                 wc.DownloadStringCompleted += wc_image_cb;
                 wc.DownloadStringAsync(new Uri(image_uri), e.UserState);
+                System.Threading.Thread.Sleep(500);
             }
         }
 
@@ -195,19 +198,21 @@ namespace Hitomi_Copy_2
         int count = 0;
         private void ImageLinkCallback(string uri, ExHentaiArticle article)
         {
-            lock (lvStandBy)
+            if (lvStandBy.InvokeRequired)
             {
-                Directory.CreateDirectory(MakeDownloadDirectory(article));
-                ++count;
-                lvStandBy.Items.Add(new ListViewItem(new string[]
-                {
-                        count.ToString(),
-                        article.Title,
-                        uri
-                }));
-                download_queue.Add(uri, MakeDownloadDirectory(article) + uri.Split('/').Last(), count);
-                IncrementProgressBarMax();
+                Invoke(new Action(() => ImageLinkCallback(uri, article)));
+                return;
             }
+            Directory.CreateDirectory(MakeDownloadDirectory(article));
+            ++count;
+            lvStandBy.Items.Add(new ListViewItem(new string[]
+            {
+                    count.ToString(),
+                    article.Title,
+                    uri
+            }));
+            lock (download_queue)
+            download_queue.Add(uri, MakeDownloadDirectory(article) + uri.Split('/').Last(), count);
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace Hitomi_Copy_2
         int capacity = 32;
         int mtx = 0;
         List<Tuple<string, string, object>> queue = new List<Tuple<string, string, object>>();
-        IWebProxy proxy;
+        public IWebProxy proxy { get; set; }
 
         public delegate void CallBack(string uri, string filename, object obj);
         public delegate void DownloadSizeCallBack(string uri, long size);

@@ -23,6 +23,8 @@ namespace Hitomi_Copy_2.EH
         public string reclass;
         public string[] language;
         public string[] group;
+        public string[] parody;
+        public string[] character;
         public string[] artist;
         public string[] male;
         public string[] female;
