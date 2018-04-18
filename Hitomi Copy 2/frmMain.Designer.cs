@@ -69,8 +69,6 @@
             this.lvMyTagRank = new System.Windows.Forms.ListView();
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.bExH = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lMsgPathError = new System.Windows.Forms.Label();
             this.cbLanguage = new System.Windows.Forms.ComboBox();
@@ -91,7 +89,6 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,7 +100,6 @@
             this.MainTab.Controls.Add(this.tabPage1);
             this.MainTab.Controls.Add(this.tabPage2);
             this.MainTab.Controls.Add(this.tabPage3);
-            this.MainTab.Controls.Add(this.tabPage5);
             this.MainTab.Controls.Add(this.tabPage4);
             this.MainTab.Enabled = false;
             this.MainTab.Location = new System.Drawing.Point(12, 12);
@@ -513,27 +509,6 @@
             this.columnHeader9.Text = "카운트";
             this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.bExH);
-            this.tabPage5.Location = new System.Drawing.Point(4, 24);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1127, 500);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "도구";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // bExH
-            // 
-            this.bExH.Location = new System.Drawing.Point(53, 49);
-            this.bExH.Name = "bExH";
-            this.bExH.Size = new System.Drawing.Size(187, 45);
-            this.bExH.TabIndex = 0;
-            this.bExH.Text = "익헨 다운로더";
-            this.bExH.UseVisualStyleBackColor = true;
-            this.bExH.Click += new System.EventHandler(this.bExH_Click);
-            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.lMsgPathError);
@@ -738,7 +713,6 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
@@ -803,7 +777,5 @@
         private System.Windows.Forms.ComboBox cbLanguage;
         private System.Windows.Forms.Button bSaveArtist;
         private System.Windows.Forms.Label lMsgPathError;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.Button bExH;
     }
 }

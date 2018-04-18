@@ -70,8 +70,6 @@
     <Compile Include="Data\HitomiDataModel.cs" />
     <Compile Include="Data\HitomiDataQuery.cs" />
     <Compile Include="Data\HitomiDataSearch.cs" />
-    <Compile Include="EH\ExHentaiArticle.cs" />
-    <Compile Include="EH\ExHentaiParser.cs" />
     <Compile Include="frmArtistInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,12 +81,6 @@
     </Compile>
     <Compile Include="frmCharacterInfo.designer.cs">
       <DependentUpon>frmCharacterInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmExHentai.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmExHentai.Designer.cs">
-      <DependentUpon>frmExHentai.cs</DependentUpon>
     </Compile>
     <Compile Include="frmGallery.cs">
       <SubType>Form</SubType>
@@ -182,9 +174,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCharacterInfo.resx">
       <DependentUpon>frmCharacterInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmExHentai.resx">
-      <DependentUpon>frmExHentai.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGallery.resx">
       <DependentUpon>frmGallery.cs</DependentUpon>

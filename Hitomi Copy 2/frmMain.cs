@@ -793,10 +793,5 @@ namespace Hitomi_Copy_2
             else
                 lMsgPathError.Visible = true;
         }
-
-        private void bExH_Click(object sender, EventArgs e)
-        {
-            (new frmExHentai()).Show();
-        }
     }
 }
