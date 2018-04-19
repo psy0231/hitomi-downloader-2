@@ -1,6 +1,7 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
 using System;
+using System.Linq;
 
 namespace hitomi.Parser
 {
@@ -20,8 +21,8 @@ namespace hitomi.Parser
         {
             // download.js
             var number_of_frontends = 2;
-            char subdomain = Convert.ToChar(97 + (Convert.ToInt32(gallery[1]) % number_of_frontends));
-            if (gallery[1] == '1' || gallery[1] == '3')
+            char subdomain = Convert.ToChar(97 + (Convert.ToInt32(gallery.Last()) % number_of_frontends));
+            if (gallery.Last() == '1' || gallery.Last() == '3')
                 subdomain = 'a';
             return $"https://{subdomain}a.hitomi.la/galleries/{gallery}/{page_with_extension}";
         }
