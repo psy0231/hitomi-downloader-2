@@ -4,7 +4,7 @@
 
 # 다운로드 주소
 
-https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.9 여기서 새로운 버전을 다운받으세요.
+https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.9q 여기서 새로운 버전을 다운받으세요.
 
 # 오류
 
