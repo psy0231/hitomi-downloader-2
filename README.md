@@ -6,6 +6,8 @@
 
 https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.9q 여기서 새로운 버전을 다운받으세요.
 
+https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/1.0 여기서 익헨 다운로더를 받을 수 있습니다.
+
 # 오류
 
 ## .NET Framework가 설치되지 않음
