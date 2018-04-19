@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9683DB5B-77BC-4B33-9AEA-81CF597076DD}</ProjectGuid>
+    <ProjectGuid>{5FED2125-7AD4-4F8D-946E-08C56069D444}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Pixiv_Downloader</RootNamespace>
-    <AssemblyName>Pixiv Downloader</AssemblyName>
+    <RootNamespace>Twitter_Downloader</RootNamespace>
+    <AssemblyName>Twitter Downloader</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,12 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.8.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\Hitomi Copy 2\packages\HtmlAgilityPack.1.8.0\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\Hitomi Copy 2\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -57,22 +51,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pixeez\Objects\Authorize.cs" />
-    <Compile Include="Pixeez\Objects\MyFeed.cs" />
-    <Compile Include="Pixeez\Objects\Paginated.cs" />
-    <Compile Include="Pixeez\Objects\ProfileImageUrls.cs" />
-    <Compile Include="Pixeez\Objects\Rank.cs" />
-    <Compile Include="Pixeez\Objects\User.cs" />
-    <Compile Include="Pixeez\Objects\UsersFavoriteWork.cs" />
-    <Compile Include="Pixeez\Objects\UsersWork.cs" />
-    <Compile Include="Pixeez\Objects\Work.cs" />
-    <Compile Include="Pixeez\Pixeez.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pixiv\PixivParser.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -82,7 +62,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -95,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Twitter\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

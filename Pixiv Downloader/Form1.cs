@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pixiv_Downloader.Pixiv;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +26,7 @@ namespace Pixiv_Downloader
             wc.Encoding = Encoding.UTF8;
             string html =  wc.DownloadString(new Uri("https://www.pixiv.net/member.php?id=3189901"));
 
-            PX.PixivParser.GetImagesAddress(html);
+            PixivParser.GetImagesAddress(html);
         }
     }
 }

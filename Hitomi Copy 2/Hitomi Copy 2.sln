@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXH Downloader", "..\EXH Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixiv Downloader", "..\Pixiv Downloader\Pixiv Downloader.csproj", "{9683DB5B-77BC-4B33-9AEA-81CF597076DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter Downloader", "..\Twitter Downloader\Twitter Downloader.csproj", "{5FED2125-7AD4-4F8D-946E-08C56069D444}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{9683DB5B-77BC-4B33-9AEA-81CF597076DD}.Release|x64.Build.0 = Release|Any CPU
 		{9683DB5B-77BC-4B33-9AEA-81CF597076DD}.Release|x86.ActiveCfg = Release|Any CPU
 		{9683DB5B-77BC-4B33-9AEA-81CF597076DD}.Release|x86.Build.0 = Release|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Debug|x64.Build.0 = Debug|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Debug|x86.Build.0 = Debug|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Release|x64.ActiveCfg = Release|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Release|x64.Build.0 = Release|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Release|x86.ActiveCfg = Release|Any CPU
+		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

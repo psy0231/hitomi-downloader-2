@@ -14,3 +14,7 @@ Pixiv Downloader/bin/*
 Pixiv Downloader/obj/*
 Pixiv Downloader/packages/*
 
+Twitter Downloader/.vs/*
+Twitter Downloader/bin/*
+Twitter Downloader/obj/*
+Twitter Downloader/packages/*

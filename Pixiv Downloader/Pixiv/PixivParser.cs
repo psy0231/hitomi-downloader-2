@@ -2,7 +2,7 @@
 
 using HtmlAgilityPack;
 
-namespace Pixiv_Downloader.PX
+namespace Pixiv_Downloader.Pixiv
 {
     public class PixivParser
     {
