@@ -22,7 +22,7 @@ namespace hitomi.Parser
             // download.js
             var number_of_frontends = 2;
             char subdomain = Convert.ToChar(97 + (Convert.ToInt32(gallery.Last()) % number_of_frontends));
-            if (gallery.Last() == '1' || gallery.Last() == '3')
+            if (gallery.Last() == '1')
                 subdomain = 'a';
             return $"https://{subdomain}a.hitomi.la/galleries/{gallery}/{page_with_extension}";
         }
