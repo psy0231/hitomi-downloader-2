@@ -2,7 +2,7 @@
 
 ## Download
 
-Latest Version (Releze.zip)
+Latest Version (Release.zip)
 
 https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.9q2
 
