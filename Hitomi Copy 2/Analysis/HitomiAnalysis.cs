@@ -16,6 +16,8 @@ namespace Hitomi_Copy_2.Analysis
 
         public List<Tuple<string, double, string>> Rank;
 
+        public bool FilterArtists = false;
+
         public HitomiAnalysis()
         {
             Dictionary<string, List<HitomiMetadata>> artists = new Dictionary<string, List<HitomiMetadata>>();
@@ -37,7 +39,7 @@ namespace Hitomi_Copy_2.Analysis
         {
             HitomiAnalysisArtist user;
             user = new HitomiAnalysisArtist(HitomiLog.Instance.GetEnumerator());
-            
+
             ///////////////////////////////
 
             Dictionary<string, Tuple<double, HitomiAnalysisArtist>> score = new Dictionary<string, Tuple<double, HitomiAnalysisArtist>>();
@@ -53,12 +55,43 @@ namespace Hitomi_Copy_2.Analysis
                 }
             }
 
+            ///////////////////////////////
+
             var list = score.ToList();
+
+            ///////////////////////////////
+
+            if (FilterArtists)
+            {
+                Dictionary<string, int> artists_galleris_count_log = new Dictionary<string, int>();
+
+                foreach (var data in HitomiLog.Instance.GetEnumerator())
+                {
+                    if (data.Artists != null)
+                        foreach (var artist in data.Artists)
+                            if (artists_galleris_count_log.ContainsKey(artist))
+                                artists_galleris_count_log[artist] += 1;
+                            else
+                                artists_galleris_count_log.Add(artist, 1);
+                }
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (artists_galleris_count_log.ContainsKey(list[i].Key))
+                    {
+                        float mul = 1 - (float)artists_galleris_count_log[list[i].Key] / list[i].Value.Item2.MetadataCount;
+                        list[i] = new KeyValuePair<string, Tuple<double, HitomiAnalysisArtist>>(list[i].Key, new Tuple<double, HitomiAnalysisArtist>(list[i].Value.Item1 * mul, list[i].Value.Item2));
+                    }
+                }
+            }
+
+            ///////////////////////////////
+
             list.Sort((p1, p2) => p2.Value.Item1.CompareTo(p1.Value.Item1));
 
             if (Rank != null) Rank.Clear();
             else Rank = new List<Tuple<string, double, string>>();
-
+            
             foreach (var item in list)
             {
                 Rank.Add(new Tuple<string, double, string>(item.Key, item.Value.Item1, item.Value.Item2.GetDetail(user)));

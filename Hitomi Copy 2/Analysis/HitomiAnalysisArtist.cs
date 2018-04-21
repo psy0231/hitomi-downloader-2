@@ -11,6 +11,7 @@ namespace Hitomi_Copy_2.Analysis
     {
         Dictionary<string, float> rate = new Dictionary<string, float>();
         int tags_count = 0;
+        public int MetadataCount { get; set; } = 0;
         public string Aritst { get; set; }
 
         public HitomiAnalysisArtist(string artist, List<HitomiMetadata> metadatas)
@@ -23,6 +24,7 @@ namespace Hitomi_Copy_2.Analysis
                 if (metadata.Tags == null) continue;
                 if (metadata.Language != HitomiSetting.Instance.GetModel().Language) continue;
                 tags_count += metadata.Tags.Length;
+                MetadataCount += 1;
                 foreach (var tag in metadata.Tags)
                     if (tags_map.ContainsKey(tag))
                         tags_map[tag] += 1;

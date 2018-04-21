@@ -58,6 +58,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.cbFilterArtists = new System.Windows.Forms.CheckBox();
             this.bSaveArtist = new System.Windows.Forms.Button();
             this.bGallery = new System.Windows.Forms.Button();
             this.bShowSearch = new System.Windows.Forms.Button();
@@ -400,6 +401,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.cbFilterArtists);
             this.tabPage3.Controls.Add(this.bSaveArtist);
             this.tabPage3.Controls.Add(this.bGallery);
             this.tabPage3.Controls.Add(this.bShowSearch);
@@ -414,6 +416,18 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "통계";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // cbFilterArtists
+            // 
+            this.cbFilterArtists.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cbFilterArtists.Location = new System.Drawing.Point(909, 60);
+            this.cbFilterArtists.Name = "cbFilterArtists";
+            this.cbFilterArtists.Size = new System.Drawing.Size(185, 33);
+            this.cbFilterArtists.TabIndex = 19;
+            this.cbFilterArtists.Text = "로그 분석하여 작가 숨기기";
+            this.cbFilterArtists.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbFilterArtists.UseVisualStyleBackColor = true;
+            this.cbFilterArtists.CheckedChanged += new System.EventHandler(this.cbFilterArtists_CheckedChanged);
             // 
             // bSaveArtist
             // 
@@ -790,5 +804,6 @@
         private System.Windows.Forms.Button bSaveArtist;
         private System.Windows.Forms.Label lMsgPathError;
         private System.Windows.Forms.Button bAbort;
+        private System.Windows.Forms.CheckBox cbFilterArtists;
     }
 }

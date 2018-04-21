@@ -699,6 +699,11 @@ namespace Hitomi_Copy_2
                 (new frmTagInfo(this, lvMyTagRank.SelectedItems[0].SubItems[0].Text)).Show();
             }
         }
+        private void cbFilterArtists_CheckedChanged(object sender, EventArgs e)
+        {
+            HitomiAnalysis.Instance.FilterArtists = cbFilterArtists.Checked;
+            UpdateStatistics();
+        }
         #endregion
 
         private void bChooseAll_Click(object sender, EventArgs e)
