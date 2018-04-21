@@ -169,6 +169,7 @@
     <Compile Include="ScrollFixLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UpdateCheck.cs" />
     <EmbeddedResource Include="frmArtistInfo.resx">
       <DependentUpon>frmArtistInfo.cs</DependentUpon>
     </EmbeddedResource>
