@@ -419,6 +419,7 @@
             // 
             // cbFilterArtists
             // 
+            this.cbFilterArtists.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbFilterArtists.Appearance = System.Windows.Forms.Appearance.Button;
             this.cbFilterArtists.Location = new System.Drawing.Point(909, 60);
             this.cbFilterArtists.Name = "cbFilterArtists";
