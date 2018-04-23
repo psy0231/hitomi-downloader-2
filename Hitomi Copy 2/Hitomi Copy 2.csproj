@@ -170,6 +170,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UpdateCheck.cs" />
+    <Compile Include="Version.cs" />
     <EmbeddedResource Include="frmArtistInfo.resx">
       <DependentUpon>frmArtistInfo.cs</DependentUpon>
     </EmbeddedResource>

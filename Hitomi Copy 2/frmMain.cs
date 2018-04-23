@@ -55,8 +55,10 @@ namespace Hitomi_Copy_2
                 cbLanguage.Items.Add(lang);
             cbLanguage.Text = HitomiSetting.Instance.GetModel().Language;
             UpdateStatistics();
+            CheckUpdate();
         }
 
+        #region 검색
         private void bSearch_Click(object sender, System.EventArgs e)
         {
             HitomiDataQuery query = new HitomiDataQuery();
@@ -168,6 +170,7 @@ namespace Hitomi_Copy_2
                 Task.Run(() => AddMetadataToPanel(v));
             }
         }
+        #endregion
 
         #region 검색창
         int global_position = 0;
@@ -710,6 +713,7 @@ namespace Hitomi_Copy_2
         }
         #endregion
 
+        #region 기타 잡것
         private void bChooseAll_Click(object sender, EventArgs e)
         {
             foreach (PicElement pe in stayed)
@@ -816,6 +820,13 @@ namespace Hitomi_Copy_2
             else
                 lMsgPathError.Visible = true;
         }
+        #endregion
 
+        #region 버전 체킹
+        private void CheckUpdate()
+        {
+            UpdateCheck.GetLatestVersion();
+        }
+        #endregion
     }
 }
