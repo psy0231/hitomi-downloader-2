@@ -825,7 +825,7 @@ namespace Hitomi_Copy_2
         #region 버전 체킹
         private void CheckUpdate()
         {
-            UpdateCheck.GetLatestVersion();
+            //UpdateCheck.GetLatestVersion();
         }
         #endregion
     }

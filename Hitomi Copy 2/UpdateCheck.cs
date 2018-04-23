@@ -19,7 +19,7 @@ namespace Hitomi_Copy_2
             HtmlDocument document = new HtmlDocument();
             document.LoadHtml(html);
             HtmlNode nodes = document.DocumentNode.SelectNodes("//div[@class='application-main ']")[0];
-            
+
             return "";
         }
     }
