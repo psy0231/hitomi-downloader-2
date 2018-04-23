@@ -154,21 +154,25 @@ namespace Hitomi_Copy
 
         public void SetImageFromAddress(string addr, int pannelw, int pannelh)
         {
-            pb.Location = new Point(3, 3);
-            pb.Size = new Size(pannelw - 6, pannelh - 30);
-            pb.Image = image = Image.FromFile(addr);
-            pb.SizeMode = PictureBoxSizeMode.Zoom;
-            pb.Paint += Picture_Paint;
-            pb.MouseEnter += Picture_MouseEnter;
-            pb.MouseLeave += Picture_MouseLeave;
-            pb.MouseClick += Picture_MouseClick;
-            pb.MouseMove += Picture_MouseMove;
-            pb.MouseDoubleClick += Picture_MouseDoubleClick;
-            info = new InfoForm(Image);
-            info.Size = new Size(image.Width*3/4, image.Height*3/4);
-            this.Width = pannelw;
-            this.Height = pannelh;
-            this.Controls.Add(pb);
+            try
+            {
+                pb.Location = new Point(3, 3);
+                pb.Size = new Size(pannelw - 6, pannelh - 30);
+                pb.Image = image = Image.FromFile(addr);
+                pb.SizeMode = PictureBoxSizeMode.Zoom;
+                pb.Paint += Picture_Paint;
+                pb.MouseEnter += Picture_MouseEnter;
+                pb.MouseLeave += Picture_MouseLeave;
+                pb.MouseClick += Picture_MouseClick;
+                pb.MouseMove += Picture_MouseMove;
+                pb.MouseDoubleClick += Picture_MouseDoubleClick;
+                info = new InfoForm(Image);
+                info.Size = new Size(image.Width*3/4, image.Height*3/4);
+                this.Width = pannelw;
+                this.Height = pannelh;
+                this.Controls.Add(pb);
+            }
+            catch { }
         }
         
         public bool Selected

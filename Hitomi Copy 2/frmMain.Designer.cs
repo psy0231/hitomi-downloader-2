@@ -279,6 +279,7 @@
             // 
             // bAbort
             // 
+            this.bAbort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bAbort.Location = new System.Drawing.Point(900, 416);
             this.bAbort.Name = "bAbort";
             this.bAbort.Size = new System.Drawing.Size(185, 40);

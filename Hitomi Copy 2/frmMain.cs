@@ -357,10 +357,14 @@ namespace Hitomi_Copy_2
 
         private string GetThumbnailAddress(string id)
         {
-            WebClient wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            return HitomiParser.ParseGallery(wc.DownloadString(
-                new Uri($"https://hitomi.la/galleries/{id}.html"))).Thumbnail;
+            try
+            {
+                WebClient wc = new WebClient();
+                wc.Encoding = Encoding.UTF8;
+                return HitomiParser.ParseGallery(wc.DownloadString(
+                    new Uri($"https://hitomi.la/galleries/{id}.html"))).Thumbnail;
+            } catch { }
+            return "";
         }
 
         private void AddArticleToPanel(HitomiArticle article)
