@@ -4,7 +4,7 @@
 
 Latest Version (Release.zip)
 
-https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.9q2
+https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.10
 
 Ex-Hentai Downloader
 
