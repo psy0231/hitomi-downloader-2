@@ -33,15 +33,18 @@
             this.MainTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pbLoad = new System.Windows.Forms.ProgressBar();
+            this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
             this.bTidy = new System.Windows.Forms.Button();
             this.lStatusSearch = new System.Windows.Forms.Label();
             this.tbLang = new System.Windows.Forms.TextBox();
             this.bDownload = new System.Windows.Forms.Button();
             this.bCancleAll = new System.Windows.Forms.Button();
             this.bChooseAll = new System.Windows.Forms.Button();
+            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.bSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lRetry = new System.Windows.Forms.Label();
             this.bAbort = new System.Windows.Forms.Button();
             this.lDownloadStatusSize = new System.Windows.Forms.Label();
             this.lDownloadSize = new System.Windows.Forms.Label();
@@ -85,9 +88,7 @@
             this.lMemoryUsage = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.lRetry = new System.Windows.Forms.Label();
-            this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
-            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
+            this.bPathCorrection = new System.Windows.Forms.Button();
             this.MainTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -142,6 +143,21 @@
             this.pbLoad.Size = new System.Drawing.Size(346, 8);
             this.pbLoad.TabIndex = 21;
             this.pbLoad.Visible = false;
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(117, 481);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.ScrollAlwaysVisible = true;
+            this.listBox1.Size = new System.Drawing.Size(281, 109);
+            this.listBox1.TabIndex = 7;
+            this.listBox1.Visible = false;
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
             // bTidy
             // 
@@ -208,6 +224,18 @@
             this.bChooseAll.UseVisualStyleBackColor = true;
             this.bChooseAll.Click += new System.EventHandler(this.bChooseAll_Click);
             // 
+            // ImagePanel
+            // 
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePanel.AutoScroll = true;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Location = new System.Drawing.Point(6, 35);
+            this.ImagePanel.Name = "ImagePanel";
+            this.ImagePanel.Size = new System.Drawing.Size(1115, 430);
+            this.ImagePanel.TabIndex = 2;
+            // 
             // bSearch
             // 
             this.bSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -251,6 +279,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "다운로드";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lRetry
+            // 
+            this.lRetry.AutoSize = true;
+            this.lRetry.Location = new System.Drawing.Point(482, 429);
+            this.lRetry.Name = "lRetry";
+            this.lRetry.Size = new System.Drawing.Size(174, 15);
+            this.lRetry.TabIndex = 31;
+            this.lRetry.Text = "항목 다운로드를 재시작합니다.";
+            this.lRetry.Visible = false;
             // 
             // bAbort
             // 
@@ -541,6 +579,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.bPathCorrection);
             this.tabPage4.Controls.Add(this.lMsgPathError);
             this.tabPage4.Controls.Add(this.cbLanguage);
             this.tabPage4.Controls.Add(this.pbSync);
@@ -620,7 +659,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDownloadPath.Location = new System.Drawing.Point(185, 78);
             this.tbDownloadPath.Name = "tbDownloadPath";
-            this.tbDownloadPath.Size = new System.Drawing.Size(851, 23);
+            this.tbDownloadPath.Size = new System.Drawing.Size(725, 23);
             this.tbDownloadPath.TabIndex = 3;
             this.tbDownloadPath.Text = "C:\\Hitomi\\{Artists}\\[{Id}] {Title}\\";
             this.tbDownloadPath.TextChanged += new System.EventHandler(this.tbDownloadPath_TextChanged);
@@ -688,42 +727,15 @@
             this.MemoryUsageUpdateTimer.Interval = 1000;
             this.MemoryUsageUpdateTimer.Tick += new System.EventHandler(this.MemoryUsageUpdateTimer_Tick);
             // 
-            // lRetry
+            // bPathCorrection
             // 
-            this.lRetry.AutoSize = true;
-            this.lRetry.Location = new System.Drawing.Point(482, 429);
-            this.lRetry.Name = "lRetry";
-            this.lRetry.Size = new System.Drawing.Size(174, 15);
-            this.lRetry.TabIndex = 31;
-            this.lRetry.Text = "항목 다운로드를 재시작합니다.";
-            this.lRetry.Visible = false;
-            // 
-            // listBox1
-            // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(117, 481);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(281, 109);
-            this.listBox1.TabIndex = 7;
-            this.listBox1.Visible = false;
-            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
-            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
-            // 
-            // ImagePanel
-            // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ImagePanel.Location = new System.Drawing.Point(6, 35);
-            this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1115, 430);
-            this.ImagePanel.TabIndex = 2;
+            this.bPathCorrection.Location = new System.Drawing.Point(916, 78);
+            this.bPathCorrection.Name = "bPathCorrection";
+            this.bPathCorrection.Size = new System.Drawing.Size(120, 23);
+            this.bPathCorrection.TabIndex = 9;
+            this.bPathCorrection.Text = "경로 보정";
+            this.bPathCorrection.UseVisualStyleBackColor = true;
+            this.bPathCorrection.Click += new System.EventHandler(this.bPathCorrection_Click);
             // 
             // frmMain
             // 
@@ -820,5 +832,6 @@
         private System.Windows.Forms.Button bAbort;
         private System.Windows.Forms.CheckBox cbFilterArtists;
         private System.Windows.Forms.Label lRetry;
+        private System.Windows.Forms.Button bPathCorrection;
     }
 }

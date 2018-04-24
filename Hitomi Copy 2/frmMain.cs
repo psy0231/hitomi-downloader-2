@@ -759,7 +759,13 @@ namespace Hitomi_Copy_2
 
         private void bDownload_Click(object sender, EventArgs e)
         {
-            tbDownloadPath.Enabled = false;
+            if (!(tbDownloadPath.Text.Contains("{Id}") || tbDownloadPath.Text.Contains("{Title}")))
+            {
+                MessageBox.Show("다운로드를 시작할 수 없습니다. 다운로드 경로가 잘못되었습니다. {Id}, {Title} 두 개의 키워드 중 적어도 하나를 포함해야 합니다. " +
+                    "가령, \r\nC:\\Hitomi\\{Title} 이나 C:\\Hitomi\\{Artist}\\[{Id}] {Title} \r\n처럼 작성하세요.\r\n" +
+                    "이 경고는 2.10버전부터 강제로 적용되었습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (!tbDownloadPath.Text.EndsWith("\\"))
                 tbDownloadPath.Text += "\\";
             try
@@ -832,6 +838,21 @@ namespace Hitomi_Copy_2
             else
                 lMsgPathError.Visible = true;
         }
+
+        private void bPathCorrection_Click(object sender, EventArgs e)
+        {
+            if (tbDownloadPath.Text.Contains("{Id}") || tbDownloadPath.Text.Contains("{Title}"))
+            {
+                MessageBox.Show("경로를 보정할 필요가 없습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                if (!tbDownloadPath.Text.EndsWith("\\"))
+                    tbDownloadPath.Text += "\\";
+                tbDownloadPath.Text += @"{Artists}\[{Id}] {Title}\";
+                MessageBox.Show("경로가 보정되었습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
         #endregion
 
         #region 버전 체킹
@@ -840,5 +861,6 @@ namespace Hitomi_Copy_2
             //UpdateCheck.GetLatestVersion();
         }
         #endregion
+
     }
 }
