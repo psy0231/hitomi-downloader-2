@@ -65,11 +65,12 @@ namespace Hitomi_Copy_2
             HitomiDataQuery query = new HitomiDataQuery();
             List<string> positive_data = new List<string>();
             List<string> negative_data = new List<string>();
+            List<string> request_number = new List<string>();
             int start_element = 0;
             bool recent = false;
             int recent_count = 0;
             int recent_start = 0;
-
+            
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("/")) start_element = Convert.ToInt32(a.Substring(1)); });
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":") && !a.StartsWith("/")) positive_data.Add(a.Trim()); });
             tbExcludeTag.Text.Trim().Split(' ').ToList().ForEach((a) => negative_data.Add(a.Trim()));
@@ -109,6 +110,8 @@ namespace Hitomi_Copy_2
                         query.TagExclude = new List<string>() { elem.Substring("tagx:".Length) };
                     else
                         query.TagExclude.Add(elem.Substring("tagx:".Length));
+                else if (elem.StartsWith("request:"))
+                    request_number.Add(elem.Substring("request:".Length));
                 else if (elem.StartsWith("recent:"))
                 {
                     recent = true;
@@ -161,6 +164,9 @@ namespace Hitomi_Copy_2
             pbLoad.Visible = true;
             pbLoad.Maximum += query_result.Count;
             Task.Run(()=>LazyAdd(query_result));
+
+            foreach (var request in request_number)
+                RequestDownloadArticleFormId(request);
         }
 
         private void LazyAdd(List<HitomiMetadata> metadata_result)
@@ -616,6 +622,15 @@ namespace Hitomi_Copy_2
                 article.Tags = metadata.Tags;
             fake_pe.Article = article;
             fake_pe.Label = metadata.Name;
+            RemoteDownloadArticle(fake_pe);
+        }
+        public void RequestDownloadArticleFormId(string id)
+        {
+            PicElement fake_pe = new PicElement(this);
+            HitomiArticle article = new HitomiArticle();
+            article.Magic = id;
+            article.Title = "";
+            fake_pe.Article = article;
             RemoteDownloadArticle(fake_pe);
         }
 
