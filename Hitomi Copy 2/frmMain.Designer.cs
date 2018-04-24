@@ -75,6 +75,7 @@
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.bPathCorrection = new System.Windows.Forms.Button();
             this.lMsgPathError = new System.Windows.Forms.Label();
             this.cbLanguage = new System.Windows.Forms.ComboBox();
             this.pbSync = new System.Windows.Forms.ProgressBar();
@@ -88,7 +89,6 @@
             this.lMemoryUsage = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.bPathCorrection = new System.Windows.Forms.Button();
             this.MainTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -596,6 +596,16 @@
             this.tabPage4.Text = "설정";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // bPathCorrection
+            // 
+            this.bPathCorrection.Location = new System.Drawing.Point(916, 78);
+            this.bPathCorrection.Name = "bPathCorrection";
+            this.bPathCorrection.Size = new System.Drawing.Size(120, 23);
+            this.bPathCorrection.TabIndex = 9;
+            this.bPathCorrection.Text = "경로 보정";
+            this.bPathCorrection.UseVisualStyleBackColor = true;
+            this.bPathCorrection.Click += new System.EventHandler(this.bPathCorrection_Click);
+            // 
             // lMsgPathError
             // 
             this.lMsgPathError.AutoSize = true;
@@ -727,16 +737,6 @@
             this.MemoryUsageUpdateTimer.Interval = 1000;
             this.MemoryUsageUpdateTimer.Tick += new System.EventHandler(this.MemoryUsageUpdateTimer_Tick);
             // 
-            // bPathCorrection
-            // 
-            this.bPathCorrection.Location = new System.Drawing.Point(916, 78);
-            this.bPathCorrection.Name = "bPathCorrection";
-            this.bPathCorrection.Size = new System.Drawing.Size(120, 23);
-            this.bPathCorrection.TabIndex = 9;
-            this.bPathCorrection.Text = "경로 보정";
-            this.bPathCorrection.UseVisualStyleBackColor = true;
-            this.bPathCorrection.Click += new System.EventHandler(this.bPathCorrection_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -755,7 +755,7 @@
             this.MinimumSize = new System.Drawing.Size(1175, 591);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hitomi Copy 2.10";
+            this.Text = "Hitomi Copy 2.11";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.MainTab.ResumeLayout(false);
