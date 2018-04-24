@@ -17,36 +17,44 @@ namespace Hitomi_Copy_2
         List<Tuple<string,HttpWebRequest>> requests = new List<Tuple<string, HttpWebRequest>>();
         public IWebProxy proxy { get; set; }
 
+        public bool timeout_infinite = true;
+        public int timeout_ms = 10000;
+
         public delegate void CallBack(string uri, string filename, object obj);
         public delegate void DownloadSizeCallBack(string uri, long size);
         public delegate void DownloadStatusCallBack(string uri, int size);
+        public delegate void RetryCallBack(string uri);
 
         CallBack callback;
         DownloadSizeCallBack download_callback;
         DownloadStatusCallBack status_callback;
+        RetryCallBack retry_callback;
 
         object int_lock = new object();
         object notify_lock = new object();
 
-        public HitomiQueue(CallBack notify, DownloadSizeCallBack notify_size, DownloadStatusCallBack notify_status)
+        public HitomiQueue(CallBack notify, DownloadSizeCallBack notify_size, DownloadStatusCallBack notify_status, RetryCallBack retry)
         {
             capacity = HitomiSetting.Instance.GetModel().Thread;
             ServicePointManager.DefaultConnectionLimit = 128;
             callback = notify;
             download_callback = notify_size;
             status_callback = notify_status;
+            retry_callback = retry;
             proxy = null;
         }
 
         public void DownloadRemoteImageFile(string uri, string fileName, object obj)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.Timeout = Timeout.Infinite;
+            if (timeout_infinite) request.Timeout = Timeout.Infinite;
+            else request.Timeout = 10000;
             request.KeepAlive = true;
             request.Proxy = proxy;
 
             lock (requests) requests.Add(new Tuple<string, HttpWebRequest>(uri,request));
 
+        RETRY:
             try
             {
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -70,7 +78,12 @@ namespace Hitomi_Copy_2
                         } while (bytesRead != 0);
                     }
                 }
-            } catch {  }
+            }
+            catch (Exception e)
+            {
+                lock (retry_callback) retry_callback(uri);
+                goto RETRY;
+            }
 
             lock (callback) callback(uri, fileName, obj);
 

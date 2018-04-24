@@ -433,9 +433,21 @@ namespace Hitomi_Copy_2
         private void InitDownloader()
         {
             download_queue = new HitomiQueue(HitomiQueueCallback, 
-                HitomiQueueDownloadSizeCallback, HitomiQueueDownloadStatusCallback);
+                HitomiQueueDownloadSizeCallback, HitomiQueueDownloadStatusCallback, HitomiRetryCallback);
+            download_queue.timeout_infinite = HitomiSetting.Instance.GetModel().WaitInfinite;
+            download_queue.timeout_ms = HitomiSetting.Instance.GetModel().WaitTimeout;
         }
 
+        private void HitomiRetryCallback(string uri)
+        {
+            if (lRetry.InvokeRequired)
+            {
+                Invoke(new Action<string>(HitomiRetryCallback), new object[] { uri });
+                return;
+            }
+            lRetry.Text = uri + "항목 다운로드를 재시작합니다.";
+            lRetry.Visible = true;
+        }
         private void HitomiQueueCallback(string uri, string filename, object obj)
         {
             IncrementProgressBarValue();

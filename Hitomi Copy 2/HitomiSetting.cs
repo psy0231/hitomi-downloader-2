@@ -21,6 +21,10 @@ namespace Hitomi_Copy_2
         public int Thread;
         [JsonProperty]
         public string Language;
+        [JsonProperty]
+        public bool WaitInfinite;
+        [JsonProperty]
+        public int WaitTimeout;
     }
 
     public class HitomiSetting
@@ -43,6 +47,8 @@ namespace Hitomi_Copy_2
                 model.MaximumThumbnailShow = 1000;
                 model.Thread = 32;
                 model.Language = "korean";
+                model.WaitInfinite = false;
+                model.WaitTimeout = 10000;
                 Save();
             }
             else
@@ -52,6 +58,8 @@ namespace Hitomi_Copy_2
                 if (model.Thread < 5) model.Thread = 32;
                 if (!HitomiData.Instance.GetLanguageList().Contains(model.Language))
                     model.Language = "korean";
+                if (model.WaitTimeout == 0 && model.WaitInfinite == false)
+                    { model.WaitInfinite = true; model.WaitTimeout = 10000; }
                 Save();
             }
         }
