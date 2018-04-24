@@ -18,7 +18,9 @@ namespace Hitomi_Copy.Data
                     result.Add(v);
                     continue;
                 }
-                if (v.Language != HitomiSetting.Instance.GetModel().Language) continue;
+                string lang = v.Language;
+                if (v.Language == null) lang = "N/A";
+                if (lang != HitomiSetting.Instance.GetModel().Language) continue;
                 if (query.TagExclude != null)
                 {
                     if (v.Tags != null)

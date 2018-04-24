@@ -53,6 +53,7 @@ namespace Hitomi_Copy_2
             MainTab.Enabled = true;
             foreach (var lang in HitomiData.Instance.GetLanguageList())
                 cbLanguage.Items.Add(lang);
+            cbLanguage.Items.Add("N/A");
             cbLanguage.Text = HitomiSetting.Instance.GetModel().Language;
             UpdateStatistics();
             CheckUpdate();
