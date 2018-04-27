@@ -4,6 +4,11 @@ Hitomi Copy 2/bin/*
 Hitomi Copy 2/obj/*
 Hitomi Copy 2/packages/*
 
+Hitomi Copy 3/.vs/*
+Hitomi Copy 3/bin/*
+Hitomi Copy 3/obj/*
+Hitomi Copy 3/packages/*
+
 EXH Downloader/.vs/*
 EXH Downloader/bin/*
 EXH Downloader/obj/*

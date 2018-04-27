@@ -377,10 +377,12 @@
             this.lvStandBy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvStandBy.BackColor = System.Drawing.SystemColors.Window;
             this.lvStandBy.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.lvStandBy.ForeColor = System.Drawing.SystemColors.WindowText;
             this.lvStandBy.FullRowSelect = true;
             this.lvStandBy.GridLines = true;
             this.lvStandBy.Location = new System.Drawing.Point(48, 70);

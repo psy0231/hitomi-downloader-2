@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixiv Downloader", "..\Pixi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter Downloader", "..\Twitter Downloader\Twitter Downloader.csproj", "{5FED2125-7AD4-4F8D-946E-08C56069D444}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hitomi Copy 3", "..\Hitomi Copy 3\Hitomi Copy 3.csproj", "{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Release|x64.Build.0 = Release|Any CPU
 		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Release|x86.ActiveCfg = Release|Any CPU
 		{5FED2125-7AD4-4F8D-946E-08C56069D444}.Release|x86.Build.0 = Release|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Debug|x64.Build.0 = Debug|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Debug|x86.Build.0 = Debug|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Release|x64.ActiveCfg = Release|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Release|x64.Build.0 = Release|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Release|x86.ActiveCfg = Release|Any CPU
+		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
