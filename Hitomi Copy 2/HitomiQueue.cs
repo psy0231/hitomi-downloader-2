@@ -48,7 +48,7 @@ namespace Hitomi_Copy_2
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             if (timeout_infinite) request.Timeout = Timeout.Infinite;
-            else request.Timeout = 10000;
+            else request.Timeout = timeout_ms;
             request.KeepAlive = true;
             request.Proxy = proxy;
 
