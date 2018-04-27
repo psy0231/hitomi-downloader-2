@@ -1,5 +1,7 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using System;
+
 namespace Hitomi_Copy_2.EH
 {
     public class ExHentaiArticle
@@ -29,5 +31,7 @@ namespace Hitomi_Copy_2.EH
         public string[] male;
         public string[] female;
         public string[] misc;
+
+        public Tuple<string, string, string>[] comment;
     }
 }

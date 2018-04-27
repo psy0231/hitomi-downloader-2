@@ -355,7 +355,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(813, 12);
+            this.label8.Location = new System.Drawing.Point(811, 12);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(433, 15);
             this.label8.TabIndex = 4;
@@ -366,7 +366,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1264, 436);
+            this.ClientSize = new System.Drawing.Size(1262, 434);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
@@ -374,7 +374,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmExHentai";
-            this.Text = "ExHentai Downloader 1.0";
+            this.Text = "ExHentai Downloader 1.1";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

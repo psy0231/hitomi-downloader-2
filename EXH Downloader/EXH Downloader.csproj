@@ -59,11 +59,38 @@
     <Compile Include="frmExHentai.Designer.cs">
       <DependentUpon>frmExHentai.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmExHentaiBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExHentaiBoard.Designer.cs">
+      <DependentUpon>frmExHentaiBoard.cs</DependentUpon>
+    </Compile>
     <Compile Include="HitomiQueue.cs" />
+    <Compile Include="InfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoForm.Designer.cs">
+      <DependentUpon>InfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PicElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PicElement.designer.cs">
+      <DependentUpon>PicElement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScrollFixLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="frmExHentai.resx">
       <DependentUpon>frmExHentai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExHentaiBoard.resx">
+      <DependentUpon>frmExHentaiBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoForm.resx">
+      <DependentUpon>InfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
