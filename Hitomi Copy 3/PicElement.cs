@@ -1,6 +1,7 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
 using hitomi.Parser;
+using Hitomi_Copy_3;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -28,6 +29,7 @@ namespace Hitomi_Copy
             this.Paint += PicElement_Paint;
             this.BackColor = Color.WhiteSmoke;
             this.parent = parent;
+            this.DoubleBuffered = true;
 
             MouseEnter += Thumbnail_MouseEnter;
             MouseLeave += Thumbnail_MouseLeave;
@@ -75,7 +77,7 @@ namespace Hitomi_Copy
                     g.FillRectangle(basicBrushes, 0, 0, Width, Height);
                 }
             }
-
+            
             if (callfrom_paint == false)
             {
                 callfrom_panel = true;
@@ -89,17 +91,22 @@ namespace Hitomi_Copy
 
         private void Picture_Paint(object sender, PaintEventArgs e)
         {
+            ViewBuffer buffer = new ViewBuffer();
+            buffer.CreateGraphics(pb.Width, pb.Height);
+
+            Graphics g = buffer.g;
+
             if (downloaded == false)
             {
                 if (selected)
                 {
                     SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(170, 203, 226, 233));
-                    e.Graphics.FillRectangle(basicBrushes, 0, 0, Width, Height);
+                    g.FillRectangle(basicBrushes, 0, 0, Width, Height);
                 }
                 else if (mouse_enter)
                 {
                     SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(100, 203, 226, 233));
-                    e.Graphics.FillRectangle(basicBrushes, 0, 0, Width, Height);
+                    g.FillRectangle(basicBrushes, 0, 0, Width, Height);
                 }
             }
             else
@@ -107,12 +114,12 @@ namespace Hitomi_Copy
                 if (downloading)
                 {
                     SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(200, 200, 200, 0));
-                    e.Graphics.FillRectangle(basicBrushes, 0, 0, Width, Height);
+                    g.FillRectangle(basicBrushes, 0, 0, Width, Height);
                 }
                 else
                 {
                     SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(200, 200, 130, 130));
-                    e.Graphics.FillRectangle(basicBrushes, 0, 0, Width, Height);
+                    g.FillRectangle(basicBrushes, 0, 0, Width, Height);
                 }
             }
 
@@ -122,6 +129,8 @@ namespace Hitomi_Copy
                 Invalidate();
             }
             callfrom_panel = false;
+
+            buffer.Draw(e.Graphics);
         }
         private void Invalidall()
         { callfrom_panel = callfrom_paint = false; Invalidate(); }

@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            this.MainTab = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.lStatusSearch = new MetroFramework.Controls.MetroLabel();
             this.pbLoad = new MetroFramework.Controls.MetroProgressBar();
@@ -42,23 +43,30 @@
             this.tbSearch = new MetroFramework.Controls.MetroTextBox();
             this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-            this.metroProgressBar2 = new MetroFramework.Controls.MetroProgressBar();
+            this.bAbort = new MetroFramework.Controls.MetroButton();
+            this.lRetry = new MetroFramework.Controls.MetroLabel();
+            this.lDownloadStatusSize = new MetroFramework.Controls.MetroLabel();
+            this.lDownloadSize = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.lStatus = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+            this.pbTarget = new MetroFramework.Controls.MetroProgressBar();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.lvStandBy = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
-            this.pbSync = new MetroFramework.Controls.MetroProgressBar();
             this.bSync = new MetroFramework.Controls.MetroButton();
             this.lThread = new MetroFramework.Controls.MetroLabel();
+            this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
             this.vThread = new MetroFramework.Controls.MetroTrackBar();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.cbLanguage = new MetroFramework.Controls.MetroComboBox();
             this.tbInfo = new MetroFramework.Controls.MetroTextBox();
-            this.metroTextBox2 = new MetroFramework.Controls.MetroTextBox();
+            this.tbExcludeTag = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.tbDownloadPath = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
@@ -66,29 +74,28 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.metroTabControl1.SuspendLayout();
+            this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
-            this.metroTabPage4.SuspendLayout();
+            this.metroTabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // metroTabControl1
+            // MainTab
             // 
-            this.metroTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.MainTab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroTabControl1.Controls.Add(this.metroTabPage1);
-            this.metroTabControl1.Controls.Add(this.metroTabPage2);
-            this.metroTabControl1.Controls.Add(this.metroTabPage3);
-            this.metroTabControl1.Controls.Add(this.metroTabPage4);
-            this.metroTabControl1.Location = new System.Drawing.Point(13, 59);
-            this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 3;
-            this.metroTabControl1.Size = new System.Drawing.Size(1130, 550);
-            this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Pink;
-            this.metroTabControl1.TabIndex = 1;
-            this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTabControl1.UseSelectable = true;
+            this.MainTab.Controls.Add(this.metroTabPage1);
+            this.MainTab.Controls.Add(this.metroTabPage2);
+            this.MainTab.Controls.Add(this.metroTabPage3);
+            this.MainTab.Location = new System.Drawing.Point(13, 59);
+            this.MainTab.Name = "MainTab";
+            this.MainTab.SelectedIndex = 2;
+            this.MainTab.Size = new System.Drawing.Size(1130, 550);
+            this.MainTab.Style = MetroFramework.MetroColorStyle.Pink;
+            this.MainTab.TabIndex = 1;
+            this.MainTab.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.MainTab.UseSelectable = true;
             // 
             // metroTabPage1
             // 
@@ -119,7 +126,7 @@
             // 
             this.lStatusSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lStatusSearch.AutoSize = true;
-            this.lStatusSearch.Location = new System.Drawing.Point(99, 484);
+            this.lStatusSearch.Location = new System.Drawing.Point(99, 483);
             this.lStatusSearch.Name = "lStatusSearch";
             this.lStatusSearch.Size = new System.Drawing.Size(112, 19);
             this.lStatusSearch.TabIndex = 27;
@@ -129,10 +136,10 @@
             // 
             this.pbLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbLoad.Location = new System.Drawing.Point(357, 489);
+            this.pbLoad.Location = new System.Drawing.Point(276, 489);
             this.pbLoad.Maximum = 0;
             this.pbLoad.Name = "pbLoad";
-            this.pbLoad.Size = new System.Drawing.Size(291, 8);
+            this.pbLoad.Size = new System.Drawing.Size(372, 8);
             this.pbLoad.Style = MetroFramework.MetroColorStyle.Pink;
             this.pbLoad.TabIndex = 23;
             // 
@@ -221,6 +228,7 @@
             this.bDownload.Text = "다운로드";
             this.bDownload.Theme = MetroFramework.MetroThemeStyle.Light;
             this.bDownload.UseSelectable = true;
+            this.bDownload.Click += new System.EventHandler(this.bDownload_Click);
             // 
             // bSearch
             // 
@@ -288,7 +296,15 @@
             // 
             // metroTabPage2
             // 
-            this.metroTabPage2.Controls.Add(this.metroProgressBar2);
+            this.metroTabPage2.Controls.Add(this.bAbort);
+            this.metroTabPage2.Controls.Add(this.lRetry);
+            this.metroTabPage2.Controls.Add(this.lDownloadStatusSize);
+            this.metroTabPage2.Controls.Add(this.lDownloadSize);
+            this.metroTabPage2.Controls.Add(this.metroLabel10);
+            this.metroTabPage2.Controls.Add(this.metroLabel9);
+            this.metroTabPage2.Controls.Add(this.lStatus);
+            this.metroTabPage2.Controls.Add(this.metroLabel8);
+            this.metroTabPage2.Controls.Add(this.pbTarget);
             this.metroTabPage2.Controls.Add(this.metroLabel2);
             this.metroTabPage2.Controls.Add(this.lvStandBy);
             this.metroTabPage2.HorizontalScrollbarBarColor = true;
@@ -304,14 +320,107 @@
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.VerticalScrollbarSize = 10;
             // 
-            // metroProgressBar2
+            // bAbort
             // 
-            this.metroProgressBar2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.bAbort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bAbort.Location = new System.Drawing.Point(920, 430);
+            this.bAbort.Name = "bAbort";
+            this.bAbort.Size = new System.Drawing.Size(162, 38);
+            this.bAbort.Style = MetroFramework.MetroColorStyle.Pink;
+            this.bAbort.TabIndex = 30;
+            this.bAbort.Text = "선택파일 다운로드 취소";
+            this.bAbort.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.bAbort.UseSelectable = true;
+            this.bAbort.Click += new System.EventHandler(this.bAbort_Click);
+            // 
+            // lRetry
+            // 
+            this.lRetry.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lRetry.AutoSize = true;
+            this.lRetry.Location = new System.Drawing.Point(451, 430);
+            this.lRetry.Name = "lRetry";
+            this.lRetry.Size = new System.Drawing.Size(202, 19);
+            this.lRetry.TabIndex = 29;
+            this.lRetry.Text = "항목 다운로드를 재시작합니다.";
+            this.lRetry.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.lRetry.Visible = false;
+            // 
+            // lDownloadStatusSize
+            // 
+            this.lDownloadStatusSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lDownloadStatusSize.AutoSize = true;
+            this.lDownloadStatusSize.Location = new System.Drawing.Point(156, 449);
+            this.lDownloadStatusSize.Name = "lDownloadStatusSize";
+            this.lDownloadStatusSize.Size = new System.Drawing.Size(40, 19);
+            this.lDownloadStatusSize.TabIndex = 28;
+            this.lDownloadStatusSize.Text = "0 MB";
+            this.lDownloadStatusSize.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // lDownloadSize
+            // 
+            this.lDownloadSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lDownloadSize.AutoSize = true;
+            this.lDownloadSize.Location = new System.Drawing.Point(156, 430);
+            this.lDownloadSize.Name = "lDownloadSize";
+            this.lDownloadSize.Size = new System.Drawing.Size(40, 19);
+            this.lDownloadSize.TabIndex = 27;
+            this.lDownloadSize.Text = "0 MB";
+            this.lDownloadSize.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // metroLabel10
+            // 
+            this.metroLabel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(42, 449);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(108, 19);
+            this.metroLabel10.TabIndex = 26;
+            this.metroLabel10.Text = "다운받은 크기 : ";
+            this.metroLabel10.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // metroLabel9
+            // 
+            this.metroLabel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.Location = new System.Drawing.Point(24, 430);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(126, 19);
+            this.metroLabel9.TabIndex = 25;
+            this.metroLabel9.Text = "총 다운로드 크기 : ";
+            this.metroLabel9.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // lStatus
+            // 
+            this.lStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lStatus.AutoSize = true;
+            this.lStatus.Location = new System.Drawing.Point(156, 399);
+            this.lStatus.Name = "lStatus";
+            this.lStatus.Size = new System.Drawing.Size(36, 19);
+            this.lStatus.TabIndex = 24;
+            this.lStatus.Text = "0 / 0";
+            this.lStatus.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // metroLabel8
+            // 
+            this.metroLabel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroLabel8.AutoSize = true;
+            this.metroLabel8.Location = new System.Drawing.Point(42, 399);
+            this.metroLabel8.Name = "metroLabel8";
+            this.metroLabel8.Size = new System.Drawing.Size(108, 19);
+            this.metroLabel8.TabIndex = 23;
+            this.metroLabel8.Text = "다운로드 상태 : ";
+            this.metroLabel8.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // pbTarget
+            // 
+            this.pbTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroProgressBar2.Location = new System.Drawing.Point(42, 364);
-            this.metroProgressBar2.Name = "metroProgressBar2";
-            this.metroProgressBar2.Size = new System.Drawing.Size(1040, 32);
-            this.metroProgressBar2.TabIndex = 22;
+            this.pbTarget.Location = new System.Drawing.Point(42, 364);
+            this.pbTarget.Maximum = 0;
+            this.pbTarget.Name = "pbTarget";
+            this.pbTarget.Size = new System.Drawing.Size(1040, 32);
+            this.pbTarget.Style = MetroFramework.MetroColorStyle.Pink;
+            this.pbTarget.TabIndex = 22;
             // 
             // metroLabel2
             // 
@@ -359,57 +468,30 @@
             // 
             // metroTabPage3
             // 
+            this.metroTabPage3.Controls.Add(this.bSync);
+            this.metroTabPage3.Controls.Add(this.lThread);
+            this.metroTabPage3.Controls.Add(this.pbSync);
+            this.metroTabPage3.Controls.Add(this.vThread);
+            this.metroTabPage3.Controls.Add(this.metroLabel7);
+            this.metroTabPage3.Controls.Add(this.metroLabel6);
+            this.metroTabPage3.Controls.Add(this.cbLanguage);
+            this.metroTabPage3.Controls.Add(this.tbInfo);
+            this.metroTabPage3.Controls.Add(this.tbExcludeTag);
+            this.metroTabPage3.Controls.Add(this.metroLabel5);
+            this.metroTabPage3.Controls.Add(this.tbDownloadPath);
+            this.metroTabPage3.Controls.Add(this.metroLabel4);
             this.metroTabPage3.HorizontalScrollbarBarColor = true;
             this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.HorizontalScrollbarSize = 2;
             this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage3.Name = "metroTabPage3";
             this.metroTabPage3.Size = new System.Drawing.Size(1122, 508);
-            this.metroTabPage3.TabIndex = 2;
-            this.metroTabPage3.Text = "통계";
+            this.metroTabPage3.TabIndex = 3;
+            this.metroTabPage3.Text = "설정";
             this.metroTabPage3.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabPage3.VerticalScrollbarBarColor = true;
             this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.VerticalScrollbarSize = 10;
-            // 
-            // metroTabPage4
-            // 
-            this.metroTabPage4.Controls.Add(this.pbSync);
-            this.metroTabPage4.Controls.Add(this.bSync);
-            this.metroTabPage4.Controls.Add(this.lThread);
-            this.metroTabPage4.Controls.Add(this.vThread);
-            this.metroTabPage4.Controls.Add(this.metroLabel7);
-            this.metroTabPage4.Controls.Add(this.metroLabel6);
-            this.metroTabPage4.Controls.Add(this.cbLanguage);
-            this.metroTabPage4.Controls.Add(this.tbInfo);
-            this.metroTabPage4.Controls.Add(this.metroTextBox2);
-            this.metroTabPage4.Controls.Add(this.metroLabel5);
-            this.metroTabPage4.Controls.Add(this.tbDownloadPath);
-            this.metroTabPage4.Controls.Add(this.metroLabel4);
-            this.metroTabPage4.HorizontalScrollbarBarColor = true;
-            this.metroTabPage4.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage4.HorizontalScrollbarSize = 2;
-            this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage4.Name = "metroTabPage4";
-            this.metroTabPage4.Size = new System.Drawing.Size(1122, 508);
-            this.metroTabPage4.TabIndex = 3;
-            this.metroTabPage4.Text = "설정";
-            this.metroTabPage4.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTabPage4.VerticalScrollbarBarColor = true;
-            this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage4.VerticalScrollbarSize = 10;
-            // 
-            // pbSync
-            // 
-            this.pbSync.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbSync.Location = new System.Drawing.Point(181, 435);
-            this.pbSync.Maximum = 0;
-            this.pbSync.Name = "pbSync";
-            this.pbSync.ProgressBarStyle = System.Windows.Forms.ProgressBarStyle.Blocks;
-            this.pbSync.Size = new System.Drawing.Size(761, 8);
-            this.pbSync.Style = MetroFramework.MetroColorStyle.Pink;
-            this.pbSync.TabIndex = 24;
             // 
             // bSync
             // 
@@ -435,19 +517,28 @@
             this.lThread.TabIndex = 15;
             this.lThread.Text = "32";
             // 
+            // pbSync
+            // 
+            this.pbSync.Location = new System.Drawing.Point(198, 427);
+            this.pbSync.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pbSync.Name = "pbSync";
+            this.pbSync.Size = new System.Drawing.Size(709, 12);
+            this.pbSync.TabIndex = 5;
+            this.pbSync.Visible = false;
+            // 
             // vThread
             // 
             this.vThread.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.vThread.BackColor = System.Drawing.Color.Transparent;
             this.vThread.Location = new System.Drawing.Point(267, 134);
-            this.vThread.Maximum = 36;
+            this.vThread.Maximum = 64;
             this.vThread.Minimum = 1;
             this.vThread.Name = "vThread";
             this.vThread.Size = new System.Drawing.Size(725, 23);
             this.vThread.Style = MetroFramework.MetroColorStyle.Pink;
             this.vThread.TabIndex = 14;
-            this.vThread.Text = "metroTrackBar1";
+            this.vThread.Text = "Thread";
             this.vThread.Value = 32;
             this.vThread.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vThread_Scroll);
             // 
@@ -521,41 +612,41 @@
             this.tbInfo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tbInfo.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroTextBox2
+            // tbExcludeTag
             // 
-            this.metroTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbExcludeTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
-            this.metroTextBox2.CustomButton.Image = null;
-            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(732, 1);
-            this.metroTextBox2.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.metroTextBox2.CustomButton.Name = "";
-            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(21, 17);
-            this.metroTextBox2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox2.CustomButton.TabIndex = 1;
-            this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox2.CustomButton.UseSelectable = true;
-            this.metroTextBox2.CustomButton.Visible = false;
-            this.metroTextBox2.Lines = new string[] {
+            this.tbExcludeTag.CustomButton.Image = null;
+            this.tbExcludeTag.CustomButton.Location = new System.Drawing.Point(732, 1);
+            this.tbExcludeTag.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbExcludeTag.CustomButton.Name = "";
+            this.tbExcludeTag.CustomButton.Size = new System.Drawing.Size(21, 17);
+            this.tbExcludeTag.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tbExcludeTag.CustomButton.TabIndex = 1;
+            this.tbExcludeTag.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tbExcludeTag.CustomButton.UseSelectable = true;
+            this.tbExcludeTag.CustomButton.Visible = false;
+            this.tbExcludeTag.Lines = new string[] {
         "female:mother, male:anal"};
-            this.metroTextBox2.Location = new System.Drawing.Point(238, 110);
-            this.metroTextBox2.MaxLength = 32767;
-            this.metroTextBox2.Name = "metroTextBox2";
-            this.metroTextBox2.PasswordChar = '\0';
-            this.metroTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox2.SelectedText = "";
-            this.metroTextBox2.SelectionLength = 0;
-            this.metroTextBox2.SelectionStart = 0;
-            this.metroTextBox2.ShortcutsEnabled = true;
-            this.metroTextBox2.Size = new System.Drawing.Size(754, 23);
-            this.metroTextBox2.Style = MetroFramework.MetroColorStyle.Pink;
-            this.metroTextBox2.TabIndex = 8;
-            this.metroTextBox2.Text = "female:mother, male:anal";
-            this.metroTextBox2.UseSelectable = true;
-            this.metroTextBox2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox2.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tbExcludeTag.Location = new System.Drawing.Point(238, 110);
+            this.tbExcludeTag.MaxLength = 32767;
+            this.tbExcludeTag.Name = "tbExcludeTag";
+            this.tbExcludeTag.PasswordChar = '\0';
+            this.tbExcludeTag.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tbExcludeTag.SelectedText = "";
+            this.tbExcludeTag.SelectionLength = 0;
+            this.tbExcludeTag.SelectionStart = 0;
+            this.tbExcludeTag.ShortcutsEnabled = true;
+            this.tbExcludeTag.Size = new System.Drawing.Size(754, 23);
+            this.tbExcludeTag.Style = MetroFramework.MetroColorStyle.Pink;
+            this.tbExcludeTag.TabIndex = 8;
+            this.tbExcludeTag.Text = "female:mother, male:anal";
+            this.tbExcludeTag.UseSelectable = true;
+            this.tbExcludeTag.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tbExcludeTag.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // metroLabel5
             // 
@@ -627,8 +718,9 @@
             // 
             // metroLabel3
             // 
+            this.metroLabel3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(328, 37);
+            this.metroLabel3.Location = new System.Drawing.Point(464, 19);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(111, 19);
             this.metroLabel3.TabIndex = 3;
@@ -636,8 +728,9 @@
             // 
             // lMemoryUsage
             // 
+            this.lMemoryUsage.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lMemoryUsage.AutoSize = true;
-            this.lMemoryUsage.Location = new System.Drawing.Point(445, 37);
+            this.lMemoryUsage.Location = new System.Drawing.Point(581, 19);
             this.lMemoryUsage.Name = "lMemoryUsage";
             this.lMemoryUsage.Size = new System.Drawing.Size(35, 19);
             this.lMemoryUsage.TabIndex = 4;
@@ -657,26 +750,27 @@
             this.Controls.Add(this.lMemoryUsage);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.metroLabel1);
-            this.Controls.Add(this.metroTabControl1);
+            this.Controls.Add(this.MainTab);
             this.DoubleBuffered = false;
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1156, 549);
+            this.MinimumSize = new System.Drawing.Size(1156, 616);
             this.Name = "frmMain";
             this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 25);
             this.Style = MetroFramework.MetroColorStyle.Pink;
             this.Text = "Hitom Copy 3.0";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.metroTabControl1.ResumeLayout(false);
+            this.MainTab.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage1.PerformLayout();
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage2.PerformLayout();
-            this.metroTabPage4.ResumeLayout(false);
-            this.metroTabPage4.PerformLayout();
+            this.metroTabPage3.ResumeLayout(false);
+            this.metroTabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -684,11 +778,10 @@
 
         #endregion
 
-        private MetroFramework.Controls.MetroTabControl metroTabControl1;
+        private MetroFramework.Controls.MetroTabControl MainTab;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
         private MetroFramework.Controls.MetroTabPage metroTabPage2;
         private MetroFramework.Controls.MetroTabPage metroTabPage3;
-        private MetroFramework.Controls.MetroTabPage metroTabPage4;
         private Hitomi_Copy_2.ScrollFixLayoutPanel ImagePanel;
         private MetroFramework.Controls.MetroButton bSearch;
         private MetroFramework.Controls.MetroTextBox tbSearch;
@@ -704,7 +797,7 @@
         private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroButton metroButton3;
-        private MetroFramework.Controls.MetroProgressBar metroProgressBar2;
+        private MetroFramework.Controls.MetroProgressBar pbTarget;
         private MetroFramework.Controls.MetroLabel lStatusSearch;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel lMemoryUsage;
@@ -712,7 +805,7 @@
         private MetroFramework.Controls.MetroTextBox tbDownloadPath;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel5;
-        private MetroFramework.Controls.MetroTextBox metroTextBox2;
+        private MetroFramework.Controls.MetroTextBox tbExcludeTag;
         private MetroFramework.Controls.MetroTextBox tbInfo;
         private MetroFramework.Controls.MetroComboBox cbLanguage;
         private MetroFramework.Controls.MetroLabel metroLabel6;
@@ -720,7 +813,15 @@
         private MetroFramework.Controls.MetroLabel metroLabel7;
         private MetroFramework.Controls.MetroLabel lThread;
         private MetroFramework.Controls.MetroButton bSync;
-        private MetroFramework.Controls.MetroProgressBar pbSync;
+        private MetroFramework.Controls.MetroLabel metroLabel8;
+        private MetroFramework.Controls.MetroLabel lStatus;
+        private MetroFramework.Controls.MetroLabel metroLabel9;
+        private MetroFramework.Controls.MetroLabel metroLabel10;
+        private MetroFramework.Controls.MetroLabel lDownloadSize;
+        private MetroFramework.Controls.MetroLabel lDownloadStatusSize;
+        private MetroFramework.Controls.MetroLabel lRetry;
+        private MetroFramework.Controls.MetroButton bAbort;
+        private MarqueeColorBar pbSync;
     }
 }
 

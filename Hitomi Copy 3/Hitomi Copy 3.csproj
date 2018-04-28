@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>TETO.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.8.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\Hitomi Copy 2\packages\HtmlAgilityPack.1.8.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -80,13 +83,24 @@
     <Compile Include="frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
     </Compile>
+    <Compile Include="GalleryInfo\HitomiGalleryInfo.cs" />
     <Compile Include="HitomiCommon.cs" />
+    <Compile Include="HitomiCore.cs" />
+    <Compile Include="HitomiJson.cs" />
+    <Compile Include="HitomiLog.cs" />
+    <Compile Include="HitomiQueue.cs" />
     <Compile Include="HitomiSetting.cs" />
     <Compile Include="InfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InfoForm.Designer.cs">
       <DependentUpon>InfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MarqueeColorBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MarqueeColorBar.Designer.cs">
+      <DependentUpon>MarqueeColorBar.cs</DependentUpon>
     </Compile>
     <Compile Include="PicElement.cs">
       <SubType>UserControl</SubType>
@@ -99,6 +113,7 @@
     <Compile Include="ScrollFixLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ViewBuffer.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -134,6 +149,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\i14434391215.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Newtonsoft.Json.dll" />
+    <None Include="bin\Debug\MetroFramework.Fonts.dll" />
+    <None Include="bin\Debug\MetroFramework.dll" />
+    <None Include="bin\Debug\MetroFramework.Design.dll" />
+    <None Include="bin\Debug\HtmlAgilityPack.dll" />
+    <Content Include="TETO.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

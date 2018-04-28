@@ -25,6 +25,8 @@ namespace Hitomi_Copy_2
         public bool WaitInfinite;
         [JsonProperty]
         public int WaitTimeout;
+        [JsonProperty]
+        public bool SaveJson;
     }
 
     public class HitomiSetting
@@ -45,10 +47,11 @@ namespace Hitomi_Copy_2
                 model.ExclusiveTag = new string[] { "female:mother", "male:anal", "male:guro", "female:guro", "male:snuff", "female:snuff" };
                 model.Zip = false;
                 model.MaximumThumbnailShow = 1000;
-                model.Thread = 32;
+                model.Thread = Environment.ProcessorCount * 3;
                 model.Language = "korean";
                 model.WaitInfinite = false;
                 model.WaitTimeout = 10000;
+                model.SaveJson = true;
                 Save();
             }
             else

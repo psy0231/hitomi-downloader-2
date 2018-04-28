@@ -1,4 +1,6 @@
-﻿using hitomi.Parser;
+﻿/* Copyright (C) 2018. Hitomi Parser Developers */
+
+using hitomi.Parser;
 using Hitomi_Copy;
 using Hitomi_Copy.Data;
 using Hitomi_Copy_2;
@@ -6,13 +8,12 @@ using MetroFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,13 +38,23 @@ namespace Hitomi_Copy_3
 
         public void OnTab()
         {
+            InitDownloader();
+
             tbSearch.Enabled = true;
             bSearch.Enabled = true;
+            bSync.Enabled = true;
+
+            tbDownloadPath.Text = HitomiSetting.Instance.GetModel().Path;
+            tbExcludeTag.Text = string.Join(", ", HitomiSetting.Instance.GetModel().ExclusiveTag ?? Enumerable.Empty<string>());
 
             foreach (var lang in HitomiData.Instance.GetLanguageList())
                 cbLanguage.Items.Add(lang);
             cbLanguage.Items.Add("N/A");
             cbLanguage.Text = HitomiSetting.Instance.GetModel().Language;
+            tbLang.Text = cbLanguage.Text;
+
+            vThread.Value = HitomiSetting.Instance.GetModel().Thread;
+            lThread.Text = vThread.Value.ToString();
         }
 
         #region 검색
@@ -150,6 +161,9 @@ namespace Hitomi_Copy_3
             pbLoad.Visible = true;
             pbLoad.Maximum += query_result.Count;
             Task.Run(() => LazyAdd(query_result));
+
+            foreach (var request in request_number)
+                RequestDownloadArticleFormId(request);
         }
 
         private void LazyAdd(List<HitomiMetadata> metadata_result)
@@ -184,8 +198,10 @@ namespace Hitomi_Copy_3
         {
             try
             {
-                WebClient wc = new WebClient();
-                wc.Encoding = Encoding.UTF8;
+                WebClient wc = new WebClient
+                {
+                    Encoding = Encoding.UTF8
+                };
                 return HitomiParser.ParseGallery(wc.DownloadString(
                     new Uri($"https://hitomi.la/galleries/{id}.html"))).Thumbnail;
             }
@@ -247,6 +263,257 @@ namespace Hitomi_Copy_3
                 ImagePanel.Controls.SetChildIndex(controls[i], i);
         }
         #endregion
+        
+        #region 다운로드 관련
+        HitomiQueue download_queue;
+        List<string> download_check = new List<string>();
+        List<PicElement> downloaded_check = new List<PicElement>();
+
+        private void InitDownloader()
+        {
+            download_queue = new HitomiQueue(HitomiQueueCallback,
+                HitomiQueueDownloadSizeCallback, HitomiQueueDownloadStatusCallback, HitomiRetryCallback)
+            {
+                timeout_infinite = HitomiSetting.Instance.GetModel().WaitInfinite,
+                timeout_ms = HitomiSetting.Instance.GetModel().WaitTimeout
+            };
+        }
+
+        private void HitomiRetryCallback(string uri)
+        {
+            if (lRetry.InvokeRequired)
+            {
+                Invoke(new Action<string>(HitomiRetryCallback), new object[] { uri });
+                return;
+            }
+            lRetry.Text = uri + "항목 다운로드를 재시작합니다.";
+            lRetry.Visible = true;
+        }
+        private void HitomiQueueCallback(string uri, string filename, object obj)
+        {
+            IncrementProgressBarValue();
+            DeleteSpecificItem(((int)obj).ToString());
+            UpdateLabel($"{pbTarget.Value}/{pbTarget.Maximum}");
+        }
+        private void IncrementProgressBarMax()
+        {
+            if (pbTarget.InvokeRequired)
+            {
+                Invoke(new Action(IncrementProgressBarMax));
+                return;
+            }
+            pbTarget.Maximum += 1;
+        }
+        private void IncrementProgressBarValue()
+        {
+            if (pbTarget.InvokeRequired)
+            {
+                Invoke(new Action(IncrementProgressBarValue));
+                return;
+            }
+            if (pbTarget.Value != pbTarget.Maximum) pbTarget.Value += 1;
+        }
+        private void DeleteSpecificItem(string i)
+        {
+            if (lvStandBy.InvokeRequired)
+            {
+                Invoke(new Action<string>(DeleteSpecificItem), new object[] { i });
+                return;
+            }
+            string title = "";
+            for (int j = 0; j < lvStandBy.Items.Count; j++)
+            {
+                if (lvStandBy.Items[j].SubItems[0].Text == i)
+                {
+                    title = lvStandBy.Items[j].SubItems[1].Text;
+                    lvStandBy.Items.RemoveAt(j);
+                    break;
+                }
+            }
+            lock (download_check)
+                lock (downloaded_check)
+                {
+                    download_check.Remove(title);
+                    List<string> copy = download_check.ToList();
+                    List<PicElement> check = downloaded_check.ToList();
+                    if (!copy.Contains(title))
+                        foreach (var elem in check)
+                            if (elem.Label == title)
+                                elem.Downloading = false;
+                }
+        }
+        private void UpdateLabel(string v)
+        {
+            if (lStatus.InvokeRequired)
+            {
+                Invoke(new Action<string>(UpdateLabel), new object[] { v });
+                return;
+            }
+            lStatus.Text = v;
+        }
+
+        long download_size = 0;
+        long status_size = 0;
+        object size_lock = new object();
+        private void HitomiQueueDownloadSizeCallback(string uri, long size)
+        {
+            lock (size_lock) download_size += size;
+            Task.Run(() => UpdateDownloadStatus());
+        }
+        private void HitomiQueueDownloadStatusCallback(string uri, int size)
+        {
+            lock (size_lock) status_size += size;
+            Task.Run(() => UpdateDownloadStatus());
+        }
+        private void UpdateDownloadStatus()
+        {
+            if (lDownloadSize.InvokeRequired || lDownloadStatusSize.InvokeRequired)
+            {
+                Invoke(new Action(UpdateDownloadStatus));
+                return;
+            }
+            lock (size_lock)
+            {
+                lDownloadSize.Text = ((double)download_size / 1000 / 1000).ToString("#,#.#") + " MB";
+                lDownloadStatusSize.Text = ((double)status_size / 1000 / 1000).ToString("#,#.#") + " MB";
+            }
+        }
+
+        private void AddArticle(PicElement pe)
+        {
+            HitomiLog.Instance.AddArticle(pe.Article);
+            HitomiLog.Instance.Save();
+            downloaded_check.Add(pe);
+            HitomiCore.DownloadAndSetImageLink(pe, ImageLinkCallback);
+        }
+        int count = 0;
+        private void ImageLinkCallback(PicElement pe)
+        {
+            lock (lvStandBy)
+            {
+                Directory.CreateDirectory(MakeDownloadDirectory(pe.Article));
+                for (int i = 0; i < pe.Article.ImagesLink.Count; i++)
+                {
+                    ++count;
+                    lvStandBy.Items.Add(new ListViewItem(new string[]
+                    {
+                            count.ToString(),
+                            pe.Label,
+                            HitomiDef.GetDownloadImageAddress(pe.Article.Magic, pe.Article.ImagesLink[i])
+                    }));
+                    download_queue.Add(HitomiDef.GetDownloadImageAddress(pe.Article.Magic, pe.Article.ImagesLink[i]), Path.Combine(
+                        MakeDownloadDirectory(pe.Article), pe.Article.ImagesLink[i]),
+                        count);
+                    download_check.Add(pe.Label);
+                    IncrementProgressBarMax();
+                }
+                if (HitomiSetting.Instance.GetModel().SaveJson == true)
+                {
+                    HitomiJson hitomi_json = new HitomiJson(MakeDownloadDirectory(pe.Article));
+                    hitomi_json.SetModelFromArticle(pe.Article);
+                    hitomi_json.Save();
+                }
+            }
+        }
+
+        private string MakeDownloadDirectory(HitomiArticle article)
+        {
+            string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            string title = article.Title ?? "";
+            string artists = "";
+            string type = article.Types ?? "";
+            if (article.Artists != null) artists = article.Artists[0];
+            if (title != null)
+                foreach (char c in invalid) title = title.Replace(c.ToString(), "");
+            if (artists != null)
+                foreach (char c in invalid) artists = artists.Replace(c.ToString(), "");
+            return Regex.Replace(Regex.Replace(Regex.Replace(Regex.Replace(tbDownloadPath.Text, "{Title}", title), "{Artists}", artists), "{Id}", article.Magic), "{Type}", type);
+        }
+
+        public void RemoteDownloadArticle(PicElement pe)
+        {
+            AddArticle(pe);
+            MainTab.SelectedIndex = 1;
+        }
+        public void RemoteDownloadArticleFromId(string id)
+        {
+            MainTab.SelectedIndex = 1;
+            HitomiMetadata metadata = new HitomiMetadata();
+            foreach (var v in HitomiData.Instance.metadata_collection)
+            {
+                if (v.ID.ToString() == id)
+                { metadata = v; break; }
+            }
+            if (metadata.ID == 0)
+            {
+                MessageBox.Show($"{id} 항목이 데이터베이스에 없습니다. 데이터베이스를 동기화해주세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            PicElement fake_pe = new PicElement(this);
+            HitomiArticle article = new HitomiArticle
+            {
+                Magic = metadata.ID.ToString(),
+                Title = metadata.Name
+            };
+            if (metadata.Artists != null)
+                article.Artists = metadata.Artists;
+            if (metadata.Tags != null)
+                article.Tags = metadata.Tags;
+            fake_pe.Article = article;
+            fake_pe.Label = metadata.Name;
+            RemoteDownloadArticle(fake_pe);
+        }
+        public void RequestDownloadArticleFormId(string id)
+        {
+            PicElement fake_pe = new PicElement(this);
+            HitomiArticle article = new HitomiArticle
+            {
+                Magic = id,
+                Title = ""
+            };
+            fake_pe.Article = article;
+            RemoteDownloadArticle(fake_pe);
+        }
+
+        private void bAbort_Click(object sender, EventArgs e)
+        {
+            List<string> uris = new List<string>();
+            if (lvStandBy.SelectedItems.Count > 0)
+                foreach (ListViewItem lvi in lvStandBy.SelectedItems)
+                {
+                    uris.Add(lvi.SubItems[2].Text);
+                    lvi.Remove();
+                }
+
+            foreach (var uri in uris)
+                download_queue.Abort(uri);
+        }
+        #endregion
+
+        private void bDownload_Click(object sender, EventArgs e)
+        {
+            cbLanguage.Enabled = false;
+            tbDownloadPath.Enabled = false;
+            tbExcludeTag.Enabled = false;
+            vThread.Enabled = false;
+
+            if (!tbDownloadPath.Text.EndsWith("\\"))
+                tbDownloadPath.Text += "\\";
+            try
+            {
+                foreach (PicElement pe in stayed)
+                {
+                    if (pe.Selected)
+                    {
+                        if (pe.Downloaded) continue;
+                        pe.Downloaded = pe.Downloading = true;
+                        pe.Invalidate();
+                        AddArticle(pe);
+                    }
+                }
+            }
+            catch { }
+        }
 
         private void MemoryUsageUpdateTimer_Tick(object sender, EventArgs e)
         {
@@ -264,7 +531,6 @@ namespace Hitomi_Copy_3
                     if (!tbDownloadPath.Text.EndsWith("\\"))
                         tbDownloadPath.Text += "\\";
                     tbDownloadPath.Text += @"{Artists}\[{Id}] {Title}\";
-                    MetroMessageBox.Show(this, "경로가 보정되었습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else tbDownloadPath.Focus();
         }
@@ -272,6 +538,9 @@ namespace Hitomi_Copy_3
         private void vThread_Scroll(object sender, ScrollEventArgs e)
         {
             lThread.Text = vThread.Value.ToString();
+            download_queue.capacity = vThread.Value;
+            HitomiSetting.Instance.GetModel().Thread = vThread.Value;
+            HitomiSetting.Instance.Save();
         }
 
         private async void bSync_ClickAsync(object sender, EventArgs e)
@@ -283,5 +552,6 @@ namespace Hitomi_Copy_3
             bSync.Enabled = true;
             MetroMessageBox.Show(this, "데이터가 동기화되었습니다!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        
     }
 }
