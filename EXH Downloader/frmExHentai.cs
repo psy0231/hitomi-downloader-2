@@ -49,6 +49,8 @@ namespace Hitomi_Copy_2
             tbTags.Text += "misc: " + string.Join(", ", article.misc) + "\r\n";
             ServicePointManager.DefaultConnectionLimit = 128;
             Task.Run(() => download_image(article.Thumbnail));
+
+            bDownload_Click();
         }
 
         private void download_image(string uri)
@@ -152,7 +154,7 @@ namespace Hitomi_Copy_2
             }
         }
 
-        private void bDownload_Click(object sender, EventArgs e)
+        private void bDownload_Click()
         {
             if (tbProxy.Text != "") proxy = download_queue.proxy = new WebProxy(tbProxy.Text);  
             pbTarget.Maximum += article.Length;
@@ -192,7 +194,7 @@ namespace Hitomi_Copy_2
             string title = article.Title ?? "";
             if (title != null)
                 foreach (char c in invalid) title = title.Replace(c.ToString(), "");
-            return $"C:\\Hitomi\\{title}\\";
+            return $"{AppDomain.CurrentDomain.BaseDirectory}\\{title}\\";
         }
 
         int count = 0;
