@@ -18,7 +18,6 @@ namespace Hitomi_Copy_2
         {
             if (HitomiData.Instance.CheckTagdataExist())
             {
-                pbLoad.MarqueeAnimationSpeed = 10;
                 await Task.Run(() => HitomiData.Instance.LoadTagdataJson());
             }
             else
@@ -29,7 +28,6 @@ namespace Hitomi_Copy_2
 
             if (HitomiData.Instance.CheckMetadataExist())
             {
-                pbLoad.MarqueeAnimationSpeed = 10;
                 await Task.Run(() => HitomiData.Instance.LoadMetadataJson());
             }
             else

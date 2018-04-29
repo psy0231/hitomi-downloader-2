@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSplash));
             this.lStatus = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pbLoad = new System.Windows.Forms.ProgressBar();
+            this.MarqueeColorBar = new Hitomi_Copy_3.MarqueeColorBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -56,13 +56,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Hitomi Copy Machine V3.0";
             // 
-            // pbLoad
+            // MarqueeColorBar
             // 
-            this.pbLoad.Location = new System.Drawing.Point(170, 116);
-            this.pbLoad.Name = "pbLoad";
-            this.pbLoad.Size = new System.Drawing.Size(391, 16);
-            this.pbLoad.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.pbLoad.TabIndex = 3;
+            this.MarqueeColorBar.BackColor = System.Drawing.SystemColors.Control;
+            this.MarqueeColorBar.Location = new System.Drawing.Point(186, 109);
+            this.MarqueeColorBar.Name = "MarqueeColorBar";
+            this.MarqueeColorBar.Size = new System.Drawing.Size(382, 18);
+            this.MarqueeColorBar.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -80,10 +80,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(580, 163);
-            this.Controls.Add(this.pbLoad);
+            this.Controls.Add(this.MarqueeColorBar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lStatus);
             this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -104,7 +105,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lStatus;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ProgressBar pbLoad;
+        private Hitomi_Copy_3.MarqueeColorBar MarqueeColorBar;
     }
 }
 
