@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.MainTab = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.lStatusSearch = new MetroFramework.Controls.MetroLabel();
             this.pbLoad = new MetroFramework.Controls.MetroProgressBar();
             this.bCancleAll = new MetroFramework.Controls.MetroButton();
@@ -57,6 +58,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+            this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.이미지로저장SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
@@ -75,8 +77,6 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
-            this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
@@ -85,7 +85,6 @@
             this.contextMenuStrip1.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
             this.SuspendLayout();
-            this.Controls.Add(pbSync);
             // 
             // MainTab
             // 
@@ -129,6 +128,18 @@
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // ImagePanel
+            // 
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePanel.AutoScroll = true;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Location = new System.Drawing.Point(3, 37);
+            this.ImagePanel.Name = "ImagePanel";
+            this.ImagePanel.Size = new System.Drawing.Size(1122, 441);
+            this.ImagePanel.TabIndex = 3;
             // 
             // lStatusSearch
             // 
@@ -481,6 +492,16 @@
             this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage4.VerticalScrollbarSize = 10;
             // 
+            // RecommendPannel
+            // 
+            this.RecommendPannel.AutoScroll = true;
+            this.RecommendPannel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.RecommendPannel.ContextMenuStrip = this.contextMenuStrip1;
+            this.RecommendPannel.Location = new System.Drawing.Point(3, 3);
+            this.RecommendPannel.Name = "RecommendPannel";
+            this.RecommendPannel.Size = new System.Drawing.Size(1122, 502);
+            this.RecommendPannel.TabIndex = 4;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -498,6 +519,7 @@
             // 
             // metroTabPage3
             // 
+            this.metroTabPage3.Controls.Add(this.pbSync);
             this.metroTabPage3.Controls.Add(this.bSync);
             this.metroTabPage3.Controls.Add(this.lThread);
             this.metroTabPage3.Controls.Add(this.vThread);
@@ -607,7 +629,7 @@
             this.tbInfo.CustomButton.Location = new System.Drawing.Point(636, 1);
             this.tbInfo.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbInfo.CustomButton.Name = "";
-            this.tbInfo.CustomButton.Size = new System.Drawing.Size(231, 231);
+            this.tbInfo.CustomButton.Size = new System.Drawing.Size(231, 185);
             this.tbInfo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.tbInfo.CustomButton.TabIndex = 1;
             this.tbInfo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -762,31 +784,9 @@
             this.MemoryUsageUpdateTimer.Interval = 1000;
             this.MemoryUsageUpdateTimer.Tick += new System.EventHandler(this.MemoryUsageUpdateTimer_Tick);
             // 
-            // ImagePanel
-            // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ImagePanel.Location = new System.Drawing.Point(3, 37);
-            this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1122, 441);
-            this.ImagePanel.TabIndex = 3;
-            // 
-            // RecommendPannel
-            // 
-            this.RecommendPannel.AutoScroll = true;
-            this.RecommendPannel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.RecommendPannel.ContextMenuStrip = this.contextMenuStrip1;
-            this.RecommendPannel.Location = new System.Drawing.Point(3, 3);
-            this.RecommendPannel.Name = "RecommendPannel";
-            this.RecommendPannel.Size = new System.Drawing.Size(1122, 502);
-            this.RecommendPannel.TabIndex = 4;
-            // 
             // pbSync
             // 
-            this.pbSync.Location = new System.Drawing.Point(198, 427);
+            this.pbSync.Location = new System.Drawing.Point(193, 439);
             this.pbSync.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pbSync.Name = "pbSync";
             this.pbSync.Size = new System.Drawing.Size(709, 12);
