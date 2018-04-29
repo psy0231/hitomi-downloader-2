@@ -27,6 +27,8 @@ namespace Hitomi_Copy_2
         public int WaitTimeout;
         [JsonProperty]
         public bool SaveJson;
+        [JsonProperty]
+        public int RecommendPerScroll;
     }
 
     public class HitomiSetting
@@ -52,6 +54,7 @@ namespace Hitomi_Copy_2
                 model.WaitInfinite = false;
                 model.WaitTimeout = 10000;
                 model.SaveJson = true;
+                model.RecommendPerScroll = 10;
                 Save();
             }
             else
@@ -63,6 +66,8 @@ namespace Hitomi_Copy_2
                     model.Language = "korean";
                 if (model.WaitTimeout == 0 && model.WaitInfinite == false)
                     { model.WaitInfinite = true; model.WaitTimeout = 10000; }
+                if (model.RecommendPerScroll < 10)
+                    model.RecommendPerScroll = 10;
                 Save();
             }
         }

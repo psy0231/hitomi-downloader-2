@@ -602,7 +602,14 @@ namespace Hitomi_Copy_3
                 foreach (char c in invalid) title = title.Replace(c.ToString(), "");
             if (artists != null)
                 foreach (char c in invalid) artists = artists.Replace(c.ToString(), "");
-            return Regex.Replace(Regex.Replace(Regex.Replace(Regex.Replace(tbDownloadPath.Text, "{Title}", title), "{Artists}", artists), "{Id}", article.Magic), "{Type}", type);
+
+            string path = tbDownloadPath.Text;
+            path = Regex.Replace(path, "{Title}", title, RegexOptions.IgnoreCase);
+            path = Regex.Replace(path, "{Artists}", artists, RegexOptions.IgnoreCase);
+            path = Regex.Replace(path, "{Id}", article.Magic, RegexOptions.IgnoreCase);
+            path = Regex.Replace(path, "{Type}", type, RegexOptions.IgnoreCase);
+            path = Regex.Replace(path, "{Date}", DateTime.Now.ToString(), RegexOptions.IgnoreCase);
+            return path;
         }
 
         public void RemoteDownloadArticle(PicElement pe)
@@ -675,7 +682,7 @@ namespace Hitomi_Copy_3
         }
         private void MoreLoadRecommend()
         {
-            for (int i = 0; i < 10 && latest_load_count < HitomiAnalysis.Instance.Rank.Count; i++, latest_load_count++)
+            for (int i = 0; i < HitomiSetting.Instance.GetModel().RecommendPerScroll && latest_load_count < HitomiAnalysis.Instance.Rank.Count; i++, latest_load_count++)
             {
                 AddToPannel(new RecommendControl(latest_load_count));
             }
@@ -690,8 +697,16 @@ namespace Hitomi_Copy_3
             }
             RecommendPannel.Controls.Add(control);
         }
+        private void tgFilterArtists_CheckedChanged(object sender, EventArgs e)
+        {
+            HitomiAnalysis.Instance.FilterArtists = tgFilterArtists.Checked;
+            RecommendPannel.Controls.Clear();
+            latest_load_count = 0;
+            UpdateStatistics();
+        }
         #endregion
 
+        #region 기타 잡것
         private void bDownload_Click(object sender, EventArgs e)
         {
             cbLanguage.Enabled = false;
@@ -725,7 +740,7 @@ namespace Hitomi_Copy_3
 
         private void tbDownloadPath_Leave(object sender, EventArgs e)
         {
-            if (!(tbDownloadPath.Text.Contains("{Id}") || tbDownloadPath.Text.Contains("{Title}")))
+            if (!(tbDownloadPath.Text.ToLower().Contains("{id}") || tbDownloadPath.Text.ToLower().Contains("{title}")))
                 if (MetroMessageBox.Show(this,
                     "다운로드 경로가 잘못 지정되었습니다. " +
                     "{Id} 또는 {Title}를 반드시 하나이상 포함하세요. 경로를 자동으로 보정하시겠습니까?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
@@ -801,6 +816,7 @@ namespace Hitomi_Copy_3
             foreach (PicElement pe in stayed)
                 pe.Selected = false;
         }
+        #endregion
 
     }
 }

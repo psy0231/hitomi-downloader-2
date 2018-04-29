@@ -57,6 +57,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+            this.tgFilterArtists = new MetroFramework.Controls.MetroToggle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.이미지로저장SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
@@ -79,6 +80,7 @@
             this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -471,6 +473,8 @@
             // metroTabPage4
             // 
             this.metroTabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.metroTabPage4.Controls.Add(this.label1);
+            this.metroTabPage4.Controls.Add(this.tgFilterArtists);
             this.metroTabPage4.Controls.Add(this.RecommendPannel);
             this.metroTabPage4.HorizontalScrollbarBarColor = true;
             this.metroTabPage4.HorizontalScrollbarHighlightOnWheel = false;
@@ -483,6 +487,17 @@
             this.metroTabPage4.VerticalScrollbarBarColor = true;
             this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage4.VerticalScrollbarSize = 10;
+            // 
+            // tgFilterArtists
+            // 
+            this.tgFilterArtists.AutoSize = true;
+            this.tgFilterArtists.Location = new System.Drawing.Point(1048, 9);
+            this.tgFilterArtists.Name = "tgFilterArtists";
+            this.tgFilterArtists.Size = new System.Drawing.Size(80, 19);
+            this.tgFilterArtists.TabIndex = 5;
+            this.tgFilterArtists.Text = "Off";
+            this.tgFilterArtists.UseSelectable = true;
+            this.tgFilterArtists.CheckedChanged += new System.EventHandler(this.tgFilterArtists_CheckedChanged);
             // 
             // contextMenuStrip1
             // 
@@ -799,9 +814,9 @@
             this.RecommendPannel.AutoScroll = true;
             this.RecommendPannel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.RecommendPannel.ContextMenuStrip = this.contextMenuStrip1;
-            this.RecommendPannel.Location = new System.Drawing.Point(3, 3);
+            this.RecommendPannel.Location = new System.Drawing.Point(3, 34);
             this.RecommendPannel.Name = "RecommendPannel";
-            this.RecommendPannel.Size = new System.Drawing.Size(1122, 502);
+            this.RecommendPannel.Size = new System.Drawing.Size(1122, 471);
             this.RecommendPannel.TabIndex = 4;
             // 
             // pbSync
@@ -812,6 +827,16 @@
             this.pbSync.Size = new System.Drawing.Size(709, 12);
             this.pbSync.TabIndex = 5;
             this.pbSync.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(923, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(151, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "로그 분석하여 작가 숨기기";
             // 
             // frmMain
             // 
@@ -844,6 +869,7 @@
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage2.PerformLayout();
             this.metroTabPage4.ResumeLayout(false);
+            this.metroTabPage4.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
             this.metroTabPage3.PerformLayout();
@@ -903,6 +929,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 이미지로저장SToolStripMenuItem;
         private Hitomi_Copy_2.AutoCompleteListBox listBox1;
+        private MetroFramework.Controls.MetroToggle tgFilterArtists;
+        private System.Windows.Forms.Label label1;
     }
 }
 
