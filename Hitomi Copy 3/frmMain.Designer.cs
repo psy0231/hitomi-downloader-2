@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.MainTab = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.lStatusSearch = new MetroFramework.Controls.MetroLabel();
             this.pbLoad = new MetroFramework.Controls.MetroProgressBar();
             this.metroButton3 = new MetroFramework.Controls.MetroButton();
@@ -73,7 +74,8 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.이미지로저장SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
             this.MainTab.SuspendLayout();
@@ -81,6 +83,7 @@
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage4.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTab
@@ -103,6 +106,7 @@
             // 
             // metroTabPage1
             // 
+            this.metroTabPage1.Controls.Add(this.ImagePanel);
             this.metroTabPage1.Controls.Add(this.lStatusSearch);
             this.metroTabPage1.Controls.Add(this.pbLoad);
             this.metroTabPage1.Controls.Add(this.metroButton3);
@@ -112,7 +116,6 @@
             this.metroTabPage1.Controls.Add(this.bDownload);
             this.metroTabPage1.Controls.Add(this.bSearch);
             this.metroTabPage1.Controls.Add(this.tbSearch);
-            this.metroTabPage1.Controls.Add(this.ImagePanel);
             this.metroTabPage1.HorizontalScrollbarBarColor = true;
             this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.HorizontalScrollbarSize = 2;
@@ -125,6 +128,18 @@
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // ImagePanel
+            // 
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePanel.AutoScroll = true;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Location = new System.Drawing.Point(3, 37);
+            this.ImagePanel.Name = "ImagePanel";
+            this.ImagePanel.Size = new System.Drawing.Size(1122, 439);
+            this.ImagePanel.TabIndex = 3;
             // 
             // lStatusSearch
             // 
@@ -460,10 +475,11 @@
             // 
             // metroTabPage4
             // 
+            this.metroTabPage4.BackColor = System.Drawing.SystemColors.Control;
             this.metroTabPage4.Controls.Add(this.RecommendPannel);
             this.metroTabPage4.HorizontalScrollbarBarColor = true;
             this.metroTabPage4.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage4.HorizontalScrollbarSize = 4;
+            this.metroTabPage4.HorizontalScrollbarSize = 2;
             this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage4.Name = "metroTabPage4";
             this.metroTabPage4.Size = new System.Drawing.Size(1128, 508);
@@ -486,7 +502,6 @@
             this.metroTabPage3.Controls.Add(this.metroLabel5);
             this.metroTabPage3.Controls.Add(this.tbDownloadPath);
             this.metroTabPage3.Controls.Add(this.metroLabel4);
-            this.metroTabPage3.Controls.Add(this.pbSync);
             this.metroTabPage3.HorizontalScrollbarBarColor = true;
             this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.HorizontalScrollbarSize = 2;
@@ -740,25 +755,26 @@
             this.MemoryUsageUpdateTimer.Interval = 1000;
             this.MemoryUsageUpdateTimer.Tick += new System.EventHandler(this.MemoryUsageUpdateTimer_Tick);
             // 
-            // ImagePanel
+            // contextMenuStrip1
             // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ImagePanel.Location = new System.Drawing.Point(3, 37);
-            this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1122, 439);
-            this.ImagePanel.TabIndex = 3;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.이미지로저장SToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(166, 26);
+            // 
+            // 이미지로저장SToolStripMenuItem
+            // 
+            this.이미지로저장SToolStripMenuItem.Enabled = false;
+            this.이미지로저장SToolStripMenuItem.Name = "이미지로저장SToolStripMenuItem";
+            this.이미지로저장SToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.이미지로저장SToolStripMenuItem.Text = "이미지로 저장(&S)";
+            this.이미지로저장SToolStripMenuItem.Click += new System.EventHandler(this.이미지로저장SToolStripMenuItem_Click);
             // 
             // RecommendPannel
             // 
-            this.RecommendPannel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.RecommendPannel.AutoScroll = true;
             this.RecommendPannel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.RecommendPannel.ContextMenuStrip = this.contextMenuStrip1;
             this.RecommendPannel.Location = new System.Drawing.Point(3, 3);
             this.RecommendPannel.Name = "RecommendPannel";
             this.RecommendPannel.Size = new System.Drawing.Size(1122, 502);
@@ -777,6 +793,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackLocation = MetroFramework.Forms.BackLocation.TopLeft;
+            this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.None;
             this.ClientSize = new System.Drawing.Size(1156, 616);
             this.Controls.Add(this.lMemoryUsage);
             this.Controls.Add(this.metroLabel3);
@@ -791,6 +809,7 @@
             this.MinimumSize = new System.Drawing.Size(1156, 616);
             this.Name = "frmMain";
             this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 25);
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.Flat;
             this.Style = MetroFramework.MetroColorStyle.Pink;
             this.Text = "Hitom Copy 3.0";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
@@ -803,6 +822,7 @@
             this.metroTabPage4.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
             this.metroTabPage3.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -856,6 +876,8 @@
         private MarqueeColorBar pbSync;
         private MetroFramework.Controls.MetroTabPage metroTabPage4;
         private Hitomi_Copy_2.ScrollFixLayoutPanel RecommendPannel;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 이미지로저장SToolStripMenuItem;
     }
 }
 

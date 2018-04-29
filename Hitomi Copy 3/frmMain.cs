@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -27,8 +29,10 @@ namespace Hitomi_Copy_3
         {
             InitializeComponent();
             (new frmSplash()).Show();
-        }
 
+            RecommendPannel.MouseWheel += RecommendPannel_MouseWheel;
+        }
+        
         private void frmMain_Load(object sender, EventArgs e)
         {
             tbInfo.Text += "Robust Hitomi Copy Machine Version 3\r\n";
@@ -494,14 +498,20 @@ namespace Hitomi_Copy_3
         #endregion
 
         #region 통계
+        int latest_load_count = 0;
+
         private void UpdateStatistics()
         {
             HitomiAnalysis.Instance.Update();
-
-            for (int i = 0; i < 100 && i < HitomiAnalysis.Instance.Rank.Count; i++)
+            MoreLoadRecommend();
+        }
+        private void MoreLoadRecommend()
+        {
+            for (int i = 0; i < 10 && latest_load_count < HitomiAnalysis.Instance.Rank.Count; i++, latest_load_count++)
             {
-                AddToPannel(new RecommendControl(i));
+                AddToPannel(new RecommendControl(latest_load_count));
             }
+
         }
         private void AddToPannel(RecommendControl control)
         {
@@ -577,15 +587,21 @@ namespace Hitomi_Copy_3
             MetroMessageBox.Show(this, "데이터가 동기화되었습니다!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        //private void RecommendPannel_Scroll(object sender, ScrollEventArgs e)
-        //{
-        //    if (e.NewValue == RecommendPannel.VerticalScroll.Maximum)
-        //        MessageBox.Show("bottom!");
-        //}
+        private void RecommendPannel_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (RecommendPannel.VerticalScroll.Value == RecommendPannel.VerticalScroll.Maximum - RecommendPannel.VerticalScroll.LargeChange + 1)
+                MoreLoadRecommend();
+        }
 
-        //private void RecommendPannel_MouseEnter(object sender, EventArgs e)
-        //{
-        //    RecommendPannel.Focus();
-        //}
+        private void 이미지로저장SToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int width = RecommendPannel.Size.Width;
+            int height = RecommendPannel.Size.Height;
+            Bitmap bm = new Bitmap(width, height);
+
+            RecommendPannel.DrawToBitmap(bm, new Rectangle(0, 0, width, height));
+            bm.Save($"{AppDomain.CurrentDomain.BaseDirectory}\\Image.bmp", ImageFormat.Bmp);
+        }
+        
     }
 }
