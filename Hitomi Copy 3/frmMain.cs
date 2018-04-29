@@ -602,6 +602,36 @@ namespace Hitomi_Copy_3
             RecommendPannel.DrawToBitmap(bm, new Rectangle(0, 0, width, height));
             bm.Save($"{AppDomain.CurrentDomain.BaseDirectory}\\Image.bmp", ImageFormat.Bmp);
         }
-        
+
+        private void bTidy_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < ImagePanel.Controls.Count; i++)
+            {
+                if (!(ImagePanel.Controls[i] as PicElement).Downloading)
+                {
+                    for (int j = 0; j < stayed.Count; j++)
+                    {
+                        if (stayed[j] == (ImagePanel.Controls[i] as PicElement))
+                        {
+                            stayed.RemoveAt(j);
+                            break;
+                        }
+                    }
+                    ImagePanel.Controls.RemoveAt(i--);
+                }
+            }
+        }
+
+        private void bChooseAll_Click(object sender, EventArgs e)
+        {
+            foreach (PicElement pe in stayed)
+                pe.Selected = true;
+        }
+
+        private void bCancleAll_Click(object sender, EventArgs e)
+        {
+            foreach (PicElement pe in stayed)
+                pe.Selected = false;
+        }
     }
 }

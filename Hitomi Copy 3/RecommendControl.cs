@@ -101,7 +101,7 @@ namespace Hitomi_Copy_3
 
         private void bDetail_Click(object sender, System.EventArgs e)
         {
-
+            (new frmArtistInfo(tbArtist.Text)).Show();
         }
     }
 

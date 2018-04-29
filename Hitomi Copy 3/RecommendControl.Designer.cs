@@ -34,12 +34,12 @@
             this.pb3 = new System.Windows.Forms.PictureBox();
             this.pb4 = new System.Windows.Forms.PictureBox();
             this.pb5 = new System.Windows.Forms.PictureBox();
-            this.bDetail = new MetroFramework.Controls.MetroButton();
-            this.bDelete = new MetroFramework.Controls.MetroButton();
             this.tbArtist = new MetroFramework.Controls.MetroTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lScore = new System.Windows.Forms.Label();
             this.tbScoreDetail = new MetroFramework.Controls.MetroTextBox();
+            this.bDetail = new MetroFramework.Controls.MetroButton();
+            this.bDelete = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb3)).BeginInit();
@@ -101,26 +101,6 @@
             this.pb5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb5.TabIndex = 5;
             this.pb5.TabStop = false;
-            // 
-            // bDetail
-            // 
-            this.bDetail.Location = new System.Drawing.Point(957, 37);
-            this.bDetail.Name = "bDetail";
-            this.bDetail.Size = new System.Drawing.Size(119, 54);
-            this.bDetail.TabIndex = 6;
-            this.bDetail.Text = "자세히 보기";
-            this.bDetail.UseSelectable = true;
-            this.bDetail.Click += new System.EventHandler(this.bDetail_Click);
-            // 
-            // bDelete
-            // 
-            this.bDelete.Location = new System.Drawing.Point(957, 116);
-            this.bDelete.Name = "bDelete";
-            this.bDelete.Size = new System.Drawing.Size(119, 54);
-            this.bDelete.TabIndex = 7;
-            this.bDelete.Text = "관심 없음";
-            this.bDelete.UseSelectable = true;
-            this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
             // 
             // tbArtist
             // 
@@ -209,6 +189,26 @@
             this.tbScoreDetail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tbScoreDetail.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // bDetail
+            // 
+            this.bDetail.Location = new System.Drawing.Point(957, 37);
+            this.bDetail.Name = "bDetail";
+            this.bDetail.Size = new System.Drawing.Size(119, 54);
+            this.bDetail.TabIndex = 6;
+            this.bDetail.Text = "자세히 보기";
+            this.bDetail.UseSelectable = true;
+            this.bDetail.Click += new System.EventHandler(this.bDetail_Click);
+            // 
+            // bDelete
+            // 
+            this.bDelete.Location = new System.Drawing.Point(957, 116);
+            this.bDelete.Name = "bDelete";
+            this.bDelete.Size = new System.Drawing.Size(119, 54);
+            this.bDelete.TabIndex = 7;
+            this.bDelete.Text = "관심 없음";
+            this.bDelete.UseSelectable = true;
+            this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
+            // 
             // RecommendControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -249,11 +249,11 @@
         private System.Windows.Forms.PictureBox pb3;
         private System.Windows.Forms.PictureBox pb4;
         private System.Windows.Forms.PictureBox pb5;
-        private MetroFramework.Controls.MetroButton bDetail;
-        private MetroFramework.Controls.MetroButton bDelete;
         private MetroFramework.Controls.MetroTextBox tbArtist;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lScore;
         private MetroFramework.Controls.MetroTextBox tbScoreDetail;
+        private MetroFramework.Controls.MetroButton bDetail;
+        private MetroFramework.Controls.MetroButton bDelete;
     }
 }
