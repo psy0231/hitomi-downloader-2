@@ -57,6 +57,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.tgFilterArtists = new MetroFramework.Controls.MetroToggle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.이미지로저장SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,7 +81,6 @@
             this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
-            this.label1 = new System.Windows.Forms.Label();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -488,8 +488,20 @@
             this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage4.VerticalScrollbarSize = 10;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(923, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(151, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "로그 분석하여 작가 숨기기";
+            // 
             // tgFilterArtists
             // 
+            this.tgFilterArtists.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tgFilterArtists.AutoSize = true;
             this.tgFilterArtists.Location = new System.Drawing.Point(1048, 9);
             this.tgFilterArtists.Name = "tgFilterArtists";
@@ -811,6 +823,9 @@
             // 
             // RecommendPannel
             // 
+            this.RecommendPannel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.RecommendPannel.AutoScroll = true;
             this.RecommendPannel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.RecommendPannel.ContextMenuStrip = this.contextMenuStrip1;
@@ -827,16 +842,6 @@
             this.pbSync.Size = new System.Drawing.Size(709, 12);
             this.pbSync.TabIndex = 5;
             this.pbSync.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(923, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(151, 15);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "로그 분석하여 작가 숨기기";
             // 
             // frmMain
             // 
