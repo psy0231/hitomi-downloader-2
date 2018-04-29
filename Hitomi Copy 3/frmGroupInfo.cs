@@ -16,35 +16,27 @@ using System.Windows.Forms;
 
 namespace Hitomi_Copy
 {
-    public partial class frmArtistInfo : Form
+    public partial class frmGroupInfo : Form
     {
-        string artist;
+        string group;
         Form closed_form;
 
-        public frmArtistInfo(string artist)
+        public frmGroupInfo(Form closed, string group)
         {
             InitializeComponent();
 
-            this.artist = artist;
-            closed_form = (Application.OpenForms[0] as frmMain);
-        }
-
-        public frmArtistInfo(Form form, string artist)
-        {
-            InitializeComponent();
-
-            this.artist = artist;
-            closed_form = form;
+            this.group = group;
+            closed_form = closed;
         }
 
         private void frmArtistInfo_Load(object sender, EventArgs e)
         {
-            Text += artist;
-            var data = HitomiData.Instance.metadata_collection;
+            Text += group;
+            var hitomi_data = HitomiData.Instance.metadata_collection;
             Dictionary<string, int> tag_count = new Dictionary<string, int>();
             int gallery_count = 0;
-            foreach (var metadata in data)
-                if (metadata.Artists != null && metadata.Tags != null && metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Artists[0] == artist)
+            foreach (var metadata in hitomi_data)
+                if (metadata.Groups != null && metadata.Tags != null && metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Groups.Contains(group))
                 {
                     gallery_count += 1;
                     foreach (var tag in metadata.Tags)
@@ -84,7 +76,7 @@ namespace Hitomi_Copy
             WebClient wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
             wc.DownloadStringCompleted += CallbackSearch;
-            wc.DownloadStringAsync(new Uri(HitomiSearch.GetWithArtist(artist, HitomiSetting.Instance.GetModel().Language, Pages.ToString())));
+            wc.DownloadStringAsync(new Uri(HitomiSearch.GetWithGroup(group, HitomiSetting.Instance.GetModel().Language, Pages.ToString())));
         }
 
         private void CallbackSearch(object sender, DownloadStringCompletedEventArgs e)
@@ -173,11 +165,6 @@ namespace Hitomi_Copy
 
         private void bDownloadAll_Click(object sender, EventArgs e)
         {
-            foreach (var pe in stayed)
-            {
-                pe.Downloading = true;
-                (Application.OpenForms[0] as frmMain).RemoteDownloadArticle(pe);
-            }
             Close();
             (Application.OpenForms[0] as frmMain).BringToFront();
         }

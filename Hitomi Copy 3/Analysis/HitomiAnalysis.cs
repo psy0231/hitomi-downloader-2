@@ -31,7 +31,7 @@ namespace Hitomi_Copy_2.Analysis
 
             foreach (var pair in artists)
                 datas.Add(new HitomiAnalysisArtist(pair.Key, pair.Value));
-
+            
             Update();
         }
 
@@ -56,7 +56,7 @@ namespace Hitomi_Copy_2.Analysis
             }
 
             ///////////////////////////////
-
+            
             var list = score.ToList();
 
             ///////////////////////////////

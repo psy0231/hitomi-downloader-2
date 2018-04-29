@@ -69,6 +69,7 @@
     <Compile Include="AutoCompleteListBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ColumnSorter.cs" />
     <Compile Include="Common\HitomiArticle.cs" />
     <Compile Include="Common\HitomiDef.cs" />
     <Compile Include="Common\HitomiParser.cs" />
@@ -83,17 +84,47 @@
     <Compile Include="frmArtistInfo.Designer.cs">
       <DependentUpon>frmArtistInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCharacterInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCharacterInfo.Designer.cs">
+      <DependentUpon>frmCharacterInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGalleryInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGalleryInfo.Designer.cs">
+      <DependentUpon>frmGalleryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGroupInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGroupInfo.designer.cs">
+      <DependentUpon>frmGroupInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSeriesInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSeriesInfo.Designer.cs">
+      <DependentUpon>frmSeriesInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTagInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTagInfo.Designer.cs">
+      <DependentUpon>frmTagInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="GalleryInfo\HitomiGalleryInfo.cs" />
     <Compile Include="HitomiCommon.cs" />
@@ -141,11 +172,26 @@
     <EmbeddedResource Include="frmArtistInfo.resx">
       <DependentUpon>frmArtistInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCharacterInfo.resx">
+      <DependentUpon>frmCharacterInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGalleryInfo.resx">
+      <DependentUpon>frmGalleryInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGroupInfo.resx">
+      <DependentUpon>frmGroupInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSeriesInfo.resx">
+      <DependentUpon>frmSeriesInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTagInfo.resx">
+      <DependentUpon>frmTagInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoForm.resx">
       <DependentUpon>InfoForm.cs</DependentUpon>

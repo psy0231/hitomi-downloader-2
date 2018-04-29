@@ -51,7 +51,7 @@ namespace Hitomi_Copy_2.Analysis
                     else
                         tags_map.Add(tag, 1);
             }
-
+            
             foreach (var pair in tags_map)
             {
                 rate.Add(pair.Key, pair.Value * pair.Value / (float)tags_count);

@@ -148,7 +148,7 @@ namespace Hitomi_Copy
 
         public void OpenInfo()
         {
-            //(new frmGalleryInfo(parent, this)).Show();
+            (new frmGalleryInfo(parent, this)).Show();
         }
         
         public new virtual void Dispose()

@@ -686,7 +686,6 @@ namespace Hitomi_Copy_3
             {
                 AddToPannel(new RecommendControl(latest_load_count));
             }
-
         }
         private void AddToPannel(RecommendControl control)
         {

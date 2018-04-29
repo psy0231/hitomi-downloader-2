@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -61,22 +62,30 @@ namespace Hitomi_Copy_3
             string thumbnail = "";
             await Task.Run(() => thumbnail = GetThumbnailAddress(id));
 
+            string temp = Path.GetTempFileName();
+            WebClient wc = new WebClient();
+            wc.Headers["Accept-Encoding"] = "application/x-gzip";
+            wc.Encoding = Encoding.UTF8;
+            wc.DownloadFile(new Uri(HitomiDef.HitomiThumbnail + thumbnail), temp);
+
+        RETRY:
             try
             {
-                string temp = Path.GetTempFileName();
-                WebClient wc = new WebClient();
-                wc.Headers["Accept-Encoding"] = "application/x-gzip";
-                wc.Encoding = Encoding.UTF8;
-                wc.DownloadFile(new Uri(HitomiDef.HitomiThumbnail + thumbnail), temp);
-
                 PictureBox[] pbs = { pb1, pb2, pb3, pb4, pb5 };
                 pbs[i].Image = Image.FromFile(temp);
 
-                info[i] = new InfoWrapper(pbs[i].Image);
-                pbs[i].MouseEnter += info[i].Picture_MouseEnter;
-                pbs[i].MouseMove += info[i].Picture_MouseMove;
-                pbs[i].MouseLeave += info[i].Picture_MouseLeave;
-            } catch { }
+                lock (info)
+                {
+                    info[i] = new InfoWrapper(pbs[i].Image);
+                    pbs[i].MouseEnter += info[i].Picture_MouseEnter;
+                    pbs[i].MouseMove += info[i].Picture_MouseMove;
+                    pbs[i].MouseLeave += info[i].Picture_MouseLeave;
+                }
+            } catch
+            {
+                Thread.Sleep(100);
+                goto RETRY;
+            }
         }
         
         private string GetThumbnailAddress(string id)
