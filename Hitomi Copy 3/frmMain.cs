@@ -679,13 +679,14 @@ namespace Hitomi_Copy_3
         private void UpdateStatistics()
         {
             HitomiAnalysis.Instance.Update();
-            MoreLoadRecommend();
+            Task.Run(() => MoreLoadRecommend());
         }
         private void MoreLoadRecommend()
         {
             for (int i = 0; i < HitomiSetting.Instance.GetModel().RecommendPerScroll && latest_load_count < HitomiAnalysis.Instance.Rank.Count; i++, latest_load_count++)
             {
                 AddToPannel(new RecommendControl(latest_load_count));
+                Thread.Sleep(100);
             }
         }
         private void AddToPannel(RecommendControl control)
@@ -707,6 +708,13 @@ namespace Hitomi_Copy_3
         #endregion
 
         #region 기타 잡것
+        private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            HitomiSetting.Instance.GetModel().Language = cbLanguage.Text;
+            HitomiSetting.Instance.Save();
+            tbLang.Text = cbLanguage.Text;
+        }
+
         private void bDownload_Click(object sender, EventArgs e)
         {
             cbLanguage.Enabled = false;
@@ -817,6 +825,5 @@ namespace Hitomi_Copy_3
                 pe.Selected = false;
         }
         #endregion
-
     }
 }
