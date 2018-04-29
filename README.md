@@ -2,7 +2,11 @@
 
 ## Download
 
-Latest Version (Release.zip)
+Newest Beta Version!!
+
+https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/3.0
+
+Latest Stability Version (Release.zip)
 
 https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.11
 
