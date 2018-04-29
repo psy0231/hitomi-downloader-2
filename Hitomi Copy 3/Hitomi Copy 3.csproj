@@ -66,6 +66,9 @@
     <Compile Include="Analysis\HitomiAnalysis.cs" />
     <Compile Include="Analysis\HitomiAnalysisArtist.cs" />
     <Compile Include="Analysis\HitomiAnalysisGallery.cs" />
+    <Compile Include="AutoCompleteListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Common\HitomiArticle.cs" />
     <Compile Include="Common\HitomiDef.cs" />
     <Compile Include="Common\HitomiParser.cs" />
