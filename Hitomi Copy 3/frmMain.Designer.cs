@@ -85,6 +85,7 @@
             this.contextMenuStrip1.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
             this.SuspendLayout();
+            this.Controls.Add(pbSync);
             // 
             // MainTab
             // 
