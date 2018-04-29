@@ -78,6 +78,7 @@ namespace Hitomi_Copy_3
 
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("/")) start_element = Convert.ToInt32(a.Substring(1)); });
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":") && !a.StartsWith("/")) positive_data.Add(a.Trim()); });
+            tbExcludeTag.Text.Trim().Split(' ').ToList().ForEach((a) => negative_data.Add(Regex.Replace(a.Trim(),",","")));
             query.Common = positive_data;
             query.TagExclude = negative_data;
             foreach (var elem in tbSearch.Text.Trim().Split(' '))
