@@ -4,6 +4,7 @@ using hitomi.Parser;
 using Hitomi_Copy;
 using Hitomi_Copy.Data;
 using Hitomi_Copy_2;
+using Hitomi_Copy_2.Analysis;
 using MetroFramework;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,8 @@ namespace Hitomi_Copy_3
 
             vThread.Value = HitomiSetting.Instance.GetModel().Thread;
             lThread.Text = vThread.Value.ToString();
+
+            Task.Run(() => UpdateStatistics());
         }
 
         #region 검색
@@ -490,6 +493,27 @@ namespace Hitomi_Copy_3
         }
         #endregion
 
+        #region 통계
+        private void UpdateStatistics()
+        {
+            HitomiAnalysis.Instance.Update();
+
+            for (int i = 0; i < 100 && i < HitomiAnalysis.Instance.Rank.Count; i++)
+            {
+                AddToPannel(new RecommendControl(i));
+            }
+        }
+        private void AddToPannel(RecommendControl control)
+        {
+            if (RecommendPannel.InvokeRequired)
+            {
+                Invoke(new Action<RecommendControl>(AddToPannel), new object[] { control });
+                return;
+            }
+            RecommendPannel.Controls.Add(control);
+        }
+        #endregion
+
         private void bDownload_Click(object sender, EventArgs e)
         {
             cbLanguage.Enabled = false;
@@ -552,6 +576,16 @@ namespace Hitomi_Copy_3
             bSync.Enabled = true;
             MetroMessageBox.Show(this, "데이터가 동기화되었습니다!", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        
+
+        //private void RecommendPannel_Scroll(object sender, ScrollEventArgs e)
+        //{
+        //    if (e.NewValue == RecommendPannel.VerticalScroll.Maximum)
+        //        MessageBox.Show("bottom!");
+        //}
+
+        //private void RecommendPannel_MouseEnter(object sender, EventArgs e)
+        //{
+        //    RecommendPannel.Focus();
+        //}
     }
 }

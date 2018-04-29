@@ -53,15 +53,16 @@ namespace Hitomi_Copy
             {
                 if (selected)
                 {
-                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(200, 203, 226, 233));
+                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(200, 234, 202, 233));
                     g.FillRectangle(basicBrushes, 0, 0, Width, Height);
-                    g.DrawRectangle(new Pen(Color.LightSkyBlue, 2), 2, 2, this.Width - 4, this.Height - 4);
+                    g.DrawRectangle(new Pen(Color.LightPink, 2), 2, 2, this.Width - 4, this.Height - 4);
                 }
                 else if (mouse_enter)
                 {
-                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(100, 203, 226, 233));
+                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(100, 234, 202, 233));
                     g.FillRectangle(basicBrushes, 0, 0, Width, Height);
-                    g.DrawRectangle(new Pen(Color.FromArgb(0,120,215), 1), 1, 1, this.Width - 2, this.Height - 2);
+                    g.DrawRectangle(new Pen(Color.FromArgb(255, 174, 201), 1), 1, 1, this.Width - 2, this.Height - 2);
+
                 }
             }
             else
@@ -100,12 +101,12 @@ namespace Hitomi_Copy
             {
                 if (selected)
                 {
-                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(170, 203, 226, 233));
+                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(170, 234, 202, 233));
                     g.FillRectangle(basicBrushes, 0, 0, Width, Height);
                 }
                 else if (mouse_enter)
                 {
-                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(100, 203, 226, 233));
+                    SolidBrush basicBrushes = new SolidBrush(Color.FromArgb(100, 234, 202, 233));
                     g.FillRectangle(basicBrushes, 0, 0, Width, Height);
                 }
             }

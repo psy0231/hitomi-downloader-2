@@ -63,6 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analysis\HitomiAnalysis.cs" />
+    <Compile Include="Analysis\HitomiAnalysisArtist.cs" />
+    <Compile Include="Analysis\HitomiAnalysisGallery.cs" />
     <Compile Include="Common\HitomiArticle.cs" />
     <Compile Include="Common\HitomiDef.cs" />
     <Compile Include="Common\HitomiParser.cs" />
@@ -110,6 +113,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecommendControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RecommendControl.Designer.cs">
+      <DependentUpon>RecommendControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScrollFixLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -133,6 +142,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RecommendControl.resx">
+      <DependentUpon>RecommendControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -151,11 +163,6 @@
     <None Include="Resources\i14434391215.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\Newtonsoft.Json.dll" />
-    <None Include="bin\Debug\MetroFramework.Fonts.dll" />
-    <None Include="bin\Debug\MetroFramework.dll" />
-    <None Include="bin\Debug\MetroFramework.Design.dll" />
-    <None Include="bin\Debug\HtmlAgilityPack.dll" />
     <Content Include="TETO.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

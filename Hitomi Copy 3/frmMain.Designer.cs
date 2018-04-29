@@ -41,7 +41,6 @@
             this.bDownload = new MetroFramework.Controls.MetroButton();
             this.bSearch = new MetroFramework.Controls.MetroButton();
             this.tbSearch = new MetroFramework.Controls.MetroTextBox();
-            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.bAbort = new MetroFramework.Controls.MetroButton();
             this.lRetry = new MetroFramework.Controls.MetroLabel();
@@ -57,10 +56,10 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.bSync = new MetroFramework.Controls.MetroButton();
             this.lThread = new MetroFramework.Controls.MetroLabel();
-            this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
             this.vThread = new MetroFramework.Controls.MetroTrackBar();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
@@ -74,9 +73,13 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
+            this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
+            this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
+            this.metroTabPage4.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,11 +90,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainTab.Controls.Add(this.metroTabPage1);
             this.MainTab.Controls.Add(this.metroTabPage2);
+            this.MainTab.Controls.Add(this.metroTabPage4);
             this.MainTab.Controls.Add(this.metroTabPage3);
-            this.MainTab.Location = new System.Drawing.Point(13, 59);
+            this.MainTab.Location = new System.Drawing.Point(10, 59);
             this.MainTab.Name = "MainTab";
             this.MainTab.SelectedIndex = 2;
-            this.MainTab.Size = new System.Drawing.Size(1130, 550);
+            this.MainTab.Size = new System.Drawing.Size(1136, 550);
             this.MainTab.Style = MetroFramework.MetroColorStyle.Pink;
             this.MainTab.TabIndex = 1;
             this.MainTab.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -114,7 +118,7 @@
             this.metroTabPage1.HorizontalScrollbarSize = 2;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(1122, 508);
+            this.metroTabPage1.Size = new System.Drawing.Size(1128, 508);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "검색";
             this.metroTabPage1.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -139,14 +143,14 @@
             this.pbLoad.Location = new System.Drawing.Point(276, 489);
             this.pbLoad.Maximum = 0;
             this.pbLoad.Name = "pbLoad";
-            this.pbLoad.Size = new System.Drawing.Size(372, 8);
+            this.pbLoad.Size = new System.Drawing.Size(378, 8);
             this.pbLoad.Style = MetroFramework.MetroColorStyle.Pink;
             this.pbLoad.TabIndex = 23;
             // 
             // metroButton3
             // 
             this.metroButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroButton3.Location = new System.Drawing.Point(883, 482);
+            this.metroButton3.Location = new System.Drawing.Point(889, 482);
             this.metroButton3.Name = "metroButton3";
             this.metroButton3.Size = new System.Drawing.Size(88, 23);
             this.metroButton3.Style = MetroFramework.MetroColorStyle.Pink;
@@ -158,7 +162,7 @@
             // metroButton2
             // 
             this.metroButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroButton2.Location = new System.Drawing.Point(800, 482);
+            this.metroButton2.Location = new System.Drawing.Point(806, 482);
             this.metroButton2.Name = "metroButton2";
             this.metroButton2.Size = new System.Drawing.Size(77, 23);
             this.metroButton2.Style = MetroFramework.MetroColorStyle.Pink;
@@ -170,7 +174,7 @@
             // metroButton1
             // 
             this.metroButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroButton1.Location = new System.Drawing.Point(676, 482);
+            this.metroButton1.Location = new System.Drawing.Point(682, 482);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(88, 23);
             this.metroButton1.Style = MetroFramework.MetroColorStyle.Pink;
@@ -220,7 +224,7 @@
             // bDownload
             // 
             this.bDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bDownload.Location = new System.Drawing.Point(1005, 482);
+            this.bDownload.Location = new System.Drawing.Point(1011, 482);
             this.bDownload.Name = "bDownload";
             this.bDownload.Size = new System.Drawing.Size(114, 23);
             this.bDownload.Style = MetroFramework.MetroColorStyle.Pink;
@@ -234,7 +238,7 @@
             // 
             this.bSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bSearch.Enabled = false;
-            this.bSearch.Location = new System.Drawing.Point(1005, 8);
+            this.bSearch.Location = new System.Drawing.Point(1011, 8);
             this.bSearch.Name = "bSearch";
             this.bSearch.Size = new System.Drawing.Size(114, 23);
             this.bSearch.Style = MetroFramework.MetroColorStyle.Pink;
@@ -252,7 +256,7 @@
             // 
             // 
             this.tbSearch.CustomButton.Image = null;
-            this.tbSearch.CustomButton.Location = new System.Drawing.Point(974, 1);
+            this.tbSearch.CustomButton.Location = new System.Drawing.Point(980, 1);
             this.tbSearch.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbSearch.CustomButton.Name = "";
             this.tbSearch.CustomButton.Size = new System.Drawing.Size(21, 17);
@@ -273,7 +277,7 @@
             this.tbSearch.SelectionLength = 0;
             this.tbSearch.SelectionStart = 0;
             this.tbSearch.ShortcutsEnabled = true;
-            this.tbSearch.Size = new System.Drawing.Size(996, 23);
+            this.tbSearch.Size = new System.Drawing.Size(1002, 23);
             this.tbSearch.Style = MetroFramework.MetroColorStyle.Pink;
             this.tbSearch.TabIndex = 4;
             this.tbSearch.Text = "recent:0-25";
@@ -281,18 +285,6 @@
             this.tbSearch.UseSelectable = true;
             this.tbSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tbSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // ImagePanel
-            // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ImagePanel.Location = new System.Drawing.Point(3, 37);
-            this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1116, 439);
-            this.ImagePanel.TabIndex = 3;
             // 
             // metroTabPage2
             // 
@@ -312,7 +304,7 @@
             this.metroTabPage2.HorizontalScrollbarSize = 2;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(1122, 508);
+            this.metroTabPage2.Size = new System.Drawing.Size(1128, 508);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "다운로드";
             this.metroTabPage2.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -466,11 +458,25 @@
             this.columnHeader3.Text = "이미지 링크";
             this.columnHeader3.Width = 351;
             // 
+            // metroTabPage4
+            // 
+            this.metroTabPage4.Controls.Add(this.RecommendPannel);
+            this.metroTabPage4.HorizontalScrollbarBarColor = true;
+            this.metroTabPage4.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage4.HorizontalScrollbarSize = 4;
+            this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage4.Name = "metroTabPage4";
+            this.metroTabPage4.Size = new System.Drawing.Size(1128, 508);
+            this.metroTabPage4.TabIndex = 4;
+            this.metroTabPage4.Text = "통계";
+            this.metroTabPage4.VerticalScrollbarBarColor = true;
+            this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage4.VerticalScrollbarSize = 10;
+            // 
             // metroTabPage3
             // 
             this.metroTabPage3.Controls.Add(this.bSync);
             this.metroTabPage3.Controls.Add(this.lThread);
-            this.metroTabPage3.Controls.Add(this.pbSync);
             this.metroTabPage3.Controls.Add(this.vThread);
             this.metroTabPage3.Controls.Add(this.metroLabel7);
             this.metroTabPage3.Controls.Add(this.metroLabel6);
@@ -480,12 +486,13 @@
             this.metroTabPage3.Controls.Add(this.metroLabel5);
             this.metroTabPage3.Controls.Add(this.tbDownloadPath);
             this.metroTabPage3.Controls.Add(this.metroLabel4);
+            this.metroTabPage3.Controls.Add(this.pbSync);
             this.metroTabPage3.HorizontalScrollbarBarColor = true;
             this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.HorizontalScrollbarSize = 2;
             this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(1122, 508);
+            this.metroTabPage3.Size = new System.Drawing.Size(1128, 508);
             this.metroTabPage3.TabIndex = 3;
             this.metroTabPage3.Text = "설정";
             this.metroTabPage3.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -516,15 +523,6 @@
             this.lThread.Style = MetroFramework.MetroColorStyle.Pink;
             this.lThread.TabIndex = 15;
             this.lThread.Text = "32";
-            // 
-            // pbSync
-            // 
-            this.pbSync.Location = new System.Drawing.Point(198, 427);
-            this.pbSync.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pbSync.Name = "pbSync";
-            this.pbSync.Size = new System.Drawing.Size(709, 12);
-            this.pbSync.TabIndex = 5;
-            this.pbSync.Visible = false;
             // 
             // vThread
             // 
@@ -709,7 +707,7 @@
             // 
             this.metroLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(675, 37);
+            this.metroLabel1.Location = new System.Drawing.Point(678, 37);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(468, 19);
             this.metroLabel1.TabIndex = 2;
@@ -742,6 +740,39 @@
             this.MemoryUsageUpdateTimer.Interval = 1000;
             this.MemoryUsageUpdateTimer.Tick += new System.EventHandler(this.MemoryUsageUpdateTimer_Tick);
             // 
+            // ImagePanel
+            // 
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePanel.AutoScroll = true;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.Location = new System.Drawing.Point(3, 37);
+            this.ImagePanel.Name = "ImagePanel";
+            this.ImagePanel.Size = new System.Drawing.Size(1122, 439);
+            this.ImagePanel.TabIndex = 3;
+            // 
+            // RecommendPannel
+            // 
+            this.RecommendPannel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RecommendPannel.AutoScroll = true;
+            this.RecommendPannel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.RecommendPannel.Location = new System.Drawing.Point(3, 3);
+            this.RecommendPannel.Name = "RecommendPannel";
+            this.RecommendPannel.Size = new System.Drawing.Size(1122, 502);
+            this.RecommendPannel.TabIndex = 4;
+            // 
+            // pbSync
+            // 
+            this.pbSync.Location = new System.Drawing.Point(198, 427);
+            this.pbSync.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pbSync.Name = "pbSync";
+            this.pbSync.Size = new System.Drawing.Size(709, 12);
+            this.pbSync.TabIndex = 5;
+            this.pbSync.Visible = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -769,6 +800,7 @@
             this.metroTabPage1.PerformLayout();
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage2.PerformLayout();
+            this.metroTabPage4.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
             this.metroTabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -822,6 +854,8 @@
         private MetroFramework.Controls.MetroLabel lRetry;
         private MetroFramework.Controls.MetroButton bAbort;
         private MarqueeColorBar pbSync;
+        private MetroFramework.Controls.MetroTabPage metroTabPage4;
+        private Hitomi_Copy_2.ScrollFixLayoutPanel RecommendPannel;
     }
 }
 
