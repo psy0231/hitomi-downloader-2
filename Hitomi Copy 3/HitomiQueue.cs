@@ -46,6 +46,7 @@ namespace Hitomi_Copy_2
 
         public void DownloadRemoteImageFile(string uri, string fileName, object obj)
         {
+        RETRY:
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             if (timeout_infinite) request.Timeout = Timeout.Infinite;
             else request.Timeout = timeout_ms;
@@ -54,7 +55,6 @@ namespace Hitomi_Copy_2
 
             lock (requests) requests.Add(new Tuple<string, HttpWebRequest>(uri,request));
 
-        RETRY:
             try
             {
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -79,9 +79,10 @@ namespace Hitomi_Copy_2
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
                 lock (retry_callback) retry_callback(uri);
+                request.Abort();
                 goto RETRY;
             }
 
