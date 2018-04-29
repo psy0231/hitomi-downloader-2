@@ -117,7 +117,6 @@ namespace Hitomi_Copy_3
     public class InfoWrapper
     {
         InfoForm info;
-        bool mouse_enter = false;
 
         public InfoWrapper(Image image)
         {
@@ -126,9 +125,9 @@ namespace Hitomi_Copy_3
         }
 
         public void Picture_MouseEnter(object sender, EventArgs e)
-        { mouse_enter = true; info.Location = Cursor.Position; info.Show(); }
+        { info.Location = Cursor.Position; info.Show(); }
         public void Picture_MouseLeave(object sender, EventArgs e)
-        { mouse_enter = false; info.Location = Cursor.Position; info.Hide(); }
+        { info.Location = Cursor.Position; info.Hide(); }
         public void Picture_MouseMove(object sender, EventArgs e)
         { info.Location = new Point(Cursor.Position.X + 15, Cursor.Position.Y); }
     }

@@ -132,14 +132,14 @@ namespace Hitomi_Copy_3
                     }
                     catch
                     {
-                        MessageBox.Show($"recent 규칙 오류입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this, $"recent 규칙 오류입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     tbSearch.Text = "recent:" + (recent_start + recent_count) + "-" + recent_count;
                 }
                 else
                 {
-                    MessageBox.Show($"알 수 없는 규칙입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, $"알 수 없는 규칙입니다. \"{elem}\"", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
@@ -156,12 +156,12 @@ namespace Hitomi_Copy_3
             lStatusSearch.Text = $"{query_result.Count} 개 항목이 검색됨";
             if (query_result.Count > HitomiSetting.Instance.GetModel().MaximumThumbnailShow)
             {
-                MessageBox.Show("검색된 항목이 너무 많습니다. 모든 결과를 보려면 고급검색 기능을 이용해주세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "검색된 항목이 너무 많습니다. 모든 결과를 보려면 고급검색 기능을 이용해주세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 query_result.RemoveRange(HitomiSetting.Instance.GetModel().MaximumThumbnailShow, query_result.Count - HitomiSetting.Instance.GetModel().MaximumThumbnailShow);
             }
             else if (query_result.Count == 0)
             {
-                MessageBox.Show("검색된 항목이 없습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MetroMessageBox.Show(this, "검색된 항목이 없습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             if (start_element != 0 && start_element <= query_result.Count) query_result.RemoveRange(0, start_element);
@@ -629,7 +629,7 @@ namespace Hitomi_Copy_3
             }
             if (metadata.ID == 0)
             {
-                MessageBox.Show($"{id} 항목이 데이터베이스에 없습니다. 데이터베이스를 동기화해주세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, $"{id} 항목이 데이터베이스에 없습니다. 데이터베이스를 동기화해주세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             PicElement fake_pe = new PicElement(this);

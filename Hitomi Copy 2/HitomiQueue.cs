@@ -79,7 +79,7 @@ namespace Hitomi_Copy_2
                     }
                 }
             }
-            catch (Exception e)
+            catch
             {
                 lock (retry_callback) retry_callback(uri);
                 goto RETRY;
