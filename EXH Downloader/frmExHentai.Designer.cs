@@ -36,7 +36,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tbProxy = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.bDownload = new System.Windows.Forms.Button();
             this.lArtist = new System.Windows.Forms.Label();
             this.lTitle = new System.Windows.Forms.Label();
             this.tbTags = new System.Windows.Forms.TextBox();
@@ -86,7 +85,7 @@
             this.bLoad.Name = "bLoad";
             this.bLoad.Size = new System.Drawing.Size(151, 23);
             this.bLoad.TabIndex = 2;
-            this.bLoad.Text = "불러오기";
+            this.bLoad.Text = "다운로드";
             this.bLoad.UseVisualStyleBackColor = true;
             this.bLoad.Click += new System.EventHandler(this.bLoad_Click);
             // 
@@ -104,7 +103,6 @@
             // 
             this.tabPage1.Controls.Add(this.tbProxy);
             this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.bDownload);
             this.tabPage1.Controls.Add(this.lArtist);
             this.tabPage1.Controls.Add(this.lTitle);
             this.tabPage1.Controls.Add(this.tbTags);
@@ -139,16 +137,6 @@
             this.label6.Size = new System.Drawing.Size(66, 21);
             this.label6.TabIndex = 11;
             this.label6.Text = "Proxy : ";
-            // 
-            // bDownload
-            // 
-            this.bDownload.Location = new System.Drawing.Point(961, 315);
-            this.bDownload.Name = "bDownload";
-            this.bDownload.Size = new System.Drawing.Size(166, 43);
-            this.bDownload.TabIndex = 10;
-            this.bDownload.Text = "다운로드";
-            this.bDownload.UseVisualStyleBackColor = true;
-            this.bDownload.Click += new System.EventHandler(this.bDownload_Click);
             // 
             // lArtist
             // 
@@ -401,7 +389,6 @@
         private System.Windows.Forms.Label lTitle;
         private System.Windows.Forms.TextBox tbTags;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button bDownload;
         private System.Windows.Forms.Label lDownloadStatusSize;
         private System.Windows.Forms.Label lDownloadSize;
         private System.Windows.Forms.Label label12;
