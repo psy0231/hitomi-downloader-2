@@ -72,11 +72,13 @@ namespace Hitomi_Copy_3
             List<string> negative_data = new List<string>();
             List<string> request_number = new List<string>();
             int start_element = 0;
+            int count_element = 0;
             bool recent = false;
             int recent_count = 0;
             int recent_start = 0;
 
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("/")) start_element = Convert.ToInt32(a.Substring(1)); });
+            tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("?")) start_element = Convert.ToInt32(a.Substring(1)); });
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":") && !a.StartsWith("/")) positive_data.Add(a.Trim()); });
             tbExcludeTag.Text.Trim().Split(' ').ToList().ForEach((a) => negative_data.Add(Regex.Replace(a.Trim(),",","")));
             query.Common = positive_data;
@@ -85,6 +87,7 @@ namespace Hitomi_Copy_3
             {
                 if (!elem.Contains(":")) continue;
                 if (elem.StartsWith("/")) continue;
+                if (elem.StartsWith("?")) continue;
                 if (elem.StartsWith("tag:"))
                     if (query.TagInclude == null)
                         query.TagInclude = new List<string>() { elem.Substring("tag:".Length) };
@@ -154,17 +157,19 @@ namespace Hitomi_Copy_3
                 query_result = HitomiDataSearch.Search2(query);
             }
             lStatusSearch.Text = $"{query_result.Count} 개 항목이 검색됨";
+
+            if (start_element != 0 && start_element <= query_result.Count) query_result.RemoveRange(0, start_element);
+            if (count_element != 0 && count_element < query_result.Count) query_result.RemoveRange(count_element, query_result.Count - count_element);
+
             if (query_result.Count > HitomiSetting.Instance.GetModel().MaximumThumbnailShow)
             {
-                MetroMessageBox.Show(this, "검색된 항목이 너무 많습니다. 모든 결과를 보려면 고급검색 기능을 이용해주세요.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "검색된 항목이 너무 많습니다. '/'또는 '?' 명령어를 이용해 보세요. '/'는 시작위치, '?'는 가져올 개수입니다.(ex: /100 ?20)", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 query_result.RemoveRange(HitomiSetting.Instance.GetModel().MaximumThumbnailShow, query_result.Count - HitomiSetting.Instance.GetModel().MaximumThumbnailShow);
             }
             else if (query_result.Count == 0)
             {
                 MetroMessageBox.Show(this, "검색된 항목이 없습니다.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            if (start_element != 0 && start_element <= query_result.Count) query_result.RemoveRange(0, start_element);
 
             pbLoad.Visible = true;
             pbLoad.Maximum += query_result.Count;
