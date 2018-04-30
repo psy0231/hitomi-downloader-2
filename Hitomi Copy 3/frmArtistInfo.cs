@@ -176,6 +176,8 @@ namespace Hitomi_Copy
             foreach (var pe in stayed)
             {
                 pe.Downloading = true;
+                if (pe.Article.Artists != null)
+                    pe.Article.Artists[0] = artist;
                 (Application.OpenForms[0] as frmMain).RemoteDownloadArticle(pe);
             }
             Close();
@@ -187,6 +189,8 @@ namespace Hitomi_Copy
             foreach (var pe in stayed)
                 if (pe.Selected) {
                     pe.Downloading = true;
+                    if (pe.Article.Artists != null)
+                        pe.Article.Artists[0] = artist;
                     (Application.OpenForms[0] as frmMain).RemoteDownloadArticle(pe);
                 }
             (Application.OpenForms[0] as frmMain).BringToFront();
