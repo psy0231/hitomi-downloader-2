@@ -531,26 +531,38 @@ namespace Hitomi_Copy_3
         long download_size = 0;
         long status_size = 0;
         object size_lock = new object();
+        object status_lock = new object();
         private void HitomiQueueDownloadSizeCallback(string uri, long size)
         {
             lock (size_lock) download_size += size;
-            Task.Run(() => UpdateDownloadStatus());
+            UpdateDownloadSize();
         }
         private void HitomiQueueDownloadStatusCallback(string uri, int size)
         {
             lock (size_lock) status_size += size;
-            Task.Run(() => UpdateDownloadStatus());
+            UpdateDownloadStatus();
         }
-        private void UpdateDownloadStatus()
+        private void UpdateDownloadSize()
         {
-            if (lDownloadSize.InvokeRequired || lDownloadStatusSize.InvokeRequired)
+            if (lDownloadSize.InvokeRequired)
             {
-                Invoke(new Action(UpdateDownloadStatus));
+                Invoke(new Action(UpdateDownloadSize));
                 return;
             }
             lock (size_lock)
             {
                 lDownloadSize.Text = ((double)download_size / 1000 / 1000).ToString("#,#.#") + " MB";
+            }
+        }
+        private void UpdateDownloadStatus()
+        {
+            if (lDownloadStatusSize.InvokeRequired)
+            {
+                Invoke(new Action(UpdateDownloadStatus));
+                return;
+            }
+            lock (status_lock)
+            {
                 lDownloadStatusSize.Text = ((double)status_size / 1000 / 1000).ToString("#,#.#") + " MB";
             }
         }
