@@ -67,6 +67,12 @@ namespace Hitomi_Copy_3
         #region 검색
         private void bSearch_Click(object sender, EventArgs e)
         {
+            if (tbSearch.Text.Trim().StartsWith("http://") || tbSearch.Text.Trim().StartsWith("https://"))
+            {
+                ProcessUrl(tbSearch.Text.Trim());
+                return;
+            }
+
             HitomiDataQuery query = new HitomiDataQuery();
             List<string> positive_data = new List<string>();
             List<string> negative_data = new List<string>();
@@ -186,6 +192,11 @@ namespace Hitomi_Copy_3
                 Thread.Sleep(100);
                 Task.Run(() => AddMetadataToPanel(v));
             }
+        }
+
+        private void ProcessUrl(string url)
+        {
+
         }
         #endregion
 

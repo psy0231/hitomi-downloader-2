@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter Downloader", "..\Tw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hitomi Copy 3", "..\Hitomi Copy 3\Hitomi Copy 3.csproj", "{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MM Downloader", "..\MM Downloader\MM Downloader.csproj", "{4C515801-26F5-45D6-B6E8-0DABA49F8782}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Release|x64.Build.0 = Release|Any CPU
 		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Release|x86.ActiveCfg = Release|Any CPU
 		{CA40B689-BFD9-47A8-B07B-3799D48FB8D5}.Release|x86.Build.0 = Release|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Debug|x64.Build.0 = Debug|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Debug|x86.Build.0 = Debug|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Release|x64.ActiveCfg = Release|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Release|x64.Build.0 = Release|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C515801-26F5-45D6-B6E8-0DABA49F8782}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
