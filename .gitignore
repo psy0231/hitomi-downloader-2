@@ -14,6 +14,11 @@ EXH Downloader/bin/*
 EXH Downloader/obj/*
 EXH Downloader/packages/*
 
+MM Downloader/.vs/*
+MM Downloader/bin/*
+MM Downloader/obj/*
+MM Downloader/packages/*
+
 Pixiv Downloader/.vs/*
 Pixiv Downloader/bin/*
 Pixiv Downloader/obj/*
