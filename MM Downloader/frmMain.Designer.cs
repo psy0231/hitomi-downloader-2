@@ -223,9 +223,10 @@
             // 
             // MarqueeColorBar
             // 
-            this.MarqueeColorBar.Location = new System.Drawing.Point(503, 353);
+            this.MarqueeColorBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.MarqueeColorBar.Location = new System.Drawing.Point(249, 353);
             this.MarqueeColorBar.Name = "MarqueeColorBar";
-            this.MarqueeColorBar.Size = new System.Drawing.Size(436, 21);
+            this.MarqueeColorBar.Size = new System.Drawing.Size(722, 19);
             this.MarqueeColorBar.TabIndex = 49;
             this.MarqueeColorBar.Visible = false;
             // 

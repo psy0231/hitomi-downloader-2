@@ -27,31 +27,30 @@ namespace MM_Downloader
             WebClient wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
             wc.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-            //wc.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate, br");
-            //wc.Headers.Add(HttpRequestHeader.AcceptLanguage, "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7");
-            //wc.Headers.Add(HttpRequestHeader.CacheControl, "max-age=0");
-            //wc.Headers.Add(HttpRequestHeader.Cookie, "__cfduid=d2a828dab05d1a3bccc46cc85db82808c1517562328; _ga=GA1.2.93771804.1517562329; PHPSESSID=ajbve7v4fbujpi1rf733plcpn5; _gid=GA1.2.233355720.1525253327");
-            //wc.Headers.Add(HttpRequestHeader.Referer, "https://marumaru.in/b/mangaup/296965");
-            //wc.Headers.Add(HttpRequestHeader.Upgrade, "1");
             wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36");
+
             string html = wc.DownloadString(tbAddress.Text);
             var archives = MMParser.ParseManga(html);
+
             MarqueeColorBar.Visible = true;
             bLoad.Enabled = false;
             images_uri.Clear();
-            await DownloadArchivesAsync(archives, MMParser.GetTitle(html));
+            await Task.Run(() => DownloadArchivesAsync(archives, MMParser.GetTitle(html)));
             MarqueeColorBar.Visible = false;
             bLoad.Enabled = true;
-            Task.Run(() => DownloadImages());
+
+            await Task.Run(() => DownloadImages());
         }
 
-        private async  Task DownloadArchivesAsync(List<string> urls, string title)
+        private void DownloadArchivesAsync(List<string> urls, string title)
         {
+            List<Task> tasks = new List<Task>();
             foreach (var url in urls)
             {
-                await Task.Run(() => DownloadArchives(url, title));
+                tasks.Add(Task.Run(() => DownloadArchives(url, title)));
                 Thread.Sleep(100);
             }
+            Task.WaitAll(tasks.ToArray());
         }
 
         private void DownloadImages()
@@ -63,15 +62,11 @@ namespace MM_Downloader
         private void DownloadArchives(string url, string title)
         {
             WebClient wc = new WebClient();
+
             wc.Encoding = Encoding.UTF8;
             wc.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-            //wc.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-            //wc.Headers.Add(HttpRequestHeader.AcceptLanguage, "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7");
-            //wc.Headers.Add(HttpRequestHeader.CacheControl, "max-age=0");
-            //wc.Headers.Add(HttpRequestHeader.Connection, "keep-alive");
-            //wc.Headers.Add(HttpRequestHeader.Host, "wasabisyrup.com");
-            //wc.Headers.Add(HttpRequestHeader.Upgrade, "1");
             wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36");
+
             string html = wc.DownloadString(url);
             var images = MMParser.ParseArchives(html);
             MMArticle ta = new MMArticle();
@@ -81,10 +76,7 @@ namespace MM_Downloader
             foreach (var uri in images)
             {
                 IncrementProgressMaximum();
-                lock (images)
-                    images_uri.Add(new Tuple<string, MMArticle>(uri, ta));
-                //DownloadImage(uri, article);
-                //Thread.Sleep(500);
+                lock (images) images_uri.Add(new Tuple<string, MMArticle>(uri, ta));
             }
         }
 
