@@ -31,9 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tbAddress = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.bLoad = new System.Windows.Forms.Button();
             this.lDownloadStatusSize = new System.Windows.Forms.Label();
             this.lDownloadSize = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -46,6 +43,10 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label5 = new System.Windows.Forms.Label();
+            this.tbAddress = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.bLoad = new System.Windows.Forms.Button();
+            this.MarqueeColorBar = new Hitomi_Copy_3.MarqueeColorBar();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +62,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.MarqueeColorBar);
             this.tabPage1.Controls.Add(this.lDownloadStatusSize);
             this.tabPage1.Controls.Add(this.lDownloadSize);
             this.tabPage1.Controls.Add(this.label12);
@@ -78,7 +80,120 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1232, 418);
             this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "다운로더";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lDownloadStatusSize
+            // 
+            this.lDownloadStatusSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lDownloadStatusSize.AutoSize = true;
+            this.lDownloadStatusSize.Location = new System.Drawing.Point(189, 372);
+            this.lDownloadStatusSize.Name = "lDownloadStatusSize";
+            this.lDownloadStatusSize.Size = new System.Drawing.Size(36, 15);
+            this.lDownloadStatusSize.TabIndex = 47;
+            this.lDownloadStatusSize.Text = "0 MB";
+            // 
+            // lDownloadSize
+            // 
+            this.lDownloadSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lDownloadSize.AutoSize = true;
+            this.lDownloadSize.Location = new System.Drawing.Point(189, 357);
+            this.lDownloadSize.Name = "lDownloadSize";
+            this.lDownloadSize.Size = new System.Drawing.Size(36, 15);
+            this.lDownloadSize.TabIndex = 46;
+            this.lDownloadSize.Text = "0 MB";
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(96, 372);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(94, 15);
+            this.label12.TabIndex = 45;
+            this.label12.Text = "다운받은 크기 : ";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(80, 357);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(110, 15);
+            this.label11.TabIndex = 44;
+            this.label11.Text = "총 다운로드 크기 : ";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(100, 329);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(90, 15);
+            this.label9.TabIndex = 43;
+            this.label9.Text = "다운로드 상태: ";
+            // 
+            // lStatus
+            // 
+            this.lStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lStatus.AutoSize = true;
+            this.lStatus.BackColor = System.Drawing.Color.Transparent;
+            this.lStatus.Location = new System.Drawing.Point(189, 329);
+            this.lStatus.Name = "lStatus";
+            this.lStatus.Size = new System.Drawing.Size(34, 15);
+            this.lStatus.TabIndex = 42;
+            this.lStatus.Text = "0 / 0";
+            // 
+            // pbTarget
+            // 
+            this.pbTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbTarget.Location = new System.Drawing.Point(109, 280);
+            this.pbTarget.Maximum = 0;
+            this.pbTarget.Name = "pbTarget";
+            this.pbTarget.Size = new System.Drawing.Size(1038, 35);
+            this.pbTarget.TabIndex = 41;
+            // 
+            // lvStandBy
+            // 
+            this.lvStandBy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvStandBy.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.lvStandBy.FullRowSelect = true;
+            this.lvStandBy.GridLines = true;
+            this.lvStandBy.Location = new System.Drawing.Point(109, 76);
+            this.lvStandBy.Name = "lvStandBy";
+            this.lvStandBy.Size = new System.Drawing.Size(1038, 198);
+            this.lvStandBy.TabIndex = 40;
+            this.lvStandBy.UseCompatibleStateImageBehavior = false;
+            this.lvStandBy.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "큐";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "제목";
+            this.columnHeader2.Width = 425;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "이미지 링크";
+            this.columnHeader3.Width = 511;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(106, 58);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 15);
+            this.label5.TabIndex = 39;
+            this.label5.Text = "대기중인 항목";
             // 
             // tbAddress
             // 
@@ -104,119 +219,15 @@
             this.bLoad.TabIndex = 2;
             this.bLoad.Text = "다운로드";
             this.bLoad.UseVisualStyleBackColor = true;
-            this.bLoad.Click += new System.EventHandler(this.bLoad_Click);
+            this.bLoad.Click += new System.EventHandler(this.bLoad_ClickAsync);
             // 
-            // lDownloadStatusSize
+            // MarqueeColorBar
             // 
-            this.lDownloadStatusSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lDownloadStatusSize.AutoSize = true;
-            this.lDownloadStatusSize.Location = new System.Drawing.Point(189, 374);
-            this.lDownloadStatusSize.Name = "lDownloadStatusSize";
-            this.lDownloadStatusSize.Size = new System.Drawing.Size(36, 15);
-            this.lDownloadStatusSize.TabIndex = 47;
-            this.lDownloadStatusSize.Text = "0 MB";
-            // 
-            // lDownloadSize
-            // 
-            this.lDownloadSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lDownloadSize.AutoSize = true;
-            this.lDownloadSize.Location = new System.Drawing.Point(189, 359);
-            this.lDownloadSize.Name = "lDownloadSize";
-            this.lDownloadSize.Size = new System.Drawing.Size(36, 15);
-            this.lDownloadSize.TabIndex = 46;
-            this.lDownloadSize.Text = "0 MB";
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(96, 374);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(94, 15);
-            this.label12.TabIndex = 45;
-            this.label12.Text = "다운받은 크기 : ";
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(80, 359);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(110, 15);
-            this.label11.TabIndex = 44;
-            this.label11.Text = "총 다운로드 크기 : ";
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(100, 331);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(90, 15);
-            this.label9.TabIndex = 43;
-            this.label9.Text = "다운로드 상태: ";
-            // 
-            // lStatus
-            // 
-            this.lStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lStatus.AutoSize = true;
-            this.lStatus.BackColor = System.Drawing.Color.Transparent;
-            this.lStatus.Location = new System.Drawing.Point(189, 331);
-            this.lStatus.Name = "lStatus";
-            this.lStatus.Size = new System.Drawing.Size(34, 15);
-            this.lStatus.TabIndex = 42;
-            this.lStatus.Text = "0 / 0";
-            // 
-            // pbTarget
-            // 
-            this.pbTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbTarget.Location = new System.Drawing.Point(109, 282);
-            this.pbTarget.Maximum = 0;
-            this.pbTarget.Name = "pbTarget";
-            this.pbTarget.Size = new System.Drawing.Size(1038, 35);
-            this.pbTarget.TabIndex = 41;
-            // 
-            // lvStandBy
-            // 
-            this.lvStandBy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvStandBy.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.lvStandBy.FullRowSelect = true;
-            this.lvStandBy.GridLines = true;
-            this.lvStandBy.Location = new System.Drawing.Point(109, 76);
-            this.lvStandBy.Name = "lvStandBy";
-            this.lvStandBy.Size = new System.Drawing.Size(1038, 200);
-            this.lvStandBy.TabIndex = 40;
-            this.lvStandBy.UseCompatibleStateImageBehavior = false;
-            this.lvStandBy.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "큐";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "제목";
-            this.columnHeader2.Width = 586;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "이미지 링크";
-            this.columnHeader3.Width = 351;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(106, 58);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 15);
-            this.label5.TabIndex = 39;
-            this.label5.Text = "대기중인 항목";
+            this.MarqueeColorBar.Location = new System.Drawing.Point(503, 353);
+            this.MarqueeColorBar.Name = "MarqueeColorBar";
+            this.MarqueeColorBar.Size = new System.Drawing.Size(436, 21);
+            this.MarqueeColorBar.TabIndex = 49;
+            this.MarqueeColorBar.Visible = false;
             // 
             // frmMain
             // 
@@ -258,6 +269,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Label label5;
+        private Hitomi_Copy_3.MarqueeColorBar MarqueeColorBar;
     }
 }
 

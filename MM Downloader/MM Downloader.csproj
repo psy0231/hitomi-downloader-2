@@ -55,10 +55,17 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="HitomiQueue.cs" />
+    <Compile Include="MarqueeColorBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MarqueeColorBar.Designer.cs">
+      <DependentUpon>MarqueeColorBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="MM\MMArticle.cs" />
     <Compile Include="MM\MMParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewBuffer.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>

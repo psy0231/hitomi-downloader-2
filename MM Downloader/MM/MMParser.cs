@@ -13,17 +13,41 @@ namespace MM_Downloader.MM
         /// <param name="html"></param>
         public static List<string> ParseManga(string html)
         {
-            Regex regex = new Regex("(http://wasabisyrup.com/archives/.*?)\\\"");
-            Match match = regex.Match(html);
             List<string> result = new List<string>();
-
-            while (match.Success)
             {
-                result.Add(match.Groups[1].Value);
-                match = match.NextMatch();
+                Regex regex = new Regex("(http://wasabisyrup.com/archives/.*?)\\\"");
+                Match match = regex.Match(html);
+
+                while (match.Success)
+                {
+                    result.Add(match.Groups[1].Value);
+                    match = match.NextMatch();
+                }
+            }
+            {
+                Regex regex = new Regex("(http://www.shencomics.com/archives/.*?)\\\"");
+                Match match = regex.Match(html);
+
+                while (match.Success)
+                {
+                    result.Add(match.Groups[1].Value);
+                    match = match.NextMatch();
+                }
             }
 
+
             return result;
+        }
+
+        /// <summary>
+        /// ex: https://marumaru.in/b/manga/241501
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
+        public static string GetTitle(string html)
+        {
+            string title_s = Regex.Split(Regex.Split(html, @"\<title\>")[1], @"\<\/title\>")[0];
+            return title_s.Remove(0, "MARUMARU - 마루마루 - ".Length);
         }
 
         /// <summary>
@@ -44,6 +68,17 @@ namespace MM_Downloader.MM
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// ex: http://wasabisyrup.com/archives/xnc4I45ZMRI
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
+        public static string GetArchive(string html)
+        {
+            string title_s = Regex.Split(Regex.Split(html, @"\<title\>")[1], @"\<\/title\>")[0];
+            return Regex.Replace(title_s, " \\| WasabiSyrup", "");
         }
     }
 }

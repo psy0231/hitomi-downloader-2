@@ -4,5 +4,7 @@ namespace MM_Downloader.MM
 {
     class MMArticle
     {
+        public string Title;
+        public string Archive;
     }
 }
