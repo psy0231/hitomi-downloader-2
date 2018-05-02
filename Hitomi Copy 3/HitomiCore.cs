@@ -34,39 +34,5 @@ namespace Hitomi_Copy_2
                 tuple.Item2(tuple.Item1);
             }
         }
-
-        public delegate void CallBack2(HitomiArticle v, PicElement pe, int i);
-        static public void DownloadArticle(HitomiArticle ha, string folder, CallBack2 callback, PicElement pe, int v1, int v2)
-        {
-            Directory.CreateDirectory(folder);
-            for (int i = v1; i < v2; i++)
-            {
-                WebClient wc = new WebClient();
-                wc.Headers["Accept-Encoding"] = "application/x-gzip";
-                wc.Encoding = Encoding.UTF8;
-                wc.DownloadFileCompleted += wc_da;
-                if (ha.TagsKor == false)
-                    wc.DownloadFileAsync(new Uri(HitomiDef.GetDownloadImageAddress(ha.Magic, ha.ImagesLink[i])),
-                        Path.Combine(folder, ha.ImagesLink[i]),
-                        new Tuple<HitomiArticle, int, CallBack2, PicElement>(ha, i, callback, pe));
-            }
-        }
-        static private void wc_da(object sender, AsyncCompletedEventArgs e)
-        {
-            var tuple = (Tuple<HitomiArticle, int, CallBack2, PicElement>)e.UserState;
-            lock (tuple.Item3)
-            {
-                tuple.Item3(tuple.Item1, tuple.Item4, tuple.Item2);
-            }
-        }
-
-        static public string DownloadThumbnail(HitomiArticle ha, string prefix = "")
-        {
-            string temp = Path.GetTempFileName();
-            WebClient wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            wc.DownloadFile(prefix + ha.Thumbnail, temp);
-            return temp;
-        }
     }
 }
