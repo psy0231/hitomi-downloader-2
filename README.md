@@ -4,7 +4,7 @@
 
 Newest Beta Version!!
 
-https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/3.0
+https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/3.1
 
 Latest Stability Version (Release.zip)
 
