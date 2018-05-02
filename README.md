@@ -6,10 +6,6 @@ Newest Beta Version!!
 
 https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/3.1
 
-Latest Stability Version (Release.zip)
-
-https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/2.11
-
 Ex-Hentai Downloader
 
 https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/1.1
