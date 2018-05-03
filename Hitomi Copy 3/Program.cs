@@ -13,6 +13,7 @@ namespace Hitomi_Copy_3
             Assembly thisAssembly = Assembly.GetExecutingAssembly();
             var name = args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll";
 
+            string[] names = thisAssembly.GetManifestResourceNames();
             var resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(name));
             if (resources.Count() > 0)
             {
@@ -23,7 +24,6 @@ namespace Hitomi_Copy_3
                     {
                         byte[] assembly = new byte[stream.Length];
                         stream.Read(assembly, 0, assembly.Length);
-                        Console.WriteLine("Dll file load : " + resourceName);
                         return Assembly.Load(assembly);
                     }
                 }
@@ -38,7 +38,11 @@ namespace Hitomi_Copy_3
         static void Main()
         {
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ResolveAssembly);
-            
+            AppSetup();
+        }
+
+        static void AppSetup()
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());
