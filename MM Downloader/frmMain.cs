@@ -66,6 +66,12 @@ namespace MM_Downloader
             wc.Encoding = Encoding.UTF8;
             wc.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
             wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36");
+            //wc.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+            wc.Headers.Add(HttpRequestHeader.AcceptLanguage, "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7");
+            wc.Headers.Add(HttpRequestHeader.CacheControl, "max-age=0");
+            //wc.Headers.Add(HttpRequestHeader.Connection, "keep-alive");
+            wc.Headers.Add(HttpRequestHeader.Host, "wasabisyrup.com");
+            wc.Headers.Add(HttpRequestHeader.Upgrade, "1");
 
             string html = wc.DownloadString(url);
             var images = MMParser.ParseArchives(html);
