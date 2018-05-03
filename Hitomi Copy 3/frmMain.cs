@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -60,6 +61,7 @@ namespace Hitomi_Copy_3
 
             vThread.Value = HitomiSetting.Instance.GetModel().Thread;
             lThread.Text = vThread.Value.ToString();
+            tgAutoZip.Checked = HitomiSetting.Instance.GetModel().Zip;
 
             Task.Run(() => UpdateStatistics());
         }
@@ -531,7 +533,11 @@ namespace Hitomi_Copy_3
                     if (!copy.Contains(title))
                         foreach (var elem in check)
                             if (elem.Label == title)
+                            {
                                 elem.Downloading = false;
+                                if (HitomiSetting.Instance.GetModel().Zip)
+                                    Task.Run(() => ZipArticle(elem.Article));
+                            }
                 }
         }
         private void UpdateLabel(string v)
@@ -542,6 +548,13 @@ namespace Hitomi_Copy_3
                 return;
             }
             lStatus.Text = v;
+        }
+        private void ZipArticle(HitomiArticle article)
+        {
+            string zip_path = MakeDownloadDirectory(article);
+            zip_path = zip_path.Remove(zip_path.Length - 1);
+            ZipFile.CreateFromDirectory(zip_path, $"{zip_path}.zip");
+            Directory.Delete(zip_path, true);
         }
 
         long download_size = 0;
@@ -852,6 +865,13 @@ namespace Hitomi_Copy_3
             foreach (PicElement pe in stayed)
                 pe.Selected = false;
         }
+        
+        private void tgAutoZip_CheckedChanged(object sender, EventArgs e)
+        {
+            HitomiSetting.Instance.GetModel().Zip = tgAutoZip.Checked;
+            HitomiSetting.Instance.Save();
+        }
         #endregion
+
     }
 }
