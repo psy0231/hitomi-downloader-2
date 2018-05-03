@@ -15,41 +15,12 @@ namespace MM_Downloader.MM
         {
             List<string> result = new List<string>();
             {
-                Regex regex = new Regex("(http://wasabisyrup.com/archives/.*?)\\\"");
+                Regex regex = new Regex("/archives/(.*?)\\\"");
                 Match match = regex.Match(html);
 
                 while (match.Success)
                 {
-                    result.Add(match.Groups[1].Value);
-                    match = match.NextMatch();
-                }
-            }
-            {
-                Regex regex = new Regex("http://www.shencomics.com/archives/(.*?)\\\"");
-                Match match = regex.Match(html);
-
-                while (match.Success)
-                {
-                    result.Add("http://wasabisyrup.com/archives/" + match.Groups[1].Value);
-                    match = match.NextMatch();
-                }
-            }
-            {
-                Regex regex = new Regex("http://blog.yuncomics.com/archives/(.*?)\\\"");
-                Match match = regex.Match(html);
-
-                while (match.Success)
-                {
-                    result.Add("http://wasabisyrup.com/archives/" + match.Groups[1].Value);
-                    match = match.NextMatch();
-                }
-            }
-            {
-                Regex regex = new Regex("http://www.yuncomics.com/archives/(.*?)\\\"");
-                Match match = regex.Match(html);
-
-                while (match.Success)
-                {
+                    if (match.Groups[1].Value.Trim() != "")
                     result.Add("http://wasabisyrup.com/archives/" + match.Groups[1].Value);
                     match = match.NextMatch();
                 }
