@@ -147,6 +147,7 @@
     <Compile Include="InfoForm.Designer.cs">
       <DependentUpon>InfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Language.cs" />
     <Compile Include="MarqueeColorBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -154,6 +155,7 @@
       <DependentUpon>MarqueeColorBar.cs</DependentUpon>
     </Compile>
     <Compile Include="MM\MMArticle.cs" />
+    <Compile Include="MM\MMCaptcha.cs" />
     <Compile Include="MM\MMParser.cs" />
     <Compile Include="PicElement.cs">
       <SubType>UserControl</SubType>
