@@ -9,6 +9,12 @@ Hitomi Copy 3/bin/*
 Hitomi Copy 3/obj/*
 Hitomi Copy 3/packages/*
 
+Hitomi Copy 2/*
+EXH Downloader/*
+MM Downloader/*
+Pixiv Downloader/*
+Twitter Downloader/*
+
 EXH Downloader/.vs/*
 EXH Downloader/bin/*
 EXH Downloader/obj/*
