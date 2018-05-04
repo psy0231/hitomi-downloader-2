@@ -84,6 +84,8 @@
     <Compile Include="Data\HitomiDataModel.cs" />
     <Compile Include="Data\HitomiDataQuery.cs" />
     <Compile Include="Data\HitomiDataSearch.cs" />
+    <Compile Include="EH\ExHentaiArticle.cs" />
+    <Compile Include="EH\ExHentaiParser.cs" />
     <Compile Include="frmArtistInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +153,8 @@
     <Compile Include="MarqueeColorBar.Designer.cs">
       <DependentUpon>MarqueeColorBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="MM\MMArticle.cs" />
+    <Compile Include="MM\MMParser.cs" />
     <Compile Include="PicElement.cs">
       <SubType>UserControl</SubType>
     </Compile>

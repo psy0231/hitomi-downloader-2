@@ -5,7 +5,9 @@ using Hitomi_Copy;
 using Hitomi_Copy.Data;
 using Hitomi_Copy_2;
 using Hitomi_Copy_2.Analysis;
+using Hitomi_Copy_2.EH;
 using MetroFramework;
+using MM_Downloader.MM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -198,7 +200,186 @@ namespace Hitomi_Copy_3
 
         private void ProcessUrl(string url)
         {
+            if (url.Contains("exhentai.org"))
+            {
+                DownloadEXH(url);
+            }
+            else if (url.Contains("marumaru.in"))
+            {
+                DownloadMMAsync(url);
+            }
+        }
+        #endregion
 
+        #region 다운로드 - 익헨
+        ExHentaiArticle article;
+        string[] pages;
+
+        private static WebClient GetEXHWebClient()
+        {
+            WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            wc.Headers.Add(HttpRequestHeader.Cookie, "igneous=fc251d23e;ipb_member_id=1904662;ipb_pass_hash=ff8940e2cc632d601091b8836fca66f5;");
+            return wc;
+        }
+
+        private void DownloadEXH(string url)
+        {
+            string article_source = GetEXHWebClient().DownloadString(new Uri(url));
+            pages = ExHentaiParser.GetPagesUri(article_source);
+            article = ExHentaiParser.GetArticleData(article_source);
+            IncrementProgressBarMax(article.Length);
+            Task.Run(() => download_page());
+        }
+
+        private void download_page()
+        {
+            foreach (string page_uri in pages)
+            {
+                WebClient wc1 = GetEXHWebClient();
+                wc1.DownloadStringCompleted += wc_page_cb;
+                wc1.DownloadStringAsync(new Uri(page_uri), article);
+            }
+        }
+
+        private void wc_page_cb(object sender, DownloadStringCompletedEventArgs e)
+        {
+            var images = ExHentaiParser.GetImagesUri(e.Result);
+            foreach (string image_uri in images)
+            {
+                WebClient wc = GetEXHWebClient();
+                wc.DownloadStringCompleted += wc_image_cb;
+                wc.DownloadStringAsync(new Uri(image_uri), e.UserState);
+                System.Threading.Thread.Sleep(500);
+            }
+        }
+
+        private void wc_image_cb(object sender, DownloadStringCompletedEventArgs e)
+        {
+            ImageLinkCallback(ExHentaiParser.GetImagesAddress(e.Result), e.UserState as ExHentaiArticle);
+        }
+        
+        private string MakeDownloadDirectory(ExHentaiArticle article)
+        {
+            string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            string title = article.Title ?? "";
+            if (title != null)
+                foreach (char c in invalid) title = title.Replace(c.ToString(), "");
+            return $"{AppDomain.CurrentDomain.BaseDirectory}\\{title}\\";
+        }
+
+        private void ImageLinkCallback(string uri, ExHentaiArticle article)
+        {
+            if (lvStandBy.InvokeRequired)
+            {
+                Invoke(new Action(() => ImageLinkCallback(uri, article)));
+                return;
+            }
+            Directory.CreateDirectory(MakeDownloadDirectory(article));
+            ++count;
+            lvStandBy.Items.Add(new ListViewItem(new string[]
+            {
+                    count.ToString(),
+                    article.Title,
+                    uri
+            }));
+            download_check.Add(article.Title);
+            lock (download_queue)
+                download_queue.Add(uri, MakeDownloadDirectory(article) + uri.Split('/').Last(), count);
+        }
+        #endregion
+
+        #region 다운로드 - 마루마루
+        List<Tuple<string, MMArticle>> images_uri = new List<Tuple<string, MMArticle>>();
+
+        private async void DownloadMMAsync(string url)
+        {
+            WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            wc.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+            wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36");
+
+            string html = wc.DownloadString(url);
+            var archives = MMParser.ParseManga(html);
+            images_uri.Clear();
+
+            await Task.Run(() => DownloadArchivesAsync(archives, MMParser.GetTitle(html)));
+            await Task.Run(() => DownloadImages());
+        }
+
+        private void DownloadArchivesAsync(List<string> urls, string title)
+        {
+            List<Task> tasks = new List<Task>();
+            foreach (var url in urls)
+            {
+                tasks.Add(Task.Run(() => DownloadArchives(url, title)));
+                Thread.Sleep(500);
+            }
+            Task.WaitAll(tasks.ToArray());
+        }
+
+        private void DownloadArchives(string url, string title)
+        {
+            WebClient wc = new WebClient();
+
+            wc.Encoding = Encoding.UTF8;
+            wc.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+            wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36");
+            //wc.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+            wc.Headers.Add(HttpRequestHeader.AcceptLanguage, "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7");
+            wc.Headers.Add(HttpRequestHeader.CacheControl, "max-age=0");
+            //wc.Headers.Add(HttpRequestHeader.Connection, "keep-alive");
+            wc.Headers.Add(HttpRequestHeader.Cookie, "__cfduid=d46fd6709d735a04a08fd60d89582a3911525265471; _ga=GA1.2.335086797.1525265472; _gid=GA1.2.928930778.1525265472; __gads=ID=fe459c0742f63207:T=1525265474:S=ALNI_Mb08qlp3nTYBBz1WptFsP7GviAwEw; impx={%22imp_usy%22:{%22capCount%22:5%2C%22capExpired%22:1525351873}}; PHPSESSID=4bae062279cf21003588d75744ba4ed1");
+            wc.Headers.Add(HttpRequestHeader.Host, "wasabisyrup.com");
+            wc.Headers.Add(HttpRequestHeader.Referer, "http://203.233.24.233/tm/?a=CR&b=WIN&c=799001634617&d=10003&e=2013&f=d2FzYWJpc3lydXAuY29tL2FyY2hpdmVzLzQyODA2MQ==&g=1525401005814&h=1525401004232&y=0&z=0&x=1&w=2018-02-12&in=2013_00009301&id=20180504");
+            wc.Headers.Add(HttpRequestHeader.Upgrade, "1");
+
+            string html = wc.DownloadString(url);
+            var images = MMParser.ParseArchives(html);
+            MMArticle ta = new MMArticle();
+            ta.Title = title;
+            ta.Archive = MMParser.GetArchive(html);
+
+            foreach (var uri in images)
+            {
+                IncrementProgressBarMax();
+                lock (images) images_uri.Add(new Tuple<string, MMArticle>(uri, ta));
+            }
+        }
+
+        private void DownloadImages()
+        {
+            foreach (var tuple in images_uri)
+                Task.Run(() => DownloadImage(tuple.Item1, tuple.Item2));
+        }
+
+        private string MakeDownloadDirectory(MMArticle article)
+        {
+            string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            string title = article.Title ?? "";
+            string archive = article.Archive ?? "";
+            if (title != null) foreach (char c in invalid) title = title.Replace(c.ToString(), "");
+            if (archive != null) foreach (char c in invalid) archive = archive.Replace(c.ToString(), "");
+            return $"{AppDomain.CurrentDomain.BaseDirectory}\\{title}\\{archive}\\";
+        }
+
+        private void DownloadImage(string uri, MMArticle article)
+        {
+            if (lvStandBy.InvokeRequired)
+            {
+                Invoke(new Action(() => DownloadImage(uri, article)));
+                return;
+            }
+            Directory.CreateDirectory(MakeDownloadDirectory(article));
+            ++count;
+            lvStandBy.Items.Add(new ListViewItem(new string[]
+            {
+                    count.ToString(),
+                    article.Title,
+                    uri
+            }));
+            lock (download_queue)
+                download_queue.Add(@"http://wasabisyrup.com" + uri, MakeDownloadDirectory(article) + uri.Split('/').Last(), count);
         }
         #endregion
 
@@ -498,6 +679,15 @@ namespace Hitomi_Copy_3
             }
             pbTarget.Maximum += 1;
         }
+        private void IncrementProgressBarMax(int value)
+        {
+            if (pbTarget.InvokeRequired)
+            {
+                Invoke(new Action<int>(IncrementProgressBarMax), new object[] { value });
+                return;
+            }
+            pbTarget.Maximum += value;
+        }
         private void IncrementProgressBarValue()
         {
             if (pbTarget.InvokeRequired)
@@ -531,13 +721,16 @@ namespace Hitomi_Copy_3
                     List<string> copy = download_check.ToList();
                     List<PicElement> check = downloaded_check.ToList();
                     if (!copy.Contains(title))
+                    {
                         foreach (var elem in check)
                             if (elem.Label == title)
                             {
                                 elem.Downloading = false;
                                 if (HitomiSetting.Instance.GetModel().Zip)
                                     Task.Run(() => ZipArticle(elem.Article));
+                                return;
                             }
+                    }
                 }
         }
         private void UpdateLabel(string v)
