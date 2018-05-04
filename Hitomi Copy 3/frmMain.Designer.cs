@@ -65,6 +65,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.이미지로저장SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tgAutoZip = new MetroFramework.Controls.MetroToggle();
             this.bSync = new MetroFramework.Controls.MetroButton();
             this.lThread = new MetroFramework.Controls.MetroLabel();
             this.vThread = new MetroFramework.Controls.MetroTrackBar();
@@ -81,8 +83,6 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.tgAutoZip = new MetroFramework.Controls.MetroToggle();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -599,6 +599,30 @@
             this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.VerticalScrollbarSize = 10;
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label2.Location = new System.Drawing.Point(878, 399);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 15);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "자동 압축";
+            // 
+            // tgAutoZip
+            // 
+            this.tgAutoZip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tgAutoZip.AutoSize = true;
+            this.tgAutoZip.Location = new System.Drawing.Point(912, 397);
+            this.tgAutoZip.Name = "tgAutoZip";
+            this.tgAutoZip.Size = new System.Drawing.Size(80, 19);
+            this.tgAutoZip.Style = MetroFramework.MetroColorStyle.Pink;
+            this.tgAutoZip.TabIndex = 17;
+            this.tgAutoZip.Text = "Off";
+            this.tgAutoZip.UseSelectable = true;
+            this.tgAutoZip.CheckedChanged += new System.EventHandler(this.tgAutoZip_CheckedChanged);
+            // 
             // bSync
             // 
             this.bSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -849,30 +873,6 @@
             this.MemoryUsageUpdateTimer.Interval = 1000;
             this.MemoryUsageUpdateTimer.Tick += new System.EventHandler(this.MemoryUsageUpdateTimer_Tick);
             // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(878, 399);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 15);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "자동 압축";
-            // 
-            // tgAutoZip
-            // 
-            this.tgAutoZip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tgAutoZip.AutoSize = true;
-            this.tgAutoZip.Location = new System.Drawing.Point(912, 397);
-            this.tgAutoZip.Name = "tgAutoZip";
-            this.tgAutoZip.Size = new System.Drawing.Size(80, 19);
-            this.tgAutoZip.Style = MetroFramework.MetroColorStyle.Pink;
-            this.tgAutoZip.TabIndex = 17;
-            this.tgAutoZip.Text = "Off";
-            this.tgAutoZip.UseSelectable = true;
-            this.tgAutoZip.CheckedChanged += new System.EventHandler(this.tgAutoZip_CheckedChanged);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -892,7 +892,7 @@
             this.Name = "frmMain";
             this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 25);
             this.Style = MetroFramework.MetroColorStyle.Pink;
-            this.Text = "Hitom Copy 3.1";
+            this.Text = "Hitom Copy 3.2";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.MainTab.ResumeLayout(false);

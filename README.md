@@ -2,10 +2,6 @@
 
 ## Download
 
-Newest Beta Version!!
+Hitomi, Ex-Hentai, Marumaru Intergration downloader
 
-https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/3.1
-
-Ex-Hentai Downloader
-
-https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/1.1
+https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/3.2
