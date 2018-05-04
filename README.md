@@ -8,14 +8,18 @@ https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/3.2
 
 ## History
 
+### Alpha Version 
 ![hitomi history](Docs/Image2/1.png)
 
+### Version 1.0
 ![hitomi history](Docs/Image2/2.png)
 
+### Version 2.0
 ![hitomi history](Docs/Image2/3.png)
 
 ![hitomi history](Docs/Image2/4.png)
 
+### Version 3.0
 ![hitomi history](Docs/Image2/5.png)
 
 ![hitomi history](Docs/Image2/6.png)
