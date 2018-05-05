@@ -34,9 +34,7 @@ namespace Hitomi_Copy_3
 
             int now_major = Convert.ToInt32(Version.Split('.')[0]);
             int now_minor = Convert.ToInt32(Version.Split('.')[1]);
-
-            return true;
-
+            
             if (checking_major > now_major) return true;
             if (checking_major < now_major) return false; // error
             if (checking_minor > now_minor) return true;
