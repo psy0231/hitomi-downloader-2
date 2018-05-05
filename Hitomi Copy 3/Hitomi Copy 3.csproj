@@ -180,6 +180,7 @@
     <Compile Include="SearchPanel.Designer.cs">
       <DependentUpon>SearchPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateManager.cs" />
     <Compile Include="ViewBuffer.cs" />
     <EmbeddedResource Include="frmArtistInfo.resx">
       <DependentUpon>frmArtistInfo.cs</DependentUpon>
@@ -249,5 +250,6 @@
     <EmbeddedResource Include="Resources\HtmlAgilityPack.dll" />
     <Content Include="TETO.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
