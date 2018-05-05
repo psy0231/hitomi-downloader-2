@@ -4,6 +4,7 @@ using hitomi.Parser;
 using Hitomi_Copy_3;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Hitomi_Copy
@@ -168,7 +169,10 @@ namespace Hitomi_Copy
             {
                 pb.Location = new Point(3, 3);
                 pb.Size = new Size(pannelw - 6, pannelh - 30);
-                pb.Image = image = Image.FromFile(addr);
+                using (FileStream fs = new FileStream(addr, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
+                {
+                    pb.Image = image = Image.FromStream(fs);
+                }
                 pb.SizeMode = PictureBoxSizeMode.Zoom;
                 pb.Paint += Picture_Paint;
                 pb.MouseEnter += Picture_MouseEnter;

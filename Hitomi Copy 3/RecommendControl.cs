@@ -72,7 +72,10 @@ namespace Hitomi_Copy_3
             try
             {
                 PictureBox[] pbs = { pb1, pb2, pb3, pb4, pb5 };
-                pbs[i].Image = Image.FromFile(temp);
+                using (FileStream fs = new FileStream(temp, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
+                {
+                    pbs[i].Image = Image.FromStream(fs);
+                }
 
                 lock (info)
                 {
