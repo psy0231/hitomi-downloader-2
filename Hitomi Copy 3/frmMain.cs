@@ -628,7 +628,7 @@ namespace Hitomi_Copy_3
                 // 중복되는 항목 처리
                 foreach (var a in stayed)
                     if (a.Article.Title == pe.Article.Title)
-                    { pe.Article.Title += " " + pe.Article.Magic; break; }
+                    { pe.Article.Title += " " + pe.Article.Magic; pe.Label += " " + pe.Article.Magic; break; }
                 stayed.Add(pe);
             }
             AddPanel(pe);
