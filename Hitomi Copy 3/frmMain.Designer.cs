@@ -892,7 +892,7 @@
             this.Name = "frmMain";
             this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 25);
             this.Style = MetroFramework.MetroColorStyle.Pink;
-            this.Text = "Hitom Copy 3.2";
+            this.Text = "Hitom Copy ";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.MainTab.ResumeLayout(false);

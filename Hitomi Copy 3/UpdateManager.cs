@@ -1,8 +1,69 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
+
 namespace Hitomi_Copy_3
 {
-    class UpdateManager
+    public class UpdateManager
     {
+        public const string Version = "3.2";
+        public const string UpdateCheckUrl = @"https://raw.githubusercontent.com/dc-koromo/hitomi-downloader-2/master/version";
+
+        static public string NewestVersionUrl;
+
+        static public bool UpdateRequired()
+        {
+            UpdateFileTidy();
+
+            string version_text;
+            using (var wc = new System.Net.WebClient())
+                version_text = wc.DownloadString(UpdateCheckUrl);
+
+            string[] lines = version_text.Split(
+                new[] { "\r\n", "\r", "\n" },
+                StringSplitOptions.None
+            );
+
+            NewestVersionUrl = lines[2];
+
+            int checking_major = Convert.ToInt32(lines[0].Split('.')[0]);
+            int checking_minor = Convert.ToInt32(lines[0].Split('.')[1]);
+
+            int now_major = Convert.ToInt32(Version.Split('.')[0]);
+            int now_minor = Convert.ToInt32(Version.Split('.')[1]);
+
+            return true;
+
+            if (checking_major > now_major) return true;
+            if (checking_major < now_major) return false; // error
+            if (checking_minor > now_minor) return true;
+
+            return false;
+        }
+
+        static public void UpdateFileTidy()
+        {
+            string now_fpath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            if (File.Exists(now_fpath + ".tmp"))
+                File.Delete(now_fpath + ".tmp");
+        }
+
+        static public void UpdateProgram()
+        {
+            string temp = Path.GetTempFileName();
+
+            using (var wc = new System.Net.WebClient())
+                wc.DownloadFile(NewestVersionUrl, temp);
+
+            string now_fpath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            File.Move(now_fpath, now_fpath + ".tmp");
+            File.Move(temp, now_fpath);
+
+            Process.Start(now_fpath);
+            Application.Exit();
+        }
     }
 }

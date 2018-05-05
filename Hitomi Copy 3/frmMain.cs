@@ -38,6 +38,8 @@ namespace Hitomi_Copy_3
         
         private void frmMain_Load(object sender, EventArgs e)
         {
+            Text += UpdateManager.Version;
+
             tbInfo.Text += "Robust Hitomi Copy Machine Version 3\r\n";
             tbInfo.Text += "Copyright (C) 2018. Hitomi Parser Developers\r\n";
             tbInfo.Text += "\r\n";
@@ -66,7 +68,21 @@ namespace Hitomi_Copy_3
             tgAutoZip.Checked = HitomiSetting.Instance.GetModel().Zip;
 
             Task.Run(() => UpdateStatistics());
+            Task.Run(() => CheckUpdate());
         }
+
+        #region 업데이트 확인
+        private void CheckUpdate()
+        {
+            if (UpdateManager.UpdateRequired())
+            {
+                if (DialogResult.Yes == MetroMessageBox.Show(this, "새로운 버전이 출시되었습니다. 다운로드할까요? (Yes 버튼을 누르면 잠시후 프로그램을 재시작합니다.)", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+                {
+                    UpdateManager.UpdateProgram();
+                }
+            }
+        }
+        #endregion
 
         #region 검색
         private void bSearch_Click(object sender, EventArgs e)
