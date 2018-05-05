@@ -1031,7 +1031,7 @@ namespace Hitomi_Copy_3
         private void RecommendPannel_MouseWheel(object sender, MouseEventArgs e)
         {
             if (RecommendPannel.VerticalScroll.Value == RecommendPannel.VerticalScroll.Maximum - RecommendPannel.VerticalScroll.LargeChange + 1)
-                MoreLoadRecommend();
+                Task.Run(() => MoreLoadRecommend());
         }
 
         private void 이미지로저장SToolStripMenuItem_Click(object sender, EventArgs e)
