@@ -183,7 +183,7 @@ namespace Hitomi_Copy
             Close();
             (Application.OpenForms[0] as frmMain).BringToFront();
         }
-
+        
         private void bDownload_Click(object sender, EventArgs e)
         {
             foreach (var pe in stayed)

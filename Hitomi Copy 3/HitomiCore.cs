@@ -27,12 +27,19 @@ namespace Hitomi_Copy_2
         {
             Tuple<PicElement, CallBack> tuple = (Tuple<PicElement, CallBack>)e.UserState;
 
-            tuple.Item1.Article.ImagesLink = HitomiGalleryInfo.GetImageLink(e.Result);
-
-            lock (tuple.Item2)
+            try
             {
-                tuple.Item2(tuple.Item1);
+                tuple.Item1.Article.ImagesLink = HitomiGalleryInfo.GetImageLink(e.Result);
+                lock (tuple.Item2)
+                {
+                    tuple.Item2(tuple.Item1);
+                }
             }
+            catch
+            {
+
+            }
+
         }
     }
 }

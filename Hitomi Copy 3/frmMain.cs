@@ -35,7 +35,7 @@ namespace Hitomi_Copy_3
 
             RecommendPannel.MouseWheel += RecommendPannel_MouseWheel;
         }
-        
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             Text += UpdateManager.Version;
@@ -106,7 +106,7 @@ namespace Hitomi_Copy_3
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("/")) start_element = Convert.ToInt32(a.Substring(1)); });
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("?")) start_element = Convert.ToInt32(a.Substring(1)); });
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":") && !a.StartsWith("/")) positive_data.Add(a.Trim()); });
-            tbExcludeTag.Text.Trim().Split(' ').ToList().ForEach((a) => negative_data.Add(Regex.Replace(a.Trim(),",","")));
+            tbExcludeTag.Text.Trim().Split(' ').ToList().ForEach((a) => negative_data.Add(Regex.Replace(a.Trim(), ",", "")));
             query.Common = positive_data;
             query.TagExclude = negative_data;
             foreach (var elem in tbSearch.Text.Trim().Split(' '))
@@ -274,7 +274,7 @@ namespace Hitomi_Copy_3
         {
             ImageLinkCallback(ExHentaiParser.GetImagesAddress(e.Result), e.UserState as ExHentaiArticle);
         }
-        
+
         private string MakeDownloadDirectory(ExHentaiArticle article)
         {
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
@@ -654,7 +654,7 @@ namespace Hitomi_Copy_3
                 ImagePanel.Controls.SetChildIndex(controls[i], i);
         }
         #endregion
-        
+
         #region 다운로드 관련
         HitomiQueue download_queue;
         List<string> download_check = new List<string>();
@@ -815,30 +815,32 @@ namespace Hitomi_Copy_3
         int count = 0;
         private void ImageLinkCallback(PicElement pe)
         {
-            lock (lvStandBy)
+            if (lvStandBy.InvokeRequired)
             {
-                Directory.CreateDirectory(MakeDownloadDirectory(pe.Article));
-                for (int i = 0; i < pe.Article.ImagesLink.Count; i++)
+                Invoke(new Action<PicElement>(ImageLinkCallback), new object[] { pe });
+                return;
+            }
+            Directory.CreateDirectory(MakeDownloadDirectory(pe.Article));
+            for (int i = 0; i < pe.Article.ImagesLink.Count; i++)
+            {
+                ++count;
+                lvStandBy.Items.Add(new ListViewItem(new string[]
                 {
-                    ++count;
-                    lvStandBy.Items.Add(new ListViewItem(new string[]
-                    {
-                            count.ToString(),
-                            pe.Label,
-                            HitomiDef.GetDownloadImageAddress(pe.Article.Magic, pe.Article.ImagesLink[i])
-                    }));
-                    download_queue.Add(HitomiDef.GetDownloadImageAddress(pe.Article.Magic, pe.Article.ImagesLink[i]), Path.Combine(
-                        MakeDownloadDirectory(pe.Article), pe.Article.ImagesLink[i]),
-                        count);
-                    download_check.Add(pe.Label);
-                    IncrementProgressBarMax();
-                }
-                if (HitomiSetting.Instance.GetModel().SaveJson == true)
-                {
-                    HitomiJson hitomi_json = new HitomiJson(MakeDownloadDirectory(pe.Article));
-                    hitomi_json.SetModelFromArticle(pe.Article);
-                    hitomi_json.Save();
-                }
+                        count.ToString(),
+                        pe.Label,
+                        HitomiDef.GetDownloadImageAddress(pe.Article.Magic, pe.Article.ImagesLink[i])
+                }));
+                download_queue.Add(HitomiDef.GetDownloadImageAddress(pe.Article.Magic, pe.Article.ImagesLink[i]), Path.Combine(
+                    MakeDownloadDirectory(pe.Article), pe.Article.ImagesLink[i]),
+                    count);
+                download_check.Add(pe.Label);
+                IncrementProgressBarMax();
+            }
+            if (HitomiSetting.Instance.GetModel().SaveJson == true)
+            {
+                HitomiJson hitomi_json = new HitomiJson(MakeDownloadDirectory(pe.Article));
+                hitomi_json.SetModelFromArticle(pe.Article);
+                hitomi_json.Save();
             }
         }
 
@@ -974,6 +976,12 @@ namespace Hitomi_Copy_3
 
             if (!tbDownloadPath.Text.EndsWith("\\"))
                 tbDownloadPath.Text += "\\";
+
+            Task.Run(() => LazyAddArticle());
+        }
+
+        private void LazyAddArticle()
+        {
             try
             {
                 foreach (PicElement pe in stayed)
@@ -985,6 +993,7 @@ namespace Hitomi_Copy_3
                         pe.Invalidate();
                         AddArticle(pe);
                     }
+                    Thread.Sleep(100);
                 }
             }
             catch { }
