@@ -16,5 +16,11 @@ namespace Booru_Downloader
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // https://gelbooru.com/index.php?page=post&s=list&tags=asanagi
+            // gelbooru.com/index.php?page=post&amp;
+        }
     }
 }
