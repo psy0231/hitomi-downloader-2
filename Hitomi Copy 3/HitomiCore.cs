@@ -4,10 +4,9 @@ using hitomi.Parser;
 using Hitomi_Copy;
 using Hitomi_Copy_2.GalleryInfo;
 using System;
-using System.ComponentModel;
-using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 
 namespace Hitomi_Copy_2
 {
@@ -26,7 +25,7 @@ namespace Hitomi_Copy_2
         static private void wc_dasil(object sender, DownloadStringCompletedEventArgs e)
         {
             Tuple<PicElement, CallBack> tuple = (Tuple<PicElement, CallBack>)e.UserState;
-
+            
             try
             {
                 tuple.Item1.Article.ImagesLink = HitomiGalleryInfo.GetImageLink(e.Result);
@@ -37,9 +36,9 @@ namespace Hitomi_Copy_2
             }
             catch
             {
-
+                Thread.Sleep(1000);
+                DownloadAndSetImageLink(tuple.Item1, tuple.Item2);
             }
-
         }
     }
 }
