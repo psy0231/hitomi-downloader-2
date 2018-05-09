@@ -38,7 +38,13 @@ namespace Hitomi_Copy_3
         static void Main()
         {
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ResolveAssembly);
+            AppDomain.CurrentDomain.UnhandledException += unhandledException;
             AppSetup();
+        }
+
+        private static void unhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("프로그램 내부에서 예외처리되지 않은 오류가 발생했습니다. 오류가 계속된다면 개발자에게 문의하십시오. " + (e.ExceptionObject as Exception).Source + "\nStackTrace: " + (e.ExceptionObject as Exception).StackTrace);
         }
 
         static void AppSetup()
