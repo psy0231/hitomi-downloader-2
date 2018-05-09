@@ -762,6 +762,8 @@ namespace Hitomi_Copy_3
         {
             string zip_path = MakeDownloadDirectory(article);
             zip_path = zip_path.Remove(zip_path.Length - 1);
+            if (File.Exists($"{zip_path}.zip"))
+                File.Delete($"{zip_path}.zip");
             ZipFile.CreateFromDirectory(zip_path, $"{zip_path}.zip");
             Directory.Delete(zip_path, true);
         }
