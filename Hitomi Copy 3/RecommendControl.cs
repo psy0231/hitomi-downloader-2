@@ -38,6 +38,7 @@ namespace Hitomi_Copy_3
 
         private async Task LoadThumbnailAsync()
         {
+            List<string> titles = new List<string>();
             List<string> magics = new List<string>();
 
             for (int i = 0, j = 0; i < 5 && j < HitomiData.Instance.metadata_collection.Count; j++)
@@ -46,6 +47,10 @@ namespace Hitomi_Copy_3
                     HitomiData.Instance.metadata_collection[j].Language == HitomiSetting.Instance.GetModel().Language &&
                     HitomiData.Instance.metadata_collection[j].Artists.Contains(tbArtist.Text))
                 {
+                    string ttitle = HitomiData.Instance.metadata_collection[j].Name.Split('|')[0];
+                    if (titles.Count > 0 && !titles.TrueForAll((title) => StringAlgorithms.get_diff(ttitle, title) > 5)) continue;
+
+                    titles.Add(ttitle);
                     magics.Add(HitomiData.Instance.metadata_collection[j].ID.ToString());
                     i++;
                 }
