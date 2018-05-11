@@ -67,6 +67,8 @@ namespace Hitomi_Copy_3
             lThread.Text = vThread.Value.ToString();
             tgAutoZip.Checked = HitomiSetting.Instance.GetModel().Zip;
 
+            HitomiDate.Initialize();
+
             Task.Run(() => UpdateStatistics());
             Task.Run(() => CheckUpdate());
         }

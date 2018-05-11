@@ -49,6 +49,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pbImage = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -258,12 +260,34 @@
             this.pbImage.TabIndex = 6;
             this.pbImage.TabStop = false;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("맑은 고딕", 15F);
+            this.label6.Location = new System.Drawing.Point(881, 86);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(195, 28);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "업로드된 날짜(추정):";
+            // 
+            // lDate
+            // 
+            this.lDate.AutoSize = true;
+            this.lDate.Font = new System.Drawing.Font("맑은 고딕", 13F);
+            this.lDate.Location = new System.Drawing.Point(881, 111);
+            this.lDate.Name = "lDate";
+            this.lDate.Size = new System.Drawing.Size(48, 25);
+            this.lDate.TabIndex = 27;
+            this.lDate.Text = "날짜";
+            // 
             // frmGalleryInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1286, 470);
+            this.Controls.Add(this.lDate);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -322,5 +346,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lDate;
     }
 }

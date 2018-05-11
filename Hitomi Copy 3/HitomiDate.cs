@@ -4,6 +4,7 @@ using Hitomi_Copy.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace Hitomi_Copy_3
 {
     public class HitomiDate
     {
-        public static readonly Tuple<string, DateTime>[] date_data =
+        public static Tuple<string, DateTime>[] date_data =
         {
             new Tuple<string, DateTime> ("1223654", new DateTime(636616216800000000)),
             new Tuple<string, DateTime> ("1218503", new DateTime(636607750200000000)),
@@ -1017,8 +1018,49 @@ namespace Hitomi_Copy_3
             new Tuple<string, DateTime> ("41", new DateTime(635648742980000000)),
             new Tuple<string, DateTime> ("12968", new DateTime(633322053000000000)),
             new Tuple<string, DateTime> ("890", new DateTime(633150119400000000)),
-            new Tuple<string, DateTime> ("5233", new DateTime(633261139200000000))
+            new Tuple<string, DateTime> ("5233", new DateTime(633261139200000000)),
         };
+        
+        public static void Initialize()
+        {
+            var psort = date_data.ToList();
+            psort.Sort((a, b) => Convert.ToUInt32(b.Item1).CompareTo(Convert.ToUInt32(a.Item1)));
+            date_data = psort.ToArray();
+        }
+
+        public static DateTime estimate_datetime(int id)
+        {
+            int index = 0;
+            for (int i = 0; i < date_data.Length; i++)
+            {
+                if (Convert.ToInt32(date_data[i].Item1) <= id)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            
+            if (index > 0)
+            {
+                int gap = Convert.ToInt32(date_data[index - 1].Item1) - Convert.ToInt32(date_data[index].Item1);
+                int near = Convert.ToInt32(date_data[index - 1].Item1) - id;
+                double rate = (double)(gap - near) / gap;
+
+                long tgap = date_data[index - 1].Item2.Ticks - date_data[index].Item2.Ticks;
+                
+                return new DateTime((long)(tgap * rate + date_data[index].Item2.Ticks));
+            }
+            else
+            {
+                int gap = Convert.ToInt32(date_data[0].Item1) - Convert.ToInt32(date_data[1].Item1);
+                int near = id-Convert.ToInt32(date_data[0].Item1);
+                double rate = (double)(gap - near) / gap;
+
+                long tgap = date_data[0].Item2.Ticks - date_data[1].Item2.Ticks;
+
+                return new DateTime((long)(tgap * rate + date_data[1].Item2.Ticks));
+            }
+        }
 
 #if false
         public static List<Tuple<string, DateTime>> date_list = new List<Tuple<string, DateTime>>();

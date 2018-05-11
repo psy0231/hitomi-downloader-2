@@ -41,6 +41,7 @@ namespace Hitomi_Copy
 
         private void frmGalleryInfo_LoadAsync(object sender, EventArgs e)
         {
+            lDate.Text = HitomiDate.estimate_datetime(Convert.ToInt32(id)).ToString();
             if (pic != null)
             {
                 pbImage.Image = pic.Image;
