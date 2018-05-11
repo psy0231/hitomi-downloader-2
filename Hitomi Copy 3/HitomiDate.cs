@@ -1039,27 +1039,17 @@ namespace Hitomi_Copy_3
                     break;
                 }
             }
+
+            if (index == 0)
+                index = 1;
+
+            int gap = Convert.ToInt32(date_data[index - 1].Item1) - Convert.ToInt32(date_data[index].Item1);
+            int near = Convert.ToInt32(date_data[index - 1].Item1) - id;
+            double rate = (double)(gap - near) / gap;
+
+            long tgap = date_data[index - 1].Item2.Ticks - date_data[index].Item2.Ticks;
             
-            if (index > 0)
-            {
-                int gap = Convert.ToInt32(date_data[index - 1].Item1) - Convert.ToInt32(date_data[index].Item1);
-                int near = Convert.ToInt32(date_data[index - 1].Item1) - id;
-                double rate = (double)(gap - near) / gap;
-
-                long tgap = date_data[index - 1].Item2.Ticks - date_data[index].Item2.Ticks;
-                
-                return new DateTime((long)(tgap * rate + date_data[index].Item2.Ticks));
-            }
-            else
-            {
-                int gap = Convert.ToInt32(date_data[0].Item1) - Convert.ToInt32(date_data[1].Item1);
-                int near = id-Convert.ToInt32(date_data[0].Item1);
-                double rate = (double)(gap - near) / gap;
-
-                long tgap = date_data[0].Item2.Ticks - date_data[1].Item2.Ticks;
-
-                return new DateTime((long)(tgap * rate + date_data[1].Item2.Ticks));
-            }
+            return new DateTime((long)(tgap * rate + date_data[index].Item2.Ticks));
         }
 
 #if false
