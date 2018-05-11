@@ -41,15 +41,16 @@ namespace Hitomi_Copy_2.Analysis
         public HitomiAnalysisArtist(IEnumerable<HitomiLogModel> logs)
         {
             Dictionary<string, int> tags_map = new Dictionary<string, int>();
+
             foreach (var log in logs)
             {
                 if (log.Tags == null) continue;
                 tags_count += log.Tags.Length;
                 foreach (var tag in log.Tags)
-                    if (tags_map.ContainsKey(tag))
-                        tags_map[tag] += 1;
+                    if (tags_map.ContainsKey(HitomiCommon.LegalizeTag(tag)))
+                        tags_map[HitomiCommon.LegalizeTag(tag)] += 1;
                     else
-                        tags_map.Add(tag, 1);
+                        tags_map.Add(HitomiCommon.LegalizeTag(tag), 1);
             }
             
             foreach (var pair in tags_map)
