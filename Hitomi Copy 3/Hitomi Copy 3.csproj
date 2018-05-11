@@ -137,6 +137,7 @@
     <Compile Include="GalleryInfo\HitomiGalleryInfo.cs" />
     <Compile Include="HitomiCommon.cs" />
     <Compile Include="HitomiCore.cs" />
+    <Compile Include="HitomiDate.cs" />
     <Compile Include="HitomiJson.cs" />
     <Compile Include="HitomiLog.cs" />
     <Compile Include="HitomiQueue.cs" />
