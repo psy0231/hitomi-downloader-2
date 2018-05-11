@@ -29,6 +29,10 @@ namespace Hitomi_Copy_2
         public bool SaveJson;
         [JsonProperty]
         public int RecommendPerScroll;
+        [JsonProperty]
+        public int TextMatchingAccuracy;
+        [JsonProperty]
+        public string[] UninterestednessArtists;
     }
 
     public class HitomiSetting
@@ -55,6 +59,7 @@ namespace Hitomi_Copy_2
                 model.WaitTimeout = 10000;
                 model.SaveJson = true;
                 model.RecommendPerScroll = 10;
+                model.TextMatchingAccuracy = 5;
                 Save();
             }
             else
@@ -68,6 +73,8 @@ namespace Hitomi_Copy_2
                     { model.WaitInfinite = true; model.WaitTimeout = 10000; }
                 if (model.RecommendPerScroll < 10)
                     model.RecommendPerScroll = 10;
+                if (model.TextMatchingAccuracy > 20 || model.TextMatchingAccuracy < 2)
+                    model.TextMatchingAccuracy = 5;
                 Save();
             }
         }

@@ -939,8 +939,14 @@ namespace Hitomi_Copy_3
         {
             for (int i = 0; i < HitomiSetting.Instance.GetModel().RecommendPerScroll && latest_load_count < HitomiAnalysis.Instance.Rank.Count; i++, latest_load_count++)
             {
+                if (HitomiSetting.Instance.GetModel().UninterestednessArtists != null &&
+                    HitomiSetting.Instance.GetModel().UninterestednessArtists.Contains(HitomiAnalysis.Instance.Rank[latest_load_count].Item1))
+                {
+                    i--;
+                    continue;
+                }
                 AddToPannel(new RecommendControl(latest_load_count));
-                Thread.Sleep(100);
+                Thread.Sleep(50);
             }
         }
         private void AddToPannel(RecommendControl control)

@@ -48,7 +48,7 @@ namespace Hitomi_Copy_3
                     HitomiData.Instance.metadata_collection[j].Artists.Contains(tbArtist.Text))
                 {
                     string ttitle = HitomiData.Instance.metadata_collection[j].Name.Split('|')[0];
-                    if (titles.Count > 0 && !titles.TrueForAll((title) => StringAlgorithms.get_diff(ttitle, title) > 5)) continue;
+                    if (titles.Count > 0 && !titles.TrueForAll((title) => StringAlgorithms.get_diff(ttitle, title) > HitomiSetting.Instance.GetModel().TextMatchingAccuracy)) continue;
 
                     titles.Add(ttitle);
                     magics.Add(HitomiData.Instance.metadata_collection[j].ID.ToString());
@@ -113,6 +113,14 @@ namespace Hitomi_Copy_3
         
         private void bDelete_Click(object sender, System.EventArgs e)
         {
+            List<string> list;
+            if (HitomiSetting.Instance.GetModel().UninterestednessArtists != null)
+                list = HitomiSetting.Instance.GetModel().UninterestednessArtists.ToList();
+            else
+                list = new List<string>();
+            list.Add(tbArtist.Text);
+            HitomiSetting.Instance.GetModel().UninterestednessArtists = list.ToArray();
+            HitomiSetting.Instance.Save();
             this.Dispose();
         }
 
