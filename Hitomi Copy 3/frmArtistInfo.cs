@@ -44,7 +44,7 @@ namespace Hitomi_Copy
             Dictionary<string, int> tag_count = new Dictionary<string, int>();
             int gallery_count = 0;
             foreach (var metadata in data)
-                if (metadata.Artists != null && metadata.Tags != null && metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Artists[0] == artist)
+                if (metadata.Artists != null && metadata.Tags != null && (metadata.Language == HitomiSetting.Instance.GetModel().Language || HitomiSetting.Instance.GetModel().Language == "ALL") && metadata.Artists[0] == artist)
                 {
                     gallery_count += 1;
                     foreach (var tag in metadata.Tags)
@@ -84,7 +84,7 @@ namespace Hitomi_Copy
             WebClient wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
             wc.DownloadStringCompleted += CallbackSearch;
-            wc.DownloadStringAsync(new Uri(HitomiSearch.GetWithArtist(artist, HitomiSetting.Instance.GetModel().Language, Pages.ToString())));
+            wc.DownloadStringAsync(new Uri(HitomiSearch.GetWithArtist(artist, HitomiSetting.Instance.GetModel().Language.ToLower(), Pages.ToString())));
         }
 
         private void CallbackSearch(object sender, DownloadStringCompletedEventArgs e)

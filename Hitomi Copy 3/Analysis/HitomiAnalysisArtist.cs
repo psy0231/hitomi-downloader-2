@@ -22,7 +22,11 @@ namespace Hitomi_Copy_2.Analysis
             foreach (var metadata in metadatas)
             {
                 if (metadata.Tags == null) continue;
-                if (metadata.Language != HitomiSetting.Instance.GetModel().Language) continue;
+
+                string lang = metadata.Language;
+                if (metadata.Language == null) lang = "N/A";
+                if (HitomiSetting.Instance.GetModel().Language != "ALL" &&
+                    HitomiSetting.Instance.GetModel().Language != lang) continue;
                 tags_count += metadata.Tags.Length;
                 MetadataCount += 1;
                 foreach (var tag in metadata.Tags)
@@ -34,7 +38,10 @@ namespace Hitomi_Copy_2.Analysis
             
             foreach(var pair in tags_map)
             {
-                rate.Add(pair.Key, pair.Value * pair.Value / (float)tags_count);
+                if (!HitomiSetting.Instance.GetModel().RecommendNMultipleWithLength)
+                    rate.Add(pair.Key, pair.Value * pair.Value / (float)tags_count);
+                else
+                    rate.Add(pair.Key, pair.Value / (float)tags_count);
             }
         }
 

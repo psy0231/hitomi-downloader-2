@@ -33,6 +33,8 @@ namespace Hitomi_Copy_2
         public int TextMatchingAccuracy;
         [JsonProperty]
         public string[] UninterestednessArtists;
+        [JsonProperty]
+        public bool RecommendNMultipleWithLength;
     }
 
     public class HitomiSetting
@@ -60,6 +62,7 @@ namespace Hitomi_Copy_2
                 model.SaveJson = true;
                 model.RecommendPerScroll = 10;
                 model.TextMatchingAccuracy = 5;
+                model.RecommendNMultipleWithLength = true;
                 Save();
             }
             else
@@ -67,7 +70,7 @@ namespace Hitomi_Copy_2
                 if (String.IsNullOrEmpty(model.Path)) model.Path = @"C:\Hitomi\{Artists}\[{Id}] {Title}\";
                 if (model.MaximumThumbnailShow < 10) model.MaximumThumbnailShow = 1000;
                 if (model.Thread < 5) model.Thread = 32;
-                if (!HitomiData.Instance.GetLanguageList().Contains(model.Language) && model.Language != "N/A")
+                if (!HitomiData.Instance.GetLanguageList().Contains(model.Language) && model.Language != "N/A" && model.Language != "ALL")
                     model.Language = "korean";
                 if (model.WaitTimeout == 0 && model.WaitInfinite == false)
                     { model.WaitInfinite = true; model.WaitTimeout = 10000; }

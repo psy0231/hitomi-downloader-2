@@ -36,7 +36,7 @@ namespace Hitomi_Copy
             Dictionary<string, int> tag_count = new Dictionary<string, int>();
             int gallery_count = 0;
             foreach (var metadata in hitomi_data)
-                if (metadata.Groups != null && metadata.Tags != null && metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Groups.Contains(group))
+                if (metadata.Groups != null && metadata.Tags != null && (metadata.Language == HitomiSetting.Instance.GetModel().Language || HitomiSetting.Instance.GetModel().Language == "ALL") && metadata.Groups.Contains(group))
                 {
                     gallery_count += 1;
                     foreach (var tag in metadata.Tags)

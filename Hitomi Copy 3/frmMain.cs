@@ -60,6 +60,7 @@ namespace Hitomi_Copy_3
             foreach (var lang in HitomiData.Instance.GetLanguageList())
                 cbLanguage.Items.Add(lang);
             cbLanguage.Items.Add("N/A");
+            cbLanguage.Items.Add("ALL");
             cbLanguage.Text = HitomiSetting.Instance.GetModel().Language;
             tbLang.Text = cbLanguage.Text;
 

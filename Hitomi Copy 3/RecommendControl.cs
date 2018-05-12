@@ -44,7 +44,7 @@ namespace Hitomi_Copy_3
             for (int i = 0, j = 0; i < 5 && j < HitomiData.Instance.metadata_collection.Count; j++)
             {
                 if (HitomiData.Instance.metadata_collection[j].Artists != null &&
-                    HitomiData.Instance.metadata_collection[j].Language == HitomiSetting.Instance.GetModel().Language &&
+                   (HitomiData.Instance.metadata_collection[j].Language == HitomiSetting.Instance.GetModel().Language || HitomiSetting.Instance.GetModel().Language == "ALL") &&
                     HitomiData.Instance.metadata_collection[j].Artists.Contains(tbArtist.Text))
                 {
                     string ttitle = HitomiData.Instance.metadata_collection[j].Name.Split('|')[0];
