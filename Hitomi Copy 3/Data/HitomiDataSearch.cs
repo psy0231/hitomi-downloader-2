@@ -91,12 +91,25 @@ namespace Hitomi_Copy.Data
         public static List<HitomiMetadata> GetSubsetOf(int start, int count)
         {
             List<HitomiMetadata> result = new List<HitomiMetadata>();
+            List<string> x_tag = HitomiSetting.Instance.GetModel().ExclusiveTag.ToList();
             foreach (var v in HitomiData.Instance.metadata_collection)
             {
                 string lang = v.Language;
                 if (v.Language == null) lang = "N/A";
                 if (HitomiSetting.Instance.GetModel().Language != "ALL" &&
                     HitomiSetting.Instance.GetModel().Language != lang) continue;
+                if (v.Tags != null)
+                {
+                    int intersec_count = 0;
+                    foreach (var tag in x_tag)
+                    {
+                        foreach (var vtag in v.Tags)
+                            if (vtag.ToLower().Replace(' ', '_') == tag.ToLower())
+                            { intersec_count++; break; }
+                        if (intersec_count > 0) break;
+                    }
+                    if (intersec_count > 0) continue;
+                }
                 if (start > 0) { start--; continue; }
                 result.Add(v);
                 if (--count == 0)
