@@ -675,7 +675,6 @@
             // 
             // metroLabel6
             // 
-            this.metroLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.metroLabel6.AutoSize = true;
             this.metroLabel6.Location = new System.Drawing.Point(374, 32);
             this.metroLabel6.Name = "metroLabel6";
@@ -686,7 +685,8 @@
             // 
             // cbLanguage
             // 
-            this.cbLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbLanguage.FormattingEnabled = true;
             this.cbLanguage.ItemHeight = 23;
             this.cbLanguage.Location = new System.Drawing.Point(428, 26);
@@ -709,7 +709,7 @@
             this.tbInfo.CustomButton.Location = new System.Drawing.Point(636, 1);
             this.tbInfo.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbInfo.CustomButton.Name = "";
-            this.tbInfo.CustomButton.Size = new System.Drawing.Size(231, 231);
+            this.tbInfo.CustomButton.Size = new System.Drawing.Size(231, 185);
             this.tbInfo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.tbInfo.CustomButton.TabIndex = 1;
             this.tbInfo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
