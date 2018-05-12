@@ -42,8 +42,26 @@ namespace Hitomi_Copy_3
 
             tbInfo.Text += "Robust Hitomi Copy Machine Version 3\r\n";
             tbInfo.Text += "Copyright (C) 2018. Hitomi Parser Developers\r\n";
+            tbInfo.Text += "E-Mail: koromo.software@gmail.com\r\n";
             tbInfo.Text += "\r\n";
-            tbInfo.Text += "오늘도 저희 Hitomi Copy를 이용해주셔서 감사합니다.\r\n";
+            tbInfo.Text += "히토미 카피는 다음과 같은 사양을 가진 컴퓨터에서 원활히 사용할 수 있도록 제작되었습니다.\r\n";
+            tbInfo.Text += "이보다 낮은 사양을 가진컴퓨터에서 발생하는 성능상의 문제는 해결해드릴 수 없습니다.\r\n";
+            tbInfo.Text += "CPU: i7-8700k 5.1ghz\r\n";
+            tbInfo.Text += "RAM: 32gb\r\n";
+            tbInfo.Text += "SSD: Samsung SSD 512GB 970 PRO M.2 NVMe(이전 256GB 960 EVO)\r\n";
+            tbInfo.Text += "\r\n";
+            tbInfo.Text += "다음과 비슷한 오류가 발생된다면 자세한 오류 상황과 함께 이메일로 문의해주세요\r\n";
+            tbInfo.Text += " * 데이터 로딩창에서 오류가 발생하고 프로그램이 종료됩니다.\r\n";
+            tbInfo.Text += " * 검색창에서 이미지가 표시되지 않습니다.\r\n";
+            tbInfo.Text += " * 프로그램이 너무 허접합니다.\r\n";
+            tbInfo.Text += "\r\n";
+            tbInfo.Text += "다음과 같은 상황은 오류가 아닙니다.\r\n";
+            tbInfo.Text += "1. 다운로드시 프로그램을 조작할 수 없습니다.\r\n";
+            tbInfo.Text += "    해결방법 : 위에 서술된 컴퓨터 사양보다 좋은 사양의 컴퓨터를 구매해 재시도합니다.\r\n";
+            tbInfo.Text += "2. 램 사용량이 지나치게 많아 다른 프로그램을 같이 사용할 수 없습니다.\r\n";
+            tbInfo.Text += "    해결방법 : 위에 서술된 컴퓨터 사양보다 좋은 사양의 컴퓨터를 맞추고 재시도합니다.\r\n";
+            tbInfo.Text += "3. 다운로드 속도가 끔찍하게 느립니다.\r\n";
+            tbInfo.Text += "    해결방법 : 위에 서술된 컴퓨터 사양보다 좋은 사양의 컴퓨터를 주문해 재시도합니다.";
         }
 
         public void OnTab()

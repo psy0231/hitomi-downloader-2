@@ -709,7 +709,7 @@
             this.tbInfo.CustomButton.Location = new System.Drawing.Point(636, 1);
             this.tbInfo.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbInfo.CustomButton.Name = "";
-            this.tbInfo.CustomButton.Size = new System.Drawing.Size(231, 185);
+            this.tbInfo.CustomButton.Size = new System.Drawing.Size(231, 231);
             this.tbInfo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.tbInfo.CustomButton.TabIndex = 1;
             this.tbInfo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -722,7 +722,7 @@
             this.tbInfo.Name = "tbInfo";
             this.tbInfo.PasswordChar = '\0';
             this.tbInfo.ReadOnly = true;
-            this.tbInfo.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tbInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbInfo.SelectedText = "";
             this.tbInfo.SelectionLength = 0;
             this.tbInfo.SelectionStart = 0;
