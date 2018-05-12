@@ -1,5 +1,9 @@
 ﻿# Hitomi Copy Source Tree
 
+## Contack us
+
+Mail to koromo.software@gmail.com
+
 ## Download
 
 Hitomi, Ex-Hentai, Marumaru Intergration downloader
