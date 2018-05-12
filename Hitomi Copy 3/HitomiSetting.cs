@@ -62,7 +62,7 @@ namespace Hitomi_Copy_2
                 model.SaveJson = true;
                 model.RecommendPerScroll = 10;
                 model.TextMatchingAccuracy = 5;
-                model.RecommendNMultipleWithLength = true;
+                model.RecommendNMultipleWithLength = false;
                 Save();
             }
             else
