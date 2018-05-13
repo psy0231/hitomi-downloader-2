@@ -22,11 +22,13 @@ namespace Hitomi_Copy_2.Analysis
             foreach (var metadata in metadatas)
             {
                 if (metadata.Tags == null) continue;
-
-                string lang = metadata.Language;
-                if (metadata.Language == null) lang = "N/A";
-                if (HitomiSetting.Instance.GetModel().Language != "ALL" &&
-                    HitomiSetting.Instance.GetModel().Language != lang) continue;
+                if (!HitomiSetting.Instance.GetModel().RecommendLanguageALL)
+                {
+                    string lang = metadata.Language;
+                    if (metadata.Language == null) lang = "N/A";
+                    if (HitomiSetting.Instance.GetModel().Language != "ALL" &&
+                        HitomiSetting.Instance.GetModel().Language != lang) continue;
+                }
                 tags_count += metadata.Tags.Length;
                 MetadataCount += 1;
                 foreach (var tag in metadata.Tags)

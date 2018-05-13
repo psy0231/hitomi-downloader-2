@@ -7,6 +7,22 @@ using System.IO;
 
 namespace Hitomi_Copy_2
 {
+    public class HitomiSettingAnalysisModel
+    {
+        [JsonProperty]
+        public bool IncludeDateTime;
+        [JsonProperty]
+        public bool ConflictTags;
+        [JsonProperty]
+        public Tuple<string,string>[] ConflictTagsPair;
+        [JsonProperty]
+        public string[] IgnoreTags;
+        [JsonProperty]
+        public bool WinnerBlur;
+        [JsonProperty]
+        public bool InverseGaussianDist;
+    }
+
     public class HitomiSettingModel
     {
         [JsonProperty]
@@ -35,6 +51,10 @@ namespace Hitomi_Copy_2
         public string[] UninterestednessArtists;
         [JsonProperty]
         public bool RecommendNMultipleWithLength;
+        [JsonProperty]
+        public bool RecommendLanguageALL;
+        [JsonProperty]
+        public HitomiSettingAnalysisModel Analysis;
     }
 
     public class HitomiSetting
@@ -63,6 +83,7 @@ namespace Hitomi_Copy_2
                 model.RecommendPerScroll = 10;
                 model.TextMatchingAccuracy = 5;
                 model.RecommendNMultipleWithLength = false;
+                model.RecommendLanguageALL = false;
                 Save();
             }
             else
