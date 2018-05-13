@@ -1,6 +1,6 @@
 ﻿# Hitomi Copy Source Tree
 
-## Contack us
+## Contact us
 
 Mail to koromo.software@gmail.com
 
