@@ -73,27 +73,16 @@ namespace Hitomi_Copy_3
             wc.Encoding = Encoding.UTF8;
             wc.DownloadFile(new Uri(HitomiDef.HitomiThumbnail + thumbnail), temp);
 
-        RETRY:
-            try
+            PictureBox[] pbs = { pb1, pb2, pb3, pb4, pb5 };
+            using (FileStream fs = new FileStream(temp, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
             {
-                PictureBox[] pbs = { pb1, pb2, pb3, pb4, pb5 };
-                using (FileStream fs = new FileStream(temp, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
-                {
-                    pbs[i].Image = Image.FromStream(fs);
-                }
-
-                lock (info)
-                {
-                    info[i] = new InfoWrapper(pbs[i].Image);
-                    pbs[i].MouseEnter += info[i].Picture_MouseEnter;
-                    pbs[i].MouseMove += info[i].Picture_MouseMove;
-                    pbs[i].MouseLeave += info[i].Picture_MouseLeave;
-                }
-            } catch
-            {
-                Thread.Sleep(100);
-                goto RETRY;
+                pbs[i].Image = Image.FromStream(fs);
             }
+            
+            info[i] = new InfoWrapper(pbs[i].Image.Clone() as Image);
+            pbs[i].MouseEnter += info[i].Picture_MouseEnter;
+            pbs[i].MouseMove += info[i].Picture_MouseMove;
+            pbs[i].MouseLeave += info[i].Picture_MouseLeave;
         }
         
         private string GetThumbnailAddress(string id)
