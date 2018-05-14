@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Analysis\HitomiAnalysis.cs" />
     <Compile Include="Analysis\HitomiAnalysisArtist.cs" />
+    <Compile Include="Analysis\HitomiAnalysisDetail.cs" />
     <Compile Include="Analysis\HitomiAnalysisGallery.cs" />
     <Compile Include="AutoCompleteListBox.cs">
       <SubType>Component</SubType>
