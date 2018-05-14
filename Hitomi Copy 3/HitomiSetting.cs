@@ -84,6 +84,7 @@ namespace Hitomi_Copy_2
                 model.TextMatchingAccuracy = 5;
                 model.RecommendNMultipleWithLength = false;
                 model.RecommendLanguageALL = false;
+                model.Analysis = new HitomiSettingAnalysisModel();
                 Save();
             }
             else
@@ -99,6 +100,8 @@ namespace Hitomi_Copy_2
                     model.RecommendPerScroll = 10;
                 if (model.TextMatchingAccuracy > 20 || model.TextMatchingAccuracy < 2)
                     model.TextMatchingAccuracy = 5;
+                if (model.Analysis == null)
+                    model.Analysis = new HitomiSettingAnalysisModel();
                 Save();
             }
         }
