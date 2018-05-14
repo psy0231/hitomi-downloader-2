@@ -71,6 +71,7 @@ namespace Hitomi_Copy_3
             tbSearch.Enabled = true;
             bSearch.Enabled = true;
             bSync.Enabled = true;
+            bStatSetting.Enabled = true;
 
             tbDownloadPath.Text = HitomiSetting.Instance.GetModel().Path;
             tbExcludeTag.Text = string.Join(", ", HitomiSetting.Instance.GetModel().ExclusiveTag ?? Enumerable.Empty<string>());
@@ -1118,7 +1119,11 @@ namespace Hitomi_Copy_3
             HitomiSetting.Instance.GetModel().Zip = tgAutoZip.Checked;
             HitomiSetting.Instance.Save();
         }
-        #endregion
 
+        private void bStatSetting_Click(object sender, EventArgs e)
+        {
+            (new frmStatRate()).Show();
+        }
+        #endregion
     }
 }
