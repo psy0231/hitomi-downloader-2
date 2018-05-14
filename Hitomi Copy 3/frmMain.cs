@@ -1047,6 +1047,11 @@ namespace Hitomi_Copy_3
                     tbDownloadPath.Text += @"{Artists}\[{Id}] {Title}\";
                 }
                 else tbDownloadPath.Focus();
+            else
+            {
+                HitomiSetting.Instance.GetModel().Path = tbDownloadPath.Text;
+                HitomiSetting.Instance.Save();
+            }
         }
 
         private void vThread_Scroll(object sender, ScrollEventArgs e)
