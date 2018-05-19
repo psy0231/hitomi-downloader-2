@@ -83,7 +83,6 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.bStatSetting = new MetroFramework.Controls.MetroButton();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -504,7 +503,6 @@
             // metroTabPage4
             // 
             this.metroTabPage4.BackColor = System.Drawing.SystemColors.Control;
-            this.metroTabPage4.Controls.Add(this.bStatSetting);
             this.metroTabPage4.Controls.Add(this.label1);
             this.metroTabPage4.Controls.Add(this.tgFilterArtists);
             this.metroTabPage4.Controls.Add(this.RecommendPannel);
@@ -875,20 +873,6 @@
             this.MemoryUsageUpdateTimer.Interval = 1000;
             this.MemoryUsageUpdateTimer.Tick += new System.EventHandler(this.MemoryUsageUpdateTimer_Tick);
             // 
-            // bStatSetting
-            // 
-            this.bStatSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bStatSetting.Enabled = false;
-            this.bStatSetting.Location = new System.Drawing.Point(3, 5);
-            this.bStatSetting.Name = "bStatSetting";
-            this.bStatSetting.Size = new System.Drawing.Size(114, 23);
-            this.bStatSetting.Style = MetroFramework.MetroColorStyle.Pink;
-            this.bStatSetting.TabIndex = 7;
-            this.bStatSetting.Text = "설정";
-            this.bStatSetting.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.bStatSetting.UseSelectable = true;
-            this.bStatSetting.Click += new System.EventHandler(this.bStatSetting_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -981,7 +965,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private MetroFramework.Controls.MetroToggle tgAutoZip;
-        private MetroFramework.Controls.MetroButton bStatSetting;
     }
 }
 
