@@ -38,6 +38,8 @@
             this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.bDownloadAll = new System.Windows.Forms.Button();
+            this.bDownload = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvHistory
@@ -58,7 +60,7 @@
             this.lvHistory.GridLines = true;
             this.lvHistory.Location = new System.Drawing.Point(12, 12);
             this.lvHistory.Name = "lvHistory";
-            this.lvHistory.Size = new System.Drawing.Size(1457, 579);
+            this.lvHistory.Size = new System.Drawing.Size(1457, 570);
             this.lvHistory.TabIndex = 9;
             this.lvHistory.UseCompatibleStateImageBehavior = false;
             this.lvHistory.View = System.Windows.Forms.View.Details;
@@ -104,12 +106,36 @@
             this.columnHeader26.Text = "태그";
             this.columnHeader26.Width = 356;
             // 
+            // bDownloadAll
+            // 
+            this.bDownloadAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bDownloadAll.Location = new System.Drawing.Point(1328, 588);
+            this.bDownloadAll.Name = "bDownloadAll";
+            this.bDownloadAll.Size = new System.Drawing.Size(141, 23);
+            this.bDownloadAll.TabIndex = 18;
+            this.bDownloadAll.Text = "모두 다운로드";
+            this.bDownloadAll.UseVisualStyleBackColor = true;
+            this.bDownloadAll.Click += new System.EventHandler(this.bDownloadAll_Click);
+            // 
+            // bDownload
+            // 
+            this.bDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bDownload.Location = new System.Drawing.Point(1234, 588);
+            this.bDownload.Name = "bDownload";
+            this.bDownload.Size = new System.Drawing.Size(88, 23);
+            this.bDownload.TabIndex = 17;
+            this.bDownload.Text = "다운로드";
+            this.bDownload.UseVisualStyleBackColor = true;
+            this.bDownload.Click += new System.EventHandler(this.bDownload_Click);
+            // 
             // frmSeriesInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1481, 603);
+            this.ClientSize = new System.Drawing.Size(1481, 619);
+            this.Controls.Add(this.bDownloadAll);
+            this.Controls.Add(this.bDownload);
             this.Controls.Add(this.lvHistory);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -134,5 +160,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader25;
         private System.Windows.Forms.ColumnHeader columnHeader28;
         private System.Windows.Forms.ColumnHeader columnHeader26;
+        private System.Windows.Forms.Button bDownloadAll;
+        private System.Windows.Forms.Button bDownload;
     }
 }

@@ -2,6 +2,7 @@
 
 using Hitomi_Copy.Data;
 using Hitomi_Copy_2;
+using Hitomi_Copy_3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Hitomi_Copy
     {
         string series;
         Form closed_form;
+        List<string> id = new List<string>();
 
         public frmSeriesInfo(Form closed, string series)
         {
@@ -52,6 +54,7 @@ namespace Hitomi_Copy
                     string.Join(",", result[i].Characters ?? Enumerable.Empty<string>()),
                     string.Join(",", result[i].Tags ?? Enumerable.Empty<string>())
                 }));
+                id.Add(result[i].ID.ToString());
             }
             lvil.Sort((a, b) => Convert.ToUInt32(b.SubItems[0].Text).CompareTo(Convert.ToUInt32(a.SubItems[0].Text)));
             lvHistory.Items.AddRange(lvil.ToArray());
@@ -82,6 +85,20 @@ namespace Hitomi_Copy
         private void frmTagInfo_FormClosed(object sender, FormClosedEventArgs e)
         {
             try { closed_form.BringToFront(); } catch { }
+        }
+
+        private void bDownloadAll_Click(object sender, EventArgs e)
+        {
+            foreach (var pe in id)
+                (Application.OpenForms[0] as frmMain).RemoteDownloadArticleFromId(pe);
+            (Application.OpenForms[0] as frmMain).BringToFront();
+        }
+
+        private void bDownload_Click(object sender, EventArgs e)
+        {
+            foreach (var id in lvHistory.SelectedItems)
+                (Application.OpenForms[0] as frmMain).RemoteDownloadArticleFromId((id as ListViewItem).SubItems[0].Text);
+            (Application.OpenForms[0] as frmMain).BringToFront();
         }
     }
 }
