@@ -165,6 +165,13 @@ namespace Hitomi_Copy
 
         private void bDownloadAll_Click(object sender, EventArgs e)
         {
+            foreach (var pe in stayed)
+            {
+                pe.Downloading = true;
+                if (pe.Article.Artists != null)
+                    pe.Article.Artists[0] = group;
+                (Application.OpenForms[0] as frmMain).RemoteDownloadArticle(pe);
+            }
             Close();
             (Application.OpenForms[0] as frmMain).BringToFront();
         }
@@ -172,8 +179,11 @@ namespace Hitomi_Copy
         private void bDownload_Click(object sender, EventArgs e)
         {
             foreach (var pe in stayed)
-                if (pe.Selected) {
+                if (pe.Selected)
+                {
                     pe.Downloading = true;
+                    if (pe.Article.Artists != null)
+                        pe.Article.Artists[0] = group;
                     (Application.OpenForms[0] as frmMain).RemoteDownloadArticle(pe);
                 }
             (Application.OpenForms[0] as frmMain).BringToFront();
