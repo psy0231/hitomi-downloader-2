@@ -99,6 +99,12 @@
     <Compile Include="frmCharacterInfo.Designer.cs">
       <DependentUpon>frmCharacterInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFinder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFinder.Designer.cs">
+      <DependentUpon>frmFinder.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGalleryInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,12 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRecent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRecent.Designer.cs">
+      <DependentUpon>frmRecent.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSeriesInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,12 +140,6 @@
     </Compile>
     <Compile Include="frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmStatRate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmStatRate.Designer.cs">
-      <DependentUpon>frmStatRate.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTagInfo.cs">
       <SubType>Form</SubType>
@@ -196,6 +202,9 @@
     <EmbeddedResource Include="frmCharacterInfo.resx">
       <DependentUpon>frmCharacterInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmFinder.resx">
+      <DependentUpon>frmFinder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGalleryInfo.resx">
       <DependentUpon>frmGalleryInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,14 +214,14 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmRecent.resx">
+      <DependentUpon>frmRecent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSeriesInfo.resx">
       <DependentUpon>frmSeriesInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmStatRate.resx">
-      <DependentUpon>frmStatRate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTagInfo.resx">
       <DependentUpon>frmTagInfo.cs</DependentUpon>
