@@ -215,5 +215,13 @@ namespace Hitomi_Copy
             }
             catch { }
         }
+
+        private void bPreview_Click(object sender, EventArgs e)
+        {
+            if (pic != null)
+                (new frmPreview(this, pic.Article.Magic)).Show();
+            else
+                (new frmPreview(this, metadata.ID.ToString())).Show();
+        }
     }
 }

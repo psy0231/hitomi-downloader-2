@@ -163,12 +163,15 @@ namespace Hitomi_Copy
             Invalidate();
         }
 
-        public void SetImageFromAddress(string addr, int pannelw, int pannelh)
+        public void SetImageFromAddress(string addr, int pannelw, int pannelh, bool title = true)
         {
             try
             {
                 pb.Location = new Point(3, 3);
-                pb.Size = new Size(pannelw - 6, pannelh - 30);
+                if (title == true)
+                    pb.Size = new Size(pannelw - 6, pannelh - 30);
+                else
+                    pb.Size = new Size(pannelw - 6, pannelh - 6);
                 using (FileStream fs = new FileStream(addr, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
                 {
                     pb.Image = image = Image.FromStream(fs);
@@ -177,11 +180,14 @@ namespace Hitomi_Copy
                 pb.Paint += Picture_Paint;
                 pb.MouseEnter += Picture_MouseEnter;
                 pb.MouseLeave += Picture_MouseLeave;
-                pb.MouseClick += Picture_MouseClick;
+                if (title) pb.MouseClick += Picture_MouseClick;
                 pb.MouseMove += Picture_MouseMove;
-                pb.MouseDoubleClick += Picture_MouseDoubleClick;
+                if (title) pb.MouseDoubleClick += Picture_MouseDoubleClick;
                 info = new InfoForm(Image);
-                info.Size = new Size(image.Width*3/4, image.Height*3/4);
+                if (title)
+                    info.Size = new Size(image.Width*3/4, image.Height*3/4);
+                else
+                    info.Size = new Size(image.Width*3/4/2, image.Height*3/4/2);
                 this.Width = pannelw;
                 this.Height = pannelh;
                 this.Controls.Add(pb);

@@ -51,6 +51,7 @@
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lDate = new System.Windows.Forms.Label();
+            this.bPreview = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -139,7 +140,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("맑은 고딕", 13F);
-            this.button1.Location = new System.Drawing.Point(571, 345);
+            this.button1.Location = new System.Drawing.Point(628, 345);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(163, 41);
             this.button1.TabIndex = 15;
@@ -150,7 +151,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("맑은 고딕", 13F);
-            this.button2.Location = new System.Drawing.Point(571, 392);
+            this.button2.Location = new System.Drawing.Point(628, 392);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(163, 41);
             this.button2.TabIndex = 16;
@@ -223,7 +224,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("맑은 고딕", 13F);
-            this.button5.Location = new System.Drawing.Point(740, 392);
+            this.button5.Location = new System.Drawing.Point(797, 392);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(163, 41);
             this.button5.TabIndex = 23;
@@ -234,7 +235,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("맑은 고딕", 13F);
-            this.button6.Location = new System.Drawing.Point(740, 345);
+            this.button6.Location = new System.Drawing.Point(797, 345);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(163, 41);
             this.button6.TabIndex = 24;
@@ -280,12 +281,24 @@
             this.lDate.TabIndex = 27;
             this.lDate.Text = "날짜";
             // 
+            // bPreview
+            // 
+            this.bPreview.Font = new System.Drawing.Font("맑은 고딕", 13F);
+            this.bPreview.Location = new System.Drawing.Point(459, 345);
+            this.bPreview.Name = "bPreview";
+            this.bPreview.Size = new System.Drawing.Size(163, 41);
+            this.bPreview.TabIndex = 28;
+            this.bPreview.Text = "미리보기";
+            this.bPreview.UseVisualStyleBackColor = true;
+            this.bPreview.Click += new System.EventHandler(this.bPreview_Click);
+            // 
             // frmGalleryInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1286, 470);
+            this.Controls.Add(this.bPreview);
             this.Controls.Add(this.lDate);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -348,5 +361,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lDate;
+        private System.Windows.Forms.Button bPreview;
     }
 }
