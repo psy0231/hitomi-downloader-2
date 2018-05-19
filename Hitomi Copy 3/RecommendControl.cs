@@ -79,7 +79,9 @@ namespace Hitomi_Copy_3
                 pbs[i].Image = Image.FromStream(fs);
             }
             
-            info[i] = new InfoWrapper(pbs[i].Image.Clone() as Image);
+            RETRY:
+            try { info[i] = new InfoWrapper(pbs[i].Image.Clone() as Image);  } catch { Thread.Sleep(500); goto RETRY; }
+            
             pbs[i].MouseEnter += info[i].Picture_MouseEnter;
             pbs[i].MouseMove += info[i].Picture_MouseMove;
             pbs[i].MouseLeave += info[i].Picture_MouseLeave;
