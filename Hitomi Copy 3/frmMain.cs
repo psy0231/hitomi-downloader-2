@@ -873,11 +873,14 @@ namespace Hitomi_Copy_3
             string title = article.Title ?? "";
             string artists = "";
             string type = article.Types ?? "";
+            string series = "";
             if (article.Artists != null) artists = article.Artists[0];
             if (title != null)
                 foreach (char c in invalid) title = title.Replace(c.ToString(), "");
             if (artists != null)
                 foreach (char c in invalid) artists = artists.Replace(c.ToString(), "");
+            if (article.Series != null)
+                series = article.Series[0];
 
             string path = tbDownloadPath.Text;
             path = Regex.Replace(path, "{Title}", title, RegexOptions.IgnoreCase);
@@ -885,6 +888,7 @@ namespace Hitomi_Copy_3
             path = Regex.Replace(path, "{Id}", article.Magic, RegexOptions.IgnoreCase);
             path = Regex.Replace(path, "{Type}", type, RegexOptions.IgnoreCase);
             path = Regex.Replace(path, "{Date}", DateTime.Now.ToString(), RegexOptions.IgnoreCase);
+            path = Regex.Replace(path, "{Series}", series, RegexOptions.IgnoreCase);
             return path;
         }
 
