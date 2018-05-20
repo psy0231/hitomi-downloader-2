@@ -29,6 +29,8 @@ namespace hitomi.Parser
         public string[] Tags { get { return tags; } set { tags = value; } }
         public bool TagsKor { get { return tags_kor; } set { tags_kor = value; } }
         public string Types { get { return types; } set { types = value; } }
+        public bool ManualPathOrdering { get; set; }
+        public string ManualAdditionalPath { get; set; }
 
         public string Thumbnail { get { return thumbnail; } set { thumbnail = value; } }
         public string Magic { get { return magic_number; } set { magic_number = value; } }

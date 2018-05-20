@@ -867,6 +867,21 @@ namespace Hitomi_Copy_3
             }
         }
 
+        private string MakePathFromAdditionalPath(string target, string additional_path)
+        {
+            StringBuilder front = new StringBuilder();
+            StringBuilder back = new StringBuilder();
+            int index = 0;
+
+            for (; target[index] != '{'; index++)
+                front.Append(target[index]);
+
+            for (; index < target.Length; index++)
+                back.Append(target[index]);
+
+            return front.ToString() + additional_path + '\\' + back.ToString();
+        }
+
         private string MakeDownloadDirectory(HitomiArticle article)
         {
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
@@ -875,14 +890,17 @@ namespace Hitomi_Copy_3
             string type = article.Types ?? "";
             string series = "";
             if (article.Artists != null) artists = article.Artists[0];
+            if (article.Series != null) series = article.Series[0];
             if (title != null)
                 foreach (char c in invalid) title = title.Replace(c.ToString(), "");
             if (artists != null)
                 foreach (char c in invalid) artists = artists.Replace(c.ToString(), "");
-            if (article.Series != null)
-                series = article.Series[0];
+            if (series != null)
+                foreach (char c in invalid) series = series.Replace(c.ToString(), "");
 
             string path = tbDownloadPath.Text;
+            if (article.ManualPathOrdering)
+                path = MakePathFromAdditionalPath(path, article.ManualAdditionalPath);
             path = Regex.Replace(path, "{Title}", title, RegexOptions.IgnoreCase);
             path = Regex.Replace(path, "{Artists}", artists, RegexOptions.IgnoreCase);
             path = Regex.Replace(path, "{Id}", article.Magic, RegexOptions.IgnoreCase);
@@ -897,7 +915,7 @@ namespace Hitomi_Copy_3
             AddArticle(pe);
             MainTab.SelectedIndex = 1;
         }
-        public void RemoteDownloadArticleFromId(string id)
+        public void RemoteDownloadArticleFromId(string id, bool add_manual_path = false, string additional_path = "")
         {
             MainTab.SelectedIndex = 1;
             HitomiMetadata metadata = new HitomiMetadata();
@@ -915,7 +933,9 @@ namespace Hitomi_Copy_3
             HitomiArticle article = new HitomiArticle
             {
                 Magic = metadata.ID.ToString(),
-                Title = metadata.Name
+                Title = metadata.Name,
+                ManualPathOrdering = add_manual_path,
+                ManualAdditionalPath = additional_path
             };
             if (metadata.Artists != null)
                 article.Artists = metadata.Artists;
