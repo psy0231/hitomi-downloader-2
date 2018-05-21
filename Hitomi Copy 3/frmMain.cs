@@ -47,6 +47,9 @@ namespace Hitomi_Copy_3
             tbInfo.Text += "\r\n";
             tbInfo.Text += "인류의 무궁한 발전을 기원합니다.\r\n";
             tbInfo.Text += "\r\n";
+            tbInfo.Text += "https://www.youtube.com/watch?v=141XHWESKO0\r\n";
+            tbInfo.Text += "https://www.youtube.com/watch?v=gI4GxITpmb4\r\n";
+            tbInfo.Text += "https://www.youtube.com/watch?v=bCDIt50hRDs\r\n";
         }
 
         public void OnTab()
@@ -56,6 +59,7 @@ namespace Hitomi_Copy_3
             tbSearch.Enabled = true;
             bSearch.Enabled = true;
             bSync.Enabled = true;
+            bDetailSetting.Enabled = true;
 
             tbDownloadPath.Text = HitomiSetting.Instance.GetModel().Path;
             tbExcludeTag.Text = string.Join(", ", HitomiSetting.Instance.GetModel().ExclusiveTag ?? Enumerable.Empty<string>());
@@ -1159,6 +1163,12 @@ namespace Hitomi_Copy_3
             HitomiSetting.Instance.GetModel().Zip = tgAutoZip.Checked;
             HitomiSetting.Instance.Save();
         }
+
+        private void bDetailSetting_Click(object sender, EventArgs e)
+        {
+            (new frmSetting()).Show();
+        }
         #endregion
+
     }
 }
