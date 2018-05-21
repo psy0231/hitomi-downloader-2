@@ -502,13 +502,31 @@ namespace Hitomi_Copy_3
                     match = HitomiData.Instance.GetSeriesList(word);
                 }
             }
+            else
+            {
+                position = 0;
+                match = new List<HitomiTagdata> {
+                    new HitomiTagdata { Tag = "artist:" },
+                    new HitomiTagdata { Tag = "character:" },
+                    new HitomiTagdata { Tag = "group:" },
+                    new HitomiTagdata { Tag = "recent:" },
+                    new HitomiTagdata { Tag = "series:" },
+                    new HitomiTagdata { Tag = "tag:" },
+                    new HitomiTagdata { Tag = "tagx:" },
+                };
+            }
 
             if (match != null && match.Count > 0)
             {
                 listBox1.Visible = true;
                 listBox1.Items.Clear();
                 for (int i = 0; i < 30 && i < match.Count; i++)
-                    listBox1.Items.Add(match[i].Tag + $" ({match[i].Count})");
+                {
+                    if (match[i].Count > 0)
+                        listBox1.Items.Add(match[i].Tag + $" ({match[i].Count})");
+                    else
+                        listBox1.Items.Add(match[i].Tag);
+                }
                 listBox1.Location = new Point(tbSearch.Left + GetCaretWidthFromTextBox(position),
                     tbSearch.Top + tbSearch.Font.Height + 5);
                 listBox1.MaxColoredTextLength = word.Length;
