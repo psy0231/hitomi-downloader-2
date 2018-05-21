@@ -54,6 +54,8 @@ namespace Hitomi_Copy_2
         [JsonProperty]
         public bool RecommendLanguageALL;
         [JsonProperty]
+        public bool ReplaceArtistsWithTitle;
+        [JsonProperty]
         public HitomiSettingAnalysisModel Analysis;
     }
 
@@ -84,6 +86,7 @@ namespace Hitomi_Copy_2
                 model.TextMatchingAccuracy = 5;
                 model.RecommendNMultipleWithLength = false;
                 model.RecommendLanguageALL = false;
+                model.ReplaceArtistsWithTitle = false;
                 model.Analysis = new HitomiSettingAnalysisModel();
                 Save();
             }
