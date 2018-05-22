@@ -112,6 +112,18 @@ namespace hitomi.Parser
             if (!what.Contains(@"<li><a href=""")) return "N/A";
             return getMatch1(@"<li><a href=""/series/.*?"">(.*?)</a>", what);
         }
+        static public string replaceEntity(string str)
+        {
+            string strs = str;
+            string[] oj = {"&nbsp;", "&amp;", "&quot;", "&lt;",
+                "&gt;", "&reg;", "&copy;", "&bull;", "&trade;", "&#39;" };
+            string[] kj = { " ", "&", "\"", "<", ">", "Â®", "Â©", "â€¢", "â„¢", "'" };
+            for (int i = 0; i <= oj.Length - 1; i++)
+            {
+                strs = strs.Replace(oj[i], kj[i]);
+            }
+            return strs;
+        }
         static public List<HitomiArticle> ParseArticles(string source)
         {
             List<HitomiArticle> result = new List<HitomiArticle>();
@@ -128,7 +140,7 @@ namespace hitomi.Parser
                 article.Thumbnail = getMatch1(block1_thumbnail, block1);
 
                 string block2 = match.Groups[2].Value;
-                article.Title = getMatch1(block2_title, block2);
+                article.Title = replaceEntity(getMatch1(block2_title, block2));
                 article.Artists = new string[] { artist_legalize(getMatch1(block2_artist, block2)) }; // get only first artist
 
                 string block3 = match.Groups[3].Value;
