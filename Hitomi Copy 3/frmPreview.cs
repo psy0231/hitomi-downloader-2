@@ -87,12 +87,18 @@ namespace Hitomi_Copy_3
         
         private void AddPanel(PicElement pe)
         {
-            if (ImagePanel.InvokeRequired)
+            try
             {
-                Invoke(new Action<PicElement>(AddPanel), new object[] { pe }); return;
+                if (ImagePanel.InvokeRequired)
+                {
+                    Invoke(new Action<PicElement>(AddPanel), new object[] { pe }); return;
+                }
+                ImagePanel.Controls.Add(pe);
+                SortThumbnail();
+            } catch
+            {
+
             }
-            ImagePanel.Controls.Add(pe);
-            SortThumbnail();
         }
         private void SortThumbnail()
         {
