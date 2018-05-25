@@ -44,6 +44,7 @@ namespace Hitomi_Copy_3
             tbInfo.Text += "Robust Hitomi Copy Machine Version 3\r\n";
             tbInfo.Text += "Copyright (C) 2018. Hitomi Parser Developers\r\n";
             tbInfo.Text += "E-Mail: koromo.software@gmail.com\r\n";
+            tbInfo.Text += "Source-code : https://github.com/dc-koromo/hitomi-downloader-2\r\n";
             tbInfo.Text += "\r\n";
             tbInfo.Text += "인류의 무궁한 발전을 기원합니다.\r\n";
             tbInfo.Text += "\r\n";
