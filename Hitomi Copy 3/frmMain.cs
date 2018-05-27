@@ -509,7 +509,6 @@ namespace Hitomi_Copy_3
             }
             else
             {
-                //position = 0;
                 match = new List<HitomiTagdata> {
                     new HitomiTagdata { Tag = "artist:" },
                     new HitomiTagdata { Tag = "character:" },
