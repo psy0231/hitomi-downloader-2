@@ -115,8 +115,8 @@ namespace Hitomi_Copy_3
             int recent_start = 0;
 
             tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("/")) start_element = Convert.ToInt32(a.Substring(1)); });
-            tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("?")) start_element = Convert.ToInt32(a.Substring(1)); });
-            tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":") && !a.StartsWith("/")) positive_data.Add(a.Trim()); });
+            tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (a.StartsWith("?")) count_element = Convert.ToInt32(a.Substring(1)); });
+            tbSearch.Text.Trim().Split(' ').ToList().ForEach((a) => { if (!a.Contains(":") && !a.StartsWith("/") && !a.StartsWith("?")) positive_data.Add(a.Trim()); });
             tbExcludeTag.Text.Trim().Split(' ').ToList().ForEach((a) => negative_data.Add(Regex.Replace(a.Trim(), ",", "")));
             query.Common = positive_data;
             query.TagExclude = negative_data;
@@ -423,6 +423,11 @@ namespace Hitomi_Copy_3
         {
             if (e.KeyData == Keys.Enter)
                 bSearch.PerformClick();
+            else if (e.KeyData == Keys.Escape)
+            {
+                listBox1.Hide();
+                tbSearch.Focus();
+            }
             else
             {
                 if (listBox1.Visible)
@@ -509,15 +514,21 @@ namespace Hitomi_Copy_3
             }
             else
             {
-                match = new List<HitomiTagdata> {
-                    new HitomiTagdata { Tag = "artist:" },
-                    new HitomiTagdata { Tag = "character:" },
-                    new HitomiTagdata { Tag = "group:" },
-                    new HitomiTagdata { Tag = "recent:" },
-                    new HitomiTagdata { Tag = "series:" },
-                    new HitomiTagdata { Tag = "tag:" },
-                    new HitomiTagdata { Tag = "tagx:" },
+                string[] match_target = {
+                    "artist:",
+                    "character:",
+                    "group:",
+                    "recent:",
+                    "series:",
+                    "tag:",
+                    "tagx:"
                 };
+                List<HitomiTagdata> data_col = new List<HitomiTagdata>();
+                foreach (var ix in match_target)
+                    if (ix.StartsWith(word))
+                        data_col.Add(new HitomiTagdata { Tag = ix });
+                if (data_col.Count > 0)
+                    match = data_col;
             }
 
             if (match != null && match.Count > 0)
