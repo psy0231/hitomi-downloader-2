@@ -8,7 +8,7 @@ Mail to koromo.software@gmail.com
 
 Hitomi, Ex-Hentai, Marumaru Intergration downloader
 
-https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/3.12
+https://github.com/dc-koromo/hitomi-downloader-2/releases/tag/3.13
 
 ## History
 
