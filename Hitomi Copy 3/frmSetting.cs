@@ -20,6 +20,7 @@ namespace Hitomi_Copy_3
             tgSJ.Checked = HitomiSetting.Instance.GetModel().SaveJson;
             tbRPS.Text = HitomiSetting.Instance.GetModel().RecommendPerScroll.ToString();
             tbTMA.Text = HitomiSetting.Instance.GetModel().TextMatchingAccuracy.ToString();
+            tbMTS.Text = HitomiSetting.Instance.GetModel().MaximumThumbnailShow.ToString();
             tgRNM.Checked = HitomiSetting.Instance.GetModel().RecommendNMultipleWithLength;
             tgRL.Checked = HitomiSetting.Instance.GetModel().RecommendLanguageALL;
             tgRA.Checked = HitomiSetting.Instance.GetModel().ReplaceArtistsWithTitle;
@@ -49,6 +50,7 @@ namespace Hitomi_Copy_3
             HitomiSetting.Instance.GetModel().SaveJson = tgSJ.Checked;
             HitomiSetting.Instance.GetModel().RecommendPerScroll = Convert.ToInt32(tbRPS.Text);
             HitomiSetting.Instance.GetModel().TextMatchingAccuracy = Convert.ToInt32(tbTMA.Text);
+            HitomiSetting.Instance.GetModel().MaximumThumbnailShow = Convert.ToInt32(tbMTS.Text);
             HitomiSetting.Instance.GetModel().RecommendNMultipleWithLength = tgRNM.Checked;
             HitomiSetting.Instance.GetModel().RecommendLanguageALL = tgRL.Checked;
             HitomiSetting.Instance.GetModel().ReplaceArtistsWithTitle = tgRA.Checked;
@@ -81,6 +83,11 @@ namespace Hitomi_Copy_3
             tbInfo.Text = "작가추천에서 중복된 Article를 표시하지않도록 설정하는 고유값입니다.";
         }
 
+        private void tbMTS_MouseEnter(object sender, EventArgs e)
+        {
+            tbInfo.Text = "표시할 수 있는 검색 결과의 최대 개수입니다.";
+        }
+
         private void tgRNM_MouseEnter(object sender, EventArgs e)
         {
             tbInfo.Text = "작가추천 목록 생성시 해당 작가의 Article 수를 곱하지 않습니다. 이 설정은 단순한 작가추천 결과를 제공합니다.";
@@ -100,5 +107,6 @@ namespace Hitomi_Copy_3
         {
             tbInfo.Text = "";
         }
+
     }
 }
