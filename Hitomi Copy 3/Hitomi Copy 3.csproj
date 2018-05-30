@@ -173,6 +173,7 @@
     <Compile Include="InfoForm.Designer.cs">
       <DependentUpon>InfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="KoreanTag.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="MarqueeColorBar.cs">
       <SubType>UserControl</SubType>
