@@ -55,36 +55,42 @@ namespace Hitomi_Copy_3
                     i++;
                 }
             }
-            
+
             for (int i = 0; i < magics.Count; i++)
             {
-                await Task.Run(() => AddMetadataToPanel(i, magics[i]));
+                _ = Task.Factory.StartNew(x => {
+                    int ix = (int)x;
+                    try { AddMetadataToPanel(ix, magics[ix]); } catch { }
+                }, i);
             }
         }
 
-        private async void AddMetadataToPanel(int i, string id)
+        private void AddMetadataToPanel(int i, string id)
         {
-            string thumbnail = "";
-            await Task.Run(() => thumbnail = GetThumbnailAddress(id));
+            string thumbnail = GetThumbnailAddress(id);
 
             string temp = Path.GetTempFileName();
             WebClient wc = new WebClient();
             wc.Headers["Accept-Encoding"] = "application/x-gzip";
             wc.Encoding = Encoding.UTF8;
             wc.DownloadFile(new Uri(HitomiDef.HitomiThumbnail + thumbnail), temp);
-
-            PictureBox[] pbs = { pb1, pb2, pb3, pb4, pb5 };
+            
+            Image img;
             using (FileStream fs = new FileStream(temp, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
             {
-                pbs[i].Image = Image.FromStream(fs);
+                img = Image.FromStream(fs);
             }
-            
-            RETRY:
-            try { info[i] = new InfoWrapper(pbs[i].Image.Clone() as Image);  } catch { Thread.Sleep(500); goto RETRY; }
-            
+            info[i] = new InfoWrapper(img.Clone() as Image);
+
+            PictureBox[] pbs = { pb1, pb2, pb3, pb4, pb5 };
             pbs[i].MouseEnter += info[i].Picture_MouseEnter;
             pbs[i].MouseMove += info[i].Picture_MouseMove;
             pbs[i].MouseLeave += info[i].Picture_MouseLeave;
+
+            if (pbs[i].InvokeRequired)
+                pbs[i].Invoke(new Action(() => { pbs[i].Image = img; }));
+            else
+                pbs[i].Image = img;
         }
         
         private string GetThumbnailAddress(string id)
