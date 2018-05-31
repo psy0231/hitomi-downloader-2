@@ -100,5 +100,15 @@ namespace Hitomi_Copy
                 (Application.OpenForms[0] as frmMain).RemoteDownloadArticleFromId((id as ListViewItem).SubItems[0].Text, true, series);
             (Application.OpenForms[0] as frmMain).BringToFront();
         }
+
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if (Form.ModifierKeys == Keys.None && keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessDialogKey(keyData);
+        }
     }
 }
