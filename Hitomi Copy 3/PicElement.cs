@@ -155,6 +155,7 @@ namespace Hitomi_Copy
         public new virtual void Dispose()
         {
             image.Dispose();
+            info.Dispose();
             base.Dispose();
         }
 
