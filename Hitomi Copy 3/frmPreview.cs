@@ -58,7 +58,7 @@ namespace Hitomi_Copy_3
         {
             if (pbLoad.InvokeRequired)
             {
-                Invoke(new Action(PBIncrease));
+                try { Invoke(new Action(PBIncrease)); } catch { }
                 return;
             }
             pbLoad.Value++;
