@@ -997,6 +997,16 @@ namespace Hitomi_Copy_3
             foreach (var uri in uris)
                 download_queue.Abort(uri);
         }
+
+        long latest_status_size = 0;
+        private void speed_timer_Tick(object sender, EventArgs e)
+        {
+            if (status_size == latest_status_size)
+                lDownloadSpeed.Text = "0 KB/S";
+            else
+                lDownloadSpeed.Text = ((double)(status_size - latest_status_size) / 1000).ToString("#,#.#") + " KB/S";
+            latest_status_size = status_size;
+        }
         #endregion
 
         #region 통계
