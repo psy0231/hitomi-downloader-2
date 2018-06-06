@@ -41,16 +41,16 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(455, 422);
+            this.textBox1.Size = new System.Drawing.Size(419, 411);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "v3.16\r\n- 검색속도가 최대 코어 수배 만큼 빨라집니다\r\n- 다운로드 통계기능이 추가되었습니다";
+            this.textBox1.Text = "v3.16\r\n- 검색속도가 최대 코어 수배 만큼 빨라집니다\r\n- 통계기능이 추가되었습니다";
             // 
             // PatchNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(479, 446);
+            this.ClientSize = new System.Drawing.Size(443, 435);
             this.Controls.Add(this.textBox1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -58,6 +58,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(459, 474);
             this.Name = "PatchNote";
             this.Text = "Patch Note v3.16";
             this.ResumeLayout(false);
