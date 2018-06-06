@@ -96,7 +96,7 @@ namespace Hitomi_Copy_3
         #endregion
 
         #region 검색
-        private void bSearch_Click(object sender, EventArgs e)
+        private async void bSearch_Click(object sender, EventArgs e)
         {
             if (tbSearch.Text.Trim().StartsWith("http://") || tbSearch.Text.Trim().StartsWith("https://"))
             {
@@ -191,7 +191,7 @@ namespace Hitomi_Copy_3
             }
             else
             {
-                query_result = HitomiDataSearch.Search2(query);
+                query_result = (await HitomiDataSearch.Search3(query));
             }
             lStatusSearch.Text = $"{query_result.Count} 개 항목이 검색됨";
 
