@@ -1050,7 +1050,7 @@ namespace Hitomi_Copy_3
                 {
                     if (most_tagc < data.Tags.Length)
                     {
-                        most_tag = string.Join(", ", data.Artists) + $" ({data.ID}, {most_tagc.ToString("#,#")} 개)";
+                        most_tag = string.Join(", ", data.Tags) + $" ({data.ID}, {most_tagc.ToString("#,#")} 개)";
                         most_tagc = data.Tags.Length;
                     }
                 }
