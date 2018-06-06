@@ -16,8 +16,6 @@ namespace Hitomi_Copy_3
 
         static public bool UpdateRequired()
         {
-            UpdateFileTidy();
-
             string version_text;
             using (var wc = new System.Net.WebClient())
                 version_text = wc.DownloadString(UpdateCheckUrl);
@@ -39,6 +37,8 @@ namespace Hitomi_Copy_3
             if (checking_major < now_major) return false; // error
             if (checking_minor > now_minor) return true;
 
+            UpdateFileTidy();
+
             return false;
         }
 
@@ -46,8 +46,9 @@ namespace Hitomi_Copy_3
         {
             string now_fpath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             if (File.Exists(now_fpath + ".tmp"))
+            {
                 File.Delete(now_fpath + ".tmp");
-            (new PatchNote()).Show();
+            }
         }
 
         static public void UpdateProgram()
