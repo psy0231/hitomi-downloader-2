@@ -139,6 +139,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("맑은 고딕", 13F);
             this.button1.Location = new System.Drawing.Point(628, 345);
             this.button1.Name = "button1";
@@ -150,6 +151,7 @@
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Font = new System.Drawing.Font("맑은 고딕", 13F);
             this.button2.Location = new System.Drawing.Point(628, 392);
             this.button2.Name = "button2";
@@ -161,6 +163,7 @@
             // 
             // button3
             // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Font = new System.Drawing.Font("맑은 고딕", 13F);
             this.button3.Location = new System.Drawing.Point(1020, 392);
             this.button3.Name = "button3";
@@ -172,6 +175,7 @@
             // 
             // button4
             // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Font = new System.Drawing.Font("맑은 고딕", 13F);
             this.button4.Location = new System.Drawing.Point(1020, 345);
             this.button4.Name = "button4";
@@ -223,6 +227,7 @@
             // 
             // button5
             // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.Font = new System.Drawing.Font("맑은 고딕", 13F);
             this.button5.Location = new System.Drawing.Point(797, 392);
             this.button5.Name = "button5";
@@ -234,6 +239,7 @@
             // 
             // button6
             // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Font = new System.Drawing.Font("맑은 고딕", 13F);
             this.button6.Location = new System.Drawing.Point(797, 345);
             this.button6.Name = "button6";
@@ -245,6 +251,9 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(509, 167);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(1);
@@ -254,6 +263,8 @@
             // 
             // pbImage
             // 
+            this.pbImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pbImage.Location = new System.Drawing.Point(12, 12);
             this.pbImage.Name = "pbImage";
             this.pbImage.Size = new System.Drawing.Size(360, 446);
@@ -283,6 +294,7 @@
             // 
             // bPreview
             // 
+            this.bPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bPreview.Font = new System.Drawing.Font("맑은 고딕", 13F);
             this.bPreview.Location = new System.Drawing.Point(459, 345);
             this.bPreview.Name = "bPreview";
@@ -322,11 +334,12 @@
             this.Controls.Add(this.lTitle);
             this.Controls.Add(this.pbImage);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1302, 509);
             this.Name = "frmGalleryInfo";
             this.Text = "정보";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmGalleryInfo_FormClosed);
