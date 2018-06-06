@@ -61,6 +61,7 @@ namespace Hitomi_Copy_3
             bSearch.Enabled = true;
             bSync.Enabled = true;
             bDetailSetting.Enabled = true;
+            bStat.Enabled = true;
 
             tbDownloadPath.Text = HitomiSetting.Instance.GetModel().Path;
             tbExcludeTag.Text = string.Join(", ", HitomiSetting.Instance.GetModel().ExclusiveTag ?? Enumerable.Empty<string>());
@@ -1188,6 +1189,11 @@ namespace Hitomi_Copy_3
         private void bDetailSetting_Click(object sender, EventArgs e)
         {
             (new frmSetting()).Show();
+        }
+
+        private void bStat_Click(object sender, EventArgs e)
+        {
+            (new frmStatistics()).Show();
         }
         #endregion
 

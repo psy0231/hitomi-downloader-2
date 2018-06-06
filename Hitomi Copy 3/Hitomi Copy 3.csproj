@@ -58,6 +58,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,10 +72,20 @@
   <ItemGroup>
     <Compile Include="Analysis\HitomiAnalysis.cs" />
     <Compile Include="Analysis\HitomiAnalysisArtist.cs" />
+    <Compile Include="Analysis\HitomiAnalysisDateTime.cs" />
     <Compile Include="Analysis\HitomiAnalysisDetail.cs" />
     <Compile Include="Analysis\HitomiAnalysisGallery.cs" />
+    <Compile Include="Analysis\HitomiAnalysisArtistCount.cs" />
+    <Compile Include="Analysis\HitomiAnalysisTagCount.cs" />
+    <Compile Include="Analysis\HitomiAnalysisTrend.cs" />
     <Compile Include="AutoCompleteListBox.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ColumnGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ColumnGraph.Designer.cs">
+      <DependentUpon>ColumnGraph.cs</DependentUpon>
     </Compile>
     <Compile Include="ColumnSorter.cs" />
     <Compile Include="Common\HitomiArticle.cs" />
@@ -221,6 +232,9 @@
     </Compile>
     <Compile Include="UpdateManager.cs" />
     <Compile Include="ViewBuffer.cs" />
+    <EmbeddedResource Include="ColumnGraph.resx">
+      <DependentUpon>ColumnGraph.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmArtistInfo.resx">
       <DependentUpon>frmArtistInfo.cs</DependentUpon>
     </EmbeddedResource>
