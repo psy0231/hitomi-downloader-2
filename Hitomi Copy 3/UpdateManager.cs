@@ -9,7 +9,7 @@ namespace Hitomi_Copy_3
 {
     public class UpdateManager
     {
-        public const string Version = "3.15";
+        public const string Version = "3.16";
         public const string UpdateCheckUrl = @"https://raw.githubusercontent.com/dc-koromo/hitomi-downloader-2/master/version";
 
         static public string NewestVersionUrl;
@@ -47,6 +47,7 @@ namespace Hitomi_Copy_3
             string now_fpath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             if (File.Exists(now_fpath + ".tmp"))
                 File.Delete(now_fpath + ".tmp");
+            (new PatchNote()).Show();
         }
 
         static public void UpdateProgram()
