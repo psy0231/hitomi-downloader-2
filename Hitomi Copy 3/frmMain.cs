@@ -46,11 +46,12 @@ namespace Hitomi_Copy_3
             tbInfo.Text += "E-Mail: koromo.software@gmail.com\r\n";
             tbInfo.Text += "Source-code : https://github.com/dc-koromo/hitomi-downloader-2\r\n";
             tbInfo.Text += "\r\n";
-            tbInfo.Text += "인류의 무궁한 발전을 기원합니다.\r\n";
+            tbInfo.Text += "v3.17 업데이트 로그\r\n";
+            tbInfo.Text += " - 메모리를 적극적으로 관리할 수 있습니다.\r\n";
+            tbInfo.Text += "   심심할때마다 메모리 사용량 숫자표시를 눌러보세요!\r\n";
             tbInfo.Text += "\r\n";
-            tbInfo.Text += "https://www.youtube.com/watch?v=141XHWESKO0\r\n";
-            tbInfo.Text += "https://www.youtube.com/watch?v=gI4GxITpmb4\r\n";
-            tbInfo.Text += "https://www.youtube.com/watch?v=bCDIt50hRDs\r\n";
+            tbInfo.Text += " - 이제 정리할 때 마다 오랜시간을 기다리지 않아도 됩니다!\r\n";
+            tbInfo.Text += "\r\n";
         }
 
         public void OnTab()
