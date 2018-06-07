@@ -1153,6 +1153,7 @@ namespace Hitomi_Copy_3
 
         private void bTidy_Click(object sender, EventArgs e)
         {
+            ImagePanel.SuspendLayout();
             for (int i = 0; i < ImagePanel.Controls.Count; i++)
             {
                 if (!(ImagePanel.Controls[i] as PicElement).Downloading)
@@ -1168,6 +1169,7 @@ namespace Hitomi_Copy_3
                     ImagePanel.Controls.RemoveAt(i--);
                 }
             }
+            ImagePanel.ResumeLayout();
         }
 
         private void bChooseAll_Click(object sender, EventArgs e)
