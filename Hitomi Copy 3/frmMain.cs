@@ -1056,7 +1056,7 @@ namespace Hitomi_Copy_3
         #region 기타 잡것
         private void lMemoryUsage_Click(object sender, EventArgs e)
         {
-            GC.Collect();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
 
         private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
