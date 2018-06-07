@@ -30,13 +30,14 @@ namespace Hitomi_Copy
         /// </summary>
         private void InitializeComponent()
         {
-            this.ImagePanel = new ScrollFixLayoutPanel();
+            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.lvMyTagRank = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.bDownload = new System.Windows.Forms.Button();
             this.bDownloadAll = new System.Windows.Forms.Button();
             this.pbLoad = new System.Windows.Forms.ProgressBar();
+            this.bTidy = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ImagePanel
@@ -106,10 +107,21 @@ namespace Hitomi_Copy
             // 
             this.pbLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbLoad.Location = new System.Drawing.Point(289, 672);
+            this.pbLoad.Location = new System.Drawing.Point(433, 672);
             this.pbLoad.Name = "pbLoad";
-            this.pbLoad.Size = new System.Drawing.Size(1131, 9);
+            this.pbLoad.Size = new System.Drawing.Size(987, 9);
             this.pbLoad.TabIndex = 17;
+            // 
+            // bTidy
+            // 
+            this.bTidy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bTidy.Location = new System.Drawing.Point(254, 664);
+            this.bTidy.Name = "bTidy";
+            this.bTidy.Size = new System.Drawing.Size(160, 23);
+            this.bTidy.TabIndex = 20;
+            this.bTidy.Text = "이름 비슷한 작품 정리";
+            this.bTidy.UseVisualStyleBackColor = true;
+            this.bTidy.Click += new System.EventHandler(this.bTidy_Click);
             // 
             // frmGroupInfo
             // 
@@ -117,6 +129,7 @@ namespace Hitomi_Copy
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1693, 699);
+            this.Controls.Add(this.bTidy);
             this.Controls.Add(this.pbLoad);
             this.Controls.Add(this.bDownloadAll);
             this.Controls.Add(this.bDownload);
@@ -143,5 +156,6 @@ namespace Hitomi_Copy
         private System.Windows.Forms.Button bDownload;
         private System.Windows.Forms.Button bDownloadAll;
         private System.Windows.Forms.ProgressBar pbLoad;
+        private System.Windows.Forms.Button bTidy;
     }
 }
