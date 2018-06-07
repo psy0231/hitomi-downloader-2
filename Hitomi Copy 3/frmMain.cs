@@ -1053,6 +1053,11 @@ namespace Hitomi_Copy_3
         #endregion
 
         #region 기타 잡것
+        private void lMemoryUsage_Click(object sender, EventArgs e)
+        {
+            GC.Collect();
+        }
+
         private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             HitomiSetting.Instance.GetModel().Language = cbLanguage.Text;

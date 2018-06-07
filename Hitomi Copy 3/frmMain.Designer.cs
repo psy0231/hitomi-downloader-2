@@ -924,6 +924,7 @@
             this.lMemoryUsage.Size = new System.Drawing.Size(35, 19);
             this.lMemoryUsage.TabIndex = 4;
             this.lMemoryUsage.Text = "0 KB";
+            this.lMemoryUsage.Click += new System.EventHandler(this.lMemoryUsage_Click);
             // 
             // MemoryUsageUpdateTimer
             // 
