@@ -1035,7 +1035,6 @@ namespace Hitomi_Copy_3
                     continue;
                 }
                 AddToPannel(new RecommendControl(latest_load_count));
-                Thread.Sleep(50);
             }
         }
         private void AddToPannel(RecommendControl control)
@@ -1045,7 +1044,9 @@ namespace Hitomi_Copy_3
                 Invoke(new Action<RecommendControl>(AddToPannel), new object[] { control });
                 return;
             }
+            RecommendPannel.SuspendLayout();
             RecommendPannel.Controls.Add(control);
+            RecommendPannel.ResumeLayout();
         }
         private void tgFilterArtists_CheckedChanged(object sender, EventArgs e)
         {
