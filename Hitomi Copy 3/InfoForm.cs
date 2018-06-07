@@ -1,5 +1,6 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -14,6 +15,12 @@ namespace Hitomi_Copy
             InitializeComponent();
 
             this.image = image;
+            Disposed += OnDispose;
+        }
+
+        private void OnDispose(object sender, EventArgs e)
+        {
+            image.Dispose();
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)

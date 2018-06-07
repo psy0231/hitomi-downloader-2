@@ -12,7 +12,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,6 +28,15 @@ namespace Hitomi_Copy_3
             tbArtist.Text = HitomiAnalysis.Instance.Rank[index].Item1;
             lScore.Text = HitomiAnalysis.Instance.Rank[index].Item2.ToString().Remove(8) + " 점";
             tbScoreDetail.Text = HitomiAnalysis.Instance.Rank[index].Item3;
+
+            Disposed += OnDispose;
+        }
+
+        private void OnDispose(object sender, EventArgs e)
+        {
+            foreach (var iw in info)
+                if (iw != null)
+                    iw.Dispose();
         }
 
         private async void RecommendControl_LoadAsync(object sender, System.EventArgs e)
@@ -159,6 +167,11 @@ namespace Hitomi_Copy_3
         {
             info = new InfoForm(image);
             info.Size = new Size(image.Width * 3 / 4, image.Height * 3 / 4);
+        }
+
+        public void Dispose()
+        {
+            info.Dispose();
         }
 
         public void Picture_MouseEnter(object sender, EventArgs e)

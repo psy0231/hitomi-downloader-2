@@ -1044,6 +1044,8 @@ namespace Hitomi_Copy_3
         private void tgFilterArtists_CheckedChanged(object sender, EventArgs e)
         {
             HitomiAnalysis.Instance.FilterArtists = tgFilterArtists.Checked;
+            foreach (var control in RecommendPannel.Controls)
+                (control as RecommendControl).Dispose();
             RecommendPannel.Controls.Clear();
             latest_load_count = 0;
             UpdateStatistics();
