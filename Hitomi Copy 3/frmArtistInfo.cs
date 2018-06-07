@@ -120,7 +120,7 @@ namespace Hitomi_Copy
                 // 중복되는 항목 처리
                 foreach (var a in stayed)
                     if (a.Article.Title == pe.Article.Title)
-                    { pe.Article.Title += " " + pe.Article.Magic; pe.Label += " " + pe.Article.Magic; break; }
+                    { pe.Article.Title += " " + pe.Article.Magic; pe.Label += " " + pe.Article.Magic; pe.Overlap = true; break; }
                 stayed.Add(pe);
             }
             AddPe(pe);
@@ -212,6 +212,25 @@ namespace Hitomi_Copy
                 return true;
             }
             return base.ProcessDialogKey(keyData);
+        }
+
+        private void bTidy_Click(object sender, EventArgs e)
+        {
+            List<string> titles = new List<string>();
+            ImagePanel.SuspendLayout();
+            for (int i = 0; i < ImagePanel.Controls.Count; i++)
+            {
+                string ttitle = (ImagePanel.Controls[i] as PicElement).Label.Split('|')[0];
+                if ((ImagePanel.Controls[i] as PicElement).Overlap ||
+                    (titles.Count > 0 && !titles.TrueForAll((title) => StringAlgorithms.get_diff(ttitle, title) > HitomiSetting.Instance.GetModel().TextMatchingAccuracy)))
+                {
+                    ImagePanel.Controls.RemoveAt(i--);
+                    continue;
+                }
+
+                titles.Add(ttitle);
+            }
+            ImagePanel.ResumeLayout();
         }
     }
 }

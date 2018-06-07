@@ -18,6 +18,7 @@ namespace Hitomi_Copy
         bool mouse_enter = false;
         bool downloading = false;
         bool downloaded = false;
+        bool overlap = false;
         HitomiArticle ha;
         PictureBox pb = new PictureBox();
         InfoForm info;
@@ -216,5 +217,7 @@ namespace Hitomi_Copy
         { get { return downloaded; } set { downloaded = value; } }
         public bool Downloading
         { get { return downloading; } set { downloading = value; } }
+        public bool Overlap
+        { get { return overlap; } set { overlap = value; } }
     }
 }
