@@ -998,7 +998,7 @@ namespace Hitomi_Copy_3
                             var pointXPixel = result.ChartArea.AxisX.ValueToPixelPosition(prop.XValue);
                             var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
 
-                            tooltip.Show(result.Series.Name + ", X=" + prop.XValue + ", Y=" + prop.YValues[0], this.chart4,
+                            tooltip.Show($"{result.Series.Name}, X={prop.XValue}, Y={prop.YValues[0]} ({HitomiDate.estimate_datetime((int)prop.XValue)})", this.chart4,
                                                 pos.X, pos.Y - 15);
                         }
                         catch { }
