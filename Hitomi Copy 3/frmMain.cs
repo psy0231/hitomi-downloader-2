@@ -62,6 +62,7 @@ namespace Hitomi_Copy_3
             bSync.Enabled = true;
             bDetailSetting.Enabled = true;
             bStat.Enabled = true;
+            bRTidy.Enabled = true;
 
             tbDownloadPath.Text = HitomiSetting.Instance.GetModel().Path;
             tbExcludeTag.Text = string.Join(", ", HitomiSetting.Instance.GetModel().ExclusiveTag ?? Enumerable.Empty<string>());
@@ -1175,6 +1176,16 @@ namespace Hitomi_Copy_3
                 }
             }
             ImagePanel.ResumeLayout();
+        }
+
+        private void bRTidy_Click(object sender, EventArgs e)
+        {
+            RecommendPannel.SuspendLayout();
+            for (int i = 0; i < RecommendPannel.Controls.Count - 10; i++)
+            {
+                RecommendPannel.Controls.RemoveAt(i--);
+            }
+            RecommendPannel.ResumeLayout();
         }
 
         private void bChooseAll_Click(object sender, EventArgs e)

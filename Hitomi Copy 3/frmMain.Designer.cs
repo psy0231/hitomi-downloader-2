@@ -88,6 +88,7 @@
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.speed_timer = new System.Windows.Forms.Timer(this.components);
+            this.bRTidy = new MetroFramework.Controls.MetroButton();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -107,7 +108,7 @@
             this.MainTab.Controls.Add(this.metroTabPage3);
             this.MainTab.Location = new System.Drawing.Point(10, 59);
             this.MainTab.Name = "MainTab";
-            this.MainTab.SelectedIndex = 0;
+            this.MainTab.SelectedIndex = 2;
             this.MainTab.Size = new System.Drawing.Size(1136, 551);
             this.MainTab.Style = MetroFramework.MetroColorStyle.Pink;
             this.MainTab.TabIndex = 1;
@@ -532,6 +533,7 @@
             // metroTabPage4
             // 
             this.metroTabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.metroTabPage4.Controls.Add(this.bRTidy);
             this.metroTabPage4.Controls.Add(this.label1);
             this.metroTabPage4.Controls.Add(this.tgFilterArtists);
             this.metroTabPage4.Controls.Add(this.RecommendPannel);
@@ -938,6 +940,19 @@
             this.speed_timer.Interval = 1000;
             this.speed_timer.Tick += new System.EventHandler(this.speed_timer_Tick);
             // 
+            // bRTidy
+            // 
+            this.bRTidy.Enabled = false;
+            this.bRTidy.Location = new System.Drawing.Point(3, 3);
+            this.bRTidy.Name = "bRTidy";
+            this.bRTidy.Size = new System.Drawing.Size(152, 25);
+            this.bRTidy.Style = MetroFramework.MetroColorStyle.Pink;
+            this.bRTidy.TabIndex = 22;
+            this.bRTidy.Text = "정리";
+            this.bRTidy.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.bRTidy.UseSelectable = true;
+            this.bRTidy.Click += new System.EventHandler(this.bRTidy_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1035,6 +1050,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel11;
         private System.Windows.Forms.Timer speed_timer;
         private MetroFramework.Controls.MetroButton bStat;
+        private MetroFramework.Controls.MetroButton bRTidy;
     }
 }
 
