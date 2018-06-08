@@ -61,6 +61,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+            this.bRTidy = new MetroFramework.Controls.MetroButton();
             this.label1 = new System.Windows.Forms.Label();
             this.tgFilterArtists = new MetroFramework.Controls.MetroToggle();
             this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
@@ -88,7 +89,6 @@
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.speed_timer = new System.Windows.Forms.Timer(this.components);
-            this.bRTidy = new MetroFramework.Controls.MetroButton();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -549,6 +549,19 @@
             this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage4.VerticalScrollbarSize = 10;
             // 
+            // bRTidy
+            // 
+            this.bRTidy.Enabled = false;
+            this.bRTidy.Location = new System.Drawing.Point(3, 3);
+            this.bRTidy.Name = "bRTidy";
+            this.bRTidy.Size = new System.Drawing.Size(152, 25);
+            this.bRTidy.Style = MetroFramework.MetroColorStyle.Pink;
+            this.bRTidy.TabIndex = 22;
+            this.bRTidy.Text = "정리";
+            this.bRTidy.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.bRTidy.UseSelectable = true;
+            this.bRTidy.Click += new System.EventHandler(this.bRTidy_Click);
+            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -661,7 +674,7 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label2.Location = new System.Drawing.Point(878, 399);
@@ -672,7 +685,7 @@
             // 
             // tgAutoZip
             // 
-            this.tgAutoZip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tgAutoZip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.tgAutoZip.AutoSize = true;
             this.tgAutoZip.Location = new System.Drawing.Point(912, 397);
             this.tgAutoZip.Name = "tgAutoZip";
@@ -889,6 +902,8 @@
             // 
             // pbSync
             // 
+            this.pbSync.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbSync.Location = new System.Drawing.Point(193, 439);
             this.pbSync.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pbSync.Name = "pbSync";
@@ -939,19 +954,6 @@
             this.speed_timer.Enabled = true;
             this.speed_timer.Interval = 1000;
             this.speed_timer.Tick += new System.EventHandler(this.speed_timer_Tick);
-            // 
-            // bRTidy
-            // 
-            this.bRTidy.Enabled = false;
-            this.bRTidy.Location = new System.Drawing.Point(3, 3);
-            this.bRTidy.Name = "bRTidy";
-            this.bRTidy.Size = new System.Drawing.Size(152, 25);
-            this.bRTidy.Style = MetroFramework.MetroColorStyle.Pink;
-            this.bRTidy.TabIndex = 22;
-            this.bRTidy.Text = "정리";
-            this.bRTidy.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.bRTidy.UseSelectable = true;
-            this.bRTidy.Click += new System.EventHandler(this.bRTidy_Click);
             // 
             // frmMain
             // 
