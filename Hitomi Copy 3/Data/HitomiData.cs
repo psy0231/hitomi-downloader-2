@@ -23,7 +23,7 @@ namespace Hitomi_Copy.Data
         public static int number_of_gallery_jsons = 20;
         
         public static string tag_json_uri = @"https://ltn.hitomi.la/tags.json";
-        public static string gllerie_json_uri(int no)=> $"https://ltn.hitomi.la/galleries{no}.json";
+        public static string gallerie_json_uri(int no)=> $"https://ltn.hitomi.la/galleries{no}.json";
 
         public HitomiTagdataCollection tagdata_collection;
         public List<HitomiMetadata> metadata_collection;
@@ -56,7 +56,7 @@ namespace Hitomi_Copy.Data
         {
             HttpClient client = new HttpClient();
             client.Timeout = new TimeSpan(0, 0, 0, 0, Timeout.Infinite);
-            var data = await client.GetStringAsync(gllerie_json_uri(no));
+            var data = await client.GetStringAsync(gallerie_json_uri(no));
             lock (metadata_collection)
             metadata_collection.AddRange(JsonConvert.DeserializeObject<IEnumerable<HitomiMetadata>>(data));
         }
