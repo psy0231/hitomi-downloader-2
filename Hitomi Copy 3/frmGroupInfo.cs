@@ -217,6 +217,7 @@ namespace Hitomi_Copy
                 if ((ImagePanel.Controls[i] as PicElement).Overlap ||
                     (titles.Count > 0 && !titles.TrueForAll((title) => StringAlgorithms.get_diff(ttitle, title) > HitomiSetting.Instance.GetModel().TextMatchingAccuracy)))
                 {
+                    stayed.Remove(ImagePanel.Controls[i] as PicElement);
                     ImagePanel.Controls.RemoveAt(i--);
                     continue;
                 }
