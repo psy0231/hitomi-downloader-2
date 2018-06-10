@@ -1186,6 +1186,7 @@ namespace Hitomi_Copy_3
                 }
             }
             ImagePanel.ResumeLayout();
+            GC.Collect();
         }
 
         private void bRTidy_Click(object sender, EventArgs e)
@@ -1197,6 +1198,7 @@ namespace Hitomi_Copy_3
                 RecommendPannel.Controls.RemoveAt(i--);
             }
             RecommendPannel.ResumeLayout();
+            GC.Collect();
         }
 
         private void bChooseAll_Click(object sender, EventArgs e)
