@@ -1193,6 +1193,7 @@ namespace Hitomi_Copy_3
             RecommendPannel.SuspendLayout();
             for (int i = 0; i < RecommendPannel.Controls.Count - 10; i++)
             {
+                RecommendPannel.Controls[i].Dispose();
                 RecommendPannel.Controls.RemoveAt(i--);
             }
             RecommendPannel.ResumeLayout();
