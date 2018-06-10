@@ -89,12 +89,15 @@
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.speed_timer = new System.Windows.Forms.Timer(this.components);
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.제목비슷한작품정리TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTab
@@ -164,6 +167,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ImagePanel.AutoScroll = true;
             this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.ContextMenuStrip = this.contextMenuStrip2;
             this.ImagePanel.Location = new System.Drawing.Point(3, 37);
             this.ImagePanel.Name = "ImagePanel";
             this.ImagePanel.Size = new System.Drawing.Size(1122, 441);
@@ -955,6 +959,20 @@
             this.speed_timer.Interval = 1000;
             this.speed_timer.Tick += new System.EventHandler(this.speed_timer_Tick);
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.제목비슷한작품정리TToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(239, 48);
+            // 
+            // 제목비슷한작품정리TToolStripMenuItem
+            // 
+            this.제목비슷한작품정리TToolStripMenuItem.Name = "제목비슷한작품정리TToolStripMenuItem";
+            this.제목비슷한작품정리TToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.제목비슷한작품정리TToolStripMenuItem.Text = "제목 비슷한 작품 선택 취소(&C)";
+            this.제목비슷한작품정리TToolStripMenuItem.Click += new System.EventHandler(this.제목비슷한작품정리TToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -987,6 +1005,7 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
             this.metroTabPage3.PerformLayout();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1053,6 +1072,8 @@
         private System.Windows.Forms.Timer speed_timer;
         private MetroFramework.Controls.MetroButton bStat;
         private MetroFramework.Controls.MetroButton bRTidy;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem 제목비슷한작품정리TToolStripMenuItem;
     }
 }
 
