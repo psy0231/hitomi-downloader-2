@@ -242,6 +242,10 @@ namespace Hitomi_Copy_3
             {
                 DownloadMMAsync(url);
             }
+            else if (url.Contains("hitomi.la"))
+            {
+                RemoteDownloadArticleFromId(Regex.Match(url, "\\d+").Value);
+            }
         }
         #endregion
 
