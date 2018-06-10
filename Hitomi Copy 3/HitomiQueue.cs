@@ -51,8 +51,7 @@ namespace Hitomi_Copy_2
             request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
             request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36";
 
-            if (timeout_infinite) request.Timeout = Timeout.Infinite;
-            else request.Timeout = timeout_ms;
+            request.Timeout = timeout_infinite ? Timeout.Infinite : timeout_ms;
             request.KeepAlive = true;
             request.Proxy = proxy;
 
