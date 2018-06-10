@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Hitomi_Copy
 {
-    public partial class PicElement : UserControl
+    public partial class PicElement : UserControl, IDisposable
     {
         Image image;
         bool selected = false;
