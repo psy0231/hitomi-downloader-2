@@ -25,6 +25,9 @@ namespace Hitomi_Copy_3
                 StringSplitOptions.None
             );
 
+            LogEssential.Instance.PushLog(() => "Recieving update text");
+            LogEssential.Instance.PushLog(lines);
+
             NewestVersionUrl = lines[2];
 
             int checking_major = Convert.ToInt32(lines[0].Split('.')[0]);

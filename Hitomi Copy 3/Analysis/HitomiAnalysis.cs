@@ -38,7 +38,6 @@ namespace Hitomi_Copy_2.Analysis
         {
             HitomiAnalysisArtist user;
             user = new HitomiAnalysisArtist(HitomiLog.Instance.GetEnumerator());
-            LogEssential.Instance.PushLog(user.GetDictionary());
 
             ///////////////////////////////
 

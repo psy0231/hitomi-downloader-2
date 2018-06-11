@@ -102,6 +102,10 @@ namespace Hitomi_Copy_3
                     UpdateManager.UpdateProgram();
                 }
             }
+            else
+            {
+                LogEssential.Instance.PushLog(() => "This version is latest version!");
+            }
         }
         #endregion
 
