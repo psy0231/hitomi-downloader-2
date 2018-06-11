@@ -46,6 +46,10 @@ namespace Hitomi_Copy_3
             tbInfo.Text += "E-Mail: koromo.software@gmail.com\r\n";
             tbInfo.Text += "Source-code : https://github.com/dc-koromo/hitomi-downloader-2\r\n";
             tbInfo.Text += "\r\n";
+            tbInfo.Text += "v3.19 업데이트 로그\r\n";
+            tbInfo.Text += " - 로깅 기능을 사용해보세요! Setting.json의 UsingLog:를 true로 바꾸면 사용할 수 있습니다!\r\n";
+            tbInfo.Text += "   (프로그램이 느리거나 오류가 잦은 경우 이 도구를 사용해 로그를 추출해 문의해 주세요.)\r\n";
+            tbInfo.Text += "\r\n";
             tbInfo.Text += "v3.18 업데이트 로그\r\n";
             tbInfo.Text += " - 작가 작품 창에서 중복되는 제목의 작품들을 제거할 수 있습니다!\r\n";
             tbInfo.Text += "   (강도를 낮추고 싶다면 고급설정에서 TextMatchingAccuracy를 낮춰보세요.)\r\n";
