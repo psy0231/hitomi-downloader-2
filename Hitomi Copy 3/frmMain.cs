@@ -334,7 +334,7 @@ namespace Hitomi_Copy_3
             string title = article.Title ?? "";
             if (title != null)
                 foreach (char c in invalid) title = title.Replace(c.ToString(), "");
-            return $"{AppDomain.CurrentDomain.BaseDirectory}\\{title}\\";
+            return $"{AppDomain.CurrentDomain.BaseDirectory}{title}\\";
         }
 
         private void ImageLinkCallback(string uri, ExHentaiArticle article)
@@ -434,7 +434,7 @@ namespace Hitomi_Copy_3
             string archive = article.Archive ?? "";
             if (title != null) foreach (char c in invalid) title = title.Replace(c.ToString(), "");
             if (archive != null) foreach (char c in invalid) archive = archive.Replace(c.ToString(), "");
-            return $"{AppDomain.CurrentDomain.BaseDirectory}\\{title}\\{archive}\\";
+            return $"{AppDomain.CurrentDomain.BaseDirectory}{title}\\{archive}\\";
         }
 
         private void DownloadImage(string uri, MMArticle article)
