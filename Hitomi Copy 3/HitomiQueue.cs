@@ -15,6 +15,7 @@ namespace Hitomi_Copy_2
         int mtx = 0;
         List<Tuple<string, string, object>> queue = new List<Tuple<string, string, object>>();
         List<Tuple<string,HttpWebRequest>> requests = new List<Tuple<string, HttpWebRequest>>();
+        List<string> aborted = new List<string>();
         public IWebProxy proxy { get; set; }
 
         public bool timeout_infinite = true;
@@ -83,9 +84,18 @@ namespace Hitomi_Copy_2
             }
             catch
             {
-                lock (retry_callback) retry_callback(uri);
-                request.Abort();
-                goto RETRY;
+                lock (aborted)
+                    if (!aborted.Contains(uri))
+                    {
+                        lock (retry_callback) retry_callback(uri);
+                        request.Abort();
+                        goto RETRY;
+                    }
+                    else
+                    {
+                        lock (callback) callback(uri, fileName, obj);
+                        return;
+                    }
             }
 
             lock (callback) callback(uri, fileName, obj);
@@ -113,7 +123,7 @@ namespace Hitomi_Copy_2
                         queue.RemoveAt(i);
                         lock (int_lock) mtx--;
                         lock (notify_lock) Notify();
-                        return true;
+                        break;
                     }
             }
             lock (requests)
@@ -122,6 +132,7 @@ namespace Hitomi_Copy_2
                     if (i.Item1 == uri)
                         lock(i.Item2) i.Item2.Abort();
             }
+            aborted.Add(uri);
             return false;
         }
 
