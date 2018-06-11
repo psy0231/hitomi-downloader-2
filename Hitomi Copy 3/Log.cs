@@ -40,9 +40,11 @@ namespace Hitomi_Copy_3
             textBox1.ResumeLayout();
         }
 
+
+        bool force_close = false;
         private void Log_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing && !force_close)
             {
                 e.Cancel = true;
                 LogEssential.Instance.PushLog(() => "Don't do that. I'm serious.");
@@ -63,6 +65,15 @@ namespace Hitomi_Copy_3
         public void save_log()
         {
             File.WriteAllText("log.log", textBox1.Text);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            HitomiSetting.Instance.GetModel().UsingLog = false;
+            HitomiSetting.Instance.Save();
+            force_close = true;
+            MessageBox.Show("Setting.json의 UsingLog 항목을 true로 바꾸면 로그를 다시 사용할 수 있습니다.");
+            Close();
         }
     }
 

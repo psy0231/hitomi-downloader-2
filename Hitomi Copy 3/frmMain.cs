@@ -98,7 +98,6 @@ namespace Hitomi_Copy_3
         {
             if (HitomiSetting.Instance.GetModel().Thread > Environment.ProcessorCount)
             {
-
                 LogEssential.Instance.PushLog(() => $"[Tip] The number of threads is greater than the number of cpu cores. In this case,");
                 LogEssential.Instance.PushLog(() => $"[Tip] If you download a large amount of galleris, the compression step is likely to be the last, and this can lead to a high CPU load.");
             }

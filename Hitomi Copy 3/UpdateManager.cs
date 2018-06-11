@@ -1,5 +1,6 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using Hitomi_Copy_2;
 using System;
 using System.Diagnostics;
 using System.IO;
