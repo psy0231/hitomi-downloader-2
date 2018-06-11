@@ -87,6 +87,8 @@ namespace Hitomi_Copy_3
 
             Task.Run(() => UpdateStatistics());
             Task.Run(() => CheckUpdate());
+
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
 
         #region 업데이트 확인
