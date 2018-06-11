@@ -51,9 +51,8 @@ namespace Hitomi_Copy_2.Analysis
         {
             Dictionary<string, int> tags_map = new Dictionary<string, int>();
 
-            foreach (var log in logs)
+            foreach (var log in logs.Where(log => log.Tags != null))
             {
-                if (log.Tags == null) continue;
                 tags_count += log.Tags.Length;
                 foreach (var tag in log.Tags)
                     if (tags_map.ContainsKey(HitomiCommon.LegalizeTag(tag)))

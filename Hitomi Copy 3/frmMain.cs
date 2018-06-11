@@ -127,11 +127,8 @@ namespace Hitomi_Copy_3
             tbExcludeTag.Text.Trim().Split(' ').ToList().ForEach((a) => negative_data.Add(Regex.Replace(a.Trim(), ",", "")));
             query.Common = positive_data;
             query.TagExclude = negative_data;
-            foreach (var elem in tbSearch.Text.Trim().Split(' '))
+            foreach (var elem in from elem in tbSearch.Text.Trim().Split(' ') where elem.Contains(":") where !elem.StartsWith("/") where !elem.StartsWith("?") select elem)
             {
-                if (!elem.Contains(":")) continue;
-                if (elem.StartsWith("/")) continue;
-                if (elem.StartsWith("?")) continue;
                 if (elem.StartsWith("tag:"))
                     if (query.TagInclude == null)
                         query.TagInclude = new List<string>() { elem.Substring("tag:".Length) };
@@ -534,10 +531,7 @@ namespace Hitomi_Copy_3
                     "tag:",
                     "tagx:"
                 };
-                List<HitomiTagdata> data_col = new List<HitomiTagdata>();
-                foreach (var ix in match_target)
-                    if (ix.StartsWith(word))
-                        data_col.Add(new HitomiTagdata { Tag = ix });
+                List<HitomiTagdata> data_col = (from ix in match_target where ix.StartsWith(word) select new HitomiTagdata {Tag = ix}).ToList();
                 if (data_col.Count > 0)
                     match = data_col;
             }

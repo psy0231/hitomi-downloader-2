@@ -14,12 +14,8 @@ namespace Hitomi_Copy.Data
         {
             bool[] check = new bool[source.Count];
             for (int i = 0; i < source.Count; i++)
-                foreach (string e in target)
-                    if (e.ToLower().Replace(' ', '_') == source[i].ToLower())
-                    {
-                        check[i] = true;
-                        break;
-                    }
+                if (target.Any(e => e.ToLower().Replace(' ', '_') == source[i].ToLower()))
+                    check[i] = true;
             return check.All((x => x));
         }
 
@@ -28,12 +24,8 @@ namespace Hitomi_Copy.Data
             if (target != null)
             {
                 for (int i = 0; i < source.Count; i++)
-                    foreach (string e in target)
-                        if (e.ToLower().Split(' ').Contains(source[i].ToLower()))
-                        {
-                            check[i] = true;
-                            break;
-                        }
+                    if (target.Any(e => e.ToLower().Split(' ').Contains(source[i].ToLower())))
+                        check[i] = true;
             }
         }
 
@@ -52,9 +44,11 @@ namespace Hitomi_Copy.Data
                     int intersec_count = 0;
                     foreach (var tag in x_tag)
                     {
-                        foreach (var vtag in v.Tags)
-                            if (vtag.ToLower().Replace(' ', '_') == tag.ToLower())
-                            { intersec_count++; break; }
+                        if (v.Tags.Any(vtag => vtag.ToLower().Replace(' ', '_') == tag.ToLower()))
+                        {
+                            intersec_count++;
+                        }
+
                         if (intersec_count > 0) break;
                     }
                     if (intersec_count > 0) continue;
@@ -117,9 +111,11 @@ namespace Hitomi_Copy.Data
                         int intersec_count = 0;
                         foreach (var tag in query.TagExclude)
                         {
-                            foreach (var vtag in v.Tags)
-                                if (vtag.ToLower().Replace(' ', '_') == tag.ToLower())
-                                { intersec_count++; break; }
+                            if (v.Tags.Any(vtag => vtag.ToLower().Replace(' ', '_') == tag.ToLower()))
+                            {
+                                intersec_count++;
+                            }
+
                             if (intersec_count > 0) break;
                         }
                         if (intersec_count > 0) continue;

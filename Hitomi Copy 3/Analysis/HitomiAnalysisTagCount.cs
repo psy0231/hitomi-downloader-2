@@ -17,17 +17,12 @@ namespace Hitomi_Copy_3.Analysis
         public HitomiAnalysisTagCount()
         {
             Dictionary<string, int> dic = new Dictionary<string, int>();
-            foreach (var data in HitomiLog.Instance.GetEnumerator())
+            foreach (var legal in from data in HitomiLog.Instance.GetEnumerator() where data.Tags != null from tag in data.Tags select HitomiCommon.LegalizeTag(tag))
             {
-                if (data.Tags == null) continue;
-                foreach (var tag in data.Tags)
-                {
-                    string legal = HitomiCommon.LegalizeTag(tag);
-                    if (dic.ContainsKey(legal))
-                        dic[legal]++;
-                    else
-                        dic.Add(legal, 1);
-                }
+                if (dic.ContainsKey(legal))
+                    dic[legal]++;
+                else
+                    dic.Add(legal, 1);
             }
 
             tag_count = dic.ToList();

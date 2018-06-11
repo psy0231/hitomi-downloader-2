@@ -88,9 +88,8 @@ namespace Hitomi_Copy_3.Analysis
             Dictionary<string, Dictionary<int, int>> tag_list = new Dictionary<string, Dictionary<int, int>>();
             foreach (var metadata in HitomiData.Instance.metadata_collection)
                 if (metadata.Tags != null)
-                    foreach (var tag in metadata.Tags)
-                        if (!tag_list.ContainsKey(tag))
-                            tag_list.Add(tag, new Dictionary<int, int>());
+                    foreach (var tag in metadata.Tags.Where(tag => !tag_list.ContainsKey(tag)))
+                        tag_list.Add(tag, new Dictionary<int, int>());
 
             foreach (var data in datas)
                 foreach (var metadata in data.Value)
@@ -220,9 +219,8 @@ namespace Hitomi_Copy_3.Analysis
             Dictionary<string, Dictionary<int, int>> artist_list = new Dictionary<string, Dictionary<int, int>>();
             foreach (var metadata in HitomiData.Instance.metadata_collection)
                 if (metadata.Artists != null && (!specifictag || (metadata.Tags != null && metadata.Tags.Contains(tag))))
-                    foreach (var artist in metadata.Artists)
-                        if (!artist_list.ContainsKey(artist))
-                            artist_list.Add(artist, new Dictionary<int, int>());
+                    foreach (var artist in metadata.Artists.Where(artist => !artist_list.ContainsKey(artist)))
+                        artist_list.Add(artist, new Dictionary<int, int>());
 
             foreach (var data in datas)
                 foreach (var metadata in data.Value)
@@ -259,9 +257,8 @@ namespace Hitomi_Copy_3.Analysis
             Dictionary<string, Dictionary<int, int>> artist_list = new Dictionary<string, Dictionary<int, int>>();
             foreach (var metadata in HitomiData.Instance.metadata_collection)
                 if (metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Artists != null && (!specifictag || (metadata.Tags != null && metadata.Tags.Contains(tag))))
-                    foreach (var artist in metadata.Artists)
-                        if (!artist_list.ContainsKey(artist))
-                            artist_list.Add(artist, new Dictionary<int, int>());
+                    foreach (var artist in metadata.Artists.Where(artist => !artist_list.ContainsKey(artist)))
+                        artist_list.Add(artist, new Dictionary<int, int>());
 
             foreach (var data in datas)
                 foreach (var metadata in data.Value)
@@ -298,9 +295,8 @@ namespace Hitomi_Copy_3.Analysis
             Dictionary<string, Dictionary<int, int>> artist_list = new Dictionary<string, Dictionary<int, int>>();
             foreach (var metadata in HitomiData.Instance.metadata_collection)
                 if (metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Artists != null)
-                    foreach (var artist in metadata.Artists)
-                        if (!artist_list.ContainsKey(artist))
-                            artist_list.Add(artist, new Dictionary<int, int>());
+                    foreach (var artist in metadata.Artists.Where(artist => !artist_list.ContainsKey(artist)))
+                        artist_list.Add(artist, new Dictionary<int, int>());
 
             foreach (var data in datas)
                 if (data.Key > 1125000)
@@ -443,9 +439,8 @@ namespace Hitomi_Copy_3.Analysis
             Dictionary<string, Dictionary<int, int>> series_list = new Dictionary<string, Dictionary<int, int>>();
             foreach (var metadata in HitomiData.Instance.metadata_collection)
                 if (metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Parodies != null && (!specifictag || (metadata.Tags != null && metadata.Tags.Contains(tag))))
-                    foreach (var series in metadata.Parodies)
-                        if (!series_list.ContainsKey(series))
-                            series_list.Add(series, new Dictionary<int, int>());
+                    foreach (var series in metadata.Parodies.Where(series => !series_list.ContainsKey(series)))
+                        series_list.Add(series, new Dictionary<int, int>());
 
             foreach (var data in datas)
                 foreach (var metadata in data.Value)
@@ -482,9 +477,8 @@ namespace Hitomi_Copy_3.Analysis
             Dictionary<string, Dictionary<int, int>> series_list = new Dictionary<string, Dictionary<int, int>>();
             foreach (var metadata in HitomiData.Instance.metadata_collection)
                 if (metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Parodies != null)
-                    foreach (var series in metadata.Parodies)
-                        if (!series_list.ContainsKey(series))
-                            series_list.Add(series, new Dictionary<int, int>());
+                    foreach (var series in metadata.Parodies.Where(series => !series_list.ContainsKey(series)))
+                        series_list.Add(series, new Dictionary<int, int>());
 
             foreach (var data in datas)
                 if (data.Key > 1125000)
@@ -535,9 +529,8 @@ namespace Hitomi_Copy_3.Analysis
             Dictionary<string, Dictionary<int, int>> character_list = new Dictionary<string, Dictionary<int, int>>();
             foreach (var metadata in HitomiData.Instance.metadata_collection)
                 if (metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Characters != null && (!specifictag || (metadata.Tags != null && metadata.Tags.Contains(tag))))
-                    foreach (var character in metadata.Characters)
-                        if (!character_list.ContainsKey(character))
-                            character_list.Add(character, new Dictionary<int, int>());
+                    foreach (var character in metadata.Characters.Where(character => !character_list.ContainsKey(character)))
+                        character_list.Add(character, new Dictionary<int, int>());
 
             foreach (var data in datas)
                 foreach (var metadata in data.Value)
@@ -574,9 +567,8 @@ namespace Hitomi_Copy_3.Analysis
             Dictionary<string, Dictionary<int, int>> character_list = new Dictionary<string, Dictionary<int, int>>();
             foreach (var metadata in HitomiData.Instance.metadata_collection)
                 if (metadata.Language == HitomiSetting.Instance.GetModel().Language && metadata.Characters != null)
-                    foreach (var series in metadata.Characters)
-                        if (!character_list.ContainsKey(series))
-                            character_list.Add(series, new Dictionary<int, int>());
+                    foreach (var series in metadata.Characters.Where(series => !character_list.ContainsKey(series)))
+                        character_list.Add(series, new Dictionary<int, int>());
 
             foreach (var data in datas)
                 if (data.Key > 1125000)

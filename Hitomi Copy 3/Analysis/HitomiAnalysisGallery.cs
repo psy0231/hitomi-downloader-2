@@ -13,17 +13,12 @@ namespace Hitomi_Copy_2.Analysis
         public HitomiAnalysisGallery()
         {
             Dictionary<string, int> tag_rank = new Dictionary<string, int>();
-            foreach (var v in HitomiLog.Instance.GetEnumerator())
+            foreach (var legalize in from v in HitomiLog.Instance.GetEnumerator() where v.Tags != null from tag in v.Tags select HitomiCommon.LegalizeTag(tag))
             {
-                if (v.Tags == null) continue;
-                foreach (var tag in v.Tags)
-                {
-                    string legalize = HitomiCommon.LegalizeTag(tag);
-                    if (tag_rank.ContainsKey(legalize))
-                        tag_rank[legalize] += 1;
-                    else
-                        tag_rank.Add(legalize, 1);
-                }
+                if (tag_rank.ContainsKey(legalize))
+                    tag_rank[legalize] += 1;
+                else
+                    tag_rank.Add(legalize, 1);
             }
 
             Dictionary<int, Tuple<double, HitomiMetadata>> datas = new Dictionary<int, Tuple<double, HitomiMetadata>>();
@@ -34,9 +29,7 @@ namespace Hitomi_Copy_2.Analysis
                 double score = 0.0;
                 if (metadata.Tags != null)
                 {
-                    foreach (var tag in metadata.Tags)
-                        if (tag_rank.ContainsKey(tag))
-                            score += tag_rank[tag];
+                    score = metadata.Tags.Where(tag => tag_rank.ContainsKey(tag)).Aggregate(score, (current, tag) => current + tag_rank[tag]);
                     score /= metadata.Tags.Length;
                 }
                 total_score += score;

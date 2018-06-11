@@ -65,14 +65,12 @@ namespace Hitomi_Copy_2.Analysis
             {
                 Dictionary<string, int> artists_galleris_count_log = new Dictionary<string, int>();
 
-                foreach (var data in HitomiLog.Instance.GetEnumerator())
+                foreach (var artist in HitomiLog.Instance.GetEnumerator().Where(data => data.Artists != null).SelectMany(data => data.Artists))
                 {
-                    if (data.Artists != null)
-                        foreach (var artist in data.Artists)
-                            if (artists_galleris_count_log.ContainsKey(artist))
-                                artists_galleris_count_log[artist] += 1;
-                            else
-                                artists_galleris_count_log.Add(artist, 1);
+                    if (artists_galleris_count_log.ContainsKey(artist))
+                        artists_galleris_count_log[artist] += 1;
+                    else
+                        artists_galleris_count_log.Add(artist, 1);
                 }
 
                 for (int i = 0; i < list.Count; i++)

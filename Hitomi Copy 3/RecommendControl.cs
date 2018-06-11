@@ -34,9 +34,8 @@ namespace Hitomi_Copy_3
 
         private void OnDispose(object sender, EventArgs e)
         {
-            foreach (var iw in info)
-                if (iw != null)
-                    iw.Dispose();
+            foreach (var iw in info.Where(iw => iw != null))
+                iw.Dispose();
         }
 
         private async void RecommendControl_LoadAsync(object sender, System.EventArgs e)

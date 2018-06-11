@@ -987,22 +987,19 @@ namespace Hitomi_Copy_3
             prevPosition = pos;
             var results = chart4.HitTest(pos.X, pos.Y, false,
                                             ChartElementType.DataPoint);
-            foreach (var result in results)
+            foreach (var result in results.Where(result => result.ChartElementType == ChartElementType.DataPoint))
             {
-                if (result.ChartElementType == ChartElementType.DataPoint)
+                if (result.Object is DataPoint prop)
                 {
-                    if (result.Object is DataPoint prop)
+                    try
                     {
-                        try
-                        {
-                            var pointXPixel = result.ChartArea.AxisX.ValueToPixelPosition(prop.XValue);
-                            var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
+                        var pointXPixel = result.ChartArea.AxisX.ValueToPixelPosition(prop.XValue);
+                        var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
 
-                            tooltip.Show($"{result.Series.Name}, X={prop.XValue}, Y={prop.YValues[0]} ({HitomiDate.estimate_datetime((int)prop.XValue)})", this.chart4,
-                                                pos.X, pos.Y - 15);
-                        }
-                        catch { }
+                        tooltip.Show($"{result.Series.Name}, X={prop.XValue}, Y={prop.YValues[0]} ({HitomiDate.estimate_datetime((int)prop.XValue)})", this.chart4,
+                            pos.X, pos.Y - 15);
                     }
+                    catch { }
                 }
             }
         }

@@ -17,16 +17,12 @@ namespace Hitomi_Copy_3.Analysis
         public HitomiAnalysisArtistCount()
         {
             Dictionary<string, int> dic = new Dictionary<string, int>();
-            foreach (var data in HitomiLog.Instance.GetEnumerator())
+            foreach (var artist in HitomiLog.Instance.GetEnumerator().Where(data => data.Artists != null).SelectMany(data => data.Artists))
             {
-                if (data.Artists == null) continue;
-                foreach (var artist in data.Artists)
-                {
-                    if (dic.ContainsKey(artist))
-                        dic[artist]++;
-                    else
-                        dic.Add(artist, 1);
-                }
+                if (dic.ContainsKey(artist))
+                    dic[artist]++;
+                else
+                    dic.Add(artist, 1);
             }
 
             artist_count = dic.ToList();
