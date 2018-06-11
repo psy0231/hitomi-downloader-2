@@ -59,6 +59,11 @@ namespace Hitomi_Copy_3
             File.WriteAllText("log.log", textBox1.Text);
             MessageBox.Show("Save complete!", "Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        public void save_log()
+        {
+            File.WriteAllText("log.log", textBox1.Text);
+        }
     }
 
     public class LogEssential
@@ -73,10 +78,20 @@ namespace Hitomi_Copy_3
             {
                 my_log = new Log();
                 my_log.Show();
+                my_log.PushString($"Hitomi Copy {UpdateManager.Version}");
+                my_log.PushString("Copyright (C) 2018. Hitomi Parser Developers");
+                my_log.PushString("E -Mail: koromo.software@gmail.com");
+                my_log.PushString("Source-code : https://github.com/dc-koromo/hitomi-downloader-2");
+                my_log.PushString("");
                 PushLog(() => "Hello!");
                 PushLog(() => "Current Setting");
                 PushLog(HitomiSetting.Instance.GetModel());
             }
+        }
+
+        public void SaveLog()
+        {
+            my_log.save_log();
         }
 
         public void PushLog(Func<string> str)
@@ -115,8 +130,9 @@ namespace Hitomi_Copy_3
                 {
                     return JsonConvert.SerializeObject(toSerialize, Formatting.Indented);
                 }
-                catch
+                catch (Exception e)
                 {
+                    Instance.PushLog(() => $"[Error] {e.Message}");
                     return toSerialize.ToString();
                 }
             }

@@ -89,7 +89,19 @@ namespace Hitomi_Copy_3
             Task.Run(() => CheckUpdate());
             Task.Run(() => UpdateStatistics());
 
+            EmitTip();
+
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+        }
+
+        public void EmitTip()
+        {
+            if (HitomiSetting.Instance.GetModel().Thread > Environment.ProcessorCount)
+            {
+
+                LogEssential.Instance.PushLog(() => $"[Tip] The number of threads is greater than the number of cpu cores. In this case,");
+                LogEssential.Instance.PushLog(() => $"[Tip] If you download a large amount of galleris, the compression step is likely to be the last, and this can lead to a high CPU load.");
+            }
         }
 
         #region 업데이트 확인
@@ -231,6 +243,11 @@ namespace Hitomi_Copy_3
             LogEssential.Instance.PushLog(query);
             LogEssential.Instance.PushLog(() => $"Result : {query_result.Count}");
             LogEssential.Instance.PushLog(query_result);
+
+            if (query.Artists != null)
+            {
+                LogEssential.Instance.PushLog(() => $"[Tip] You can get the most accurate single artist/group list only in the artist/group window.");
+            }
         }
 
         private void LazyAdd(List<HitomiMetadata> metadata_result)
@@ -1033,6 +1050,8 @@ namespace Hitomi_Copy_3
 
             foreach (var uri in uris)
                 download_queue.Abort(uri);
+            LogEssential.Instance.PushLog(() => "Abort");
+            LogEssential.Instance.PushLog(uris);
         }
 
         long latest_status_size = 0;

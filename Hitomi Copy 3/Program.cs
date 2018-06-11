@@ -48,11 +48,13 @@ namespace Hitomi_Copy_3
         private static void unhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             MessageBox.Show("프로그램 내부에서 예외처리되지 않은 오류가 발생했습니다. 오류가 계속된다면 개발자에게 문의하십시오. " + (e.ExceptionObject as Exception).Source + "\nStackTrace: " + (e.ExceptionObject as Exception).StackTrace);
+            LogEssential.Instance.PushLog(() => $"[Unhandled Exception] {(e.ExceptionObject as Exception).Message}\r\n{(e.ExceptionObject as Exception).Source}\r\n{(e.ExceptionObject as Exception).StackTrace}");
         }
 
         private static void ApplicationThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            MessageBox.Show("프로그램 내부에서 예외처리되지 않은 오류가 발생했습니다. 오류가 계속된다면 개발자에게 문의하십시오. " + (e.Exception as Exception).Source + "\nStackTrace: " + (e.Exception as Exception).StackTrace);
+            MessageBox.Show("프로그램 내부에서 예외처리되지 않은 오류가 발생했습니다. 오류가 계속된다면 개발자에게 문의하십시오. " + e.Exception.Source + "\nStackTrace: " + (e.Exception as Exception).StackTrace);
+            LogEssential.Instance.PushLog(() => $"[Application Thread Exception] {e.Exception.Message}\r\n{e.Exception.Source}\r\n{e.Exception.StackTrace}");
         }
 
         static void AppSetup()

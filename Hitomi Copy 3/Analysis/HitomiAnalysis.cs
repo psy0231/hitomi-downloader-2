@@ -1,7 +1,6 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
 using Hitomi_Copy.Data;
-using Hitomi_Copy_3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
