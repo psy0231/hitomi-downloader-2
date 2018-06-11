@@ -77,6 +77,7 @@ namespace Hitomi_Copy
             wc.Encoding = Encoding.UTF8;
             wc.DownloadStringCompleted += CallbackSearch;
             wc.DownloadStringAsync(new Uri(HitomiSearch.GetWithGroup(group, HitomiSetting.Instance.GetModel().Language, Pages.ToString())));
+            LogEssential.Instance.PushLog(() => $"Load artist pages {HitomiSearch.GetWithGroup(group, HitomiSetting.Instance.GetModel().Language, Pages.ToString())}");
         }
 
         private void CallbackSearch(object sender, DownloadStringCompletedEventArgs e)
@@ -118,6 +119,7 @@ namespace Hitomi_Copy
             AddPe(pe);
             IncrementProgressBarValue();
             Application.DoEvents();
+            LogEssential.Instance.PushLog(() => $"Downloaded image! {HitomiDef.HitomiThumbnail + tuple.Item2.Thumbnail} {tuple.Item1}");
         }
         private void IncrementProgressBarValue()
         {

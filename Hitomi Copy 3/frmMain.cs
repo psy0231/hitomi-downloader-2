@@ -84,9 +84,10 @@ namespace Hitomi_Copy_3
             tgAutoZip.Checked = HitomiSetting.Instance.GetModel().Zip;
 
             HitomiDate.Initialize();
+            LogEssential.Instance.Initialize();
 
-            Task.Run(() => UpdateStatistics());
             Task.Run(() => CheckUpdate());
+            Task.Run(() => UpdateStatistics());
 
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
@@ -107,6 +108,8 @@ namespace Hitomi_Copy_3
         #region 검색
         private async void bSearch_Click(object sender, EventArgs e)
         {
+            LogEssential.Instance.PushLog(() => $"Search : \"{tbSearch.Text}\"");
+
             if (tbSearch.Text.Trim().StartsWith("http://") || tbSearch.Text.Trim().StartsWith("https://"))
             {
                 ProcessUrl(tbSearch.Text.Trim());
@@ -220,6 +223,10 @@ namespace Hitomi_Copy_3
 
             foreach (var request in request_number)
                 RequestDownloadArticleFormId(request);
+
+            LogEssential.Instance.PushLog(query);
+            LogEssential.Instance.PushLog(() => $"Result : {query_result.Count}");
+            LogEssential.Instance.PushLog(query_result);
         }
 
         private void LazyAdd(List<HitomiMetadata> metadata_result)
@@ -267,6 +274,8 @@ namespace Hitomi_Copy_3
             article = ExHentaiParser.GetArticleData(article_source);
             IncrementProgressBarMax(article.Length);
             Task.Run(() => download_page());
+            LogEssential.Instance.PushLog(() => $"EXH {url}");
+            LogEssential.Instance.PushLog(article);
         }
 
         private void download_page()
@@ -289,6 +298,8 @@ namespace Hitomi_Copy_3
                 wc.DownloadStringAsync(new Uri(image_uri), e.UserState);
                 System.Threading.Thread.Sleep(500);
             }
+            LogEssential.Instance.PushLog(() => $"EXH Images");
+            LogEssential.Instance.PushLog(images);
         }
 
         private void wc_image_cb(object sender, DownloadStringCompletedEventArgs e)
@@ -340,7 +351,10 @@ namespace Hitomi_Copy_3
             var archives = MMParser.ParseManga(html);
             images_uri.Clear();
 
+            LogEssential.Instance.PushLog(() => $"Download MM {url}");
+            LogEssential.Instance.PushLog(archives);
             await Task.Run(() => DownloadArchivesAsync(archives, MMParser.GetTitle(html)));
+            LogEssential.Instance.PushLog(() => $"Merge Successful!");
             await Task.Run(() => DownloadImages());
         }
 
@@ -376,12 +390,14 @@ namespace Hitomi_Copy_3
             MMArticle ta = new MMArticle();
             ta.Title = title;
             ta.Archive = MMParser.GetArchive(html);
-
+            LogEssential.Instance.PushLog(() => $"Download MM Archives {url}");
+            LogEssential.Instance.PushLog(ta);
             foreach (var uri in images)
             {
                 IncrementProgressBarMax();
                 lock (images) images_uri.Add(new Tuple<string, MMArticle>(uri, ta));
             }
+            LogEssential.Instance.PushLog(images);
         }
 
         private void DownloadImages()
@@ -655,6 +671,8 @@ namespace Hitomi_Copy_3
             wc.DownloadFileCompleted += CallbackThumbnail;
             wc.DownloadFileAsync(new Uri(HitomiDef.HitomiThumbnail + article.Thumbnail), temp,
                 new Tuple<string, HitomiArticle>(temp, article));
+            LogEssential.Instance.PushLog(() => $"AddArticleToPanel {HitomiDef.HitomiThumbnail + article.Thumbnail} {temp}");
+            LogEssential.Instance.PushLog(article);
         }
 
         List<PicElement> stayed = new List<PicElement>();
@@ -725,12 +743,14 @@ namespace Hitomi_Copy_3
             }
             lRetry.Text = uri + "항목 다운로드를 재시작합니다.";
             lRetry.Visible = true;
+            LogEssential.Instance.PushLog(() => $"Retry downloading... {uri}");
         }
         private void HitomiQueueCallback(string uri, string filename, object obj)
         {
             IncrementProgressBarValue();
             DeleteSpecificItem(((int)obj).ToString());
             UpdateLabel($"{pbTarget.Value}/{pbTarget.Maximum}");
+            LogEssential.Instance.PushLog(() => $"Image Download Complete! {uri} {filename}");
         }
         private void IncrementProgressBarMax()
         {
@@ -806,12 +826,14 @@ namespace Hitomi_Copy_3
         }
         private void ZipArticle(HitomiArticle article)
         {
+            LogEssential.Instance.PushLog(() => $"{article.Magic} Zipping article... ");
             string zip_path = MakeDownloadDirectory(article);
             zip_path = zip_path.Remove(zip_path.Length - 1);
             if (File.Exists($"{zip_path}.zip"))
                 File.Delete($"{zip_path}.zip");
             ZipFile.CreateFromDirectory(zip_path, $"{zip_path}.zip");
             Directory.Delete(zip_path, true);
+            LogEssential.Instance.PushLog(() => $"{article.Magic} Zipping Completed! ");
         }
 
         long download_size = 0;
@@ -884,6 +906,10 @@ namespace Hitomi_Copy_3
                 download_check.Add(pe.Label);
                 IncrementProgressBarMax();
             }
+            LogEssential.Instance.PushLog(() => $"Add ImageLink");
+            LogEssential.Instance.PushLog(() => $"Folder Address : {MakeDownloadDirectory(pe.Article)}");
+            LogEssential.Instance.PushLog(pe.Article.ImagesLink);
+            LogEssential.Instance.PushLog(() => $"This list is added in download_queue!");
             if (HitomiSetting.Instance.GetModel().SaveJson == true)
             {
                 HitomiJson hitomi_json = new HitomiJson(MakeDownloadDirectory(pe.Article));

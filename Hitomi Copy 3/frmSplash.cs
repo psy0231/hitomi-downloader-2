@@ -2,7 +2,6 @@
 
 using Hitomi_Copy.Data;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 

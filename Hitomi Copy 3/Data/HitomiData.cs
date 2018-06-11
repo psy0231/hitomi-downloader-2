@@ -1,5 +1,6 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using Hitomi_Copy_3;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -126,10 +127,13 @@ namespace Hitomi_Copy.Data
 
         public async Task Synchronization()
         {
+            LogEssential.Instance.PushLog(() => "Start Synchronization...");
             metadata_collection.Clear();
             await Task.Run(() => DownloadTagdata());
             await Task.Run(() => DownloadMetadata());
             await Task.Run(() => SortTagdata());
+            LogEssential.Instance.PushLog(() => "End Synchronization");
+            LogEssential.Instance.PushLog(() => $"Sync Report : {metadata_collection.Count} {tagdata_collection.female.Count}");
         }
 
         #region Autocomplete Helper

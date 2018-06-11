@@ -22,7 +22,7 @@ namespace Hitomi_Copy_2
         [JsonProperty]
         public bool InverseGaussianDist;
     }
-
+    
     public class HitomiSettingModel
     {
         [JsonProperty]
@@ -56,6 +56,8 @@ namespace Hitomi_Copy_2
         [JsonProperty]
         public bool ReplaceArtistsWithTitle;
         [JsonProperty]
+        public bool UsingLog;
+        [JsonProperty]
         public HitomiSettingAnalysisModel Analysis;
     }
 
@@ -87,6 +89,7 @@ namespace Hitomi_Copy_2
                 model.RecommendNMultipleWithLength = false;
                 model.RecommendLanguageALL = false;
                 model.ReplaceArtistsWithTitle = false;
+                model.UsingLog = false;
                 model.Analysis = new HitomiSettingAnalysisModel();
                 Save();
             }

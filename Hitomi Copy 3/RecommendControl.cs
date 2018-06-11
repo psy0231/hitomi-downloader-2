@@ -20,22 +20,25 @@ namespace Hitomi_Copy_3
     public partial class RecommendControl : UserControl
     {
         InfoWrapper[] info = new InfoWrapper[5];
+        string artist;
 
         public RecommendControl(int index)
         {
             InitializeComponent();
             
-            tbArtist.Text = HitomiAnalysis.Instance.Rank[index].Item1;
+            artist = tbArtist.Text = HitomiAnalysis.Instance.Rank[index].Item1;
             lScore.Text = HitomiAnalysis.Instance.Rank[index].Item2.ToString().Remove(8) + " 점";
             tbScoreDetail.Text = HitomiAnalysis.Instance.Rank[index].Item3;
 
             Disposed += OnDispose;
+            LogEssential.Instance.PushLog(() => $"Created RecommendControl! {tbArtist.Text} {lScore.Text}");
         }
 
         private void OnDispose(object sender, EventArgs e)
         {
             foreach (var iw in info.Where(iw => iw != null))
                 iw.Dispose();
+            LogEssential.Instance.PushLog(() => $"Successful disposed! [RecommendControl] {artist}");
         }
 
         private async void RecommendControl_LoadAsync(object sender, System.EventArgs e)
@@ -62,6 +65,8 @@ namespace Hitomi_Copy_3
                     i++;
                 }
             }
+            LogEssential.Instance.PushLog(() => $"This images will be loaded. [RecommendControl]");
+            LogEssential.Instance.PushLog(magics);
 
             for (int i = 0; i < magics.Count; i++)
             {
@@ -98,6 +103,8 @@ namespace Hitomi_Copy_3
                 pbs[i].Invoke(new Action(() => { pbs[i].Image = img; }));
             else
                 pbs[i].Image = img;
+
+            LogEssential.Instance.PushLog(() => $"Load successful! {HitomiDef.HitomiThumbnail + thumbnail} {temp} {i} {id}");
         }
         
         private string GetThumbnailAddress(string id)

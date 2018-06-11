@@ -1,6 +1,7 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
 using Hitomi_Copy.Data;
+using Hitomi_Copy_3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,14 +32,13 @@ namespace Hitomi_Copy_2.Analysis
 
             foreach (var pair in artists)
                 datas.Add(new HitomiAnalysisArtist(pair.Key, pair.Value));
-            
-            Update();
         }
 
         public void Update()
         {
             HitomiAnalysisArtist user;
             user = new HitomiAnalysisArtist(HitomiLog.Instance.GetEnumerator());
+            LogEssential.Instance.PushLog(user.GetDictionary());
 
             ///////////////////////////////
 
@@ -56,7 +56,7 @@ namespace Hitomi_Copy_2.Analysis
             }
 
             ///////////////////////////////
-            
+
             var list = score.ToList();
 
             ///////////////////////////////

@@ -123,6 +123,7 @@ namespace Hitomi_Copy
                 string set = client.DownloadString(new Uri(HitomiDef.HitomiGalleryAddress + metadata.ID + ".html"));
                 client.DownloadFile(HitomiDef.HitomiThumbnail + HitomiParser.ParseGallery(set).Thumbnail, localFilename);
                 load_image(localFilename);
+                LogEssential.Instance.PushLog(() => $"Download image successful! {HitomiDef.HitomiThumbnail + HitomiParser.ParseGallery(set).Thumbnail} {localFilename}");
             }
         }
         private void load_image(string path)
