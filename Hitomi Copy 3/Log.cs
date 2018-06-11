@@ -53,6 +53,12 @@ namespace Hitomi_Copy_3
         {
             textBox1.BackColor = Color.White;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText("log.log", textBox1.Text);
+            MessageBox.Show("Save complete!", "Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 
     public class LogEssential
