@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -42,6 +44,7 @@ namespace Hitomi_Copy_3
             Application.ThreadException += ApplicationThreadException;
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += unhandledException;
+            SetGC();
             AppSetup();
         }
 
@@ -55,6 +58,13 @@ namespace Hitomi_Copy_3
         {
             MessageBox.Show("프로그램 내부에서 예외처리되지 않은 오류가 발생했습니다. 오류가 계속된다면 개발자에게 문의하십시오. " + e.Exception.Source + "\nStackTrace: " + (e.Exception as Exception).StackTrace);
             LogEssential.Instance.PushLog(() => $"[Application Thread Exception] {e.Exception.Message}\r\n{e.Exception.Source}\r\n{e.Exception.StackTrace}");
+        }
+
+        static void SetGC()
+        {
+            GCLatencyMode oldMode = GCSettings.LatencyMode;
+            RuntimeHelpers.PrepareConstrainedRegions();
+            GCSettings.LatencyMode = GCLatencyMode.Batch;
         }
 
         static void AppSetup()
