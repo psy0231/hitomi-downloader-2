@@ -245,9 +245,10 @@ namespace Hitomi_Copy_3
 
             LogEssential.Instance.PushLog(query);
             LogEssential.Instance.PushLog(() => $"Result : {query_result.Count}");
-            LogEssential.Instance.PushLog(query_result);
+            if (HitomiSetting.Instance.GetModel().DetailedLog)
+                LogEssential.Instance.PushLog(query_result);
 
-            if (query.Artists != null)
+            if (query.Artists != null || query.Groups != null)
             {
                 LogEssential.Instance.PushLog(() => $"[Tip] You can get the most accurate single artist/group list only in the artist/group window.");
             }
@@ -322,8 +323,11 @@ namespace Hitomi_Copy_3
                 wc.DownloadStringAsync(new Uri(image_uri), e.UserState);
                 System.Threading.Thread.Sleep(500);
             }
-            LogEssential.Instance.PushLog(() => $"EXH Images");
-            LogEssential.Instance.PushLog(images);
+            if (HitomiSetting.Instance.GetModel().DetailedLog)
+            {
+                LogEssential.Instance.PushLog(() => $"EXH Images");
+                LogEssential.Instance.PushLog(images);
+            }
         }
 
         private void wc_image_cb(object sender, DownloadStringCompletedEventArgs e)
@@ -421,7 +425,8 @@ namespace Hitomi_Copy_3
                 IncrementProgressBarMax();
                 lock (images) images_uri.Add(new Tuple<string, MMArticle>(uri, ta));
             }
-            LogEssential.Instance.PushLog(images);
+            if(HitomiSetting.Instance.GetModel().DetailedLog)
+                LogEssential.Instance.PushLog(images);
         }
 
         private void DownloadImages()
@@ -696,7 +701,8 @@ namespace Hitomi_Copy_3
             wc.DownloadFileAsync(new Uri(HitomiDef.HitomiThumbnail + article.Thumbnail), temp,
                 new Tuple<string, HitomiArticle>(temp, article));
             LogEssential.Instance.PushLog(() => $"AddArticleToPanel {HitomiDef.HitomiThumbnail + article.Thumbnail} {temp}");
-            LogEssential.Instance.PushLog(article);
+            if (HitomiSetting.Instance.GetModel().DetailedLog)
+                LogEssential.Instance.PushLog(article);
         }
 
         List<PicElement> stayed = new List<PicElement>();
@@ -932,8 +938,11 @@ namespace Hitomi_Copy_3
             }
             LogEssential.Instance.PushLog(() => $"Add ImageLink");
             LogEssential.Instance.PushLog(() => $"Folder Address : {MakeDownloadDirectory(pe.Article)}");
-            LogEssential.Instance.PushLog(pe.Article.ImagesLink);
-            LogEssential.Instance.PushLog(() => $"This list is added in download_queue!");
+            if (HitomiSetting.Instance.GetModel().DetailedLog)
+            {
+                LogEssential.Instance.PushLog(pe.Article.ImagesLink);
+                LogEssential.Instance.PushLog(() => $"This list is added in download_queue!");
+            }
             if (HitomiSetting.Instance.GetModel().SaveJson == true)
             {
                 HitomiJson hitomi_json = new HitomiJson(MakeDownloadDirectory(pe.Article));

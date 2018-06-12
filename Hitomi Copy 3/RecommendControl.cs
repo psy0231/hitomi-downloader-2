@@ -65,8 +65,12 @@ namespace Hitomi_Copy_3
                     i++;
                 }
             }
-            LogEssential.Instance.PushLog(() => $"This images will be loaded. [RecommendControl]");
-            LogEssential.Instance.PushLog(magics);
+
+            if (HitomiSetting.Instance.GetModel().DetailedLog)
+            {
+                LogEssential.Instance.PushLog(() => $"This images will be loaded. [RecommendControl]");
+                LogEssential.Instance.PushLog(magics);
+            }
 
             for (int i = 0; i < magics.Count; i++)
             {

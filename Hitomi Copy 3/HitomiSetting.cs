@@ -58,6 +58,8 @@ namespace Hitomi_Copy_2
         [JsonProperty]
         public bool UsingLog;
         [JsonProperty]
+        public bool DetailedLog;
+        [JsonProperty]
         public HitomiSettingAnalysisModel Analysis;
     }
 
@@ -90,6 +92,7 @@ namespace Hitomi_Copy_2
                 model.RecommendLanguageALL = false;
                 model.ReplaceArtistsWithTitle = false;
                 model.UsingLog = false;
+                model.DetailedLog = false;
                 model.Analysis = new HitomiSettingAnalysisModel();
                 Save();
             }
