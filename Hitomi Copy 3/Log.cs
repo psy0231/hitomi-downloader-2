@@ -211,6 +211,14 @@ namespace Hitomi_Copy_3
                     PushString("enumi [Form] [Variable1] [Variable2] ... : Enumerate form or class members with private members.");
                     PushString("get (Form|hitomi_analysis) (Variable1) [Variable2] ... : Get value.");
                     PushString("set (Form) (Variable1) [Variable2] ... [Value] : Set value.");
+                    PushString("fucs : Frequently Used Command Snippet");
+                }
+                else if (cmd == "fucs")
+                {
+                    PushString("get frmMain latest_load_count");
+                    PushString("   - get Recommend scroll status");
+                    PushString("set frmMain latest_load_count 100");
+                    PushString("   - set Recommend scroll status to 100");
                 }
                 else
                 {
