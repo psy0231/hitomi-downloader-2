@@ -1,6 +1,7 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
 using Hitomi_Copy_2;
+using Hitomi_Copy_2.Analysis;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -129,6 +131,11 @@ namespace Hitomi_Copy_3
                         {
                             PushString(ex.Message);
                         }
+                    }
+                    else if (split.Length >= 2 && split[1] == "hitomi_analysis")
+                    {
+                        PushString(string.Join("\r\n", HitomiAnalysis.Instance.Rank.Select(p => $"{p.Item1} ({p.Item2})")));
+                        PushString($"Artist Counts : {HitomiAnalysis.Instance.Rank.Count}");
                     }
                     else
                     {
