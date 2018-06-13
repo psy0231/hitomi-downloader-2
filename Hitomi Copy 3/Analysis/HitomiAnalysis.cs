@@ -18,6 +18,7 @@ namespace Hitomi_Copy_2.Analysis
 
         public bool FilterArtists = false;
         public bool UserDefined = false;
+        public bool MustInclude = false;
         public List<Tuple<string, int>> CustomAnalysis = new List<Tuple<string, int>>();
 
         public HitomiAnalysis()
@@ -83,6 +84,20 @@ namespace Hitomi_Copy_2.Analysis
                         float mul = 1 - (float)artists_galleris_count_log[list[i].Key] / list[i].Value.Item2.MetadataCount;
                         list[i] = new KeyValuePair<string, Tuple<double, HitomiAnalysisArtist>>(list[i].Key, new Tuple<double, HitomiAnalysisArtist>(list[i].Value.Item1 * mul, list[i].Value.Item2));
                     }
+                }
+            }
+
+            ///////////////////////////////
+
+            if (MustInclude)
+            {
+                int count = CustomAnalysis.Count;
+                for (int i = 0; i < list.Count; i++)
+                {
+                    //if (list[i].Value.Item2.GetDictionary().Count < count)
+                    //    list.RemoveAt(i--);
+                    if (CustomAnalysis.Any(x => !list[i].Value.Item2.IsExsit(x.Item1)))
+                        list.RemoveAt(i--);
                 }
             }
 

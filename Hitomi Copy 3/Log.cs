@@ -268,6 +268,19 @@ namespace Hitomi_Copy_3
                         {
                             HitomiAnalysis.Instance.UserDefined = false;
                         }
+                        else if (split[1] == "mion")
+                        {
+                            HitomiAnalysis.Instance.MustInclude = true;
+                        }
+                        else if (split[1] == "mioff")
+                        {
+                            HitomiAnalysis.Instance.MustInclude = false;
+                        }
+                        else if (split[1] == "rank")
+                        {
+                            PushString(string.Join("\r\n", HitomiAnalysis.Instance.Rank.ToArray().Reverse().Select(p => $"{p.Item1} ({p.Item2})")));
+                            PushString($"Artist Counts : {HitomiAnalysis.Instance.Rank.Count}");
+                        }
                         else if (split[1] == "+")
                         {
                             if (split.Length >= 4)
@@ -378,7 +391,7 @@ namespace Hitomi_Copy_3
                     else
                     {
                         PushString("using 'ra (option) [tag] [count] ...'");
-                        PushString("  (option): ulist, list, clear, update, on, off, +, +a");
+                        PushString("  (option): ulist, list, clear, update, on, off, mion, mioff, rank, +, +a");
                     }
                 }
                 else if (cmd == "help")
