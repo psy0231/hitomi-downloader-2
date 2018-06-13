@@ -2,7 +2,7 @@
 
 namespace MM_Downloader.MM
 {
-    class MMArticle
+    public class MMArticle
     {
         public string Title;
         public string Archive;

@@ -3,9 +3,11 @@
 using Hitomi_Copy_2;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -75,6 +77,114 @@ namespace Hitomi_Copy_3
             MessageBox.Show("Setting.json의 UsingLog 항목을 true로 바꾸면 로그를 다시 사용할 수 있습니다.");
             Close();
         }
+
+        List<string> cmd_stack = new List<string>();
+        int stack_pointer = 0;
+        bool check_tab = false;
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                PushString("dc-koromo@hitomi-copy$ " + textBox2.Text);
+                string cmd = textBox2.Text.Trim().Split(' ')[0];
+                //
+
+                if (cmd == "enum")
+                {
+                    if (textBox2.Text.Trim().Split(' ').Length == 1)
+                    {
+                        foreach (var f in Application.OpenForms)
+                        {
+                            PushString(f.GetType().Name);
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            string frm_name = textBox2.Text.Trim().Split(' ')[1];
+                            Application.OpenForms[frm_name].GetType().GetFields()
+                                    .ToList().ForEach(x => PushString(x.Name.PadRight(25) + $"[{x.ToString()}]"));
+                        }
+                        catch (Exception ex)
+                        {
+                            PushString(ex.Message);
+                        }
+                    }
+                }
+                else if (cmd == "get")
+                {
+                    string[] split = textBox2.Text.Trim().Split(' ');
+                    if (split.Length >= 3)
+                    {
+                        string frm = split[1];
+                        string var = split[2];
+
+                        try
+                        {
+                            PushString(LogEssential.SerializeObject(Application.OpenForms[frm].GetType().GetField(var).GetValue(Application.OpenForms[frm])));
+                        }
+                        catch (Exception ex)
+                        {
+                            PushString(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        PushString("using 'get [Form] [Variable]");
+                    }
+                }
+                else if (cmd == "set")
+                {
+                    string[] split = textBox2.Text.Trim().Split(' ');
+                    if (split.Length >= 4)
+                    {
+                        string frm = split[1];
+                        string var = split[2];
+                        string val = split[3];
+
+                        try
+                        {
+                            Application.OpenForms[frm].GetType().GetField(var).SetValue(Application.OpenForms[frm],
+                                Convert.ChangeType(val, Application.OpenForms[frm].GetType().GetField(var).GetValue(Application.OpenForms[frm]).GetType()));
+                        }
+                        catch (Exception ex)
+                        {
+                            PushString(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        PushString("using 'get [Form] [Variable] [Value]");
+                    }
+                }
+
+                cmd_stack.Insert(0, textBox2.Text + " ");
+                textBox2.Text = "";
+                stack_pointer = 0;
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                if (stack_pointer >= cmd_stack.Count)
+                    stack_pointer = cmd_stack.Count - 1;
+                if (stack_pointer >= 0)
+                {
+                    textBox2.Text = cmd_stack[stack_pointer];
+                    Application.DoEvents();
+                    textBox2.Focus();
+                    textBox2.SelectionStart = Math.Max(0, textBox2.Text.Length * 10);
+                    textBox2.SelectionLength = 0;
+                    textBox2.Focus();
+                }
+                stack_pointer++;
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                textBox2.SelectionStart = Math.Max(0, textBox2.Text.Length - 1);
+                textBox2.SelectionLength = 0;
+            }
+        }
     }
 
     public class LogEssential
@@ -139,7 +249,11 @@ namespace Hitomi_Copy_3
             {
                 try
                 {
-                    return JsonConvert.SerializeObject(toSerialize, Formatting.Indented);
+                    return JsonConvert.SerializeObject(toSerialize, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        //ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    });
                 }
                 catch (Exception e)
                 {

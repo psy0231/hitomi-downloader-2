@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hitomi_Copy_2
 {
-    class HitomiQueue
+    public class HitomiQueue
     {
         public int capacity = 32;
         int mtx = 0;

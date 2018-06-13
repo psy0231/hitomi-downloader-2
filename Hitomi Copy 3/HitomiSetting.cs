@@ -60,6 +60,8 @@ namespace Hitomi_Copy_2
         [JsonProperty]
         public bool DetailedLog;
         [JsonProperty]
+        public bool RecommendAutoRemove;
+        [JsonProperty]
         public HitomiSettingAnalysisModel Analysis;
     }
 
@@ -93,6 +95,7 @@ namespace Hitomi_Copy_2
                 model.ReplaceArtistsWithTitle = false;
                 model.UsingLog = false;
                 model.DetailedLog = false;
+                model.RecommendAutoRemove = false;
                 model.Analysis = new HitomiSettingAnalysisModel();
                 Save();
             }

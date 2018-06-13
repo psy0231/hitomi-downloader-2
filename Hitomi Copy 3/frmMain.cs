@@ -281,8 +281,8 @@ namespace Hitomi_Copy_3
         #endregion
 
         #region 다운로드 - 익헨
-        ExHentaiArticle article;
-        string[] pages;
+        public ExHentaiArticle article;
+        public string[] pages;
 
         private static WebClient GetEXHWebClient()
         {
@@ -366,7 +366,7 @@ namespace Hitomi_Copy_3
         #endregion
 
         #region 다운로드 - 마루마루
-        List<Tuple<string, MMArticle>> images_uri = new List<Tuple<string, MMArticle>>();
+        public List<Tuple<string, MMArticle>> images_uri = new List<Tuple<string, MMArticle>>();
 
         private async void DownloadMMAsync(string url)
         {
@@ -466,9 +466,9 @@ namespace Hitomi_Copy_3
         #endregion
 
         #region 검색창
-        int global_position = 0;
-        string global_text = "";
-        bool selected_part = true;
+        public int global_position = 0;
+        public string global_text = "";
+        public bool selected_part = true;
 
         private int GetCaretWidthFromTextBox(int pos)
         {
@@ -705,7 +705,7 @@ namespace Hitomi_Copy_3
                 LogEssential.Instance.PushLog(article);
         }
 
-        List<PicElement> stayed = new List<PicElement>();
+        public List<PicElement> stayed = new List<PicElement>();
         private void CallbackThumbnail(object sender, AsyncCompletedEventArgs e)
         {
             PicElement pe = new PicElement(this);
@@ -750,9 +750,9 @@ namespace Hitomi_Copy_3
         #endregion
 
         #region 다운로드 관련
-        HitomiQueue download_queue;
-        List<string> download_check = new List<string>();
-        List<PicElement> downloaded_check = new List<PicElement>();
+        public HitomiQueue download_queue;
+        public List<string> download_check = new List<string>();
+        public List<PicElement> downloaded_check = new List<PicElement>();
 
         private void InitDownloader()
         {
@@ -1078,7 +1078,7 @@ namespace Hitomi_Copy_3
         #endregion
 
         #region 통계
-        int latest_load_count = 0;
+        public int latest_load_count = 0;
 
         private void UpdateStatistics()
         {
