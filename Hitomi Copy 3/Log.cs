@@ -90,7 +90,7 @@ namespace Hitomi_Copy_3
             if (bb.Length == ptr)
             {
                 obj.GetType().GetFields(option)
-                        .ToList().ForEach(x => PushString(x.Name.PadRight(25) + $"[{x.ToString()}]"));
+                        .ToList().ForEach(x => PushString(x.Name.PadRight(25) + $"[{x.FieldType.ToString()}]"));
                 return;
             }
             enum_recursion(obj.GetType().GetField(bb[ptr], default_bf).GetValue(obj), bb, ptr + 1, option);
