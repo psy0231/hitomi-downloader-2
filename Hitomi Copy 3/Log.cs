@@ -226,7 +226,7 @@ namespace Hitomi_Copy_3
                 }
                 else if (cmd == "help")
                 {
-                    PushString("Runtime Variable Update System");
+                    PushString("Realtime Variable Update System");
                     PushString("Copyright (C) 2018. Hitomi Parser Developers");
                     PushString("");
                     PushString("enum [Form] [Variable1] [Variable2] ... : Enumerate form or class members.");

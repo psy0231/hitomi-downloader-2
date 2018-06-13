@@ -40,9 +40,10 @@
             this.textBox1.Location = new System.Drawing.Point(12, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox1.Size = new System.Drawing.Size(419, 411);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "v3.16\r\n- 검색속도가 최대 코어 수배 만큼 빨라집니다\r\n- 통계기능이 추가되었습니다";
+            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // PatchNote
             // 
@@ -59,7 +60,8 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(459, 474);
             this.Name = "PatchNote";
-            this.Text = "Patch Note v3.16";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Patch Note v3.20";
             this.ResumeLayout(false);
             this.PerformLayout();
 
