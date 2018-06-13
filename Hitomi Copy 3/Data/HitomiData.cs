@@ -58,6 +58,7 @@ namespace Hitomi_Copy.Data
             HttpClient client = new HttpClient();
             client.Timeout = new TimeSpan(0, 0, 0, 0, Timeout.Infinite);
             var data = await client.GetStringAsync(gallerie_json_uri(no));
+            if (data.Trim() == "") return;
             lock (metadata_collection)
             metadata_collection.AddRange(JsonConvert.DeserializeObject<IEnumerable<HitomiMetadata>>(data));
         }
