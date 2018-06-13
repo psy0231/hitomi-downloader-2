@@ -9,7 +9,6 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -168,7 +167,7 @@ namespace Hitomi_Copy_3
                     }
                     else
                     {
-                        PushString("using 'get [Form] [Variable]");
+                        PushString("using 'get (Form) (Variable1) [Variable2] ...");
                     }
                 }
                 else if (cmd == "set")
@@ -182,8 +181,6 @@ namespace Hitomi_Copy_3
 
                         try
                         {
-                            //Application.OpenForms[frm].GetType().GetField(var).SetValue(Application.OpenForms[frm],
-                            //    Convert.ChangeType(val, Application.OpenForms[frm].GetType().GetField(var).GetValue(Application.OpenForms[frm]).GetType()));
                             set_recurion(Application.OpenForms[frm], split, 2);
                         }
                         catch (Exception ex)
@@ -193,8 +190,21 @@ namespace Hitomi_Copy_3
                     }
                     else
                     {
-                        PushString("using 'get [Form] [Variable] [Value]");
+                        PushString("using 'set (Form) (Variable1) [Variable2] ... [Value]");
                     }
+                }
+                else if (cmd == "help")
+                {
+                    PushString("Runtime Variable Update System");
+                    PushString("Copyright (C) 2018. Hitomi Parser Developers");
+                    PushString("");
+                    PushString("enum [Form|hitomi_analysis] [Variable1] [Variable2] ... : Enumerate form or class members.");
+                    PushString("get (Form) (Variable1) [Variable2] ... : Get value.");
+                    PushString("set (Form) (Variable1) [Variable2] ... [Value] : Set value.");
+                }
+                else
+                {
+                    PushString("Command not found. Try 'help' command.");
                 }
 
                 cmd_stack.Insert(0, textBox2.Text + " ");
