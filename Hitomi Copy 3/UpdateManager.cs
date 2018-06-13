@@ -52,6 +52,7 @@ namespace Hitomi_Copy_3
             if (File.Exists(now_fpath + ".tmp"))
             {
                 File.Delete(now_fpath + ".tmp");
+                Application.OpenForms[0].Invoke((MethodInvoker)delegate () { (new PatchNote()).Show(); });
             }
         }
 
