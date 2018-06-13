@@ -143,6 +143,8 @@ namespace Hitomi_Copy_3
                 e.Handled = true;
                 e.SuppressKeyPress = true;
 
+                textBox2.Text += textBox2.Text.Trim();
+
                 PushString("dc-koromo@hitomi-copy$ " + textBox2.Text);
                 string cmd = textBox2.Text.Trim().Split(' ')[0];
                 //
