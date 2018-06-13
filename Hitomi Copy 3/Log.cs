@@ -332,6 +332,7 @@ namespace Hitomi_Copy_3
                                 diff.Sort((a, b) => a.Item2.CompareTo(b.Item2));
                                 for (int i = 5; i >= 0; i--)
                                     PushString(diff[i].Item1);
+                                return;
                             }
                             else
                             {
