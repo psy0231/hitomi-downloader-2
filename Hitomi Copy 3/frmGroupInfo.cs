@@ -76,8 +76,8 @@ namespace Hitomi_Copy
             WebClient wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
             wc.DownloadStringCompleted += CallbackSearch;
-            wc.DownloadStringAsync(new Uri(HitomiSearch.GetWithGroup(group, HitomiSetting.Instance.GetModel().Language, Pages.ToString())));
-            LogEssential.Instance.PushLog(() => $"Load artist pages {HitomiSearch.GetWithGroup(group, HitomiSetting.Instance.GetModel().Language, Pages.ToString())}");
+            wc.DownloadStringAsync(new Uri(HitomiSearch.GetWithGroup(group, HitomiSetting.Instance.GetModel().Language.ToLower(), Pages.ToString())));
+            LogEssential.Instance.PushLog(() => $"Load artist pages {HitomiSearch.GetWithGroup(group, HitomiSetting.Instance.GetModel().Language.ToLower(), Pages.ToString())}");
         }
 
         private void CallbackSearch(object sender, DownloadStringCompletedEventArgs e)
