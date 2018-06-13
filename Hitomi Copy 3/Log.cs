@@ -346,10 +346,10 @@ namespace Hitomi_Copy_3
                                 try
                                 {
                                     string artist = Regex.Replace(split[2], "_", " ");
-                                    
+
                                     bool found = false;
                                     found = HitomiData.Instance.tagdata_collection.artist.Any(x => x.Tag == artist);
-                                    
+
                                     if (!found)
                                     {
                                         PushString($"'{artist}' is not found.");
@@ -386,6 +386,16 @@ namespace Hitomi_Copy_3
                             else
                             {
                                 PushString("'+a' command need 1 more parameters.");
+                            }
+                        }
+                        else if (split[1] == "-")
+                        {
+                            if (split.Length >= 3)
+                            {
+                                string tag = Regex.Replace(split[2], "_", " ");
+                                for (int i = 0; i < HitomiAnalysis.Instance.CustomAnalysis.Count; i++)
+                                    if (HitomiAnalysis.Instance.CustomAnalysis[i].Item1 == tag)
+                                        HitomiAnalysis.Instance.CustomAnalysis.RemoveAt(i--);
                             }
                         }
                     }
