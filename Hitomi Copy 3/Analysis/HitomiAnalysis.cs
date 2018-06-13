@@ -94,8 +94,6 @@ namespace Hitomi_Copy_2.Analysis
                 int count = CustomAnalysis.Count;
                 for (int i = 0; i < list.Count; i++)
                 {
-                    //if (list[i].Value.Item2.GetDictionary().Count < count)
-                    //    list.RemoveAt(i--);
                     if (CustomAnalysis.Any(x => !list[i].Value.Item2.IsExsit(x.Item1)))
                         list.RemoveAt(i--);
                 }

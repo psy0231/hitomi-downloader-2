@@ -362,6 +362,13 @@ namespace Hitomi_Copy_3
 
                                     foreach (var data in HitomiData.Instance.metadata_collection)
                                     {
+                                        if (!HitomiSetting.Instance.GetModel().RecommendLanguageALL)
+                                        {
+                                            string lang = data.Language;
+                                            if (data.Language == null) lang = "N/A";
+                                            if (HitomiSetting.Instance.GetModel().Language != "ALL" &&
+                                                HitomiSetting.Instance.GetModel().Language != lang) continue;
+                                        }
                                         if (data.Artists != null && data.Tags != null && data.Artists.Contains(artist))
                                         {
                                             foreach (var tag in data.Tags)
