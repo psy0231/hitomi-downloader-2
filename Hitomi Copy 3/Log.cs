@@ -82,8 +82,38 @@ namespace Hitomi_Copy_3
 
         List<string> cmd_stack = new List<string>();
         int stack_pointer = 0;
-        bool check_tab = false;
 
+        private void enum_recursion(object obj, string[] bb, int ptr)
+        {
+            if (bb.Length == ptr)
+            {
+                obj.GetType().GetFields()
+                        .ToList().ForEach(x => PushString(x.Name.PadRight(25) + $"[{x.ToString()}]"));
+                return;
+            }
+            enum_recursion(obj.GetType().GetField(bb[ptr]).GetValue(obj), bb, ptr + 1);
+        }
+
+        private object get_recursion(object obj, string[] bb, int ptr)
+        {
+            if (bb.Length == ptr)
+            {
+                return obj;
+            }
+            return get_recursion(obj.GetType().GetField(bb[ptr]).GetValue(obj), bb, ptr + 1);
+        }
+
+        private void set_recurion(object obj, string[] bb, int ptr)
+        {
+            if (bb.Length - 2 == ptr)
+            {
+                obj.GetType().GetField(bb[ptr]).SetValue(obj,
+                    Convert.ChangeType(bb[ptr + 1], obj.GetType().GetField(bb[ptr]).GetValue(obj).GetType()));
+                return;
+            }   
+            set_recurion(obj.GetType().GetField(bb[ptr]).GetValue(obj), bb, ptr + 1);
+        }
+        
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -106,8 +136,7 @@ namespace Hitomi_Copy_3
                         try
                         {
                             string frm_name = textBox2.Text.Trim().Split(' ')[1];
-                            Application.OpenForms[frm_name].GetType().GetFields()
-                                    .ToList().ForEach(x => PushString(x.Name.PadRight(25) + $"[{x.ToString()}]"));
+                            enum_recursion(Application.OpenForms[frm_name], textBox2.Text.Trim().Split(' '), 2);
                         }
                         catch (Exception ex)
                         {
@@ -125,7 +154,7 @@ namespace Hitomi_Copy_3
 
                         try
                         {
-                            PushString(LogEssential.SerializeObject(Application.OpenForms[frm].GetType().GetField(var).GetValue(Application.OpenForms[frm])));
+                            PushString(LogEssential.SerializeObject(get_recursion(Application.OpenForms[frm], split, 2)));
                         }
                         catch (Exception ex)
                         {
@@ -153,8 +182,9 @@ namespace Hitomi_Copy_3
 
                         try
                         {
-                            Application.OpenForms[frm].GetType().GetField(var).SetValue(Application.OpenForms[frm],
-                                Convert.ChangeType(val, Application.OpenForms[frm].GetType().GetField(var).GetValue(Application.OpenForms[frm]).GetType()));
+                            //Application.OpenForms[frm].GetType().GetField(var).SetValue(Application.OpenForms[frm],
+                            //    Convert.ChangeType(val, Application.OpenForms[frm].GetType().GetField(var).GetValue(Application.OpenForms[frm]).GetType()));
+                            set_recurion(Application.OpenForms[frm], split, 2);
                         }
                         catch (Exception ex)
                         {
