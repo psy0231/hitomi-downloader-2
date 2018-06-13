@@ -111,7 +111,7 @@
             this.MainTab.Controls.Add(this.metroTabPage3);
             this.MainTab.Location = new System.Drawing.Point(10, 59);
             this.MainTab.Name = "MainTab";
-            this.MainTab.SelectedIndex = 3;
+            this.MainTab.SelectedIndex = 0;
             this.MainTab.Size = new System.Drawing.Size(1136, 551);
             this.MainTab.Style = MetroFramework.MetroColorStyle.Pink;
             this.MainTab.TabIndex = 1;

@@ -231,7 +231,7 @@ namespace Hitomi_Copy_3
                     PushString("");
                     PushString("enum [Form] [Variable1] [Variable2] ... : Enumerate form or class members.");
                     PushString("enumi [Form] [Variable1] [Variable2] ... : Enumerate form or class members with private members.");
-                    PushString("enumx [Form] [Variable1] [Variable2] ... : Enumerate all class members without static.")
+                    PushString("enumx [Form] [Variable1] [Variable2] ... : Enumerate all class members without static.");
                     PushString("get (Form|hitomi_analysis) (Variable1) [Variable2] ... : Get value.");
                     PushString("set (Form) (Variable1) [Variable2] ... [Value] : Set value.");
                     PushString("fucs : Frequently Used Command Snippet");

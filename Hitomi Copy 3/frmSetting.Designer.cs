@@ -49,6 +49,8 @@
             this.tbInfo = new MetroFramework.Controls.MetroTextBox();
             this.tbMTS = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+            this.tgUL = new MetroFramework.Controls.MetroToggle();
             this.SuspendLayout();
             // 
             // tgWI
@@ -305,7 +307,7 @@
             // bSave
             // 
             this.bSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bSave.Location = new System.Drawing.Point(333, 255);
+            this.bSave.Location = new System.Drawing.Point(337, 278);
             this.bSave.Name = "bSave";
             this.bSave.Size = new System.Drawing.Size(105, 44);
             this.bSave.Style = MetroFramework.MetroColorStyle.Pink;
@@ -331,7 +333,7 @@
             this.tbInfo.CustomButton.UseSelectable = true;
             this.tbInfo.CustomButton.Visible = false;
             this.tbInfo.Lines = new string[0];
-            this.tbInfo.Location = new System.Drawing.Point(8, 255);
+            this.tbInfo.Location = new System.Drawing.Point(12, 278);
             this.tbInfo.MaxLength = 32767;
             this.tbInfo.Multiline = true;
             this.tbInfo.Name = "tbInfo";
@@ -396,12 +398,36 @@
             this.metroLabel9.TabIndex = 37;
             this.metroLabel9.Text = "Text Matching Accuracy : ";
             // 
+            // metroLabel10
+            // 
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(168, 252);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(78, 19);
+            this.metroLabel10.Style = MetroFramework.MetroColorStyle.Pink;
+            this.metroLabel10.TabIndex = 40;
+            this.metroLabel10.Text = "Using Log : ";
+            // 
+            // tgUL
+            // 
+            this.tgUL.AutoSize = true;
+            this.tgUL.Location = new System.Drawing.Point(222, 253);
+            this.tgUL.Name = "tgUL";
+            this.tgUL.Size = new System.Drawing.Size(80, 19);
+            this.tgUL.Style = MetroFramework.MetroColorStyle.Pink;
+            this.tgUL.TabIndex = 39;
+            this.tgUL.Text = "Off";
+            this.tgUL.UseSelectable = true;
+            this.tgUL.MouseEnter += new System.EventHandler(this.tgUL_MouseEnter);
+            // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(450, 309);
+            this.ClientSize = new System.Drawing.Size(450, 334);
+            this.Controls.Add(this.metroLabel10);
+            this.Controls.Add(this.tgUL);
             this.Controls.Add(this.tbMTS);
             this.Controls.Add(this.metroLabel9);
             this.Controls.Add(this.tbInfo);
@@ -459,5 +485,7 @@
         private MetroFramework.Controls.MetroTextBox tbInfo;
         private MetroFramework.Controls.MetroTextBox tbMTS;
         private MetroFramework.Controls.MetroLabel metroLabel9;
+        private MetroFramework.Controls.MetroLabel metroLabel10;
+        private MetroFramework.Controls.MetroToggle tgUL;
     }
 }

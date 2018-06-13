@@ -24,6 +24,7 @@ namespace Hitomi_Copy_3
             tgRNM.Checked = HitomiSetting.Instance.GetModel().RecommendNMultipleWithLength;
             tgRL.Checked = HitomiSetting.Instance.GetModel().RecommendLanguageALL;
             tgRA.Checked = HitomiSetting.Instance.GetModel().ReplaceArtistsWithTitle;
+            tgUL.Checked = HitomiSetting.Instance.GetModel().UsingLog;
         }
 
         private void bSave_Click(object sender, EventArgs e)
@@ -54,6 +55,7 @@ namespace Hitomi_Copy_3
             HitomiSetting.Instance.GetModel().RecommendNMultipleWithLength = tgRNM.Checked;
             HitomiSetting.Instance.GetModel().RecommendLanguageALL = tgRL.Checked;
             HitomiSetting.Instance.GetModel().ReplaceArtistsWithTitle = tgRA.Checked;
+            HitomiSetting.Instance.GetModel().UsingLog = tgUL.Checked;
             HitomiSetting.Instance.Save();
             Close();
         }
@@ -101,6 +103,11 @@ namespace Hitomi_Copy_3
         private void tgRA_MouseEnter(object sender, EventArgs e)
         {
             tbInfo.Text = "{Aritsts}를 단어의 첫 글자 대문자로하여 치환합니다.";
+        }
+
+        private void tgUL_MouseEnter(object sender, EventArgs e)
+        {
+            tbInfo.Text = "모든 진행상황을 기록합니다. 런타임 변수 수정 시스템 기능을 실험적으로 제공합니다.";
         }
 
         private void MouseLeave_Event(object sender, EventArgs e)
