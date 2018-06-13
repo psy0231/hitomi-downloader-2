@@ -295,7 +295,7 @@ namespace Hitomi_Copy_3
                     }
                     else
                     {
-                        PushString("using 'ra (option) [var1] [var2] ...'");
+                        PushString("using 'ra (option) [tag] [count] ...'");
                         PushString("  (option): ulist, list, clear, update, on, off, +");
                     }
                 }
