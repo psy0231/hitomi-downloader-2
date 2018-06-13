@@ -120,6 +120,9 @@ namespace Hitomi_Copy_3
         {
             if (e.KeyCode == Keys.Enter)
             {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
                 PushString("dc-koromo@hitomi-copy$ " + textBox2.Text);
                 string cmd = textBox2.Text.Trim().Split(' ')[0];
                 //
@@ -204,9 +207,9 @@ namespace Hitomi_Copy_3
                     PushString("Runtime Variable Update System");
                     PushString("Copyright (C) 2018. Hitomi Parser Developers");
                     PushString("");
-                    PushString("enum [Form|hitomi_analysis] [Variable1] [Variable2] ... : Enumerate form or class members.");
-                    PushString("enumi [Form|hitomi_analysis] [Variable1] [Variable2] ... : Enumerate form or class members with private members.");
-                    PushString("get (Form) (Variable1) [Variable2] ... : Get value.");
+                    PushString("enum [Form] [Variable1] [Variable2] ... : Enumerate form or class members.");
+                    PushString("enumi [Form] [Variable1] [Variable2] ... : Enumerate form or class members with private members.");
+                    PushString("get (Form|hitomi_analysis) (Variable1) [Variable2] ... : Get value.");
                     PushString("set (Form) (Variable1) [Variable2] ... [Value] : Set value.");
                 }
                 else
