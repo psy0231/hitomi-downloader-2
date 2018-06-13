@@ -1,5 +1,6 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using Hitomi_Copy.Data;
 using Hitomi_Copy_2;
 using Hitomi_Copy_2.Analysis;
 using Newtonsoft.Json;
@@ -245,7 +246,10 @@ namespace Hitomi_Copy_3
                         {
                             PushString("User Custom History");
                             if (HitomiAnalysis.Instance.CustomAnalysis != null)
+                            {
+                                HitomiAnalysis.Instance.CustomAnalysis.Sort((a, b) => a.Item2.CompareTo(b.Item2));
                                 PushString(string.Join("\r\n", HitomiAnalysis.Instance.CustomAnalysis.Select(x => $"{x.Item1} ({x.Item2})")));
+                            }
                         }
                         else if (split[1] == "clear")
                         {
@@ -273,6 +277,23 @@ namespace Hitomi_Copy_3
                                     string tag = Regex.Replace(split[2], "_", " ");
                                     int val = Convert.ToInt32(split[3]);
 
+                                    bool found = false;
+                                    found = HitomiData.Instance.tagdata_collection.female.Any(x => x.Tag == tag);
+                                    if (found == false) found = HitomiData.Instance.tagdata_collection.male.Any(x => x.Tag == tag);
+                                    if (found == false) found = HitomiData.Instance.tagdata_collection.tag.Any(x => x.Tag == tag);
+
+                                    if (!found)
+                                    {
+                                        PushString($"'{tag}' is not found.");
+                                        string similar = "";
+                                        int diff = int.MaxValue;
+                                        HitomiData.Instance.tagdata_collection.female.ForEach(x => { int diff_t = StringAlgorithms.get_diff(tag, x.Tag); if (diff_t < diff) { diff = diff_t; similar = x.Tag; } });
+                                        HitomiData.Instance.tagdata_collection.male.ForEach(x => { int diff_t = StringAlgorithms.get_diff(tag, x.Tag); if (diff_t < diff) { diff = diff_t; similar = x.Tag; } });
+                                        HitomiData.Instance.tagdata_collection.tag.ForEach(x => { int diff_t = StringAlgorithms.get_diff(tag, x.Tag); if (diff_t < diff) { diff = diff_t; similar = x.Tag; } });
+                                        PushString($"Are you looking for '{similar}'?");
+                                        return;
+                                    }
+
                                     if (HitomiAnalysis.Instance.CustomAnalysis.Any(x => x.Item1 == tag))
                                     {
                                         for (int i = 0; i < HitomiAnalysis.Instance.CustomAnalysis.Count; i++)
@@ -281,6 +302,67 @@ namespace Hitomi_Copy_3
                                     }
                                     else
                                         HitomiAnalysis.Instance.CustomAnalysis.Add(new Tuple<string, int>(tag, val));
+                                    
+                                }
+                                catch (Exception ex)
+                                {
+                                    PushString(ex.Message);
+                                }
+                            }
+                            else if (split.Length == 3)
+                            {
+                                string tag = Regex.Replace(split[2], "_", " ");
+                                List<Tuple<string, int>> diff = new List<Tuple<string, int>>();
+                                HitomiData.Instance.tagdata_collection.female.ForEach(x => diff.Add(new Tuple<string, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag))));
+                                HitomiData.Instance.tagdata_collection.male.ForEach(x => diff.Add(new Tuple<string, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag))));
+                                HitomiData.Instance.tagdata_collection.tag.ForEach(x => diff.Add(new Tuple<string, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag))));
+                                diff.Sort((a, b) => a.Item2.CompareTo(b.Item2));
+                                for (int i = 5; i >= 0; i--)
+                                    PushString(diff[i].Item1);
+                            }
+                            else
+                            {
+                                PushString("'+' command need 2 more parameters.");
+                            }
+                        }
+                        else if (split[1] == "+a")
+                        {
+                            if (split.Length >= 3)
+                            {
+                                try
+                                {
+                                    string artist = Regex.Replace(split[2], "_", " ");
+                                    
+                                    bool found = false;
+                                    found = HitomiData.Instance.tagdata_collection.artist.Any(x => x.Tag == artist);
+                                    
+                                    if (!found)
+                                    {
+                                        PushString($"'{artist}' is not found.");
+                                        string similar = "";
+                                        int diff = int.MaxValue;
+                                        HitomiData.Instance.tagdata_collection.artist.ForEach(x => { int diff_t = StringAlgorithms.get_diff(artist, x.Tag); if (diff_t < diff) { diff = diff_t; similar = x.Tag; } });
+                                        PushString($"Are you looking for '{similar}'?");
+                                        return;
+                                    }
+
+                                    foreach (var data in HitomiData.Instance.metadata_collection)
+                                    {
+                                        if (data.Artists != null && data.Tags != null && data.Artists.Contains(artist))
+                                        {
+                                            foreach (var tag in data.Tags)
+                                            {
+                                                if (HitomiAnalysis.Instance.CustomAnalysis.Any(x => x.Item1 == tag))
+                                                {
+                                                    for (int i = 0; i < HitomiAnalysis.Instance.CustomAnalysis.Count; i++)
+                                                        if (HitomiAnalysis.Instance.CustomAnalysis[i].Item1 == tag)
+                                                            HitomiAnalysis.Instance.CustomAnalysis[i] = new Tuple<string, int>(tag, HitomiAnalysis.Instance.CustomAnalysis[i].Item2 + 1);
+                                                }
+                                                else
+                                                    HitomiAnalysis.Instance.CustomAnalysis.Add(new Tuple<string, int>(tag, 1));
+                                            }
+                                        }
+                                    }
                                 }
                                 catch (Exception ex)
                                 {
@@ -289,14 +371,14 @@ namespace Hitomi_Copy_3
                             }
                             else
                             {
-                                PushString("'+' command need 2 more parameters.");
+                                PushString("'+a' command need 1 more parameters.");
                             }
                         }
                     }
                     else
                     {
                         PushString("using 'ra (option) [tag] [count] ...'");
-                        PushString("  (option): ulist, list, clear, update, on, off, +");
+                        PushString("  (option): ulist, list, clear, update, on, off, +, +a");
                     }
                 }
                 else if (cmd == "help")
