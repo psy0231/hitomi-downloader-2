@@ -12,10 +12,10 @@ namespace Hitomi_Copy_2
     public class HitomiQueue
     {
         public int capacity = 32;
-        int mtx = 0;
-        List<Tuple<string, string, object>> queue = new List<Tuple<string, string, object>>();
-        List<Tuple<string,HttpWebRequest>> requests = new List<Tuple<string, HttpWebRequest>>();
-        List<string> aborted = new List<string>();
+        public int mtx = 0;
+        public List<Tuple<string, string, object>> queue = new List<Tuple<string, string, object>>();
+        public List<Tuple<string,HttpWebRequest>> requests = new List<Tuple<string, HttpWebRequest>>();
+        public List<string> aborted = new List<string>();
         public IWebProxy proxy { get; set; }
 
         public bool timeout_infinite = true;
