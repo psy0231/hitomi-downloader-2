@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -81,16 +82,18 @@ namespace Hitomi_Copy_3
 
         List<string> cmd_stack = new List<string>();
         int stack_pointer = 0;
+        const BindingFlags default_bf = BindingFlags.NonPublic |
+                         BindingFlags.Instance | BindingFlags.IgnoreCase | BindingFlags.Public;
 
-        private void enum_recursion(object obj, string[] bb, int ptr)
+        private void enum_recursion(object obj, string[] bb, int ptr, BindingFlags option)
         {
             if (bb.Length == ptr)
             {
-                obj.GetType().GetFields()
+                obj.GetType().GetFields(option)
                         .ToList().ForEach(x => PushString(x.Name.PadRight(25) + $"[{x.ToString()}]"));
                 return;
             }
-            enum_recursion(obj.GetType().GetField(bb[ptr]).GetValue(obj), bb, ptr + 1);
+            enum_recursion(obj.GetType().GetField(bb[ptr], default_bf).GetValue(obj), bb, ptr + 1, option);
         }
 
         private object get_recursion(object obj, string[] bb, int ptr)
@@ -99,7 +102,7 @@ namespace Hitomi_Copy_3
             {
                 return obj;
             }
-            return get_recursion(obj.GetType().GetField(bb[ptr]).GetValue(obj), bb, ptr + 1);
+            return get_recursion(obj.GetType().GetField(bb[ptr], default_bf).GetValue(obj), bb, ptr + 1);
         }
 
         private void set_recurion(object obj, string[] bb, int ptr)
@@ -107,7 +110,7 @@ namespace Hitomi_Copy_3
             if (bb.Length - 2 == ptr)
             {
                 obj.GetType().GetField(bb[ptr]).SetValue(obj,
-                    Convert.ChangeType(bb[ptr + 1], obj.GetType().GetField(bb[ptr]).GetValue(obj).GetType()));
+                    Convert.ChangeType(bb[ptr + 1], obj.GetType().GetField(bb[ptr], default_bf).GetValue(obj).GetType()));
                 return;
             }   
             set_recurion(obj.GetType().GetField(bb[ptr]).GetValue(obj), bb, ptr + 1);
@@ -121,7 +124,7 @@ namespace Hitomi_Copy_3
                 string cmd = textBox2.Text.Trim().Split(' ')[0];
                 //
 
-                if (cmd == "enum")
+                if (cmd == "enum" || cmd == "enumi")
                 {
                     if (textBox2.Text.Trim().Split(' ').Length == 1)
                     {
@@ -135,7 +138,10 @@ namespace Hitomi_Copy_3
                         try
                         {
                             string frm_name = textBox2.Text.Trim().Split(' ')[1];
-                            enum_recursion(Application.OpenForms[frm_name], textBox2.Text.Trim().Split(' '), 2);
+                            if (cmd == "enum")
+                                enum_recursion(Application.OpenForms[frm_name], textBox2.Text.Trim().Split(' '), 2, BindingFlags.Instance | BindingFlags.Public);
+                            else
+                                enum_recursion(Application.OpenForms[frm_name], textBox2.Text.Trim().Split(' '), 2, BindingFlags.Instance | BindingFlags.NonPublic);
                         }
                         catch (Exception ex)
                         {
@@ -199,6 +205,7 @@ namespace Hitomi_Copy_3
                     PushString("Copyright (C) 2018. Hitomi Parser Developers");
                     PushString("");
                     PushString("enum [Form|hitomi_analysis] [Variable1] [Variable2] ... : Enumerate form or class members.");
+                    PushString("enumi [Form|hitomi_analysis] [Variable1] [Variable2] ... : Enumerate form or class members with private members.");
                     PushString("get (Form) (Variable1) [Variable2] ... : Get value.");
                     PushString("set (Form) (Variable1) [Variable2] ... [Value] : Set value.");
                 }

@@ -1066,7 +1066,7 @@ namespace Hitomi_Copy_3
             LogEssential.Instance.PushLog(uris);
         }
 
-        long latest_status_size = 0;
+        public long latest_status_size = 0;
         private void speed_timer_Tick(object sender, EventArgs e)
         {
             if (status_size == latest_status_size)
