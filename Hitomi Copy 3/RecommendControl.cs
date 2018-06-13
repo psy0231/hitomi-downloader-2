@@ -27,7 +27,10 @@ namespace Hitomi_Copy_3
             InitializeComponent();
             
             artist = tbArtist.Text = HitomiAnalysis.Instance.Rank[index].Item1;
-            lScore.Text = HitomiAnalysis.Instance.Rank[index].Item2.ToString().Remove(8) + " 점";
+            if (HitomiAnalysis.Instance.Rank[index].Item2.ToString().Length > 8)
+                lScore.Text = HitomiAnalysis.Instance.Rank[index].Item2.ToString().Remove(8) + " 점";
+            else
+                lScore.Text = HitomiAnalysis.Instance.Rank[index].Item2.ToString() + " 점";
             tbScoreDetail.Text = HitomiAnalysis.Instance.Rank[index].Item3;
 
             Disposed += OnDispose;

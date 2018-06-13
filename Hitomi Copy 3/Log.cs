@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -199,7 +200,7 @@ namespace Hitomi_Copy_3
                     }
                     else
                     {
-                        PushString("using 'get (Form) (Variable1) [Variable2] ...");
+                        PushString("using 'get (Form) (Variable1) [Variable2] ...'");
                     }
                 }
                 else if (cmd == "set")
@@ -222,7 +223,80 @@ namespace Hitomi_Copy_3
                     }
                     else
                     {
-                        PushString("using 'set (Form) (Variable1) [Variable2] ... [Value]");
+                        PushString("using 'set (Form) (Variable1) [Variable2] ... [Value]'");
+                    }
+                }
+                else if (cmd == "ra")
+                {
+                    string[] split = textBox2.Text.Trim().Split(' ');
+                    if (split.Length > 1)
+                    {
+                        if (split[1] == "ulist")
+                        {
+                            PushString("User History");
+                            HitomiAnalysisArtist user;
+                            user = new HitomiAnalysisArtist(HitomiLog.Instance.GetEnumerator());
+                            foreach (var pair in user.GetDictionary())
+                            {
+                                PushString($"{pair.Key} ({pair.Value})");
+                            }
+                        }
+                        else if (split[1] == "list")
+                        {
+                            PushString("User Custom History");
+                            if (HitomiAnalysis.Instance.CustomAnalysis != null)
+                                PushString(string.Join("\r\n", HitomiAnalysis.Instance.CustomAnalysis.Select(x => $"{x.Item1} ({x.Item2})")));
+                        }
+                        else if (split[1] == "clear")
+                        {
+                            HitomiAnalysis.Instance.CustomAnalysis.Clear();
+                        }
+                        else if (split[1] == "update")
+                        {
+                            HitomiAnalysis.Instance.Update();
+                            (Application.OpenForms[0] as frmMain).UpdateNewStatistics();
+                        }
+                        else if (split[1] == "on")
+                        {
+                            HitomiAnalysis.Instance.UserDefined = true;
+                        }
+                        else if (split[1] == "off")
+                        {
+                            HitomiAnalysis.Instance.UserDefined = false;
+                        }
+                        else if (split[1] == "+")
+                        {
+                            if (split.Length >= 4)
+                            {
+                                try
+                                {
+                                    string tag = Regex.Replace(split[2], "_", " ");
+                                    int val = Convert.ToInt32(split[3]);
+
+                                    if (HitomiAnalysis.Instance.CustomAnalysis.Any(x => x.Item1 == tag))
+                                    {
+                                        for (int i = 0; i < HitomiAnalysis.Instance.CustomAnalysis.Count; i++)
+                                            if (HitomiAnalysis.Instance.CustomAnalysis[i].Item1 == tag)
+                                                HitomiAnalysis.Instance.CustomAnalysis[i] = new Tuple<string, int>(tag, val);
+                                    }
+                                    else
+                                        HitomiAnalysis.Instance.CustomAnalysis.Add(new Tuple<string, int>(tag, val));
+                                }
+                                catch (Exception ex)
+                                {
+                                    PushString(ex.Message);
+                                }
+                            }
+                            else
+                            {
+                                PushString("'+' command need 2 more parameters.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        PushString("using 'ra (option) [var1] [var2] ...'");
+                        PushString("  (option): ulist, list, clear, update, on, off, +");
                     }
                 }
                 else if (cmd == "help")
@@ -236,6 +310,7 @@ namespace Hitomi_Copy_3
                     PushString("get (Form|hitomi_analysis) (Variable1) [Variable2] ... : Get value.");
                     PushString("set (Form) (Variable1) [Variable2] ... [Value] : Set value.");
                     PushString("fucs : Frequently Used Command Snippet");
+                    PushString("ra (option) [var1] [var2] ... : Recommend artists tools.");
                 }
                 else if (cmd == "fucs")
                 {

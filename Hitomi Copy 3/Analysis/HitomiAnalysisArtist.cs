@@ -1,6 +1,7 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
 using Hitomi_Copy.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,6 +65,17 @@ namespace Hitomi_Copy_2.Analysis
             foreach (var pair in tags_map)
             {
                 rate.Add(pair.Key, pair.Value * pair.Value / (float)tags_count);
+            }
+        }
+
+        public HitomiAnalysisArtist(List<Tuple<string, int>> custom)
+        {
+            foreach (var c in custom)
+                tags_count += c.Item2;
+
+            foreach (var pair in custom)
+            {
+                rate.Add(pair.Item1, pair.Item2 * pair.Item2 / (float)tags_count);
             }
         }
 

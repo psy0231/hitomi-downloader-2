@@ -17,6 +17,8 @@ namespace Hitomi_Copy_2.Analysis
         public List<Tuple<string, double, string>> Rank;
 
         public bool FilterArtists = false;
+        public bool UserDefined = false;
+        public List<Tuple<string, int>> CustomAnalysis = new List<Tuple<string, int>>();
 
         public HitomiAnalysis()
         {
@@ -36,7 +38,10 @@ namespace Hitomi_Copy_2.Analysis
         public void Update()
         {
             HitomiAnalysisArtist user;
-            user = new HitomiAnalysisArtist(HitomiLog.Instance.GetEnumerator());
+            if (!UserDefined)
+                user = new HitomiAnalysisArtist(HitomiLog.Instance.GetEnumerator());
+            else
+                user = new HitomiAnalysisArtist(CustomAnalysis);
 
             ///////////////////////////////
 
