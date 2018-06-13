@@ -83,7 +83,26 @@ namespace Hitomi_Copy_3
         List<string> cmd_stack = new List<string>();
         int stack_pointer = 0;
         const BindingFlags default_bf = BindingFlags.NonPublic |
-                         BindingFlags.Instance | BindingFlags.IgnoreCase | BindingFlags.Public;
+                         BindingFlags.Instance | BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.FlattenHierarchy;
+
+        private void GetAllFields(Type t, BindingFlags flags)
+        {
+            if (t == null)
+                return;
+            
+            t.GetFields(flags).ToList().ForEach(x => PushString(x.Name.PadRight(25) + $"[{x.FieldType.ToString()}]"));
+            GetAllFields(t.BaseType, flags);
+        }
+
+        private void enum_recursion(object obj, string[] bb, int ptr)
+        {
+            if (bb.Length == ptr)
+            {
+                GetAllFields(obj.GetType(), default_bf);
+                return;
+            }
+            enum_recursion(obj.GetType().GetField(bb[ptr], default_bf).GetValue(obj), bb, ptr + 1);
+        }
 
         private void enum_recursion(object obj, string[] bb, int ptr, BindingFlags option)
         {
@@ -91,6 +110,7 @@ namespace Hitomi_Copy_3
             {
                 obj.GetType().GetFields(option)
                         .ToList().ForEach(x => PushString(x.Name.PadRight(25) + $"[{x.FieldType.ToString()}]"));
+                //GetAllFields(obj.GetType(), option);
                 return;
             }
             enum_recursion(obj.GetType().GetField(bb[ptr], default_bf).GetValue(obj), bb, ptr + 1, option);
@@ -127,7 +147,7 @@ namespace Hitomi_Copy_3
                 string cmd = textBox2.Text.Trim().Split(' ')[0];
                 //
 
-                if (cmd == "enum" || cmd == "enumi")
+                if (cmd == "enum" || cmd == "enumi" || cmd == "enumx")
                 {
                     if (textBox2.Text.Trim().Split(' ').Length == 1)
                     {
@@ -143,8 +163,10 @@ namespace Hitomi_Copy_3
                             string frm_name = textBox2.Text.Trim().Split(' ')[1];
                             if (cmd == "enum")
                                 enum_recursion(Application.OpenForms[frm_name], textBox2.Text.Trim().Split(' '), 2, BindingFlags.Instance | BindingFlags.Public);
-                            else
-                                enum_recursion(Application.OpenForms[frm_name], textBox2.Text.Trim().Split(' '), 2, BindingFlags.Instance | BindingFlags.NonPublic);
+                            else if (cmd == "enumi")
+                                enum_recursion(Application.OpenForms[frm_name], textBox2.Text.Trim().Split(' '), 2, default_bf);
+                            else if (cmd == "enumx")
+                                enum_recursion(Application.OpenForms[frm_name], textBox2.Text.Trim().Split(' '), 2);
                         }
                         catch (Exception ex)
                         {
@@ -209,6 +231,7 @@ namespace Hitomi_Copy_3
                     PushString("");
                     PushString("enum [Form] [Variable1] [Variable2] ... : Enumerate form or class members.");
                     PushString("enumi [Form] [Variable1] [Variable2] ... : Enumerate form or class members with private members.");
+                    PushString("enumx [Form] [Variable1] [Variable2] ... : Enumerate all class members without static.")
                     PushString("get (Form|hitomi_analysis) (Variable1) [Variable2] ... : Get value.");
                     PushString("set (Form) (Variable1) [Variable2] ... [Value] : Set value.");
                     PushString("fucs : Frequently Used Command Snippet");

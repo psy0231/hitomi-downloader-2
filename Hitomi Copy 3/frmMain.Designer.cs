@@ -32,8 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.MainTab = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
-            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.제목비슷한작품정리TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lStatusSearch = new MetroFramework.Controls.MetroLabel();
             this.pbLoad = new MetroFramework.Controls.MetroProgressBar();
             this.bCancleAll = new MetroFramework.Controls.MetroButton();
@@ -64,7 +64,6 @@
             this.bRTidy = new MetroFramework.Controls.MetroButton();
             this.label1 = new System.Windows.Forms.Label();
             this.tgFilterArtists = new MetroFramework.Controls.MetroToggle();
-            this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.이미지로저장SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
@@ -83,21 +82,22 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.tbDownloadPath = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.speed_timer = new System.Windows.Forms.Timer(this.components);
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.제목비슷한작품정리TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listBox1 = new Hitomi_Copy_2.AutoCompleteListBox();
+            this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
+            this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
+            this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
-            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTab
@@ -111,7 +111,7 @@
             this.MainTab.Controls.Add(this.metroTabPage3);
             this.MainTab.Location = new System.Drawing.Point(10, 59);
             this.MainTab.Name = "MainTab";
-            this.MainTab.SelectedIndex = 0;
+            this.MainTab.SelectedIndex = 3;
             this.MainTab.Size = new System.Drawing.Size(1136, 551);
             this.MainTab.Style = MetroFramework.MetroColorStyle.Pink;
             this.MainTab.TabIndex = 1;
@@ -144,34 +144,19 @@
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
-            // listBox1
+            // contextMenuStrip2
             // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(381, 192);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(367, 124);
-            this.listBox1.TabIndex = 28;
-            this.listBox1.Visible = false;
-            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
-            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.제목비슷한작품정리TToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(239, 26);
             // 
-            // ImagePanel
+            // 제목비슷한작품정리TToolStripMenuItem
             // 
-            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImagePanel.AutoScroll = true;
-            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ImagePanel.ContextMenuStrip = this.contextMenuStrip2;
-            this.ImagePanel.Location = new System.Drawing.Point(3, 37);
-            this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(1122, 441);
-            this.ImagePanel.TabIndex = 3;
+            this.제목비슷한작품정리TToolStripMenuItem.Name = "제목비슷한작품정리TToolStripMenuItem";
+            this.제목비슷한작품정리TToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.제목비슷한작품정리TToolStripMenuItem.Text = "제목 비슷한 작품 선택 취소(&C)";
+            this.제목비슷한작품정리TToolStripMenuItem.Click += new System.EventHandler(this.제목비슷한작품정리TToolStripMenuItem_Click);
             // 
             // lStatusSearch
             // 
@@ -590,19 +575,6 @@
             this.tgFilterArtists.UseSelectable = true;
             this.tgFilterArtists.CheckedChanged += new System.EventHandler(this.tgFilterArtists_CheckedChanged);
             // 
-            // RecommendPannel
-            // 
-            this.RecommendPannel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RecommendPannel.AutoScroll = true;
-            this.RecommendPannel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.RecommendPannel.ContextMenuStrip = this.contextMenuStrip1;
-            this.RecommendPannel.Location = new System.Drawing.Point(3, 34);
-            this.RecommendPannel.Name = "RecommendPannel";
-            this.RecommendPannel.Size = new System.Drawing.Size(1122, 471);
-            this.RecommendPannel.TabIndex = 4;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -904,17 +876,6 @@
             this.metroLabel4.TabIndex = 5;
             this.metroLabel4.Text = "다운로드 경로 : ";
             // 
-            // pbSync
-            // 
-            this.pbSync.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbSync.Location = new System.Drawing.Point(193, 439);
-            this.pbSync.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pbSync.Name = "pbSync";
-            this.pbSync.Size = new System.Drawing.Size(709, 12);
-            this.pbSync.TabIndex = 5;
-            this.pbSync.Visible = false;
-            // 
             // metroLabel1
             // 
             this.metroLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -959,19 +920,58 @@
             this.speed_timer.Interval = 1000;
             this.speed_timer.Tick += new System.EventHandler(this.speed_timer_Tick);
             // 
-            // contextMenuStrip2
+            // listBox1
             // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.제목비슷한작품정리TToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(239, 48);
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(381, 192);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.ScrollAlwaysVisible = true;
+            this.listBox1.Size = new System.Drawing.Size(367, 124);
+            this.listBox1.TabIndex = 28;
+            this.listBox1.Visible = false;
+            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
-            // 제목비슷한작품정리TToolStripMenuItem
+            // ImagePanel
             // 
-            this.제목비슷한작품정리TToolStripMenuItem.Name = "제목비슷한작품정리TToolStripMenuItem";
-            this.제목비슷한작품정리TToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.제목비슷한작품정리TToolStripMenuItem.Text = "제목 비슷한 작품 선택 취소(&C)";
-            this.제목비슷한작품정리TToolStripMenuItem.Click += new System.EventHandler(this.제목비슷한작품정리TToolStripMenuItem_Click);
+            this.ImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePanel.AutoScroll = true;
+            this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.ContextMenuStrip = this.contextMenuStrip2;
+            this.ImagePanel.Location = new System.Drawing.Point(3, 37);
+            this.ImagePanel.Name = "ImagePanel";
+            this.ImagePanel.Size = new System.Drawing.Size(1122, 441);
+            this.ImagePanel.TabIndex = 3;
+            // 
+            // RecommendPannel
+            // 
+            this.RecommendPannel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RecommendPannel.AutoScroll = true;
+            this.RecommendPannel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.RecommendPannel.ContextMenuStrip = this.contextMenuStrip1;
+            this.RecommendPannel.Location = new System.Drawing.Point(3, 34);
+            this.RecommendPannel.Name = "RecommendPannel";
+            this.RecommendPannel.Size = new System.Drawing.Size(1122, 471);
+            this.RecommendPannel.TabIndex = 4;
+            // 
+            // pbSync
+            // 
+            this.pbSync.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbSync.Location = new System.Drawing.Point(193, 439);
+            this.pbSync.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pbSync.Name = "pbSync";
+            this.pbSync.Size = new System.Drawing.Size(709, 12);
+            this.pbSync.TabIndex = 5;
+            this.pbSync.Visible = false;
             // 
             // frmMain
             // 
@@ -998,6 +998,7 @@
             this.MainTab.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage1.PerformLayout();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage2.PerformLayout();
             this.metroTabPage4.ResumeLayout(false);
@@ -1005,7 +1006,6 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
             this.metroTabPage3.PerformLayout();
-            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
