@@ -325,13 +325,13 @@ namespace Hitomi_Copy_3
                             else if (split.Length == 3)
                             {
                                 string tag = Regex.Replace(split[2], "_", " ");
-                                List<Tuple<string, int>> diff = new List<Tuple<string, int>>();
-                                HitomiData.Instance.tagdata_collection.female.ForEach(x => diff.Add(new Tuple<string, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag))));
-                                HitomiData.Instance.tagdata_collection.male.ForEach(x => diff.Add(new Tuple<string, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag))));
-                                HitomiData.Instance.tagdata_collection.tag.ForEach(x => diff.Add(new Tuple<string, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag))));
+                                List<Tuple<string, int, int>> diff = new List<Tuple<string, int, int>>();
+                                HitomiData.Instance.tagdata_collection.female.ForEach(x => diff.Add(new Tuple<string, int, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag), x.Count)));
+                                HitomiData.Instance.tagdata_collection.male.ForEach(x => diff.Add(new Tuple<string, int, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag), x.Count)));
+                                HitomiData.Instance.tagdata_collection.tag.ForEach(x => diff.Add(new Tuple<string, int, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag), x.Count)));
                                 diff.Sort((a, b) => a.Item2.CompareTo(b.Item2));
                                 for (int i = 5; i >= 0; i--)
-                                    PushString($"{diff[i].Item1} [{diff[i].Item2}]");
+                                    PushString($"{diff[i].Item1} [{diff[i].Item3}]");
                                 return;
                             }
                             else
