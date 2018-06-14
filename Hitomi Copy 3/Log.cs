@@ -443,6 +443,8 @@ namespace Hitomi_Copy_3
             }
             else if (e.KeyCode == Keys.Up)
             {
+                if (textBox2.Text == "")
+                    stack_pointer = 0;
                 if (stack_pointer >= cmd_stack.Count)
                     stack_pointer = cmd_stack.Count - 1;
                 if (stack_pointer >= 0)
