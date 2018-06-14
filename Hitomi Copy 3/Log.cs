@@ -331,7 +331,7 @@ namespace Hitomi_Copy_3
                                 HitomiData.Instance.tagdata_collection.tag.ForEach(x => diff.Add(new Tuple<string, int>(x.Tag, StringAlgorithms.get_diff(tag, x.Tag))));
                                 diff.Sort((a, b) => a.Item2.CompareTo(b.Item2));
                                 for (int i = 5; i >= 0; i--)
-                                    PushString(diff[i].Item1);
+                                    PushString($"{diff[i].Item1} [{diff[i].Item2}]");
                                 return;
                             }
                             else
@@ -404,6 +404,10 @@ namespace Hitomi_Copy_3
                                     if (HitomiAnalysis.Instance.CustomAnalysis[i].Item1 == tag)
                                         HitomiAnalysis.Instance.CustomAnalysis.RemoveAt(i--);
                             }
+                        }
+                        else
+                        {
+                            PushString($"'{split[1]}' is not a valid command option.");
                         }
                     }
                     else
