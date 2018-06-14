@@ -281,6 +281,32 @@ namespace Hitomi_Copy_3
                             PushString(string.Join("\r\n", HitomiAnalysis.Instance.Rank.ToArray().Reverse().Select(p => $"{p.Item1} ({p.Item2})")));
                             PushString($"Artist Counts : {HitomiAnalysis.Instance.Rank.Count}");
                         }
+                        else if (split[1] == "add")
+                        {
+                            if (split.Length >= 3)
+                            {
+                                string artist = Regex.Replace(split[2], "_", " ");
+
+                                bool found = false;
+                                found = HitomiData.Instance.tagdata_collection.artist.Any(x => x.Tag == artist);
+
+                                if (!found)
+                                {
+                                    PushString($"'{artist}' is not found.");
+                                    string similar = "";
+                                    int diff = int.MaxValue;
+                                    HitomiData.Instance.tagdata_collection.artist.ForEach(x => { int diff_t = StringAlgorithms.get_diff(artist, x.Tag); if (diff_t < diff) { diff = diff_t; similar = x.Tag; } });
+                                    PushString($"Are you looking for '{similar}'?");
+                                    return;
+                                }
+                            
+                                (Application.OpenForms[0] as frmMain).AddRecommendArtist(artist);
+                            }
+                            else
+                            {
+                                PushString("using 'ra add (artist)'");
+                            }
+                        }
                         else if (split[1] == "+")
                         {
                             if (split.Length >= 4)
@@ -413,7 +439,7 @@ namespace Hitomi_Copy_3
                     else
                     {
                         PushString("using 'ra (option) [tag] [count] ...'");
-                        PushString("  (option): ulist, list, clear, update, on, off, mion, mioff, rank, +, +a");
+                        PushString("  (option): ulist, list, clear, update, on, off, mion, mioff, rank, add, +, +a");
                     }
                 }
                 else if (cmd == "help")
