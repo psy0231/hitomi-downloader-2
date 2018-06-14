@@ -136,6 +136,16 @@ namespace Hitomi_Copy_2
             return false;
         }
 
+        public void Abort()
+        {
+            lock (requests)
+            {
+                queue.Clear();
+                for (int i = requests.Count - 1; i >= 0; i--)
+                    requests[i].Item2.Abort();
+            }
+        }
+
         public void Add(string uri, string filename, object obj)
         {
             queue.Add(new Tuple<string, string, object>(uri, filename, obj));

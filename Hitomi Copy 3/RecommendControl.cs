@@ -37,6 +37,19 @@ namespace Hitomi_Copy_3
             LogEssential.Instance.PushLog(() => $"Created RecommendControl! {tbArtist.Text} {lScore.Text}");
         }
 
+        public RecommendControl(string artist)
+        {
+            InitializeComponent();
+
+            this.artist = tbArtist.Text = artist;
+            lScore.Text = "";
+            label2.Hide();
+            tbScoreDetail.Hide();
+
+            Disposed += OnDispose;
+            LogEssential.Instance.PushLog(() => $"Created RecommendControl! {tbArtist.Text}");
+        }
+
         private void OnDispose(object sender, EventArgs e)
         {
             foreach (var iw in info.Where(iw => iw != null))

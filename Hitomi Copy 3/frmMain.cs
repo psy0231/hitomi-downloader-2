@@ -1075,6 +1075,10 @@ namespace Hitomi_Copy_3
             HitomiAnalysis.Instance.Update();
             Task.Run(() => MoreLoadRecommend());
         }
+        public void AddRecommendArtist(string artist)
+        {
+            AddToPannel(new RecommendControl(artist));
+        }
         private void MoreLoadRecommend()
         {
             for (int i = 0; i < HitomiSetting.Instance.GetModel().RecommendPerScroll && latest_load_count < HitomiAnalysis.Instance.Rank.Count; i++, latest_load_count++)
