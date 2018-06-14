@@ -195,8 +195,9 @@ namespace Hitomi_Copy
         {
             try { closed_form.BringToFront(); } catch { }
 
-            foreach (var pe in ImagePanel.Controls)
-                (pe as PicElement).Dispose();
+            for (int i = ImagePanel.Controls.Count - 1; i >= 0; i--)
+                if (ImagePanel.Controls[i] != null)
+                    ImagePanel.Controls[i].Dispose();
         }
 
         protected override bool ProcessDialogKey(Keys keyData)

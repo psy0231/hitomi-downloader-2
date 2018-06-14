@@ -1106,8 +1106,9 @@ namespace Hitomi_Copy_3
         }
         public void UpdateNewStatistics()
         {
-            foreach (var control in RecommendPannel.Controls)
-                (control as RecommendControl).Dispose();
+            for (int i = RecommendPannel.Controls.Count - 1; i >= 0; i--)
+                if (RecommendPannel.Controls[i] != null)
+                    RecommendPannel.Controls[i].Dispose();
             RecommendPannel.Controls.Clear();
             latest_load_count = 0;
             UpdateStatistics();
