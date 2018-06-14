@@ -83,12 +83,6 @@ namespace Hitomi_Copy_3
             EmitTip();
 
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
-
-            if (HitomiSetting.Instance.GetModel().AutoGC)
-            {
-                gc_timer.Interval = HitomiSetting.Instance.GetModel().AutoGCDelay;
-                gc_timer.Start();
-            }
         }
 
         public void EmitTip()
@@ -1305,11 +1299,6 @@ namespace Hitomi_Copy_3
                 titles.Add(ttitle);
             }
             ImagePanel.ResumeLayout();
-        }
-        
-        private void gc_timer_Tick(object sender, EventArgs e)
-        {
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
         #endregion
 

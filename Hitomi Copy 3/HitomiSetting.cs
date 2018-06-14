@@ -62,10 +62,6 @@ namespace Hitomi_Copy_2
         [JsonProperty]
         public bool RecommendAutoRemove;
         [JsonProperty]
-        public bool AutoGC;
-        [JsonProperty]
-        public int AutoGCDelay;
-        [JsonProperty]
         public HitomiSettingAnalysisModel Analysis;
     }
 
@@ -100,8 +96,6 @@ namespace Hitomi_Copy_2
                 model.UsingLog = false;
                 model.DetailedLog = false;
                 model.RecommendAutoRemove = false;
-                model.AutoGC = true;
-                model.AutoGCDelay = 10000;
                 model.Analysis = new HitomiSettingAnalysisModel();
                 Save();
             }
@@ -120,8 +114,6 @@ namespace Hitomi_Copy_2
                     model.TextMatchingAccuracy = 5;
                 if (model.Analysis == null)
                     model.Analysis = new HitomiSettingAnalysisModel();
-                if (model.AutoGCDelay < 1000)
-                    model.AutoGCDelay = 5000;
                 Save();
             }
         }

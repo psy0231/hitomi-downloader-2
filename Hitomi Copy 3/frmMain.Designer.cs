@@ -91,7 +91,6 @@
             this.lMemoryUsage = new MetroFramework.Controls.MetroLabel();
             this.MemoryUsageUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.speed_timer = new System.Windows.Forms.Timer(this.components);
-            this.gc_timer = new System.Windows.Forms.Timer(this.components);
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
@@ -974,11 +973,6 @@
             this.speed_timer.Interval = 1000;
             this.speed_timer.Tick += new System.EventHandler(this.speed_timer_Tick);
             // 
-            // gc_timer
-            // 
-            this.gc_timer.Interval = 5000;
-            this.gc_timer.Tick += new System.EventHandler(this.gc_timer_Tick);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1080,7 +1074,6 @@
         private MetroFramework.Controls.MetroButton bRTidy;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem 제목비슷한작품정리TToolStripMenuItem;
-        private System.Windows.Forms.Timer gc_timer;
     }
 }
 
