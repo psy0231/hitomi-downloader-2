@@ -1,4 +1,4 @@
-﻿﻿# Hitomi Copy Source Tree
+# Hitomi Copy Source Tree
 
 ## Contact us
 
