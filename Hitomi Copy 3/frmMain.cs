@@ -85,7 +85,10 @@ namespace Hitomi_Copy_3
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
 
             if (HitomiSetting.Instance.GetModel().AutoGC)
+            {
+                gc_timer.Interval = HitomiSetting.Instance.GetModel().AutoGCDelay;
                 gc_timer.Start();
+            }
         }
 
         public void EmitTip()
