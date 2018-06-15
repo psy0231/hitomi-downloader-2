@@ -13,7 +13,10 @@ namespace driver
         {
             if (args.Length < 2)
             {
-                Console.WriteLine("driver.exe [path] [url]");
+                Console.WriteLine("Image download driver");
+                Console.WriteLine("Copyright (C) 2018. Hitomi Parser Developer");
+                Console.WriteLine("");
+                Console.WriteLine("  - driver.exe [path] [url]");
                 return;
             }
             

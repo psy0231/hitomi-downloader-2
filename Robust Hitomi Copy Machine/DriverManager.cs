@@ -32,6 +32,7 @@ namespace Robust_Hitomi_Copy_Machine
             processInfo.CreateNoWindow = false;
             processInfo.UseShellExecute = false;
             process = Process.Start(processInfo);
+            Console.WriteLine($"driver.exe \"{path}\" \"{url}\"");
             return process;
         }
 
@@ -42,7 +43,7 @@ namespace Robust_Hitomi_Copy_Machine
             process.WaitForExit();
             int exitCode = process.ExitCode;
             process.Close();
-            Console.WriteLine($"Complete! {fileName} {uri}");
+            Console.WriteLine($"process terminated {fileName} {uri}");
 
             if (exitCode == 6974)
             {
