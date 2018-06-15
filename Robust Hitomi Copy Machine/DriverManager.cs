@@ -29,7 +29,7 @@ namespace Robust_Hitomi_Copy_Machine
             ProcessStartInfo processInfo;
             Process process;
             processInfo = new ProcessStartInfo("driver.exe", $"\"{path}\" \"{url}\"");
-            processInfo.CreateNoWindow = true;
+            processInfo.CreateNoWindow = false;
             processInfo.UseShellExecute = false;
             process = Process.Start(processInfo);
             return process;
