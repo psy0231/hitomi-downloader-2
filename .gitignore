@@ -44,3 +44,8 @@ Robust Hitomi Copy Machine/.vs/*
 Robust Hitomi Copy Machine/bin/*
 Robust Hitomi Copy Machine/obj/*
 Robust Hitomi Copy Machine/packages/*
+
+Robust Hitomi Copy Machine/driver/.vs/*
+Robust Hitomi Copy Machine/driver/bin/*
+Robust Hitomi Copy Machine/driver/obj/*
+Robust Hitomi Copy Machine/driver/packages/*
