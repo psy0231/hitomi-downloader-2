@@ -46,6 +46,7 @@ namespace Hitomi_Copy_3
             tbInfo.Text += "E-Mail: koromo.software@gmail.com\r\n";
             tbInfo.Text += "Source-code : https://github.com/dc-koromo/hitomi-downloader-2\r\n";
             tbInfo.Text += "PatchNote : https://github.com/dc-koromo/hitomi-downloader-2/blob/master/PatchNote.md";
+            tbInfo.Text += "";
             tbInfo.Text += "\r\n";
         }
 
