@@ -1,5 +1,6 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using Hitomi_Copy_3;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -82,13 +83,15 @@ namespace Hitomi_Copy_2
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
+                LogEssential.Instance.PushLog(e.Message);
                 lock (aborted)
                     if (!aborted.Contains(uri))
                     {
                         lock (retry_callback) retry_callback(uri);
                         request.Abort();
+                        Thread.Sleep(1000);
                         goto RETRY;
                     }
                     else
