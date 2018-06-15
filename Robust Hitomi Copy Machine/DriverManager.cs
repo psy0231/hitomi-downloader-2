@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Robust_Hitomi_Copy_Machine
 {
+    /// <summary>
+    /// Semaphore for Hitomi Copy Downloader
+    /// </summary>
     public class DriverManager
     {
         private static readonly Lazy<DriverManager> instance = new Lazy<DriverManager>(() => new DriverManager());
@@ -22,7 +25,15 @@ namespace Robust_Hitomi_Copy_Machine
         object notify_lock = new object();
 
         public delegate void ClearCallback();
-        public ClearCallback callback;
+        public delegate void RetryCallBack(string uri);
+
+        public ClearCallback clear_callback;
+
+        public DriverManager()
+        {
+            // Set capacity to processor threads count
+            capacity = Environment.ProcessorCount * 6;
+        }
 
         private static Process CreateProcess(string path, string url)
         {
@@ -45,9 +56,10 @@ namespace Robust_Hitomi_Copy_Machine
             process.Close();
             Console.WriteLine($"process terminated {fileName} {uri}");
 
+            // ??
             if (exitCode == 6974)
             {
-                Console.WriteLine($" retrying... {fileName} {uri}");
+                Console.WriteLine($"retrying... {fileName} {uri}");
                 Thread.Sleep(1000);
                 goto RETRY;
             }
@@ -66,8 +78,7 @@ namespace Robust_Hitomi_Copy_Machine
         public void Add(string filename, string uri)
         {
             queue.Add(new Tuple<string, string>(filename, uri));
-            if (Wait())
-                lock (notify_lock) Notify();
+            if (Wait()) lock (notify_lock) Notify();
         }
 
         private void Notify()
@@ -81,7 +92,7 @@ namespace Robust_Hitomi_Copy_Machine
                 lock (int_lock) mutex++;
             }
             else if (queue.Count == 0)
-                callback();
+                clear_callback();
         }
 
         private bool Wait()

@@ -11,21 +11,24 @@ namespace Robust_Hitomi_Copy_Machine
         static void Main(string[] args)
         {
             System.Console.WriteLine("------------------------------------------------------------------------");
-            System.Console.WriteLine("   Robust Hitomi Copy Machine");
+            System.Console.WriteLine("   Robust Hitomi Copy Machine v0.1");
             System.Console.WriteLine("   Copyright (c) 2018. Hitomi Downloader Developer.");
             System.Console.WriteLine("------------------------------------------------------------------------");
 
-            DriverManager.Instance.callback = callback;
+            DriverManager.Instance.clear_callback = callback;
 
             while (true)
             {
-                System.Console.Write(">> ");
+                System.Console.Write(" >> ");
+
                 int magic;
                 if (int.TryParse(System.Console.ReadLine(), out magic))
                     HitomiCore.DownloadAndSetImageLink(magic.ToString());
 
                 while (complete_flag == false)
                     Thread.Sleep(1000);
+
+                complete_flag = false;
             }
         }
 
