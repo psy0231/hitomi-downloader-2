@@ -113,7 +113,7 @@ namespace Hitomi_Copy_2.EH
             article.Language = nodes_static[3].SelectSingleNode(".//td[@class='gdt2']").InnerText.Split(' ')[0].ToLower();
             article.FileSize = nodes_static[4].SelectSingleNode(".//td[@class='gdt2']").InnerText;
             article.Length = int.Parse(nodes_static[5].SelectSingleNode(".//td[@class='gdt2']").InnerText.Split(' ')[0]);
-            article.Favorited = int.Parse(nodes_static[6].SelectSingleNode(".//td[@class='gdt2']").InnerText.Split(' ')[0]);
+            //article.Favorited = int.Parse(nodes_static[6].SelectSingleNode(".//td[@class='gdt2']").InnerText.Split(' ')[0]);
 
             HtmlNodeCollection nodes_data = nodes.SelectNodes(".//div[@id='gmid']//div[@id='gd4']//table//tr");
 
