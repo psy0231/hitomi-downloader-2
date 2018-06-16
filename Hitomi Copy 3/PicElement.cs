@@ -136,6 +136,7 @@ namespace Hitomi_Copy
             callfrom_panel = false;
 
             buffer.Draw(e.Graphics);
+            buffer.Dispose();
         }
         private void Invalidall()
         { callfrom_panel = callfrom_paint = false; Invalidate(); }
