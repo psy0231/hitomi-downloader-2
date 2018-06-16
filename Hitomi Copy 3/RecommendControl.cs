@@ -185,7 +185,7 @@ namespace Hitomi_Copy_3
         }
     }
     
-    public class InfoWrapper : IDisposable
+    public sealed class InfoWrapper : IDisposable
     {
         InfoForm info;
 

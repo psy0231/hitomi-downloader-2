@@ -1,10 +1,11 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using System;
 using System.Drawing;
 
 namespace Hitomi_Copy_3
 {
-    class ViewBuffer
+    public sealed class ViewBuffer : IDisposable
     {
         private Graphics graphics;
         private Bitmap bitmap;
@@ -33,7 +34,12 @@ namespace Hitomi_Copy_3
                 g.DrawImage(bitmap, new Rectangle(0, 0, w, h), 0, 0, w, h, GraphicsUnit.Pixel);
             }
         }
-        
+
+        public void Dispose()
+        {
+            bitmap.Dispose();
+        }
+
         public Graphics g
         {
             get { return graphics; }

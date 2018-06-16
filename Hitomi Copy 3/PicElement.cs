@@ -159,7 +159,6 @@ namespace Hitomi_Copy
                 image.Dispose();
             if (info != null)
                 info.Dispose();
-            base.Dispose();
         }
 
         private new void Resize(object sedner, EventArgs e)
