@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Hitomi_Copy
 {
-    public partial class PicElement : UserControl, IDisposable
+    public partial class PicElement : UserControl
     {
         Image image;
         bool selected = false;
@@ -36,6 +36,8 @@ namespace Hitomi_Copy
             MouseEnter += Thumbnail_MouseEnter;
             MouseLeave += Thumbnail_MouseLeave;
             MouseClick += Thunbnail_MouseClick;
+            
+            Disposed += OnDispose;
         }
 
         private void Thumbnail_MouseEnter(object sender, EventArgs e)
@@ -152,13 +154,14 @@ namespace Hitomi_Copy
         {
             (new frmGalleryInfo(parent, this)).Show();
         }
-        
-        public new virtual void Dispose()
+
+        private void OnDispose(object sender, EventArgs e)
         {
             if (image != null)
                 image.Dispose();
             if (info != null)
                 info.Dispose();
+            LogEssential.Instance.PushLog(() => $"Successful disposed! [PicElement] {label}");
         }
 
         private new void Resize(object sedner, EventArgs e)

@@ -1236,7 +1236,7 @@ namespace Hitomi_Copy_3
                             break;
                         }
                     }
-                    ImagePanel.Controls.RemoveAt(i--);
+                    ImagePanel.Controls[i--].Dispose();
                 }
             }
             ImagePanel.ResumeLayout();
