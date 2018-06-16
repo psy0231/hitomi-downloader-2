@@ -122,7 +122,7 @@ namespace Hitomi_Copy.Data
                     }
                 }
                 bool[] check = new bool[query.Common.Count];
-                if (query.Common != null)
+                if (query.Common.Count > 0)
                 {
                     IntersectCountSplit(v.Name.Split(' '), query.Common, ref check);
                     IntersectCountSplit(v.Tags, query.Common, ref check);
