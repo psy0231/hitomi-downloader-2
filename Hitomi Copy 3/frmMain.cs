@@ -1248,7 +1248,8 @@ namespace Hitomi_Copy_3
         {
             RecommendPannel.SuspendLayout();
             int rc = RecommendPannel.Controls.Count;
-            for (int i = 0; i < rc - 10; i++)
+            int sp = HitomiSetting.Instance.GetModel().RecommendPerScroll;
+            for (int i = 0; i < rc - sp; i++)
             {
                 RecommendPannel.Controls[0].Dispose();
             }
