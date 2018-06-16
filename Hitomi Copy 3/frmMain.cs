@@ -1114,6 +1114,7 @@ namespace Hitomi_Copy_3
             RecommendPannel.Controls.Clear();
             latest_load_count = 0;
             UpdateStatistics();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
         #endregion
 
@@ -1240,19 +1241,19 @@ namespace Hitomi_Copy_3
                 }
             }
             ImagePanel.ResumeLayout();
-            GC.Collect();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
 
         private void bRTidy_Click(object sender, EventArgs e)
         {
             RecommendPannel.SuspendLayout();
-            for (int i = 0; i < RecommendPannel.Controls.Count - 10; i++)
+            int rc = RecommendPannel.Controls.Count;
+            for (int i = 0; i < rc - 10; i++)
             {
-                RecommendPannel.Controls[i].Dispose();
-                RecommendPannel.Controls.RemoveAt(i--);
+                RecommendPannel.Controls[0].Dispose();
             }
             RecommendPannel.ResumeLayout();
-            GC.Collect();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
 
         private void bChooseAll_Click(object sender, EventArgs e)
