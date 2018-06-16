@@ -20,6 +20,7 @@ namespace Hitomi_Copy
     {
         string artist;
         Form closed_form;
+        bool closed = false;
 
         public frmArtistInfo(string artist)
         {
@@ -114,6 +115,13 @@ namespace Hitomi_Copy
             pe.Dock = DockStyle.Bottom;
             pe.SetImageFromAddress(tuple.Item1, 150, 200);
 
+            if (closed)
+            {
+                pe.Dispose();
+                LogEssential.Instance.PushLog(() => $"Unexpected Disposed! {HitomiDef.HitomiThumbnail + tuple.Item2.Thumbnail} {tuple.Item1}");
+                return;
+            }
+
             pe.Font = this.Font;
             
             lock (stayed)
@@ -205,6 +213,8 @@ namespace Hitomi_Copy
             for (int i = ImagePanel.Controls.Count - 1; i >= 0; i--)
                 if (ImagePanel.Controls[i] != null)
                     ImagePanel.Controls[i].Dispose();
+
+            closed = true;
         }
 
         protected override bool ProcessDialogKey(Keys keyData)

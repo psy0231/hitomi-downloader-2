@@ -7,22 +7,6 @@ using System.IO;
 
 namespace Hitomi_Copy_2
 {
-    public class HitomiSettingAnalysisModel
-    {
-        [JsonProperty]
-        public bool IncludeDateTime;
-        [JsonProperty]
-        public bool ConflictTags;
-        [JsonProperty]
-        public Tuple<string,string>[] ConflictTagsPair;
-        [JsonProperty]
-        public string[] IgnoreTags;
-        [JsonProperty]
-        public bool WinnerBlur;
-        [JsonProperty]
-        public bool InverseGaussianDist;
-    }
-    
     public class HitomiSettingModel
     {
         [JsonProperty]
@@ -61,8 +45,6 @@ namespace Hitomi_Copy_2
         public bool DetailedLog;
         [JsonProperty]
         public bool RecommendAutoRemove;
-        [JsonProperty]
-        public HitomiSettingAnalysisModel Analysis;
     }
 
     public class HitomiSetting
@@ -96,7 +78,6 @@ namespace Hitomi_Copy_2
                 model.UsingLog = false;
                 model.DetailedLog = false;
                 model.RecommendAutoRemove = false;
-                model.Analysis = new HitomiSettingAnalysisModel();
                 Save();
             }
             else
@@ -112,8 +93,6 @@ namespace Hitomi_Copy_2
                     model.RecommendPerScroll = 10;
                 if (model.TextMatchingAccuracy > 20 || model.TextMatchingAccuracy < 2)
                     model.TextMatchingAccuracy = 5;
-                if (model.Analysis == null)
-                    model.Analysis = new HitomiSettingAnalysisModel();
                 Save();
             }
         }

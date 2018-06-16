@@ -21,6 +21,7 @@ namespace Hitomi_Copy_3
     {
         InfoWrapper[] info = new InfoWrapper[5];
         string artist;
+        bool closed = false;
 
         public RecommendControl(int index)
         {
@@ -55,6 +56,7 @@ namespace Hitomi_Copy_3
             foreach (var iw in info.Where(iw => iw != null))
                 iw.Dispose();
             LogEssential.Instance.PushLog(() => $"Successful disposed! [RecommendControl] {artist}");
+            closed = true;
         }
 
         private async void RecommendControl_LoadAsync(object sender, System.EventArgs e)
@@ -111,6 +113,12 @@ namespace Hitomi_Copy_3
             using (FileStream fs = new FileStream(temp, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
             {
                 img = Image.FromStream(fs);
+            }
+            if (closed)
+            {
+                img.Dispose();
+                LogEssential.Instance.PushLog(() => $"Unexpected Disposed! {HitomiDef.HitomiThumbnail + thumbnail} {temp} {i} {id}");
+                return;
             }
             info[i] = new InfoWrapper(img.Clone() as Image);
 
