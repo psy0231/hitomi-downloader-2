@@ -29,6 +29,8 @@ namespace driver
             
             try
             {
+                int total_bytes = 0;
+
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
                 if ((response.StatusCode == HttpStatusCode.OK ||
@@ -45,9 +47,11 @@ namespace driver
                         {
                             bytesRead = inputStream.Read(buffer, 0, buffer.Length);
                             outputStream.Write(buffer, 0, bytesRead);
+                            total_bytes += bytesRead;
                         } while (bytesRead != 0);
                     }
                 }
+                Environment.Exit(total_bytes);
             }
             catch (Exception e)
             {

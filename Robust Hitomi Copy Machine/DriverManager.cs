@@ -54,7 +54,7 @@ namespace Robust_Hitomi_Copy_Machine
             process.WaitForExit();
             int exitCode = process.ExitCode;
             process.Close();
-            Console.WriteLine($"process terminated {fileName} {uri}");
+            Console.WriteLine($"process terminated {uri} {exitCode}");
 
             // ??
             if (exitCode == 6974)
