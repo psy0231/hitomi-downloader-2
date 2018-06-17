@@ -24,7 +24,7 @@ namespace Hitomi_Copy.Data
             if (target != null)
             {
                 for (int i = 0; i < source.Count; i++)
-                    if (target.Any(e => e.ToLower().Split(' ').Contains(source[i].ToLower())))
+                    if (target.Any(e => e.ToLower().Split(' ').Any(x => x.Contains(source[i].ToLower()))))
                         check[i] = true;
             }
         }
