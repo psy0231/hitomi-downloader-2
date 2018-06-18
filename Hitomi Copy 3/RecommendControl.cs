@@ -195,25 +195,25 @@ namespace Hitomi_Copy_3
     
     public sealed class InfoWrapper : IDisposable
     {
-        InfoForm info;
+        Lazy<InfoForm> info;
 
         public InfoWrapper(Image image)
         {
-            info = new InfoForm(image);
-            info.Size = new Size(image.Width * 3 / 4, image.Height * 3 / 4);
+            info = new Lazy<InfoForm> (() => new InfoForm(image, new Size(image.Width * 3 / 4, image.Height * 3 / 4)));
         }
 
         public void Dispose()
         {
-            info.Dispose();
+            if (info.IsValueCreated)
+                info.Value.Dispose();
         }
 
         public void Picture_MouseEnter(object sender, EventArgs e)
-        { info.Location = Cursor.Position; info.Show(); }
+        { info.Value.Location = Cursor.Position; info.Value.Show(); }
         public void Picture_MouseLeave(object sender, EventArgs e)
-        { info.Location = Cursor.Position; info.Hide(); }
+        { info.Value.Location = Cursor.Position; info.Value.Hide(); }
         public void Picture_MouseMove(object sender, EventArgs e)
-        { info.Location = new Point(Cursor.Position.X + 15, Cursor.Position.Y); }
+        { info.Value.Location = new Point(Cursor.Position.X + 15, Cursor.Position.Y); }
     }
 
 }

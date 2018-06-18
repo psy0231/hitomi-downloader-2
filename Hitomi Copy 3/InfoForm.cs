@@ -10,11 +10,12 @@ namespace Hitomi_Copy
     {
         Image image;
 
-        public InfoForm(Image image)
+        public InfoForm(Image image, Size size)
         {
             InitializeComponent();
 
             this.image = image;
+            this.Size = size;
             Disposed += OnDispose;
         }
 

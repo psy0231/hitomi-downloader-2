@@ -21,7 +21,7 @@ namespace Hitomi_Copy
         bool overlap = false;
         HitomiArticle ha;
         PictureBox pb = new PictureBox();
-        InfoForm info;
+        Lazy<InfoForm> info;
         Form parent;
 
         public PicElement(Form parent, ToolTip tooltip = null)
@@ -141,11 +141,11 @@ namespace Hitomi_Copy
         private void Invalidall()
         { callfrom_panel = callfrom_paint = false; Invalidate(); }
         private void Picture_MouseEnter(object sender, EventArgs e)
-        { mouse_enter = true; if (!downloading) { info.Location = Cursor.Position; info.Show(); Invalidall(); } }
+        { mouse_enter = true; if (!downloading) { info.Value.Location = Cursor.Position; info.Value.Show(); Invalidall(); } }
         private void Picture_MouseLeave(object sender, EventArgs e)
-        { mouse_enter = false; if (!downloading) { info.Location = Cursor.Position; info.Hide(); Invalidall(); } }
+        { mouse_enter = false; if (!downloading) { info.Value.Location = Cursor.Position; info.Value.Hide(); Invalidall(); } }
         private void Picture_MouseMove(object sender, EventArgs e)
-        { info.Location = new Point(Cursor.Position.X+15,Cursor.Position.Y); /*info.BringToFront();*/ }
+        { info.Value.Location = new Point(Cursor.Position.X+15,Cursor.Position.Y); /*info.BringToFront();*/ }
         private void Picture_MouseClick(object sender, EventArgs e)
         { if (((MouseEventArgs)e).Button == MouseButtons.Left) { selected = !selected; Invalidall(); } }
         private void Picture_MouseDoubleClick(object sender, EventArgs e)
@@ -160,8 +160,8 @@ namespace Hitomi_Copy
         {
             if (image != null)
                 image.Dispose();
-            if (info != null)
-                info.Dispose();
+            if (info != null && info.IsValueCreated)
+                info.Value.Dispose();
             LogEssential.Instance.PushLog(() => $"Successful disposed! [PicElement] {label}");
         }
 
@@ -190,11 +190,10 @@ namespace Hitomi_Copy
                 if (title) pb.MouseClick += Picture_MouseClick;
                 pb.MouseMove += Picture_MouseMove;
                 if (title) pb.MouseDoubleClick += Picture_MouseDoubleClick;
-                info = new InfoForm(Image);
                 if (title)
-                    info.Size = new Size(image.Width*3/4, image.Height*3/4);
+                    info = new Lazy<InfoForm>(() => new InfoForm(Image, new Size(image.Width*3/4, image.Height*3/4)));
                 else
-                    info.Size = new Size(image.Width*3/4/2, image.Height*3/4/2);
+                    info = new Lazy<InfoForm>(() => new InfoForm(Image, new Size(image.Width*3/4/2, image.Height*3/4/2)));
                 this.Width = pannelw;
                 this.Height = pannelh;
                 this.Controls.Add(pb);
