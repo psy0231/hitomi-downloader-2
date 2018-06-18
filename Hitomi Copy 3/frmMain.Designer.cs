@@ -994,6 +994,7 @@
             this.Style = MetroFramework.MetroColorStyle.Pink;
             this.Text = "Hitom Copy ";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.MainTab.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);

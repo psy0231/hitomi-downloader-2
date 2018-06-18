@@ -1303,6 +1303,12 @@ namespace Hitomi_Copy_3
             }
             ImagePanel.ResumeLayout();
         }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            HitomiSetting.Instance.GetModel().ExclusiveTag = tbExcludeTag.Text.Split(',').Select(x => x.Trim()).ToArray();
+            HitomiSetting.Instance.Save();
+        }
         #endregion
 
     }
