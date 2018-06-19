@@ -1,4 +1,9 @@
-﻿# Hitomi Copy (현존하는 최강의 히토미 다운로더)
+# 이 문서는 이전 버전의 문서입니다.
+# 다음 주소에서 최신 문서를 열어보세요.
+
+https://github.com/dc-koromo/hitomi-downloader-2/blob/master/README.md
+
+# Hitomi Copy (현존하는 최강의 히토미 다운로더)
 
 소스코드는 Hitomi Copy 2 폴더에 있습니다.
 
