@@ -246,7 +246,7 @@ namespace Hitomi_Copy_3
         {
             foreach (var v in metadata_result)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(50);
                 Task.Run(() => AddMetadataToPanel(v));
             }
         }
@@ -1303,11 +1303,12 @@ namespace Hitomi_Copy_3
             }
             ImagePanel.ResumeLayout();
         }
-
-        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             HitomiSetting.Instance.GetModel().ExclusiveTag = tbExcludeTag.Text.Split(',').Select(x => x.Trim()).ToArray();
             HitomiSetting.Instance.Save();
+            Process.GetCurrentProcess().Kill();
         }
         #endregion
 
