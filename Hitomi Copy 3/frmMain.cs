@@ -411,6 +411,7 @@ namespace Hitomi_Copy_3
             foreach (var uri in images)
             {
                 IncrementProgressBarMax();
+                UpdateLabel($"{pbTarget.Value}/{pbTarget.Maximum}");
                 lock (images) images_uri.Add(new Tuple<string, MMArticle>(uri, ta));
             }
             if(HitomiSetting.Instance.GetModel().DetailedLog)
