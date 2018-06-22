@@ -19,6 +19,11 @@ namespace Hitomi_Copy
             Disposed += OnDispose;
         }
 
+        protected override bool ShowWithoutActivation
+        {
+            get { return true; }
+        }
+        
         private void OnDispose(object sender, EventArgs e)
         {
             image.Dispose();
