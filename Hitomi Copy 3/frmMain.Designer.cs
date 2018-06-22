@@ -91,8 +91,6 @@
             this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.RecommendPannel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.pbSync = new Hitomi_Copy_3.MarqueeColorBar();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTab.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
@@ -149,11 +147,9 @@
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.제목비슷한작품정리TToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2});
+            this.제목비슷한작품정리TToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(239, 76);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(239, 26);
             // 
             // 제목비슷한작품정리TToolStripMenuItem
             // 
@@ -977,20 +973,6 @@
             this.pbSync.TabIndex = 5;
             this.pbSync.Visible = false;
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(235, 6);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Checked = true;
-            this.toolStripMenuItem2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(238, 22);
-            this.toolStripMenuItem2.Text = "자세한 검색결과 표시(&D)";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1093,8 +1075,6 @@
         private MetroFramework.Controls.MetroButton bRTidy;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem 제목비슷한작품정리TToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
     }
 }
 

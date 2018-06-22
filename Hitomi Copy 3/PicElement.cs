@@ -23,9 +23,6 @@ namespace Hitomi_Copy
         bool Overlap { get; set; }
         void SetImageFromAddress(string addr, int pannelw, int pannelh, bool title = true);
         void Invalidate();
-        bool DisposeRequired { get; set; }
-        Lazy<InfoForm> LazyInfoForm { get; set; }
-        Form PeParentForm { get; set; }
     }
 
     public partial class PicElement : UserControl, IPicElement
@@ -38,48 +35,10 @@ namespace Hitomi_Copy
         bool downloading = false;
         bool downloaded = false;
         bool overlap = false;
-        bool dispose = true;
         HitomiArticle ha;
         PictureBox pb = new PictureBox();
         Lazy<InfoForm> info;
         Form parent;
-
-        public PicElement(IPicElement ipe)
-        {
-            InitializeComponent();
-
-            this.Paint += PicElement_Paint;
-            this.BackColor = Color.WhiteSmoke;
-            this.DoubleBuffered = true;
-
-            MouseEnter += Thumbnail_MouseEnter;
-            MouseLeave += Thumbnail_MouseLeave;
-            MouseClick += Thunbnail_MouseClick;
-
-            ipe.DisposeRequired = false;
-
-            image = ipe.Image;
-            selected = ipe.Selected;
-            label = ipe.Label;
-            ha = ipe.Article;
-            info = ipe.LazyInfoForm;
-            downloading = ipe.Downloading;
-            downloaded = ipe.Downloaded;
-            overlap = ipe.Overlap;
-            parent = ipe.PeParentForm;
-
-            pb.Location = new Point(3, 3);
-            pb.Size = new Size(150 - 6, 200 - 30);
-            pb.SizeMode = PictureBoxSizeMode.Zoom;
-            pb.Paint += Picture_Paint;
-            pb.MouseEnter += Picture_MouseEnter;
-            pb.MouseLeave += Picture_MouseLeave;
-            pb.MouseClick += Picture_MouseClick;
-            pb.MouseMove += Picture_MouseMove;
-            pb.MouseDoubleClick += Picture_MouseDoubleClick;
-
-            Disposed += OnDispose;
-        }
 
         public PicElement(Form parent, ToolTip tooltip = null)
         {
@@ -215,14 +174,11 @@ namespace Hitomi_Copy
 
         private void OnDispose(object sender, EventArgs e)
         {
-            if (dispose)
-            {
-                if (image != null)
-                    image.Dispose();
-                if (info != null && info.IsValueCreated)
-                    info.Value.Dispose();
-                LogEssential.Instance.PushLog(() => $"Successful disposed! [PicElement] {label}");
-            }
+            if (image != null)
+                image.Dispose();
+            if (info != null && info.IsValueCreated)
+                info.Value.Dispose();
+            LogEssential.Instance.PushLog(() => $"Successful disposed! [PicElement] {label}");
         }
 
         private new void Resize(object sedner, EventArgs e)
@@ -276,17 +232,11 @@ namespace Hitomi_Copy
         { set { font = value; } }
         public PictureBox Picture
         { get { return pb; } }
-        public bool DisposeRequired
-        { get { return dispose; } set { dispose = value; } }
         public bool Downloaded
         { get { return downloaded; } set { downloaded = value; } }
         public bool Downloading
         { get { return downloading; } set { downloading = value; } }
         public bool Overlap
         { get { return overlap; } set { overlap = value; } }
-        public Lazy<InfoForm> LazyInfoForm
-        { get { return info; } set { info = value; } }
-        public Form PeParentForm
-        { get { return parent; } set { parent = value; } }
     }
 }
