@@ -234,5 +234,11 @@ namespace Hitomi_Copy
             }
             return base.ProcessDialogKey(keyData);
         }
+
+        private void Label_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText((sender as Label).Text);
+            LogEssential.Instance.PushLog(() => $"Copy to clipboard \"{(sender as Label).Text}\"");
+        }
     }
 }

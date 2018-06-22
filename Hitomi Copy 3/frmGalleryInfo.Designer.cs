@@ -64,6 +64,7 @@
             this.lTitle.Size = new System.Drawing.Size(52, 28);
             this.lTitle.TabIndex = 7;
             this.lTitle.Text = "제목";
+            this.lTitle.Click += new System.EventHandler(this.Label_Click);
             // 
             // lArtist
             // 
@@ -74,6 +75,7 @@
             this.lArtist.Size = new System.Drawing.Size(48, 25);
             this.lArtist.TabIndex = 8;
             this.lArtist.Text = "작가";
+            this.lArtist.Click += new System.EventHandler(this.Label_Click);
             // 
             // textBox1
             // 
@@ -96,6 +98,7 @@
             this.lSeries.Size = new System.Drawing.Size(66, 25);
             this.lSeries.TabIndex = 10;
             this.lSeries.Text = "시리즈";
+            this.lSeries.Click += new System.EventHandler(this.Label_Click);
             // 
             // label2
             // 
@@ -204,6 +207,7 @@
             this.lCharacter.Size = new System.Drawing.Size(66, 25);
             this.lCharacter.TabIndex = 20;
             this.lCharacter.Text = "캐릭터";
+            this.lCharacter.Click += new System.EventHandler(this.Label_Click);
             // 
             // label7
             // 
@@ -224,6 +228,7 @@
             this.lGroup.Size = new System.Drawing.Size(48, 25);
             this.lGroup.TabIndex = 21;
             this.lGroup.Text = "그룹";
+            this.lGroup.Click += new System.EventHandler(this.Label_Click);
             // 
             // button5
             // 
@@ -291,6 +296,7 @@
             this.lDate.Size = new System.Drawing.Size(48, 25);
             this.lDate.TabIndex = 27;
             this.lDate.Text = "날짜";
+            this.lDate.Click += new System.EventHandler(this.Label_Click);
             // 
             // bPreview
             // 
