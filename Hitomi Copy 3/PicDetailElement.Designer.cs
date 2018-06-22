@@ -206,7 +206,7 @@
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(963, 85);
+            this.metroButton1.Location = new System.Drawing.Point(963, 83);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(119, 27);
             this.metroButton1.TabIndex = 38;
@@ -226,7 +226,7 @@
             // 
             // metroButton3
             // 
-            this.metroButton3.Location = new System.Drawing.Point(963, 58);
+            this.metroButton3.Location = new System.Drawing.Point(963, 57);
             this.metroButton3.Name = "metroButton3";
             this.metroButton3.Size = new System.Drawing.Size(119, 27);
             this.metroButton3.TabIndex = 40;
@@ -236,9 +236,9 @@
             // 
             // metroButton4
             // 
-            this.metroButton4.Location = new System.Drawing.Point(963, 140);
+            this.metroButton4.Location = new System.Drawing.Point(963, 137);
             this.metroButton4.Name = "metroButton4";
-            this.metroButton4.Size = new System.Drawing.Size(119, 43);
+            this.metroButton4.Size = new System.Drawing.Size(119, 46);
             this.metroButton4.TabIndex = 41;
             this.metroButton4.Text = "히토미 열기";
             this.metroButton4.UseSelectable = true;

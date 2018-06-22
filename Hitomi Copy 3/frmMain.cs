@@ -1314,6 +1314,39 @@ namespace Hitomi_Copy_3
             HitomiSetting.Instance.Save();
             Process.GetCurrentProcess().Kill();
         }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            bool v = toolStripMenuItem2.Checked = !toolStripMenuItem2.Checked;
+            HitomiSetting.Instance.GetModel().DetailedSearchResult = v;
+            HitomiSetting.Instance.Save();
+
+            List<Control> controls = new List<Control>();
+            ImagePanel.SuspendLayout();
+            for (int i = 0; i < ImagePanel.Controls.Count; i++)
+            {
+                if (v && ImagePanel.Controls[i] is PicElement)
+                {
+                    PicDetailElement pe = new PicDetailElement(ImagePanel.Controls[i] as IPicElement);
+                    controls.Add(pe);
+                }
+                else if (!v && ImagePanel.Controls[i] is PicDetailElement)
+                {
+                    PicElement pe = new PicElement(ImagePanel.Controls[i] as IPicElement);
+                    controls.Add(pe);
+                }
+                else
+                    controls.Add(ImagePanel.Controls[i]);
+            }
+            //ImagePanel.Controls.Clear();
+            controls.Sort((a, b) => Convert.ToUInt32((b as IPicElement).Article.Magic).CompareTo(Convert.ToUInt32((a as IPicElement).Article.Magic)));
+            for (int i = 0; i < controls.Count; i++)
+            {
+                ImagePanel.Controls.Add(controls[i]);
+                ImagePanel.Controls[i].Invalidate();
+            }
+            ImagePanel.ResumeLayout();
+        }
         #endregion
 
     }

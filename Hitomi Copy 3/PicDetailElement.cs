@@ -21,9 +21,32 @@ namespace Hitomi_Copy_3
         bool downloading = false;
         bool downloaded = false;
         bool overlap = false;
+        bool dispose = true;
         HitomiArticle ha;
         Lazy<InfoForm> info;
         Form parent;
+
+        public PicDetailElement(IPicElement ipe)
+        {
+            InitializeComponent();
+
+            this.BackColor = Color.GhostWhite;
+            this.DoubleBuffered = true;
+            
+            ipe.DisposeRequired = false;
+
+            image = ipe.Image;
+            selected = ipe.Selected;
+            label = ipe.Label;
+            ha = ipe.Article;
+            info = ipe.LazyInfoForm;
+            downloading = ipe.Downloading;
+            downloaded = ipe.Downloaded;
+            overlap = ipe.Overlap;
+            parent = ipe.PeParentForm;
+            
+            Disposed += OnDispose;
+        }
 
         public PicDetailElement(Form parent, ToolTip tooltip = null)
         {
@@ -43,11 +66,14 @@ namespace Hitomi_Copy_3
 
         private void OnDispose(object sender, EventArgs e)
         {
-            if (image != null)
-                image.Dispose();
-            if (info != null && info.IsValueCreated)
-                info.Value.Dispose();
-            LogEssential.Instance.PushLog(() => $"Successful disposed! [PicDetailElement] {label}");
+            if (dispose)
+            {
+                if (image != null)
+                    image.Dispose();
+                if (info != null && info.IsValueCreated)
+                    info.Value.Dispose();
+                LogEssential.Instance.PushLog(() => $"Successful disposed! [PicDetailElement] {label}");
+            }
         }
         
         private void pb_MouseEnter(object sender, EventArgs e)
@@ -96,15 +122,21 @@ namespace Hitomi_Copy_3
         public HitomiArticle Article
         { get { return ha; } set { ha = value; } }
         public override Font Font
-        { set { font = value; } }
+        { get { return font; } set { font = value; } }
         public PictureBox Picture
         { get { return pb; } }
+        public bool DisposeRequired
+        { get { return dispose; } set { dispose = value; } }
         public bool Downloaded
         { get { return downloaded; } set { downloaded = value; } }
         public bool Downloading
         { get { return downloading; } set { downloading = value; if (Downloading) BackColor = Color.FromArgb(200, 200, 200, 0); else BackColor = Color.FromArgb(200, 200, 130, 130); } }
         public bool Overlap
         { get { return overlap; } set { overlap = value; } }
+        public Lazy<InfoForm> LazyInfoForm
+        { get { return info; } set { info = value; } }
+        public Form PeParentForm
+        { get { return parent; } set { parent = value; } }
 
         private void PicDetailElement_Load(object sender, EventArgs e)
         {
