@@ -52,6 +52,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lDate = new System.Windows.Forms.Label();
             this.bPreview = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -310,12 +311,25 @@
             this.bPreview.UseVisualStyleBackColor = true;
             this.bPreview.Click += new System.EventHandler(this.bPreview_Click);
             // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.Font = new System.Drawing.Font("맑은 고딕", 13F);
+            this.button7.Location = new System.Drawing.Point(459, 392);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(163, 41);
+            this.button7.TabIndex = 29;
+            this.button7.Text = "익헨에서 열기";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // frmGalleryInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1286, 470);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.bPreview);
             this.Controls.Add(this.lDate);
             this.Controls.Add(this.label6);
@@ -381,5 +395,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lDate;
         private System.Windows.Forms.Button bPreview;
+        private System.Windows.Forms.Button button7;
     }
 }

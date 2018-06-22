@@ -220,7 +220,7 @@
             this.metroButton4.Name = "metroButton4";
             this.metroButton4.Size = new System.Drawing.Size(119, 43);
             this.metroButton4.TabIndex = 41;
-            this.metroButton4.Text = "히토미 열기";
+            this.metroButton4.Text = "히토미에서 열기";
             this.metroButton4.UseSelectable = true;
             this.metroButton4.Click += new System.EventHandler(this.metroButton4_Click);
             // 

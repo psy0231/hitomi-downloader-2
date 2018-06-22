@@ -4,6 +4,7 @@ using hitomi.Parser;
 using Hitomi_Copy.Data;
 using Hitomi_Copy_2;
 using Hitomi_Copy_3;
+using Hitomi_Copy_3.EH;
 using System;
 using System.Drawing;
 using System.IO;
@@ -239,6 +240,19 @@ namespace Hitomi_Copy
         {
             Clipboard.SetText((sender as Label).Text);
             LogEssential.Instance.PushLog(() => $"Copy to clipboard \"{(sender as Label).Text}\"");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string result="";
+            if (pic != null)
+                result = ExHentaiTool.GetAddressFromMagicTitle(pic.Article.Magic, pic.Article.Title);
+            else
+                result = ExHentaiTool.GetAddressFromMagicTitle(metadata.ID.ToString(), metadata.Name);
+            if (result != "")
+                System.Diagnostics.Process.Start(result);
+            else
+                MessageBox.Show("Not found!", "Hitomi Copy", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

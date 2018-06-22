@@ -125,6 +125,7 @@
     <Compile Include="Data\HitomiDataSearch.cs" />
     <Compile Include="EH\ExHentaiArticle.cs" />
     <Compile Include="EH\ExHentaiParser.cs" />
+    <Compile Include="EH\ExHentaiTool.cs" />
     <Compile Include="frmArtistInfo.cs">
       <SubType>Form</SubType>
     </Compile>
