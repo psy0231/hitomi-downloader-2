@@ -143,7 +143,7 @@ namespace Hitomi_Copy_3
             if (image == 1)
                 b.ForeColor = Color.DeepPink;
             else if (image == 2)
-                b.ForeColor = Color.DarkBlue;
+                b.ForeColor = Color.Blue;
 
             flowLayoutPanel1.Controls.Add(b);
         }
@@ -152,7 +152,7 @@ namespace Hitomi_Copy_3
         {
             if (((Button)sender).ForeColor == Color.DeepPink)
                 (new frmTagInfo(parent, "female:" + ((Button)sender).Text)).Show();
-            else if (((Button)sender).ForeColor == Color.DarkBlue)
+            else if (((Button)sender).ForeColor == Color.Blue)
                 (new frmTagInfo(parent, "male:" + ((Button)sender).Text)).Show();
             else
                 (new frmTagInfo(parent, ((Button)sender).Text)).Show();
