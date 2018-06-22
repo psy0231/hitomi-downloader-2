@@ -248,6 +248,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PicDetailElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PicDetailElement.Designer.cs">
+      <DependentUpon>PicDetailElement.cs</DependentUpon>
+    </Compile>
     <Compile Include="RecommendControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -326,6 +332,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="PicDetailElement.resx">
+      <DependentUpon>PicDetailElement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RecommendControl.resx">
       <DependentUpon>RecommendControl.cs</DependentUpon>
     </EmbeddedResource>

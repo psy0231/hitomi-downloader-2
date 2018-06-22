@@ -45,6 +45,8 @@ namespace Hitomi_Copy_2
         public bool DetailedLog;
         [JsonProperty]
         public bool RecommendAutoRemove;
+        [JsonProperty]
+        public bool DetailedSearchResult;
     }
 
     public class HitomiSetting
@@ -78,6 +80,7 @@ namespace Hitomi_Copy_2
                 model.UsingLog = false;
                 model.DetailedLog = false;
                 model.RecommendAutoRemove = false;
+                model.DetailedSearchResult = false;
                 Save();
             }
             else

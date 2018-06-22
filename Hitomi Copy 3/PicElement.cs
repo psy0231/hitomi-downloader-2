@@ -9,7 +9,23 @@ using System.Windows.Forms;
 
 namespace Hitomi_Copy
 {
-    public partial class PicElement : UserControl
+    public interface IPicElement
+    {
+        bool Selected { get; set; }
+        bool MouseIn { get; set; }
+        Image Image { get; set; }
+        string Label { get; set; }
+        HitomiArticle Article { get; set; }
+        Font Font { set; }
+        PictureBox Picture { get; }
+        bool Downloaded { get; set; }
+        bool Downloading { get; set; }
+        bool Overlap { get; set; }
+        void SetImageFromAddress(string addr, int pannelw, int pannelh, bool title = true);
+        void Invalidate();
+    }
+
+    public partial class PicElement : UserControl, IPicElement
     {
         Image image;
         bool selected = false;
@@ -172,6 +188,7 @@ namespace Hitomi_Copy
 
         public void SetImageFromAddress(string addr, int pannelw, int pannelh, bool title = true)
         {
+            Dock = DockStyle.Bottom;
             try
             {
                 pb.Location = new Point(3, 3);
@@ -200,7 +217,7 @@ namespace Hitomi_Copy
             }
             catch { }
         }
-        
+
         public bool Selected
         { get { return selected; } set { selected = value; Invalidate(); } }
         public bool MouseIn

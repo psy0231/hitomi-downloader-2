@@ -16,12 +16,12 @@ namespace Hitomi_Copy
 {
     public partial class frmGalleryInfo : Form
     {
-        PicElement pic;
+        IPicElement pic;
         HitomiMetadata metadata;
         string id;
         Form closed_form;
 
-        public frmGalleryInfo(Form closed, PicElement pic)
+        public frmGalleryInfo(Form closed, IPicElement pic)
         {
             InitializeComponent();
 

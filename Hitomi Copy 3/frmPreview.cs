@@ -33,7 +33,7 @@ namespace Hitomi_Copy_3
         }
 
         HitomiQueue download_queue;
-        private void ImageLinkCallback(PicElement pe)
+        private void ImageLinkCallback(IPicElement pe)
         {
             download_queue = new HitomiQueue(Notify, Notify_Size, Notify_Status, Notify_Retry);
             PBMaxSize(pe.Article.ImagesLink.Count);

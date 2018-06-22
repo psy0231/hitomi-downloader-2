@@ -12,19 +12,19 @@ namespace Hitomi_Copy_2
 {
     public class HitomiCore
     {
-        public delegate void CallBack(PicElement pe);
+        public delegate void CallBack(IPicElement pe);
         
-        static public void DownloadAndSetImageLink(PicElement pe, CallBack callback)
+        static public void DownloadAndSetImageLink(IPicElement pe, CallBack callback)
         {
             WebClient wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
             wc.DownloadStringCompleted += wc_dasil;
             wc.DownloadStringAsync(new Uri(HitomiDef.HitomiGalleryAddress + pe.Article.Magic + ".js"),
-                new Tuple<PicElement, CallBack>(pe, callback));
+                new Tuple<IPicElement, CallBack>(pe, callback));
         }
         static private void wc_dasil(object sender, DownloadStringCompletedEventArgs e)
         {
-            Tuple<PicElement, CallBack> tuple = (Tuple<PicElement, CallBack>)e.UserState;
+            Tuple<IPicElement, CallBack> tuple = (Tuple<IPicElement, CallBack>)e.UserState;
             
             try
             {

@@ -694,14 +694,17 @@ namespace Hitomi_Copy_3
                 LogEssential.Instance.PushLog(article);
         }
 
-        public List<PicElement> stayed = new List<PicElement>();
+        public List<IPicElement> stayed = new List<IPicElement>();
         private void CallbackThumbnail(object sender, AsyncCompletedEventArgs e)
         {
-            PicElement pe = new PicElement(this);
+            IPicElement pe;
+            if (!HitomiSetting.Instance.GetModel().DetailedSearchResult)
+                pe = new PicDetailElement(this);
+            else
+                pe = new PicElement(this);
             Tuple<string, HitomiArticle> tuple = (Tuple<string, HitomiArticle>)e.UserState;
             pe.Article = tuple.Item2;
             pe.Label = tuple.Item2.Title;
-            pe.Dock = DockStyle.Bottom;
             pe.SetImageFromAddress(tuple.Item1, 150, 200);
 
             pe.Font = this.Font;
@@ -717,13 +720,13 @@ namespace Hitomi_Copy_3
             AddPanel(pe);
             Application.DoEvents();
         }
-        private void AddPanel(PicElement pe)
+        private void AddPanel(object pe)
         {
             if (ImagePanel.InvokeRequired)
             {
-                Invoke(new Action<PicElement>(AddPanel), new object[] { pe }); return;
+                Invoke(new Action<object>(AddPanel), new object[] { pe }); return;
             }
-            ImagePanel.Controls.Add(pe);
+            ImagePanel.Controls.Add(pe as Control);
             IncrementLoadProgressBarValue();
             SortThumbnail();
         }
@@ -732,7 +735,7 @@ namespace Hitomi_Copy_3
             List<Control> controls = new List<Control>();
             for (int i = 0; i < ImagePanel.Controls.Count; i++)
                 controls.Add(ImagePanel.Controls[i]);
-            controls.Sort((a, b) => Convert.ToUInt32((b as PicElement).Article.Magic).CompareTo(Convert.ToUInt32((a as PicElement).Article.Magic)));
+            controls.Sort((a, b) => Convert.ToUInt32((b as IPicElement).Article.Magic).CompareTo(Convert.ToUInt32((a as IPicElement).Article.Magic)));
             for (int i = 0; i < controls.Count; i++)
                 ImagePanel.Controls.SetChildIndex(controls[i], i);
         }
@@ -741,7 +744,7 @@ namespace Hitomi_Copy_3
         #region 다운로드 관련
         public HitomiQueue download_queue;
         public List<string> download_check = new List<string>();
-        public List<PicElement> downloaded_check = new List<PicElement>();
+        public List<IPicElement> downloaded_check = new List<IPicElement>();
 
         private void InitDownloader()
         {
@@ -820,7 +823,7 @@ namespace Hitomi_Copy_3
                 {
                     download_check.Remove(title);
                     List<string> copy = download_check.ToList();
-                    List<PicElement> check = downloaded_check.ToList();
+                    List<IPicElement> check = downloaded_check.ToList();
                     if (!copy.Contains(title))
                     {
                         foreach (var elem in check)
@@ -894,7 +897,7 @@ namespace Hitomi_Copy_3
             }
         }
 
-        private void AddArticle(PicElement pe)
+        private void AddArticle(IPicElement pe)
         {
             HitomiLog.Instance.AddArticle(pe.Article);
             HitomiLog.Instance.Save();
@@ -902,11 +905,11 @@ namespace Hitomi_Copy_3
             HitomiCore.DownloadAndSetImageLink(pe, ImageLinkCallback);
         }
         int count = 0;
-        private void ImageLinkCallback(PicElement pe)
+        private void ImageLinkCallback(IPicElement pe)
         {
             if (lvStandBy.InvokeRequired)
             {
-                Invoke(new Action<PicElement>(ImageLinkCallback), new object[] { pe });
+                Invoke(new Action<IPicElement>(ImageLinkCallback), new object[] { pe });
                 return;
             }
             Directory.CreateDirectory(MakeDownloadDirectory(pe.Article));
@@ -1149,7 +1152,7 @@ namespace Hitomi_Copy_3
         {
             try
             {
-                foreach (PicElement pe in stayed)
+                foreach (IPicElement pe in stayed)
                 {
                     if (pe.Selected)
                     {
@@ -1228,11 +1231,11 @@ namespace Hitomi_Copy_3
             ImagePanel.SuspendLayout();
             for (int i = 0; i < ImagePanel.Controls.Count; i++)
             {
-                if (!(ImagePanel.Controls[i] as PicElement).Downloading)
+                if (!(ImagePanel.Controls[i] as IPicElement).Downloading)
                 {
                     for (int j = 0; j < stayed.Count; j++)
                     {
-                        if (stayed[j] == (ImagePanel.Controls[i] as PicElement))
+                        if (stayed[j] == (ImagePanel.Controls[i] as IPicElement))
                         {
                             stayed.RemoveAt(j);
                             break;
@@ -1260,13 +1263,13 @@ namespace Hitomi_Copy_3
 
         private void bChooseAll_Click(object sender, EventArgs e)
         {
-            foreach (PicElement pe in stayed)
+            foreach (IPicElement pe in stayed)
                 pe.Selected = true;
         }
 
         private void bCancleAll_Click(object sender, EventArgs e)
         {
-            foreach (PicElement pe in stayed)
+            foreach (IPicElement pe in stayed)
                 pe.Selected = false;
         }
         
@@ -1292,11 +1295,11 @@ namespace Hitomi_Copy_3
             ImagePanel.SuspendLayout();
             for (int i = 0; i < ImagePanel.Controls.Count; i++)
             {
-                string ttitle = (ImagePanel.Controls[i] as PicElement).Label.Split('|')[0];
-                if ((ImagePanel.Controls[i] as PicElement).Overlap ||
+                string ttitle = (ImagePanel.Controls[i] as IPicElement).Label.Split('|')[0];
+                if ((ImagePanel.Controls[i] as IPicElement).Overlap ||
                     (titles.Count > 0 && !titles.TrueForAll((title) => StringAlgorithms.get_diff(ttitle, title) > HitomiSetting.Instance.GetModel().TextMatchingAccuracy)))
                 {
-                    (ImagePanel.Controls[i] as PicElement).Selected = false;
+                    (ImagePanel.Controls[i] as IPicElement).Selected = false;
                     continue;
                 }
 
