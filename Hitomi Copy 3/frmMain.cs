@@ -698,7 +698,7 @@ namespace Hitomi_Copy_3
         private void CallbackThumbnail(object sender, AsyncCompletedEventArgs e)
         {
             IPicElement pe;
-            if (!HitomiSetting.Instance.GetModel().DetailedSearchResult)
+            if (HitomiSetting.Instance.GetModel().DetailedSearchResult)
                 pe = new PicDetailElement(this);
             else
                 pe = new PicElement(this);
