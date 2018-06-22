@@ -246,5 +246,40 @@ namespace Hitomi_Copy
             }
             ImagePanel.ResumeLayout();
         }
+
+        private void 모두선택AToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < ImagePanel.Controls.Count; i++)
+            {
+                (ImagePanel.Controls[i] as PicElement).Selected = true;
+            }
+        }
+
+        private void 모두선택취소CToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < ImagePanel.Controls.Count; i++)
+            {
+                (ImagePanel.Controls[i] as PicElement).Selected = false;
+            }
+        }
+
+        private void 제목비슷한작품선택취소SToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> titles = new List<string>();
+            ImagePanel.SuspendLayout();
+            for (int i = 0; i < ImagePanel.Controls.Count; i++)
+            {
+                string ttitle = (ImagePanel.Controls[i] as PicElement).Label.Split('|')[0];
+                if ((ImagePanel.Controls[i] as PicElement).Overlap ||
+                    (titles.Count > 0 && !titles.TrueForAll((title) => StringAlgorithms.get_diff(ttitle, title) > HitomiSetting.Instance.GetModel().TextMatchingAccuracy)))
+                {
+                    (ImagePanel.Controls[i] as PicElement).Selected = false;
+                    continue;
+                }
+
+                titles.Add(ttitle);
+            }
+            ImagePanel.ResumeLayout();
+        }
     }
 }

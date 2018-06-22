@@ -30,6 +30,7 @@ namespace Hitomi_Copy
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ImagePanel = new Hitomi_Copy_2.ScrollFixLayoutPanel();
             this.lvMyTagRank = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -38,6 +39,12 @@ namespace Hitomi_Copy
             this.bDownloadAll = new System.Windows.Forms.Button();
             this.pbLoad = new System.Windows.Forms.ProgressBar();
             this.bTidy = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.모두선택AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.모두선택취소CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.제목비슷한작품선택취소SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ImagePanel
@@ -47,6 +54,7 @@ namespace Hitomi_Copy
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ImagePanel.AutoScroll = true;
             this.ImagePanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ImagePanel.ContextMenuStrip = this.contextMenuStrip1;
             this.ImagePanel.Location = new System.Drawing.Point(254, 15);
             this.ImagePanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ImagePanel.Name = "ImagePanel";
@@ -123,6 +131,42 @@ namespace Hitomi_Copy
             this.bTidy.UseVisualStyleBackColor = true;
             this.bTidy.Click += new System.EventHandler(this.bTidy_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.모두선택AToolStripMenuItem,
+            this.모두선택취소CToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.제목비슷한작품선택취소SToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(238, 76);
+            // 
+            // 모두선택AToolStripMenuItem
+            // 
+            this.모두선택AToolStripMenuItem.Name = "모두선택AToolStripMenuItem";
+            this.모두선택AToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.모두선택AToolStripMenuItem.Text = "모두 선택(&A)";
+            this.모두선택AToolStripMenuItem.Click += new System.EventHandler(this.모두선택AToolStripMenuItem_Click);
+            // 
+            // 모두선택취소CToolStripMenuItem
+            // 
+            this.모두선택취소CToolStripMenuItem.Name = "모두선택취소CToolStripMenuItem";
+            this.모두선택취소CToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.모두선택취소CToolStripMenuItem.Text = "모두 선택 취소(&C)";
+            this.모두선택취소CToolStripMenuItem.Click += new System.EventHandler(this.모두선택취소CToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(167, 6);
+            // 
+            // 제목비슷한작품선택취소SToolStripMenuItem
+            // 
+            this.제목비슷한작품선택취소SToolStripMenuItem.Name = "제목비슷한작품선택취소SToolStripMenuItem";
+            this.제목비슷한작품선택취소SToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.제목비슷한작품선택취소SToolStripMenuItem.Text = "제목 비슷한 작품 선택 취소(&S)";
+            this.제목비슷한작품선택취소SToolStripMenuItem.Click += new System.EventHandler(this.제목비슷한작품선택취소SToolStripMenuItem_Click);
+            // 
             // frmArtistInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -143,6 +187,7 @@ namespace Hitomi_Copy
             this.Text = "작가 : ";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmArtistInfo_FormClosed);
             this.Load += new System.EventHandler(this.frmArtistInfo_Load);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -157,5 +202,10 @@ namespace Hitomi_Copy
         private System.Windows.Forms.Button bDownloadAll;
         private System.Windows.Forms.ProgressBar pbLoad;
         private System.Windows.Forms.Button bTidy;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 모두선택AToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 모두선택취소CToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 제목비슷한작품선택취소SToolStripMenuItem;
     }
 }
