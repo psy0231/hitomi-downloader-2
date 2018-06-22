@@ -18,6 +18,7 @@ namespace hitomi.Parser
         string thumbnail;
         string magic_number;
         string title;
+        string original_title;
 
         List<string> images_link;
 
@@ -35,6 +36,7 @@ namespace hitomi.Parser
         public string Thumbnail { get { return thumbnail; } set { thumbnail = value; } }
         public string Magic { get { return magic_number; } set { magic_number = value; } }
         public string Title { get { return title; } set { title = value; } }
+        public string OriginalTitle { get { return original_title; } set { original_title = value; } }
 
         public List<string> ImagesLink { get { return images_link; } set { images_link = value; } }
     }

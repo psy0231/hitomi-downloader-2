@@ -141,6 +141,7 @@ namespace hitomi.Parser
 
                 string block2 = match.Groups[2].Value;
                 article.Title = replaceEntity(getMatch1(block2_title, block2));
+                article.OriginalTitle = article.Title;
                 article.Artists = new string[] { artist_legalize(getMatch1(block2_artist, block2)) }; // get only first artist
 
                 string block3 = match.Groups[3].Value;

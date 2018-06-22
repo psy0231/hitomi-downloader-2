@@ -15,6 +15,7 @@ namespace Hitomi_Copy_2
             article.Groups = metadata.Groups;
             article.Language = metadata.Language;
             article.Magic = metadata.ID.ToString();
+            article.OriginalTitle = metadata.Name;
             article.Series = metadata.Parodies;
             article.Tags = metadata.Tags;
             article.Title = metadata.Name;

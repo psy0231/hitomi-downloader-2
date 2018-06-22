@@ -246,7 +246,7 @@ namespace Hitomi_Copy
         {
             string result="";
             if (pic != null)
-                result = ExHentaiTool.GetAddressFromMagicTitle(pic.Article.Magic, pic.Article.Title);
+                result = ExHentaiTool.GetAddressFromMagicTitle(pic.Article.Magic, pic.Article.OriginalTitle);
             else
                 result = ExHentaiTool.GetAddressFromMagicTitle(metadata.ID.ToString(), metadata.Name);
             if (result != "")
