@@ -3,6 +3,7 @@
 using hitomi.Parser;
 using Hitomi_Copy;
 using Hitomi_Copy_2;
+using Hitomi_Copy_3.EH;
 using System;
 using System.Drawing;
 using System.IO;
@@ -122,6 +123,8 @@ namespace Hitomi_Copy_3
                     else if (a.StartsWith("male:")) AddTagToPanel(a.Substring("male:".Length), 2);
                     else AddTagToPanel(a, 0);
                 });
+            if (HitomiSetting.Instance.GetModel().UsingExHentaiBaseOpener)
+                metroButton4.Text = "익헨에서 열기";
         }
 
         private void AddTagToPanel(string tag_data, int image)
@@ -187,7 +190,16 @@ namespace Hitomi_Copy_3
 
         private void metroButton4_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start($"https://hitomi.la/galleries/{ha.Magic}.html");
+            if (!HitomiSetting.Instance.GetModel().UsingExHentaiBaseOpener)
+                System.Diagnostics.Process.Start($"https://hitomi.la/galleries/{ha.Magic}.html");
+            else
+            {
+                string result = ExHentaiTool.GetAddressFromMagicTitle(ha.Magic, ha.OriginalTitle);
+                if (result != "")
+                    System.Diagnostics.Process.Start(result);
+                else
+                    MessageBox.Show("익헨 주소를 찾지 못했습니다.", "Hitomi Copy", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void PicDetailElement_MouseDoubleClick(object sender, MouseEventArgs e)

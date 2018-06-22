@@ -53,6 +53,8 @@
             this.tgUL = new MetroFramework.Controls.MetroToggle();
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
             this.tgDSR = new MetroFramework.Controls.MetroToggle();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.tgEXH = new MetroFramework.Controls.MetroToggle();
             this.SuspendLayout();
             // 
             // tgWI
@@ -309,7 +311,7 @@
             // bSave
             // 
             this.bSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bSave.Location = new System.Drawing.Point(337, 303);
+            this.bSave.Location = new System.Drawing.Point(337, 332);
             this.bSave.Name = "bSave";
             this.bSave.Size = new System.Drawing.Size(105, 44);
             this.bSave.Style = MetroFramework.MetroColorStyle.Pink;
@@ -335,7 +337,7 @@
             this.tbInfo.CustomButton.UseSelectable = true;
             this.tbInfo.CustomButton.Visible = false;
             this.tbInfo.Lines = new string[0];
-            this.tbInfo.Location = new System.Drawing.Point(12, 303);
+            this.tbInfo.Location = new System.Drawing.Point(12, 332);
             this.tbInfo.MaxLength = 32767;
             this.tbInfo.Multiline = true;
             this.tbInfo.Name = "tbInfo";
@@ -444,12 +446,36 @@
             this.tgDSR.UseSelectable = true;
             this.tgDSR.MouseEnter += new System.EventHandler(this.tgDSR_MouseEnter);
             // 
+            // metroLabel12
+            // 
+            this.metroLabel12.AutoSize = true;
+            this.metroLabel12.Location = new System.Drawing.Point(86, 302);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(160, 19);
+            this.metroLabel12.Style = MetroFramework.MetroColorStyle.Pink;
+            this.metroLabel12.TabIndex = 44;
+            this.metroLabel12.Text = "Using EXH Base Opener : ";
+            // 
+            // tgEXH
+            // 
+            this.tgEXH.AutoSize = true;
+            this.tgEXH.Location = new System.Drawing.Point(222, 303);
+            this.tgEXH.Name = "tgEXH";
+            this.tgEXH.Size = new System.Drawing.Size(80, 19);
+            this.tgEXH.Style = MetroFramework.MetroColorStyle.Pink;
+            this.tgEXH.TabIndex = 43;
+            this.tgEXH.Text = "Off";
+            this.tgEXH.UseSelectable = true;
+            this.tgEXH.MouseEnter += new System.EventHandler(this.tgEXH_MouseEnter);
+            // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(450, 358);
+            this.ClientSize = new System.Drawing.Size(450, 386);
+            this.Controls.Add(this.metroLabel12);
+            this.Controls.Add(this.tgEXH);
             this.Controls.Add(this.metroLabel11);
             this.Controls.Add(this.tgDSR);
             this.Controls.Add(this.metroLabel10);
@@ -515,5 +541,7 @@
         private MetroFramework.Controls.MetroToggle tgUL;
         private MetroFramework.Controls.MetroLabel metroLabel11;
         private MetroFramework.Controls.MetroToggle tgDSR;
+        private MetroFramework.Controls.MetroLabel metroLabel12;
+        private MetroFramework.Controls.MetroToggle tgEXH;
     }
 }

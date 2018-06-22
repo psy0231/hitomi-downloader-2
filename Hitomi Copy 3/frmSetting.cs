@@ -26,6 +26,7 @@ namespace Hitomi_Copy_3
             tgRA.Checked = HitomiSetting.Instance.GetModel().ReplaceArtistsWithTitle;
             tgUL.Checked = HitomiSetting.Instance.GetModel().UsingLog;
             tgDSR.Checked = HitomiSetting.Instance.GetModel().DetailedSearchResult;
+            tgEXH.Checked = HitomiSetting.Instance.GetModel().UsingExHentaiBaseOpener;
         }
 
         private void bSave_Click(object sender, EventArgs e)
@@ -58,6 +59,7 @@ namespace Hitomi_Copy_3
             HitomiSetting.Instance.GetModel().ReplaceArtistsWithTitle = tgRA.Checked;
             HitomiSetting.Instance.GetModel().UsingLog = tgUL.Checked;
             HitomiSetting.Instance.GetModel().DetailedSearchResult = tgDSR.Checked;
+            HitomiSetting.Instance.GetModel().UsingExHentaiBaseOpener = tgEXH.Checked;
             HitomiSetting.Instance.Save();
             Close();
         }
@@ -115,6 +117,11 @@ namespace Hitomi_Copy_3
         private void tgDSR_MouseEnter(object sender, EventArgs e)
         {
             tbInfo.Text = "검색결과가 자세하게 표시됩니다.";
+        }
+
+        private void tgEXH_MouseEnter(object sender, EventArgs e)
+        {
+            tbInfo.Text = "검색결과에서 '히토미으로 열기'가 아닌 '익헨으로 열기'가 기본으로 설정됩니다.";
         }
 
         private void MouseLeave_Event(object sender, EventArgs e)
