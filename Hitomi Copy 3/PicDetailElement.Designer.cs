@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bDetail = new MetroFramework.Controls.MetroButton();
             this.pb = new System.Windows.Forms.PictureBox();
             this.lCharacter = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,16 +49,6 @@
             this.metroButton4 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
             this.SuspendLayout();
-            // 
-            // bDetail
-            // 
-            this.bDetail.Location = new System.Drawing.Point(963, 143);
-            this.bDetail.Name = "bDetail";
-            this.bDetail.Size = new System.Drawing.Size(119, 39);
-            this.bDetail.TabIndex = 6;
-            this.bDetail.Text = "자세히 보기";
-            this.bDetail.UseSelectable = true;
-            this.bDetail.Click += new System.EventHandler(this.bDetail_Click);
             // 
             // pb
             // 
@@ -247,9 +236,9 @@
             // 
             // metroButton4
             // 
-            this.metroButton4.Location = new System.Drawing.Point(963, 116);
+            this.metroButton4.Location = new System.Drawing.Point(963, 140);
             this.metroButton4.Name = "metroButton4";
-            this.metroButton4.Size = new System.Drawing.Size(119, 27);
+            this.metroButton4.Size = new System.Drawing.Size(119, 43);
             this.metroButton4.TabIndex = 41;
             this.metroButton4.Text = "히토미 열기";
             this.metroButton4.UseSelectable = true;
@@ -278,7 +267,6 @@
             this.Controls.Add(this.lSeries);
             this.Controls.Add(this.lArtist);
             this.Controls.Add(this.lTitle);
-            this.Controls.Add(this.bDetail);
             this.Controls.Add(this.pb);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -286,6 +274,7 @@
             this.Size = new System.Drawing.Size(1096, 208);
             this.Load += new System.EventHandler(this.PicDetailElement_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicDetailElement_MouseClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PicDetailElement_MouseDoubleClick);
             ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -294,7 +283,6 @@
 
         #endregion
         private System.Windows.Forms.PictureBox pb;
-        private MetroFramework.Controls.MetroButton bDetail;
         private System.Windows.Forms.Label lCharacter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;

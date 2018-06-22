@@ -157,12 +157,7 @@ namespace Hitomi_Copy_3
             else
                 (new frmTagInfo(parent, ((Button)sender).Text)).Show();
         }
-
-        private void bDetail_Click(object sender, EventArgs e)
-        {
-            (new frmGalleryInfo(parent, this)).Show();
-        }
-
+        
         private void metroButton2_Click(object sender, EventArgs e)
         {
             try
@@ -193,6 +188,11 @@ namespace Hitomi_Copy_3
         private void metroButton4_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start($"https://hitomi.la/galleries/{ha.Magic}.html");
+        }
+
+        private void PicDetailElement_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            (new frmGalleryInfo(parent, this)).Show(); selected = false; BackColor = Color.GhostWhite;
         }
     }
 }
