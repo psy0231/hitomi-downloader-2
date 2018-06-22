@@ -46,6 +46,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "frmInfo";
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }
