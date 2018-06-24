@@ -55,22 +55,22 @@ namespace Hitomi_Copy_3
             //
             // Button to VUI
             //
-            //for (int i = 0; i < Controls.Count; i++)
-            //{
-            //    if (Controls[i] is Button)
-            //    {
-            //        using (Button bbb = Controls[i] as Button)
-            //        {
-            //            VUI.VUIButton button = new VUI.VUIButton();
-            //            button.Location = (Controls[i] as Button).Location;
-            //            button.Size = (Controls[i] as Button).Size;
-            //            button.Font = (Controls[i] as Button).Font;
-            //            button.Text = (Controls[i] as Button).Text;
-            //            (Controls[i--] as Button).Dispose();
-            //            vuiButtons.Add(button);
-            //        }
-            //    }
-            //}
+            for (int i = 0; i < Controls.Count; i++)
+            {
+                if (Controls[i] is Button)
+                {
+                    using (Button bbb = Controls[i] as Button)
+                    {
+                        VUI.VUIButton button = new VUI.VUIButton();
+                        button.Location = (Controls[i] as Button).Location;
+                        button.Size = (Controls[i] as Button).Size;
+                        button.Font = (Controls[i] as Button).Font;
+                        button.Text = (Controls[i] as Button).Text;
+                        (Controls[i--] as Button).Dispose();
+                        vuiButtons.Add(button);
+                    }
+                }
+            }
         }
 
         public void ConvertToVUILabel(Label label)
