@@ -17,7 +17,7 @@ namespace Hitomi_Copy_3.VUI
             var bm = new Bitmap(pict.ClientSize.Width, pict.ClientSize.Height);
             pict.Image = Image;
             pict.DrawToBitmap(bm, pict.ClientRectangle);
-            g.DrawImage(bm, pict.Bounds);
+            g.DrawImage(bm, Location.X, Location.Y, Size.Width, Size.Height);
             pict.Dispose();
         }
     }
