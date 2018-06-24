@@ -63,17 +63,28 @@ namespace Hitomi_Copy_3
             Dock = DockStyle.Bottom;
             try
             {
-                using (FileStream fs = new FileStream(addr, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
-                {
-                    pb.Image = image = Image.FromStream(fs);
-                }
-                pb.SizeMode = PictureBoxSizeMode.Zoom;
-                if (title)
-                    info = new Lazy<InfoForm>(() => new InfoForm(Image, new Size(image.Width * 3 / 4, image.Height * 3 / 4)));
-                else
-                    info = new Lazy<InfoForm>(() => new InfoForm(Image, new Size(image.Width * 3 / 4 / 2, image.Height * 3 / 4 / 2)));
+                Image image = Image.FromStream(new MemoryStream(File.ReadAllBytes(addr)));
+                File.Delete(addr);
+
+                SetImage(image, pannelw, pannelh, title);
             }
             catch { }
+        }
+
+        public void SetImage(Image image, int panelW, int panelH, bool title = true)
+        {
+            Dock = DockStyle.Bottom;
+            pb.Image = this.image = image;
+            pb.SizeMode = PictureBoxSizeMode.Zoom;
+
+            if (parent is frmPreview)
+                new LazyPicturePopup(pb, image.Size, LazyPicturePopup.PopupType.Corner);
+            else
+            {
+                Func<int, int> mul = x => x * 3 / 4 / (title ? 1 : 2);
+                var popupSize = new Size(mul(image.Width), mul(image.Height));
+                new LazyPicturePopup(pb, popupSize);
+            }
         }
 
         private void PicDetailElement_MouseClick(object sender, MouseEventArgs e)
