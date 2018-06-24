@@ -57,7 +57,7 @@ namespace Hitomi_Copy_3
 
         private void RecommendControl_LoadAsync(object sender, System.EventArgs e)
         {
-            LoadThumbnailAsync();
+            Task.Run(() => LoadThumbnailAsync()).Catch();
         }
 
         private void LoadThumbnailAsync()
@@ -67,15 +67,16 @@ namespace Hitomi_Copy_3
 
             for (int i = 0, j = 0; i < 5 && j < HitomiData.Instance.metadata_collection.Count; j++)
             {
-                if (HitomiData.Instance.metadata_collection[j].Artists != null &&
-                   (HitomiData.Instance.metadata_collection[j].Language == HitomiSetting.Instance.GetModel().Language || HitomiSetting.Instance.GetModel().Language == "ALL") &&
-                    HitomiData.Instance.metadata_collection[j].Artists.Contains(tbArtist.Text))
+                HitomiMetadata metadata = HitomiData.Instance.metadata_collection[j];
+                HitomiSettingModel setting = HitomiSetting.Instance.GetModel();
+                if ((metadata.Language == setting.Language || setting.Language == "ALL") &&
+                    metadata.Artists?.Contains(tbArtist.Text) == true)
                 {
-                    string ttitle = HitomiData.Instance.metadata_collection[j].Name.Split('|')[0];
-                    if (titles.Count > 0 && !titles.TrueForAll((title) => StringAlgorithms.get_diff(ttitle, title) > HitomiSetting.Instance.GetModel().TextMatchingAccuracy)) continue;
+                    string ttitle = metadata.Name.Split('|')[0];
+                    if (titles.Count > 0 && !titles.TrueForAll(title => StringAlgorithms.get_diff(ttitle, title) > setting.TextMatchingAccuracy)) continue;
 
                     titles.Add(ttitle);
-                    magics.Add(HitomiData.Instance.metadata_collection[j].ID.ToString());
+                    magics.Add(metadata.ID.ToString());
                     i++;
                 }
             }
@@ -98,18 +99,25 @@ namespace Hitomi_Copy_3
         {
             WebClient client = Util.PlainWebClient();
             var galleryUri = new Uri($"https://hitomi.la/galleries/{id}.html");
-            string html = await client.DownloadStringTaskAsync(galleryUri);
+            string html = await client.DownloadStringTaskAsync(galleryUri).ConfigureAwait(false);
             if (Abort.IsCancellationRequested) return;
 
             string thumbPath = HitomiParser.ParseGallery(html).Thumbnail;
             var thumbUri = new Uri(HitomiDef.HitomiThumbnail + thumbPath);
-            Stream thumbnail = await client.OpenReadTaskAsync(thumbUri);
+            Stream thumbnail = await client.OpenReadTaskAsync(thumbUri).ConfigureAwait(false);
             if (Abort.IsCancellationRequested) return;
 
             Image img = Image.FromStream(thumbnail);
 
             PictureBox[] pbs = { pb1, pb2, pb3, pb4, pb5 };
-            pbs[i].Post(() => { pbs[i].Image = img; });
+            PaintEventHandler peh = null;
+            peh = (o, e) =>
+            {
+                pbs[i].Image = img;
+                pbs[i].Paint -= peh;
+            };
+            pbs[i].Paint += peh;
+            pbs[i].Invalidate();
 
             var popupSize = new Size(img.Width * 3 / 4, img.Height * 3 / 4);
             new LazyPicturePopup(pbs[i], popupSize);

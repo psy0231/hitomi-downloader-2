@@ -1017,22 +1017,30 @@ namespace Hitomi_Copy_3
         }
         private void MoreLoadRecommend()
         {
-            for (int i = 0; i < HitomiSetting.Instance.GetModel().RecommendPerScroll && latest_load_count < HitomiAnalysis.Instance.Rank.Count; i++, latest_load_count++)
+            WindowsFormsSynchronizationContext.AutoInstall = false;
+
+            var recommends = new List<RecommendControl>();
+            HitomiSettingModel setting = HitomiSetting.Instance.GetModel();
+            var candidates = HitomiAnalysis.Instance.Rank;
+            for (int i = 0; i < setting.RecommendPerScroll &&
+                latest_load_count < candidates.Count; i++, latest_load_count++)
             {
-                if (HitomiSetting.Instance.GetModel().UninterestednessArtists != null &&
-                    HitomiSetting.Instance.GetModel().UninterestednessArtists.Contains(HitomiAnalysis.Instance.Rank[latest_load_count].Item1))
+                string artist = candidates[latest_load_count].Item1;
+                if (setting.UninterestednessArtists?.Contains(artist) == false)
                 {
                     i--;
                     continue;
                 }
-                AddToPannel(new RecommendControl(latest_load_count));
+                recommends.Add(new RecommendControl(latest_load_count));
             }
+            this.Post(() =>
+            {
+                RecommendPannel.Controls.AddRange(recommends.ToArray());
+            });
         }
         private void AddToPannel(RecommendControl control) => this.Post(() =>
         {
-            RecommendPannel.SuspendLayout();
             RecommendPannel.Controls.Add(control);
-            RecommendPannel.ResumeLayout();
         });
         private void tgFilterArtists_CheckedChanged(object sender, EventArgs e)
         {
