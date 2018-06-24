@@ -276,6 +276,8 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.PicDetailElement_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicDetailElement_MouseClick);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PicDetailElement_MouseDoubleClick);
+            this.MouseLeave += new System.EventHandler(this.PicDetailElement_MouseLeave);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PicDetailElement_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

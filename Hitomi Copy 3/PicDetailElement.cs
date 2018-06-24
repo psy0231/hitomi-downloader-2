@@ -7,6 +7,7 @@ using Hitomi_Copy_3.EH;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -32,16 +33,19 @@ namespace Hitomi_Copy_3
         public PicDetailElement(Form parent, ToolTip tooltip = null)
         {
             InitializeComponent();
-            
+
             this.BackColor = Color.GhostWhite;
             this.parent = parent;
             this.DoubleBuffered = true;
-            
+
             Disposed += OnDispose;
 
             vuiPB = new VUI.VUIPictureBox();
             vuiPB.Size = new Size(150, 200);
             vuiPB.Location = pb.Location;
+            vuiPB.MouseEnterEvent = () => { info.Value.Location = Cursor.Position; info.Value.Show(); };
+            vuiPB.MouseLeaveEvent = () => { info.Value.Location = Cursor.Position; info.Value.Hide(); };
+            vuiPB.MouseMoveEvent = () => { info.Value.Location = new Point(Cursor.Position.X + 15, Cursor.Position.Y); };
             pb.Dispose();
         }
 
@@ -70,6 +74,7 @@ namespace Hitomi_Copy_3
             LogEssential.Instance.PushLog(() => $"Successful disposed! [PicDetailElement] {label}");
         }
 
+        #region VUI
         private void PicDetailElement_Paint(object sender, PaintEventArgs e)
         {
             ViewBuffer buffer = new ViewBuffer();
@@ -87,12 +92,50 @@ namespace Hitomi_Copy_3
             buffer.Dispose();
         }
 
+        bool PicEnterMouse = true;
+        private void PicDetailElement_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point screenPosition = MousePosition;
+            Point clientPosition = PointToClient(screenPosition);
+            if (vuiPB.Intersect(clientPosition))
+            {
+                if (PicEnterMouse == false)
+                {
+                    PicEnterMouse = true;
+                    vuiPB.MouseEnterEvent();
+                    vuiPB.MouseMoveEvent();
+                }
+                else
+                {
+                    vuiPB.MouseMoveEvent();
+                }
+            }
+            else if (PicEnterMouse == true)
+            {
+                vuiPB.MouseLeaveEvent();
+                PicEnterMouse = false;
+            }
+        }
+        private void PicDetailElement_MouseLeave(object sender, EventArgs e)
+        {
+            if (PicEnterMouse == true)
+            {
+                vuiPB.MouseLeaveEvent();
+                PicEnterMouse = false;
+            }
+        }
+        #endregion
+
+        #region Unused
+
         private void pb_MouseEnter(object sender, EventArgs e)
         { info.Value.Location = Cursor.Position; info.Value.Show(); }
         private void pb_MouseLeave(object sender, EventArgs e)
         { info.Value.Location = Cursor.Position; info.Value.Hide(); }
         private void pb_MouseMove(object sender, MouseEventArgs e)
         { info.Value.Location = new Point(Cursor.Position.X + 15, Cursor.Position.Y); }
+
+        #endregion
 
         public void SetImageFromAddress(string addr, int pannelw, int pannelh, bool title = true)
         {
