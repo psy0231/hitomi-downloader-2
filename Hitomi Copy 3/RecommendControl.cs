@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +23,7 @@ namespace Hitomi_Copy_3
         InfoWrapper[] info = new InfoWrapper[5];
         string artist;
         bool closed = false;
+        CancellationTokenSource Abort = new CancellationTokenSource();
 
         public RecommendControl(int index)
         {
@@ -56,15 +58,15 @@ namespace Hitomi_Copy_3
             foreach (var iw in info.Where(iw => iw != null))
                 iw.Dispose();
             LogEssential.Instance.PushLog(() => $"Successful disposed! [RecommendControl] {artist}");
-            closed = true;
+            Abort.Cancel();
         }
 
-        private async void RecommendControl_LoadAsync(object sender, System.EventArgs e)
+        private void RecommendControl_LoadAsync(object sender, System.EventArgs e)
         {
-            await LoadThumbnailAsync();
+            LoadThumbnailAsync();
         }
 
-        private async Task LoadThumbnailAsync()
+        private void LoadThumbnailAsync()
         {
             List<string> titles = new List<string>();
             List<string> magics = new List<string>();
@@ -92,62 +94,39 @@ namespace Hitomi_Copy_3
 
             for (int i = 0; i < magics.Count; i++)
             {
-                _ = Task.Factory.StartNew(x => {
-                    int ix = (int)x;
-                    try { AddMetadataToPanel(ix, magics[ix]); } catch { }
-                }, i);
+                if (Abort.IsCancellationRequested) return;
+                System.Diagnostics.Debug.WriteLine($"HC: LoadThumb: ${i} ${magics[i]}");
+                AddMetadataToPanel(i, magics[i]).Catch();
             }
         }
 
-        private void AddMetadataToPanel(int i, string id)
+        private async Task AddMetadataToPanel(int i, string id)
         {
-            string thumbnail = GetThumbnailAddress(id);
+            WebClient client = Util.PlainWebClient();
+            var galleryUri = new Uri($"https://hitomi.la/galleries/{id}.html");
+            string html = await client.DownloadStringTaskAsync(galleryUri);
+                        if (Abort.IsCancellationRequested) return;
 
-            string temp = Path.GetTempFileName();
-            WebClient wc = new WebClient();
-            wc.Headers["Accept-Encoding"] = "application/x-gzip";
-            wc.Encoding = Encoding.UTF8;
-            wc.DownloadFile(new Uri(HitomiDef.HitomiThumbnail + thumbnail), temp);
-            
-            Image img;
-            using (FileStream fs = new FileStream(temp, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
-            {
-                img = Image.FromStream(fs);
-            }
-            if (closed)
-            {
-                img.Dispose();
-                LogEssential.Instance.PushLog(() => $"Unexpected Disposed! {HitomiDef.HitomiThumbnail + thumbnail} {temp} {i} {id}");
-                return;
-            }
+            string thumbPath = HitomiParser.ParseGallery(html).Thumbnail;
+            var thumbUri = new Uri(HitomiDef.HitomiThumbnail + thumbPath);
+            Stream thumbnail = await client.OpenReadTaskAsync(thumbUri);
+            if (Abort.IsCancellationRequested) return;
+
+            Image img = Image.FromStream(thumbnail);
             info[i] = new InfoWrapper(img.Clone() as Image);
 
             PictureBox[] pbs = { pb1, pb2, pb3, pb4, pb5 };
             pbs[i].MouseEnter += info[i].Picture_MouseEnter;
             pbs[i].MouseMove += info[i].Picture_MouseMove;
             pbs[i].MouseLeave += info[i].Picture_MouseLeave;
+            pbs[i].Post(() => { pbs[i].Image = img; });
 
             if (pbs[i].InvokeRequired)
                 pbs[i].Invoke(new Action(() => { pbs[i].Image = img; }));
             else
                 pbs[i].Image = img;
 
-            LogEssential.Instance.PushLog(() => $"Load successful! {HitomiDef.HitomiThumbnail + thumbnail} {temp} {i} {id}");
-        }
-        
-        private string GetThumbnailAddress(string id)
-        {
-            try
-            {
-                WebClient wc = new WebClient
-                {
-                    Encoding = Encoding.UTF8
-                };
-                return HitomiParser.ParseGallery(wc.DownloadString(
-                    new Uri($"https://hitomi.la/galleries/{id}.html"))).Thumbnail;
-            }
-            catch { }
-            return "";
+            LogEssential.Instance.PushLog(() => $"Load successful! {HitomiDef.HitomiThumbnail + thumbPath} {i} {id}");
         }
         
         private void bDelete_Click(object sender, System.EventArgs e)
