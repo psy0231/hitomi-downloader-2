@@ -29,6 +29,7 @@ namespace Hitomi_Copy_3
         Form parent;
         VUI.VUIPictureBox vuiPB;
         List<VUI.VUILabel> vuiLabels = new List<VUI.VUILabel>();
+        List<VUI.VUIButton> vuiButtons = new List<VUI.VUIButton>();
 
         public PicDetailElement(Form parent, ToolTip tooltip = null)
         {
@@ -40,6 +41,9 @@ namespace Hitomi_Copy_3
 
             Disposed += OnDispose;
 
+            //
+            //  PictureBox to VUI
+            //
             vuiPB = new VUI.VUIPictureBox();
             vuiPB.Size = new Size(150, 200);
             vuiPB.Location = pb.Location;
@@ -47,6 +51,26 @@ namespace Hitomi_Copy_3
             vuiPB.MouseLeaveEvent = () => { info.Value.Location = Cursor.Position; info.Value.Hide(); };
             vuiPB.MouseMoveEvent = () => { info.Value.Location = new Point(Cursor.Position.X + 15, Cursor.Position.Y); };
             pb.Dispose();
+
+            //
+            // Button to VUI
+            //
+            //for (int i = 0; i < Controls.Count; i++)
+            //{
+            //    if (Controls[i] is Button)
+            //    {
+            //        using (Button bbb = Controls[i] as Button)
+            //        {
+            //            VUI.VUIButton button = new VUI.VUIButton();
+            //            button.Location = (Controls[i] as Button).Location;
+            //            button.Size = (Controls[i] as Button).Size;
+            //            button.Font = (Controls[i] as Button).Font;
+            //            button.Text = (Controls[i] as Button).Text;
+            //            (Controls[i--] as Button).Dispose();
+            //            vuiButtons.Add(button);
+            //        }
+            //    }
+            //}
         }
 
         public void ConvertToVUILabel(Label label)
@@ -89,6 +113,7 @@ namespace Hitomi_Copy_3
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
 
             vuiLabels.ForEach(x => x.Paint(g));
+            vuiButtons.ForEach(x => x.Paint(g));
 
             buffer.Draw(e.Graphics);
             buffer.Dispose();
@@ -173,10 +198,12 @@ namespace Hitomi_Copy_3
                 });
             if (HitomiSetting.Instance.GetModel().UsingExHentaiBaseOpener)
                 metroButton4.Text = "익헨에서 열기";
-
-            foreach (var control in Controls)
-                if (control is Label)
-                    ConvertToVUILabel(control as Label);
+            
+            for (int i = 0; i < Controls.Count; i++)
+            {
+                if (Controls[i] is Label)
+                    ConvertToVUILabel(Controls[i--] as Label);
+            }
         }
 
         private void AddTagToPanel(string tag_data, int image)

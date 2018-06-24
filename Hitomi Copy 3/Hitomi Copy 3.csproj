@@ -273,6 +273,7 @@
     </Compile>
     <Compile Include="UpdateManager.cs" />
     <Compile Include="ViewBuffer.cs" />
+    <Compile Include="VUI\VUIButton.cs" />
     <Compile Include="VUI\VUIControl.cs" />
     <Compile Include="VUI\VUILabel.cs" />
     <Compile Include="VUI\VUIPictureBox.cs" />

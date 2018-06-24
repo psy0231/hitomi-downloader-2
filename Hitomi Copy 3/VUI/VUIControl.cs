@@ -9,7 +9,6 @@ namespace Hitomi_Copy_3.VUI
         public Point Location { get; set; }
         public Size Size { get; set; }
         public delegate void Action();
-        public Action ClickEvent;
 
         public Action MouseEnterEvent;
         public Action MouseMoveEvent;
