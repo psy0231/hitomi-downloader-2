@@ -6,11 +6,9 @@ using Hitomi_Copy_2;
 using Hitomi_Copy_3;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,7 +18,7 @@ namespace Hitomi_Copy
     {
         string group;
         Form closed_form;
-        bool closed;
+        CancellationTokenSource Abort = new CancellationTokenSource();
 
         public frmGroupInfo(Form closed, string group)
         {
@@ -62,59 +60,50 @@ namespace Hitomi_Copy
             lvMyTagRank.Items.AddRange(lvil.ToArray());
 
             pbLoad.Maximum = gallery_count;
-            Task.Run(() => loadArtist(1));
+
+            if (Abort.IsCancellationRequested) return;
+            LoadArtist(1).Catch();
             gallery_count -= 25;
             int gallery_c = 2;
             while (gallery_count > 0)
             {
-                Task.Run(() => loadArtist(gallery_c++));
+                if (Abort.IsCancellationRequested) return;
+                LoadArtist(gallery_c++).Catch();
                 gallery_count -= 25;
             }
         }
 
-        private void loadArtist(int Pages)
+        private async Task LoadArtist(int Pages)
         {
-            WebClient wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            wc.DownloadStringCompleted += CallbackSearch;
-            wc.DownloadStringAsync(new Uri(HitomiSearch.GetWithGroup(group, HitomiSetting.Instance.GetModel().Language.ToLower(), Pages.ToString())));
-            LogEssential.Instance.PushLog(() => $"Load artist pages {HitomiSearch.GetWithGroup(group, HitomiSetting.Instance.GetModel().Language.ToLower(), Pages.ToString())}");
-        }
+            string lang = HitomiSetting.Instance.GetModel().Language.ToLower();
+            var uri = new Uri(HitomiSearch.GetWithGroup(group, lang, Pages.ToString()));
+            LogEssential.Instance.PushLog(() => $"Load artist pages {uri}");
 
-        private void CallbackSearch(object sender, DownloadStringCompletedEventArgs e)
-        {
-            if (e.Error != null) return;
-            
-            foreach (HitomiArticle ha in HitomiParser.ParseArticles(e.Result))
+            if (Abort.IsCancellationRequested) return;
+            string html = await Util.PlainWebClient().DownloadStringTaskAsync(uri);
+
+            foreach (HitomiArticle ha in HitomiParser.ParseArticles(html))
             {
-                string temp = Path.GetTempFileName();
-                WebClient wc = new WebClient();
-                wc.Headers["Accept-Encoding"] = "application/x-gzip";
-                wc.Encoding = Encoding.UTF8;
-                wc.DownloadFileCompleted += CallbackThumbnail;
-                wc.DownloadFileAsync(new Uri(HitomiDef.HitomiThumbnail + ha.Thumbnail), temp,
-                    new Tuple<string, HitomiArticle>(temp, ha));
+                if (Abort.IsCancellationRequested) return;
+                LoadThumbnail(ha).Catch();
             }
         }
 
         List<PicElement> stayed = new List<PicElement>();
-        private void CallbackThumbnail(object sender, AsyncCompletedEventArgs e)
+        private async Task LoadThumbnail(HitomiArticle article)
         {
-            PicElement pe = new PicElement(this);
-            Tuple<string, HitomiArticle> tuple = (Tuple<string, HitomiArticle>)e.UserState;
-            pe.Article = tuple.Item2;
-            pe.Label = tuple.Item2.Title;
-            pe.Dock = DockStyle.Bottom;
-            pe.SetImageFromAddress(tuple.Item1, 150, 200);
+            var thumbnailUri = new Uri(HitomiDef.HitomiThumbnail + article.Thumbnail);
+            Stream thumbnail = await Util.PlainWebClient().OpenReadTaskAsync(thumbnailUri);
+            if (Abort.IsCancellationRequested) return;
 
-            if (closed)
-            {
-                pe.Dispose();
-                LogEssential.Instance.PushLog(() => $"Unexpected Disposed! {HitomiDef.HitomiThumbnail + tuple.Item2.Thumbnail} {tuple.Item1}");
-                return;
-            }
-            pe.Font = this.Font;
-            
+            PicElement pe = new PicElement(this) {
+                Article = article,
+                Label = article.Title,
+                Dock = DockStyle.Bottom,
+                Font = Font
+            };
+            pe.SetImage(thumbnail, 150, 200);
+
             lock (stayed)
             {
                 // 중복되는 항목 처리
@@ -123,10 +112,12 @@ namespace Hitomi_Copy
                     { pe.Article.Title += " " + pe.Article.Magic; pe.Label += " " + pe.Article.Magic; break; }
                 stayed.Add(pe);
             }
+
+            if (Abort.IsCancellationRequested) return;
             AddPe(pe);
             IncrementProgressBarValue();
             Application.DoEvents();
-            LogEssential.Instance.PushLog(() => $"Downloaded image! {HitomiDef.HitomiThumbnail + tuple.Item2.Thumbnail} {tuple.Item1}");
+            LogEssential.Instance.PushLog(() => $"Downloaded image! {thumbnailUri}");
         }
         private void IncrementProgressBarValue()
         {
@@ -200,13 +191,11 @@ namespace Hitomi_Copy
 
         private void frmArtistInfo_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Abort.Cancel();
+
             try { closed_form.BringToFront(); } catch { }
 
-            for (int i = ImagePanel.Controls.Count - 1; i >= 0; i--)
-                if (ImagePanel.Controls[i] != null)
-                    ImagePanel.Controls[i].Dispose();
-
-            closed = true;
+            ImagePanel.Controls.OfType<Control>().ToList().ForEach(x => x.Dispose());
         }
 
         protected override bool ProcessDialogKey(Keys keyData)
@@ -221,7 +210,7 @@ namespace Hitomi_Copy
 
         private void bTidy_Click(object sender, EventArgs e)
         {
-            List<string> titles = new List<string>();
+            var titles = new List<string>();
             ImagePanel.SuspendLayout();
             for (int i = 0; i < ImagePanel.Controls.Count; i++)
             {

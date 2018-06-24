@@ -14,6 +14,7 @@ namespace Hitomi_Copy_3
         static Assembly ResolveAssembly(object sender, ResolveEventArgs args)
         {
             Assembly thisAssembly = Assembly.GetExecutingAssembly();
+            if (!args.Name.Contains(",")) return null;
             var name = args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll";
 
             string[] names = thisAssembly.GetManifestResourceNames();
