@@ -43,7 +43,6 @@ namespace Hitomi_Copy_3
             vuiPB.Size = new Size(150, 200);
             vuiPB.Location = pb.Location;
             pb.Dispose();
-
         }
 
         public void ConvertToVUILabel(Label label)
@@ -78,6 +77,10 @@ namespace Hitomi_Copy_3
             Graphics g = buffer.g;
 
             vuiPB.Paint(g);
+
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+
             vuiLabels.ForEach(x => x.Paint(g));
 
             buffer.Draw(e.Graphics);
