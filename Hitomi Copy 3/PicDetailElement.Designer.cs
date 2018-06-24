@@ -58,9 +58,6 @@
             this.pb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb.TabIndex = 1;
             this.pb.TabStop = false;
-            this.pb.MouseEnter += new System.EventHandler(this.pb_MouseEnter);
-            this.pb.MouseLeave += new System.EventHandler(this.pb_MouseLeave);
-            this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
             // 
             // lCharacter
             // 

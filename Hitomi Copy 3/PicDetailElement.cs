@@ -93,52 +93,19 @@ namespace Hitomi_Copy_3
             buffer.Draw(e.Graphics);
             buffer.Dispose();
         }
-
-        bool PicEnterMouse = true;
+        
         private void PicDetailElement_MouseMove(object sender, MouseEventArgs e)
         {
             Point screenPosition = MousePosition;
             Point clientPosition = PointToClient(screenPosition);
-            if (vuiPB.Intersect(clientPosition))
-            {
-                if (PicEnterMouse == false)
-                {
-                    PicEnterMouse = true;
-                    vuiPB.MouseEnterEvent();
-                    vuiPB.MouseMoveEvent();
-                }
-                else
-                {
-                    vuiPB.MouseMoveEvent();
-                }
-            }
-            else if (PicEnterMouse == true)
-            {
-                vuiPB.MouseLeaveEvent();
-                PicEnterMouse = false;
-            }
+            vuiPB.MouseMove(clientPosition);
         }
         private void PicDetailElement_MouseLeave(object sender, EventArgs e)
         {
-            if (PicEnterMouse == true)
-            {
-                vuiPB.MouseLeaveEvent();
-                PicEnterMouse = false;
-            }
+            vuiPB.MouseLeave();
         }
         #endregion
-
-        #region Unused
-
-        private void pb_MouseEnter(object sender, EventArgs e)
-        { info.Value.Location = Cursor.Position; info.Value.Show(); }
-        private void pb_MouseLeave(object sender, EventArgs e)
-        { info.Value.Location = Cursor.Position; info.Value.Hide(); }
-        private void pb_MouseMove(object sender, MouseEventArgs e)
-        { info.Value.Location = new Point(Cursor.Position.X + 15, Cursor.Position.Y); }
-
-        #endregion
-
+        
         public void SetImageFromAddress(string addr, int pannelw, int pannelh, bool title = true)
         {
             Dock = DockStyle.Bottom;

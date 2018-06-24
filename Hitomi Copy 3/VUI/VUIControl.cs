@@ -14,6 +14,7 @@ namespace Hitomi_Copy_3.VUI
         public Action MouseEnterEvent;
         public Action MouseMoveEvent;
         public Action MouseLeaveEvent;
+        public Action MouseClickEvent;
 
         public abstract void Paint(Graphics g);
 
@@ -24,5 +25,41 @@ namespace Hitomi_Copy_3.VUI
             if (Size.Height >= sy && Size.Width >= sx) return true;
             return false;
         }
+
+        #region Event Wrapper
+        bool mouse_enter = true;
+
+        public void MouseMove(Point clientPosition)
+        {
+            if (Intersect(clientPosition))
+            {
+                if (mouse_enter == false)
+                {
+                    mouse_enter = true;
+                    MouseEnterEvent();
+                    MouseMoveEvent();
+                }
+                else
+                {
+                    MouseMoveEvent();
+                }
+            }
+            else if (mouse_enter == true)
+            {
+                MouseLeaveEvent();
+                mouse_enter = false;
+            }
+        }
+
+        public void MouseLeave()
+        {
+            if (mouse_enter == true)
+            {
+                MouseLeaveEvent();
+                mouse_enter = false;
+            }
+        }
+        #endregion
+
     }
 }
