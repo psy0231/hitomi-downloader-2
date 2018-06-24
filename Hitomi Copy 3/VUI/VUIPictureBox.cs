@@ -11,14 +11,23 @@ namespace Hitomi_Copy_3.VUI
 
         public override void Paint(Graphics g)
         {
-            PictureBox pict = new PictureBox();
-            pict.Size = Size;
-            pict.SizeMode = PictureBoxSizeMode.Zoom;
-            var bm = new Bitmap(pict.ClientSize.Width, pict.ClientSize.Height);
-            pict.Image = Image;
-            pict.DrawToBitmap(bm, pict.ClientRectangle);
-            g.DrawImage(bm, Location.X, Location.Y, Size.Width, Size.Height);
-            pict.Dispose();
+            decimal r1 = (decimal)Image.Width / Image.Height;
+            decimal r2 = (decimal)Size.Width / Size.Height;
+            int w = Size.Width;
+            int h = Size.Height;
+            if (r1 > r2)
+            {
+                w = Size.Width;
+                h = (int)(w / r1);
+            }
+            else if (r1 < r2)
+            {
+                h = Size.Height;
+                w = (int)(r1 * h);
+            }
+            int x = (Size.Width - w) / 2;
+            int y = (Size.Height - h) / 2;
+            g.DrawImage(Image, new Rectangle(x+Location.X, y+Location.Y, w, h));
         }
     }
 }

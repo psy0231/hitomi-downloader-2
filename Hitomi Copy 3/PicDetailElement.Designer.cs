@@ -273,6 +273,7 @@
             this.Name = "PicDetailElement";
             this.Size = new System.Drawing.Size(1096, 208);
             this.Load += new System.EventHandler(this.PicDetailElement_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.PicDetailElement_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicDetailElement_MouseClick);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PicDetailElement_MouseDoubleClick);
             ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();

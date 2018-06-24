@@ -5,6 +5,7 @@ using Hitomi_Copy;
 using Hitomi_Copy_2;
 using Hitomi_Copy_3.EH;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace Hitomi_Copy_3
         HitomiArticle ha;
         Lazy<InfoForm> info;
         Form parent;
+        VUI.VUIPictureBox vuiPB;
+        List<VUI.VUILabel> vuiLabels = new List<VUI.VUILabel>();
 
         public PicDetailElement(Form parent, ToolTip tooltip = null)
         {
@@ -35,6 +38,23 @@ namespace Hitomi_Copy_3
             this.DoubleBuffered = true;
             
             Disposed += OnDispose;
+
+            vuiPB = new VUI.VUIPictureBox();
+            vuiPB.Size = new Size(150, 200);
+            vuiPB.Location = pb.Location;
+            pb.Dispose();
+
+        }
+
+        public void ConvertToVUILabel(Label label)
+        {
+            VUI.VUILabel vl = new VUI.VUILabel();
+            vl.Size = label.Size;
+            vl.Location = label.Location;
+            vl.Text = label.Text;
+            vl.Font = label.Font;
+            vuiLabels.Add(vl);
+            label.Dispose();
         }
 
         public PicDetailElement(int index)
@@ -50,7 +70,20 @@ namespace Hitomi_Copy_3
                 info.Value.Dispose();
             LogEssential.Instance.PushLog(() => $"Successful disposed! [PicDetailElement] {label}");
         }
-        
+
+        private void PicDetailElement_Paint(object sender, PaintEventArgs e)
+        {
+            ViewBuffer buffer = new ViewBuffer();
+            buffer.CreateGraphics(Width, Height);
+            Graphics g = buffer.g;
+
+            vuiPB.Paint(g);
+            vuiLabels.ForEach(x => x.Paint(g));
+
+            buffer.Draw(e.Graphics);
+            buffer.Dispose();
+        }
+
         private void pb_MouseEnter(object sender, EventArgs e)
         { info.Value.Location = Cursor.Position; info.Value.Show(); }
         private void pb_MouseLeave(object sender, EventArgs e)
@@ -65,7 +98,7 @@ namespace Hitomi_Copy_3
             {
                 using (FileStream fs = new FileStream(addr, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
                 {
-                    pb.Image = image = Image.FromStream(fs);
+                    vuiPB.Image = /*pb.Image =*/ image = Image.FromStream(fs);
                 }
                 pb.SizeMode = PictureBoxSizeMode.Zoom;
                 if (title)
@@ -125,6 +158,10 @@ namespace Hitomi_Copy_3
                 });
             if (HitomiSetting.Instance.GetModel().UsingExHentaiBaseOpener)
                 metroButton4.Text = "익헨에서 열기";
+
+            foreach (var control in Controls)
+                if (control is Label)
+                    ConvertToVUILabel(control as Label);
         }
 
         private void AddTagToPanel(string tag_data, int image)
@@ -206,5 +243,6 @@ namespace Hitomi_Copy_3
         {
             (new frmGalleryInfo(parent, this)).Show(); selected = false; BackColor = Color.GhostWhite;
         }
+
     }
 }
