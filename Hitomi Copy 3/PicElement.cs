@@ -37,7 +37,6 @@ namespace Hitomi_Copy
         bool overlap = false;
         HitomiArticle ha;
         PictureBox pb = new PictureBox();
-        Lazy<InfoForm> info;
         Form parent;
 
         public PicElement(Form parent, ToolTip tooltip = null)
@@ -154,14 +153,13 @@ namespace Hitomi_Copy
             buffer.Draw(e.Graphics);
             buffer.Dispose();
         }
+
         private void Invalidall()
         { callfrom_panel = callfrom_paint = false; Invalidate(); }
         private void Picture_MouseEnter(object sender, EventArgs e)
-        { mouse_enter = true; if (!downloading) { info.Value.Location = Cursor.Position; info.Value.Show(); Invalidall(); } }
+        { mouse_enter = true; if (!downloading) Invalidall(); }
         private void Picture_MouseLeave(object sender, EventArgs e)
-        { mouse_enter = false; if (!downloading) { info.Value.Location = Cursor.Position; info.Value.Hide(); Invalidall(); } }
-        private void Picture_MouseMove(object sender, EventArgs e)
-        { info.Value.Location = new Point(Cursor.Position.X+15,Cursor.Position.Y); /*info.BringToFront();*/ }
+        { mouse_enter = false; if (!downloading) { Invalidall(); } }
         private void Picture_MouseClick(object sender, EventArgs e)
         { if (((MouseEventArgs)e).Button == MouseButtons.Left) { selected = !selected; Invalidall(); } }
         private void Picture_MouseDoubleClick(object sender, EventArgs e)
@@ -174,10 +172,7 @@ namespace Hitomi_Copy
 
         private void OnDispose(object sender, EventArgs e)
         {
-            if (image != null)
-                image.Dispose();
-            if (info != null && info.IsValueCreated)
-                info.Value.Dispose();
+            if (image != null) image.Dispose();
             LogEssential.Instance.PushLog(() => $"Successful disposed! [PicElement] {label}");
         }
 
@@ -186,34 +181,47 @@ namespace Hitomi_Copy
             Invalidate();
         }
 
-        public void SetImageFromAddress(string addr, int pannelw, int pannelh, bool title = true)
-        {
+        public void SetImageFromStream(Stream stream, int panelX, int panelY, bool title = true)
+            => SetImage(Image.FromStream(stream), panelX, panelY, title);
+
+        public void SetImage(Image image, int panelX, int panelY, bool title = true) => this.Post(() => {
             Dock = DockStyle.Bottom;
             try
             {
                 pb.Location = new Point(3, 3);
-                if (title == true)
-                    pb.Size = new Size(pannelw - 6, pannelh - 30);
-                else
-                    pb.Size = new Size(pannelw - 6, pannelh - 6);
-                using (FileStream fs = new FileStream(addr, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
-                {
-                    pb.Image = image = Image.FromStream(fs);
-                }
+                pb.Size = new Size(panelX - 6, panelY - (title ? 30 : 6));
+                pb.Image = Image = image;
                 pb.SizeMode = PictureBoxSizeMode.Zoom;
                 pb.Paint += Picture_Paint;
                 pb.MouseEnter += Picture_MouseEnter;
                 pb.MouseLeave += Picture_MouseLeave;
-                if (title) pb.MouseClick += Picture_MouseClick;
-                pb.MouseMove += Picture_MouseMove;
-                if (title) pb.MouseDoubleClick += Picture_MouseDoubleClick;
                 if (title)
-                    info = new Lazy<InfoForm>(() => new InfoForm(Image, new Size(image.Width*3/4, image.Height*3/4)));
+                {
+                    pb.MouseClick += Picture_MouseClick;
+                    pb.MouseDoubleClick += Picture_MouseDoubleClick;
+                }
+                int divi = 4 * (title ? 1 : 2);
+                var popupSize = new Size(image.Width * 3 / divi, image.Height * 3 / divi);
+                if (parent is frmPreview)
+                    new LazyPicturePopup(pb, image.Size, LazyPicturePopup.PopupType.Corner);
                 else
-                    info = new Lazy<InfoForm>(() => new InfoForm(Image, new Size(image.Width*3/4/2, image.Height*3/4/2)));
-                this.Width = pannelw;
-                this.Height = pannelh;
-                this.Controls.Add(pb);
+                    new LazyPicturePopup(pb, popupSize);
+
+                Width = panelX;
+                Height = panelY;
+                Controls.Add(pb);
+            }
+            catch { }
+        });
+
+        public void SetImageFromAddress(string addr, int pannelw, int pannelh, bool title = true)
+        {
+            try
+            {
+                Image image = Image.FromStream(new MemoryStream(File.ReadAllBytes(addr)));
+                File.Delete(addr);
+
+                SetImage(image, pannelw, pannelh, title);
             }
             catch { }
         }
