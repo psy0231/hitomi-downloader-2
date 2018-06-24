@@ -686,21 +686,16 @@ namespace Hitomi_Copy_3
             pe.Article = article;
             pe.Label = article.Title;
             pe.Font = Font;
-
-            var uri = new Uri(HitomiDef.HitomiThumbnail + article.Thumbnail);
+            pe.SetImageFromAddress(HitomiDef.HitomiThumbnail + article.Thumbnail, 150, 200);
+            pe.Font = this.Font;
+            
             var ms = new MemoryStream();
             WebClient wc = Util.PlainWebClient();
 
             LogEssential.Instance.PushLog(() => $"AddArticleToPanel {HitomiDef.HitomiThumbnail + article.Thumbnail}");
             if (HitomiSetting.Instance.GetModel().DetailedLog)
                 LogEssential.Instance.PushLog(article);
-
-            Stream stream = await wc.OpenReadTaskAsync(uri).ConfigureAwait(false);
-            if (pe is PicElement rpe)
-                rpe.SetImage(stream, 150, 200);
-            else if (pe is PicDetailElement pde)
-                pde.SetImage(Image.FromStream(stream), 150, 200);
-
+            
             bool isDup = ImagePanel.Controls.OfType<PicElement>().Any(
                 thumb => pe.Article.Title == thumb.Article.Title);
             if (isDup)

@@ -6,8 +6,11 @@ using Hitomi_Copy_2;
 using Hitomi_Copy_3;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -84,25 +87,25 @@ namespace Hitomi_Copy
 
             foreach (HitomiArticle ha in HitomiParser.ParseArticles(html))
             {
-                if (Abort.IsCancellationRequested) return;
-                LoadThumbnail(ha).Catch();
+                string temp = Path.GetTempFileName();
+                WebClient wc = new WebClient();
+                wc.Headers["Accept-Encoding"] = "application/x-gzip";
+                wc.Encoding = Encoding.UTF8;
+                wc.DownloadFileCompleted += CallbackThumbnail;
+                wc.DownloadFileAsync(new Uri(HitomiDef.HitomiThumbnail + ha.Thumbnail), temp,
+                    new Tuple<string, HitomiArticle>(temp, ha));
             }
         }
 
         List<PicElement> stayed = new List<PicElement>();
-        private async Task LoadThumbnail(HitomiArticle article)
+        private void CallbackThumbnail(object sender, AsyncCompletedEventArgs e)
         {
-            var thumbnailUri = new Uri(HitomiDef.HitomiThumbnail + article.Thumbnail);
-            Stream thumbnail = await Util.PlainWebClient().OpenReadTaskAsync(thumbnailUri);
-            if (Abort.IsCancellationRequested) return;
-
-            PicElement pe = new PicElement(this) {
-                Article = article,
-                Label = article.Title,
-                Dock = DockStyle.Bottom,
-                Font = Font
-            };
-            pe.SetImage(thumbnail, 150, 200);
+            PicElement pe = new PicElement(this);
+            Tuple<string, HitomiArticle> tuple = (Tuple<string, HitomiArticle>)e.UserState;
+            pe.Article = tuple.Item2;
+            pe.Label = tuple.Item2.Title;
+            pe.Dock = DockStyle.Bottom;
+            pe.SetImageFromAddress(tuple.Item1, 150, 200);
 
             lock (stayed)
             {
@@ -117,7 +120,7 @@ namespace Hitomi_Copy
             AddPe(pe);
             IncrementProgressBarValue();
             Application.DoEvents();
-            LogEssential.Instance.PushLog(() => $"Downloaded image! {thumbnailUri}");
+            LogEssential.Instance.PushLog(() => $"Downloaded image! {HitomiDef.HitomiThumbnail + tuple.Item2.Thumbnail} {tuple.Item1}");
         }
         private void IncrementProgressBarValue()
         {
