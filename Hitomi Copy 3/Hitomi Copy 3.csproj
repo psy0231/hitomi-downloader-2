@@ -272,6 +272,7 @@
     </Compile>
     <Compile Include="UpdateManager.cs" />
     <Compile Include="ViewBuffer.cs" />
+    <Compile Include="VUI\VUILabel.cs" />
     <EmbeddedResource Include="ColumnGraph.resx">
       <DependentUpon>ColumnGraph.cs</DependentUpon>
     </EmbeddedResource>
