@@ -21,6 +21,7 @@ namespace Hitomi_Copy
         HitomiMetadata metadata;
         string id;
         Form closed_form;
+        RightClickCloser CloseOnRBtn;
 
         public frmGalleryInfo(Form closed, IPicElement pic)
         {
@@ -29,6 +30,7 @@ namespace Hitomi_Copy
             this.pic = pic;
             closed_form = closed;
             id = pic.Article.Magic;
+            CloseOnRBtn = new RightClickCloser(this);
         }
 
         public frmGalleryInfo(Form closed, HitomiMetadata metadata)

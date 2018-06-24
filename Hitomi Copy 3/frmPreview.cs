@@ -15,6 +15,7 @@ namespace Hitomi_Copy_3
     {
         Form closed_form;
         string id;
+        RightClickCloser CloseOnRBtn;
 
         public frmPreview(Form closed, string id)
         {
@@ -22,6 +23,7 @@ namespace Hitomi_Copy_3
 
             this.closed_form = closed;
             this.id = id;
+            CloseOnRBtn = new RightClickCloser(this);
         }
 
         private void frmPreview_Load(object sender, EventArgs e)
