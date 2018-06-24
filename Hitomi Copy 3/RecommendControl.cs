@@ -19,7 +19,6 @@ namespace Hitomi_Copy_3
 {
     public partial class RecommendControl : UserControl
     {
-        InfoWrapper[] info = new InfoWrapper[5];
         string artist;
         bool closed = false;
 
@@ -53,8 +52,6 @@ namespace Hitomi_Copy_3
 
         private void OnDispose(object sender, EventArgs e)
         {
-            foreach (var iw in info.Where(iw => iw != null))
-                iw.Dispose();
             LogEssential.Instance.PushLog(() => $"Successful disposed! [RecommendControl] {artist}");
             closed = true;
         }
@@ -103,36 +100,30 @@ namespace Hitomi_Copy_3
         {
             string thumbnail = GetThumbnailAddress(id);
 
-            string temp = Path.GetTempFileName();
             WebClient wc = new WebClient();
             wc.Headers["Accept-Encoding"] = "application/x-gzip";
             wc.Encoding = Encoding.UTF8;
-            wc.DownloadFile(new Uri(HitomiDef.HitomiThumbnail + thumbnail), temp);
-            
-            Image img;
-            using (FileStream fs = new FileStream(temp, FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose))
-            {
-                img = Image.FromStream(fs);
-            }
+            var thumbUri = new Uri(HitomiDef.HitomiThumbnail + thumbnail);
+            Stream thumbStream = wc.OpenRead(thumbUri);
+
+            Image img = Image.FromStream(thumbStream);
             if (closed)
             {
                 img.Dispose();
-                LogEssential.Instance.PushLog(() => $"Unexpected Disposed! {HitomiDef.HitomiThumbnail + thumbnail} {temp} {i} {id}");
+                LogEssential.Instance.PushLog(() => $"Unexpected Disposed! {HitomiDef.HitomiThumbnail + thumbnail} {i} {id}");
                 return;
             }
-            info[i] = new InfoWrapper(img.Clone() as Image);
 
             PictureBox[] pbs = { pb1, pb2, pb3, pb4, pb5 };
-            pbs[i].MouseEnter += info[i].Picture_MouseEnter;
-            pbs[i].MouseMove += info[i].Picture_MouseMove;
-            pbs[i].MouseLeave += info[i].Picture_MouseLeave;
 
             if (pbs[i].InvokeRequired)
                 pbs[i].Invoke(new Action(() => { pbs[i].Image = img; }));
             else
                 pbs[i].Image = img;
+            var popupSize = new Size(img.Width * 3 / 4, img.Height * 3 / 4);
+            new LazyPicturePopup(pbs[i], popupSize);
 
-            LogEssential.Instance.PushLog(() => $"Load successful! {HitomiDef.HitomiThumbnail + thumbnail} {temp} {i} {id}");
+            LogEssential.Instance.PushLog(() => $"Load successful! {HitomiDef.HitomiThumbnail + thumbnail} {i} {id}");
         }
         
         private string GetThumbnailAddress(string id)
@@ -192,28 +183,4 @@ namespace Hitomi_Copy_3
             return v0[y+y+1];
         }
     }
-    
-    public sealed class InfoWrapper : IDisposable
-    {
-        Lazy<InfoForm> info;
-
-        public InfoWrapper(Image image)
-        {
-            info = new Lazy<InfoForm> (() => new InfoForm(image, new Size(image.Width * 3 / 4, image.Height * 3 / 4)));
-        }
-
-        public void Dispose()
-        {
-            if (info.IsValueCreated)
-                info.Value.Dispose();
-        }
-
-        public void Picture_MouseEnter(object sender, EventArgs e)
-        { info.Value.Location = Cursor.Position; info.Value.Show(); }
-        public void Picture_MouseLeave(object sender, EventArgs e)
-        { info.Value.Location = Cursor.Position; info.Value.Hide(); }
-        public void Picture_MouseMove(object sender, EventArgs e)
-        { info.Value.Location = new Point(Cursor.Position.X + 15, Cursor.Position.Y); }
-    }
-
 }
