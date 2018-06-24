@@ -46,27 +46,15 @@ namespace Hitomi_Copy_3
             }
         }
 
-        private void PBMaxSize(int count)
-        {
-            if (pbLoad.InvokeRequired)
-            {
-                Invoke(new Action<int>(PBMaxSize), new object[] { count });
-                return;
-            }
+        private void PBMaxSize(int count) => this.Post(() => {
             pbLoad.Maximum = count;
-        }
+        });
 
-        private void PBIncrease()
-        {
-            if (pbLoad.InvokeRequired)
-            {
-                try { Invoke(new Action(PBIncrease)); } catch { }
-                return;
-            }
+        private void PBIncrease() => this.Post(() => {
             pbLoad.Value++;
             if (pbLoad.Value == pbLoad.Maximum)
                 pbLoad.Visible = false;
-        }
+        });
 
         private void Notify(string uri, string filename, object obj)
         {
@@ -75,7 +63,6 @@ namespace Hitomi_Copy_3
             pe.Article.Magic = ((int)obj).ToString();
             pe.Dock = DockStyle.Bottom;
             pe.SetImageFromAddress(filename, 300, 400, false);
-
             pe.Font = this.Font;
 
             AddPanel(pe);
@@ -86,22 +73,15 @@ namespace Hitomi_Copy_3
         private void Notify_Size(string uri, long size) { }
         private void Notify_Status(string uri, int size) { }
         private void Notify_Retry(string uri) { }
-        
-        private void AddPanel(PicElement pe)
-        {
+
+        private void AddPanel(PicElement pe) => this.Post(() => {
             try
             {
-                if (ImagePanel.InvokeRequired)
-                {
-                    Invoke(new Action<PicElement>(AddPanel), new object[] { pe }); return;
-                }
                 ImagePanel.Controls.Add(pe);
                 SortThumbnail();
-            } catch
-            {
-
             }
-        }
+            catch { }
+        });
         private void SortThumbnail()
         {
             List<Control> controls = new List<Control>();

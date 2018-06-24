@@ -10,7 +10,6 @@ using MetroFramework;
 using MM_Downloader.MM;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -335,13 +334,8 @@ namespace Hitomi_Copy_3
             return $"{AppDomain.CurrentDomain.BaseDirectory}{title}\\";
         }
 
-        private void ImageLinkCallback(string uri, ExHentaiArticle article)
+        private void ImageLinkCallback(string uri, ExHentaiArticle article) => this.Post(() =>
         {
-            if (lvStandBy.InvokeRequired)
-            {
-                Invoke(new Action(() => ImageLinkCallback(uri, article)));
-                return;
-            }
             Directory.CreateDirectory(MakeDownloadDirectory(article));
             ++count;
             lvStandBy.Items.Add(new ListViewItem(new string[]
@@ -353,7 +347,7 @@ namespace Hitomi_Copy_3
             download_check.Add(article.Title);
             lock (download_queue)
                 download_queue.Add(uri, MakeDownloadDirectory(article) + uri.Split('/').Last(), count);
-        }
+        });
         #endregion
 
         #region 다운로드 - 마루마루
@@ -437,13 +431,8 @@ namespace Hitomi_Copy_3
             return $"{AppDomain.CurrentDomain.BaseDirectory}{title}\\{archive}\\";
         }
 
-        private void DownloadImage(string uri, MMArticle article)
+        private void DownloadImage(string uri, MMArticle article) => this.Post(() =>
         {
-            if (lvStandBy.InvokeRequired)
-            {
-                Invoke(new Action(() => DownloadImage(uri, article)));
-                return;
-            }
             Directory.CreateDirectory(MakeDownloadDirectory(article));
             ++count;
             lvStandBy.Items.Add(new ListViewItem(new string[]
@@ -454,7 +443,7 @@ namespace Hitomi_Copy_3
             }));
             lock (download_queue)
                 download_queue.Add(@"http://wasabisyrup.com" + uri, MakeDownloadDirectory(article) + uri.Split('/').Last(), count);
-        }
+        });
         #endregion
 
         #region 검색창
@@ -652,14 +641,7 @@ namespace Hitomi_Copy_3
 
         #region 썸네일
         private void IncrementLoadProgressBarValue()
-        {
-            if (pbLoad.InvokeRequired)
-            {
-                Invoke(new Action(IncrementLoadProgressBarValue));
-                return;
-            }
-            pbLoad.Value += 1;
-        }
+            => this.Post(() => { pbLoad.Value += 1; });
 
         private async Task AddMetadataToPanel(HitomiMetadata metadata)
         {
@@ -712,16 +694,12 @@ namespace Hitomi_Copy_3
             AddPanel(pe);
             Application.DoEvents();
         }
-        private void AddPanel(object pe)
+        private void AddPanel(IPicElement pe) => this.Post(() =>
         {
-            if (ImagePanel.InvokeRequired)
-            {
-                Invoke(new Action<object>(AddPanel), new object[] { pe }); return;
-            }
             ImagePanel.Controls.Add(pe as Control);
             IncrementLoadProgressBarValue();
             SortThumbnail();
-        }
+        });
         private void SortThumbnail()
         {
             List<Control> controls = new List<Control>();
@@ -748,17 +726,12 @@ namespace Hitomi_Copy_3
             };
         }
 
-        private void HitomiRetryCallback(string uri)
+        private void HitomiRetryCallback(string uri) => this.Post(() =>
         {
-            if (lRetry.InvokeRequired)
-            {
-                Invoke(new Action<string>(HitomiRetryCallback), new object[] { uri });
-                return;
-            }
             lRetry.Text = uri + "항목 다운로드를 재시작합니다.";
             lRetry.Visible = true;
             LogEssential.Instance.PushLog(() => $"Retry downloading... {uri}");
-        }
+        });
         private void HitomiQueueCallback(string uri, string filename, object obj)
         {
             IncrementProgressBarValue();
@@ -766,40 +739,19 @@ namespace Hitomi_Copy_3
             UpdateLabel($"{pbTarget.Value}/{pbTarget.Maximum}");
             LogEssential.Instance.PushLog(() => $"Image Download Complete! {uri} {filename}");
         }
-        private void IncrementProgressBarMax()
+        private void IncrementProgressBarMax() => this.Post(() =>
         {
-            if (pbTarget.InvokeRequired)
-            {
-                Invoke(new Action(IncrementProgressBarMax));
-                return;
-            }
             pbTarget.Maximum += 1;
-        }
-        private void IncrementProgressBarMax(int value)
+        });
+        private void IncrementProgressBarMax(int value) => this.Post(() =>
         {
-            if (pbTarget.InvokeRequired)
-            {
-                Invoke(new Action<int>(IncrementProgressBarMax), new object[] { value });
-                return;
-            }
             pbTarget.Maximum += value;
-        }
-        private void IncrementProgressBarValue()
+        });
+        private void IncrementProgressBarValue() => this.Post(() =>
         {
-            if (pbTarget.InvokeRequired)
-            {
-                Invoke(new Action(IncrementProgressBarValue));
-                return;
-            }
             if (pbTarget.Value != pbTarget.Maximum) pbTarget.Value += 1;
-        }
-        private void DeleteSpecificItem(string i)
-        {
-            if (lvStandBy.InvokeRequired)
-            {
-                Invoke(new Action<string>(DeleteSpecificItem), new object[] { i });
-                return;
-            }
+        });
+        private void DeleteSpecificItem(string i) => this.Post(() => {
             string title = "";
             for (int j = 0; j < lvStandBy.Items.Count; j++)
             {
@@ -828,16 +780,11 @@ namespace Hitomi_Copy_3
                             }
                     }
                 }
-        }
-        private void UpdateLabel(string v)
+        });
+        private void UpdateLabel(string v) => this.Post(() =>
         {
-            if (lStatus.InvokeRequired)
-            {
-                Invoke(new Action<string>(UpdateLabel), new object[] { v });
-                return;
-            }
             lStatus.Text = v;
-        }
+        });
         private void ZipArticle(HitomiArticle article)
         {
             LogEssential.Instance.PushLog(() => $"{article.Magic} Zipping article... ");
@@ -897,13 +844,8 @@ namespace Hitomi_Copy_3
             HitomiCore.DownloadAndSetImageLink(pe, ImageLinkCallback);
         }
         int count = 0;
-        private void ImageLinkCallback(IPicElement pe)
+        private void ImageLinkCallback(IPicElement pe) => this.Post(() =>
         {
-            if (lvStandBy.InvokeRequired)
-            {
-                Invoke(new Action<IPicElement>(ImageLinkCallback), new object[] { pe });
-                return;
-            }
             Directory.CreateDirectory(MakeDownloadDirectory(pe.Article));
             for (int i = 0; i < pe.Article.ImagesLink.Count; i++)
             {
@@ -933,7 +875,7 @@ namespace Hitomi_Copy_3
                 hitomi_json.SetModelFromArticle(pe.Article);
                 hitomi_json.Save();
             }
-        }
+        });
 
         private string MakePathFromAdditionalPath(string target, string additional_path)
         {
@@ -1086,17 +1028,12 @@ namespace Hitomi_Copy_3
                 AddToPannel(new RecommendControl(latest_load_count));
             }
         }
-        private void AddToPannel(RecommendControl control)
+        private void AddToPannel(RecommendControl control) => this.Post(() =>
         {
-            if (RecommendPannel.InvokeRequired)
-            {
-                Invoke(new Action<RecommendControl>(AddToPannel), new object[] { control });
-                return;
-            }
             RecommendPannel.SuspendLayout();
             RecommendPannel.Controls.Add(control);
             RecommendPannel.ResumeLayout();
-        }
+        });
         private void tgFilterArtists_CheckedChanged(object sender, EventArgs e)
         {
             HitomiAnalysis.Instance.FilterArtists = tgFilterArtists.Checked;

@@ -121,36 +121,20 @@ namespace Hitomi_Copy
         }
         private void IncrementProgressBarValue()
         {
-            if (pbLoad.InvokeRequired)
-            {
-                // form 꺼지면 오류남
-                try { Invoke(new Action(IncrementProgressBarValue)); } catch { }
-                return;
-            }
-            try
-            {
+            if (Abort.IsCancellationRequested) return;
+            this.Post(() => {
                 pbLoad.Value += 1;
                 if (pbLoad.Value == pbLoad.Maximum)
                     pbLoad.Visible = false;
-            }
-            catch { }
-            
+            });
         }
         private void AddPe(PicElement pe)
         {
-            try
-            {
-                if (ImagePanel.InvokeRequired)
-                {
-                    Invoke(new Action<PicElement>(AddPe), new object[] { pe });
-                }
-                else
-                {
-                    ImagePanel.Controls.Add(pe);
-                    SortThumbnail();
-                }
-            }
-            catch { }
+            if (Abort.IsCancellationRequested) return;
+            this.Post(() => {
+                ImagePanel.Controls.Add(pe);
+                SortThumbnail();
+            });
         }
 
         private void SortThumbnail()
