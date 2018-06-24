@@ -1145,23 +1145,23 @@ namespace Hitomi_Copy_3
             if (!tbDownloadPath.Text.EndsWith("\\"))
                 tbDownloadPath.Text += "\\";
 
-            Task.Run(() => LazyAddArticle());
+            Task.Run(LazyAddArticle);
         }
 
-        private void LazyAddArticle()
+        private async Task LazyAddArticle()
         {
             try
             {
-                foreach (IPicElement pe in stayed)
+                List<IPicElement> pes = ImagePanel
+                    .Controls.OfType<IPicElement>()
+                    .Where(x => x.Selected).ToList();
+                foreach (IPicElement pe in pes)
                 {
-                    if (pe.Selected)
-                    {
-                        if (pe.Downloaded) continue;
-                        pe.Downloaded = pe.Downloading = true;
-                        pe.Invalidate();
-                        AddArticle(pe);
-                    }
-                    Thread.Sleep(100);
+                    if ((pe as Control)?.IsDisposed != false) continue;
+                    pe.Downloaded = pe.Downloading = true;
+                    pe.Invalidate();
+                    AddArticle(pe);
+                    await Task.Delay(100);
                 }
             }
             catch { }
@@ -1263,13 +1263,13 @@ namespace Hitomi_Copy_3
 
         private void bChooseAll_Click(object sender, EventArgs e)
         {
-            foreach (IPicElement pe in stayed)
+            foreach (var pe in ImagePanel.Controls.OfType<IPicElement>())
                 pe.Selected = true;
         }
 
         private void bCancleAll_Click(object sender, EventArgs e)
         {
-            foreach (IPicElement pe in stayed)
+            foreach (var pe in ImagePanel.Controls.OfType<IPicElement>())
                 pe.Selected = false;
         }
         
