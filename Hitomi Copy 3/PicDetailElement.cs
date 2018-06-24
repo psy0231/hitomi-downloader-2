@@ -71,6 +71,8 @@ namespace Hitomi_Copy_3
                 image.Dispose();
             if (info != null && info.IsValueCreated)
                 info.Value.Dispose();
+            if (vuiPB.Image != null)
+                vuiPB.Image.Dispose();
             LogEssential.Instance.PushLog(() => $"Successful disposed! [PicDetailElement] {label}");
         }
 
