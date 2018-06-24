@@ -48,4 +48,36 @@ namespace Hitomi_Copy_3
             else action();
         }
     }
+
+    class RightClickCloser
+    {
+        Form Form;
+        public bool Enabled = true;
+
+        public RightClickCloser(Form form)
+        {
+            Form = form;
+            MonitorRightClick(form);
+        }
+
+        public void MonitorRightClick(Control control)
+        {
+            control.MouseUp += OnRButtonUp;
+            control.ControlAdded += RescanControl;
+            control.Controls.OfType<Control>().ToList().ForEach(x => {
+                MonitorRightClick(x);
+            });
+        }
+
+        private void RescanControl(object sender, ControlEventArgs e)
+        {
+            MonitorRightClick(e.Control);
+        }
+
+        private void OnRButtonUp(object sender, MouseEventArgs e)
+        {
+            if (Enabled && e.Button == MouseButtons.Right)
+                Form.Close();
+        }
+    }
 }
