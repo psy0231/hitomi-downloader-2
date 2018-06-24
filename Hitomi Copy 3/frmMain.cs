@@ -19,6 +19,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -78,7 +79,9 @@ namespace Hitomi_Copy_3
             HitomiDate.Initialize();
             LogEssential.Instance.Initialize();
 
+#if !DEBUG
             Task.Run(() => CheckUpdate());
+#endif
             Task.Run(() => UpdateStatistics());
 
             EmitTip();
@@ -226,7 +229,7 @@ namespace Hitomi_Copy_3
 
             pbLoad.Visible = true;
             pbLoad.Maximum += query_result.Count;
-            Task.Run(() => LazyAdd(query_result));
+            LazyAdd(query_result).Catch();
 
             foreach (var request in request_number)
                 RequestDownloadArticleFormId(request);
@@ -242,12 +245,12 @@ namespace Hitomi_Copy_3
             }
         }
 
-        private void LazyAdd(List<HitomiMetadata> metadata_result)
+        private async Task LazyAdd(List<HitomiMetadata> metadata_result)
         {
             foreach (var v in metadata_result)
             {
-                Thread.Sleep(50);
-                Task.Run(() => AddMetadataToPanel(v));
+                AddMetadataToPanel(v).Catch();
+                await Task.Delay(50).ConfigureAwait(false);
             }
         }
 
@@ -414,7 +417,7 @@ namespace Hitomi_Copy_3
                 UpdateLabel($"{pbTarget.Value}/{pbTarget.Maximum}");
                 lock (images) images_uri.Add(new Tuple<string, MMArticle>(uri, ta));
             }
-            if(HitomiSetting.Instance.GetModel().DetailedLog)
+            if (HitomiSetting.Instance.GetModel().DetailedLog)
                 LogEssential.Instance.PushLog(images);
         }
 
@@ -567,7 +570,7 @@ namespace Hitomi_Copy_3
                     "tag:",
                     "tagx:"
                 };
-                List<HitomiTagdata> data_col = (from ix in match_target where ix.StartsWith(word) select new HitomiTagdata {Tag = ix}).ToList();
+                List<HitomiTagdata> data_col = (from ix in match_target where ix.StartsWith(word) select new HitomiTagdata { Tag = ix }).ToList();
                 if (data_col.Count > 0)
                     match = data_col;
             }
@@ -658,64 +661,53 @@ namespace Hitomi_Copy_3
             pbLoad.Value += 1;
         }
 
-        private async void AddMetadataToPanel(HitomiMetadata metadata)
+        private async Task AddMetadataToPanel(HitomiMetadata metadata)
         {
             HitomiArticle article = HitomiCommon.MetadataToArticle(metadata);
-            await Task.Run(() => article.Thumbnail = GetThumbnailAddress(article.Magic));
-            AddArticleToPanel(article);
+            string galleryUri = $"https://hitomi.la/galleries/{article.Magic}.html";
+            string html = await Util.PlainWebClient().DownloadStringTaskAsync(galleryUri).ConfigureAwait(false);
+            string thumbUri = HitomiParser.ParseGallery(html).Thumbnail;
+            article.Thumbnail = thumbUri;
+            await AddArticleToPanel(article);
         }
 
-        private string GetThumbnailAddress(string id)
+        private async Task AddArticleToPanel(HitomiArticle article)
         {
-            try
-            {
-                WebClient wc = new WebClient
-                {
-                    Encoding = Encoding.UTF8
-                };
-                return HitomiParser.ParseGallery(wc.DownloadString(
-                    new Uri($"https://hitomi.la/galleries/{id}.html"))).Thumbnail;
-            }
-            catch { }
-            return "";
-        }
-
-        private void AddArticleToPanel(HitomiArticle article)
-        {
-            string temp = Path.GetTempFileName();
-            WebClient wc = new WebClient();
-            wc.Headers["Accept-Encoding"] = "application/x-gzip";
-            wc.Encoding = Encoding.UTF8;
-            wc.DownloadFileCompleted += CallbackThumbnail;
-            wc.DownloadFileAsync(new Uri(HitomiDef.HitomiThumbnail + article.Thumbnail), temp,
-                new Tuple<string, HitomiArticle>(temp, article));
-            LogEssential.Instance.PushLog(() => $"AddArticleToPanel {HitomiDef.HitomiThumbnail + article.Thumbnail} {temp}");
             if (HitomiSetting.Instance.GetModel().DetailedLog)
                 LogEssential.Instance.PushLog(article);
-        }
 
-        public List<IPicElement> stayed = new List<IPicElement>();
-        private void CallbackThumbnail(object sender, AsyncCompletedEventArgs e)
-        {
-            IPicElement pe;
-            if (HitomiSetting.Instance.GetModel().DetailedSearchResult)
-                pe = new PicDetailElement(this);
-            else
-                pe = new PicElement(this);
-            Tuple<string, HitomiArticle> tuple = (Tuple<string, HitomiArticle>)e.UserState;
-            pe.Article = tuple.Item2;
-            pe.Label = tuple.Item2.Title;
-            pe.SetImageFromAddress(tuple.Item1, 150, 200);
+            // https://stackoverflow.com/q/40682131
+            // We need the following or Invoke() for creation
+            // of winform control in background thread.
+            WindowsFormsSynchronizationContext.AutoInstall = false;
 
-            pe.Font = this.Font;
+            bool isDetailed = HitomiSetting.Instance.GetModel().DetailedSearchResult;
+            IPicElement pe = isDetailed ? new PicDetailElement(this) as IPicElement : new PicElement(this);
+            pe.Article = article;
+            pe.Label = article.Title;
+            pe.Font = Font;
 
-            lock (stayed)
+            var uri = new Uri(HitomiDef.HitomiThumbnail + article.Thumbnail);
+            var ms = new MemoryStream();
+            WebClient wc = Util.PlainWebClient();
+
+            LogEssential.Instance.PushLog(() => $"AddArticleToPanel {HitomiDef.HitomiThumbnail + article.Thumbnail}");
+            if (HitomiSetting.Instance.GetModel().DetailedLog)
+                LogEssential.Instance.PushLog(article);
+
+            Stream stream = await wc.OpenReadTaskAsync(uri).ConfigureAwait(false);
+            if (pe is PicElement rpe)
+                rpe.SetImage(stream, 150, 200);
+            else if (pe is PicDetailElement pde)
+                pde.SetImage(Image.FromStream(stream), 150, 200);
+
+            bool isDup = ImagePanel.Controls.OfType<PicElement>().Any(
+                thumb => pe.Article.Title == thumb.Article.Title);
+            if (isDup)
             {
-                // 중복되는 항목 처리
-                foreach (var a in stayed)
-                    if (a.Article.Title == pe.Article.Title)
-                    { pe.Article.Title += " " + pe.Article.Magic; pe.Label += " " + pe.Article.Magic; pe.Overlap = true; break; }
-                stayed.Add(pe);
+                pe.Article.Title += " " + pe.Article.Magic;
+                pe.Label += " " + pe.Article.Magic;
+                pe.Overlap = true;
             }
             AddPanel(pe);
             Application.DoEvents();
@@ -1145,23 +1137,23 @@ namespace Hitomi_Copy_3
             if (!tbDownloadPath.Text.EndsWith("\\"))
                 tbDownloadPath.Text += "\\";
 
-            Task.Run(() => LazyAddArticle());
+            Task.Run(LazyAddArticle);
         }
 
-        private void LazyAddArticle()
+        private async Task LazyAddArticle()
         {
             try
             {
-                foreach (IPicElement pe in stayed)
+                List<IPicElement> pes = ImagePanel
+                    .Controls.OfType<IPicElement>()
+                    .Where(x => x.Selected).ToList();
+                foreach (IPicElement pe in pes)
                 {
-                    if (pe.Selected)
-                    {
-                        if (pe.Downloaded) continue;
-                        pe.Downloaded = pe.Downloading = true;
-                        pe.Invalidate();
-                        AddArticle(pe);
-                    }
-                    Thread.Sleep(100);
+                    if ((pe as Control)?.IsDisposed != false) continue;
+                    pe.Downloaded = pe.Downloading = true;
+                    pe.Invalidate();
+                    AddArticle(pe);
+                    await Task.Delay(100);
                 }
             }
             catch { }
@@ -1229,21 +1221,11 @@ namespace Hitomi_Copy_3
         private void bTidy_Click(object sender, EventArgs e)
         {
             ImagePanel.SuspendLayout();
-            for (int i = 0; i < ImagePanel.Controls.Count; i++)
-            {
-                if (!(ImagePanel.Controls[i] as IPicElement).Downloading)
-                {
-                    for (int j = 0; j < stayed.Count; j++)
-                    {
-                        if (stayed[j] == (ImagePanel.Controls[i] as IPicElement))
-                        {
-                            stayed.RemoveAt(j);
-                            break;
-                        }
-                    }
-                    ImagePanel.Controls[i--].Dispose();
-                }
-            }
+            ImagePanel
+                .Controls.OfType<IPicElement>()
+                .Where(x => !x.Selected && !x.Downloading)
+                .ToList()
+                .ForEach(x => (x as Control)?.Dispose());
             ImagePanel.ResumeLayout();
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
@@ -1263,16 +1245,16 @@ namespace Hitomi_Copy_3
 
         private void bChooseAll_Click(object sender, EventArgs e)
         {
-            foreach (IPicElement pe in stayed)
+            foreach (var pe in ImagePanel.Controls.OfType<IPicElement>())
                 pe.Selected = true;
         }
 
         private void bCancleAll_Click(object sender, EventArgs e)
         {
-            foreach (IPicElement pe in stayed)
+            foreach (var pe in ImagePanel.Controls.OfType<IPicElement>())
                 pe.Selected = false;
         }
-        
+
         private void tgAutoZip_CheckedChanged(object sender, EventArgs e)
         {
             HitomiSetting.Instance.GetModel().Zip = tgAutoZip.Checked;
@@ -1307,7 +1289,7 @@ namespace Hitomi_Copy_3
             }
             ImagePanel.ResumeLayout();
         }
-        
+
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             HitomiSetting.Instance.GetModel().ExclusiveTag = tbExcludeTag.Text.Split(',').Select(x => x.Trim()).ToArray();

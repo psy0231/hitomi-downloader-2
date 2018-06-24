@@ -5,6 +5,7 @@ using Hitomi_Copy_3;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace Hitomi_Copy
@@ -22,6 +23,7 @@ namespace Hitomi_Copy
         bool Downloading { get; set; }
         bool Overlap { get; set; }
         void SetImageFromAddress(string addr, int pannelw, int pannelh, bool title = true);
+        void SetImage(Image image, int panelW, int panelH, bool title = true);
         void Invalidate();
     }
 
@@ -51,7 +53,7 @@ namespace Hitomi_Copy
             MouseEnter += Thumbnail_MouseEnter;
             MouseLeave += Thumbnail_MouseLeave;
             MouseClick += Thunbnail_MouseClick;
-            
+
             Disposed += OnDispose;
         }
 
@@ -181,15 +183,22 @@ namespace Hitomi_Copy
             Invalidate();
         }
 
-        public void SetImageFromStream(Stream stream, int panelX, int panelY, bool title = true)
-            => SetImage(Image.FromStream(stream), panelX, panelY, title);
+        public async void SetImage(Uri uri, int panelW, int panelH, bool title = true)
+        {
+            WebClient wc = Util.PlainWebClient();
+            Stream stream = await wc.OpenReadTaskAsync(uri).ConfigureAwait(false);
+            SetImage(stream, 150, 200);
+        }
 
-        public void SetImage(Image image, int panelX, int panelY, bool title = true) => this.Post(() => {
+        public void SetImage(Stream stream, int panelW, int panelH, bool title = true)
+            => SetImage(Image.FromStream(stream), panelW, panelH, title);
+
+        public void SetImage(Image image, int panelW, int panelH, bool title = true) => this.Post(() => {
             Dock = DockStyle.Bottom;
             try
             {
                 pb.Location = new Point(3, 3);
-                pb.Size = new Size(panelX - 6, panelY - (title ? 30 : 6));
+                pb.Size = new Size(panelW - 6, panelH - (title ? 30 : 6));
                 pb.Image = Image = image;
                 pb.SizeMode = PictureBoxSizeMode.Zoom;
                 pb.Paint += Picture_Paint;
@@ -200,15 +209,14 @@ namespace Hitomi_Copy
                     pb.MouseClick += Picture_MouseClick;
                     pb.MouseDoubleClick += Picture_MouseDoubleClick;
                 }
-                int divi = 4 * (title ? 1 : 2);
-                var popupSize = new Size(image.Width * 3 / divi, image.Height * 3 / divi);
+                Func<int, int> mul = x => x * 3 / 4 / (title ? 1 : 2);
                 if (parent is frmPreview)
                     new LazyPicturePopup(pb, image.Size, LazyPicturePopup.PopupType.Corner);
                 else
-                    new LazyPicturePopup(pb, popupSize);
+                    new LazyPicturePopup(pb, new Size(mul(image.Width), mul(image.Height)));
 
-                Width = panelX;
-                Height = panelY;
+                Width = panelW;
+                Height = panelH;
                 Controls.Add(pb);
             }
             catch { }
