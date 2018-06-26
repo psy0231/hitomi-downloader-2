@@ -32,6 +32,6 @@ namespace Hitomi_Copy_2.EH
         public string[] female;
         public string[] misc;
 
-        public Tuple<string, string, string>[] comment;
+        public Tuple<DateTime, string, string>[] comment;
     }
 }

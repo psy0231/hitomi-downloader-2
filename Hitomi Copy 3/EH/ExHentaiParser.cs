@@ -1,9 +1,12 @@
 ﻿/* Copyright (C) 2018. Hitomi Parser Developers */
 
+using hitomi.Parser;
 using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Hitomi_Copy_2.EH
 {
@@ -112,8 +115,8 @@ namespace Hitomi_Copy_2.EH
             article.Visible = nodes_static[2].SelectSingleNode(".//td[@class='gdt2']").InnerText;
             article.Language = nodes_static[3].SelectSingleNode(".//td[@class='gdt2']").InnerText.Split(' ')[0].ToLower();
             article.FileSize = nodes_static[4].SelectSingleNode(".//td[@class='gdt2']").InnerText;
-            article.Length = int.Parse(nodes_static[5].SelectSingleNode(".//td[@class='gdt2']").InnerText.Split(' ')[0]);
-            //article.Favorited = int.Parse(nodes_static[6].SelectSingleNode(".//td[@class='gdt2']").InnerText.Split(' ')[0]);
+            int.TryParse(nodes_static[5].SelectSingleNode(".//td[@class='gdt2']").InnerText.Split(' ')[0], out article.Length);
+            int.TryParse(nodes_static[6].SelectSingleNode(".//td[@class='gdt2']").InnerText.Split(' ')[0], out article.Favorited);
 
             HtmlNodeCollection nodes_data = nodes.SelectNodes(".//div[@id='gmid']//div[@id='gd4']//table//tr");
 
@@ -136,7 +139,28 @@ namespace Hitomi_Copy_2.EH
             if (information.ContainsKey("male:")) article.male = information["male:"];
             if (information.ContainsKey("female:")) article.female = information["female:"];
             if (information.ContainsKey("misc:")) article.misc = information["misc:"];
-            
+
+            HtmlNode nodesc = document.DocumentNode.SelectNodes("//div[@id='cdiv']")[0];
+            HtmlNodeCollection nodes_datac = nodesc.SelectNodes(".//div[@class='c1']");
+            List<Tuple<DateTime, string, string>> comments = new List<Tuple<DateTime, string, string>>();
+
+            foreach (var i in nodes_datac)
+            {
+                try
+                {
+                    string date = HttpUtility.HtmlDecode(i.SelectNodes(".//div[@class='c2']//div[@class='c3']")[0].InnerText.Trim());
+                    string author = HttpUtility.HtmlDecode(i.SelectNodes(".//div[@class='c2']//div[@class='c3']//a")[0].InnerText.Trim());
+                    string contents = HttpUtility.HtmlDecode(i.SelectNodes(".//div[@class='c6']")[0].InnerText.Trim());
+                    comments.Add(new Tuple<DateTime, string, string> (
+                        DateTime.Parse(date.Remove(date.IndexOf(" UTC")).Substring("Posted on ".Length) + "Z"),
+                        author,
+                        contents));
+                }
+                catch { }
+            }
+
+            article.comment = comments.ToArray();
+
             return article;
         }
     }
